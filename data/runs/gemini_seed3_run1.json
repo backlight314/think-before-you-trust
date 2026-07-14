@@ -1,0 +1,410 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all odd integers n, n^4 - 1 is divisible by 16.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 4) - 1) % 16 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all odd integers n, n^2 - 1 is divisible by 8.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 2) - 1) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all odd integers n, n^2 + 1 is divisible by 2.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 2) + 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [0],
+    "claim": "For all odd integers n, n^8 - 1 is divisible by 32.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 8) - 1) % 32 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [3],
+    "claim": "For all odd integers n, n^16 - 1 is divisible by 64.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 16) - 1) % 64 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 5,
+    "parents": [0],
+    "claim": "For all integers n not divisible by 3, n^2 - 1 is divisible by 3.",
+    "predicate": "(n % 3 == 0) or ((pow(n, 2) - 1) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [0],
+    "claim": "For all integers n not divisible by 5, n^4 - 1 is divisible by 5.",
+    "predicate": "(n % 5 == 0) or ((pow(n, 4) - 1) % 5 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [0, 5],
+    "claim": "For all odd integers n not divisible by 3, n^4 - 1 is divisible by 48.",
+    "predicate": "(n % 2 == 0) or (n % 3 == 0) or ((pow(n, 4) - 1) % 48 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [0, 6],
+    "claim": "For all odd integers n not divisible by 5, n^4 - 1 is divisible by 80.",
+    "predicate": "(n % 2 == 0) or (n % 5 == 0) or ((pow(n, 4) - 1) % 80 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [7, 8],
+    "claim": "For all odd integers n not divisible by 3 or 5, n^4 - 1 is divisible by 240.",
+    "predicate": "(n % 2 == 0) or (n % 3 == 0) or (n % 5 == 0) or ((pow(n, 4) - 1) % 240 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [6],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(pow(n, 5) - n) % 30 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [5],
+    "claim": "For all integers n, n^7 - n is divisible by 42.",
+    "predicate": "(pow(n, 7) - n) % 42 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [10],
+    "claim": "For all integers n, n^9 - n is divisible by 30.",
+    "predicate": "(pow(n, 9) - n) % 30 == 0",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 13,
+    "parents": [11],
+    "claim": "For all integers n, n^11 - n is divisible by 66.",
+    "predicate": "(pow(n, 11) - n) % 66 == 0",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 14,
+    "parents": [10, 11],
+    "claim": "For all integers n, n^13 - n is divisible by 2730.",
+    "predicate": "(pow(n, 13) - n) % 2730 == 0",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 15,
+    "parents": [1],
+    "claim": "For all odd integers n, the 2-adic valuation of n^2 - 1 is at least 3.",
+    "predicate": "(n % 2 == 0) or (vp(pow(n, 2) - 1, 2) >= 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [0, 15],
+    "claim": "For all odd integers n, the 2-adic valuation of n^4 - 1 is at least 4.",
+    "predicate": "(n % 2 == 0) or (vp(pow(n, 4) - 1, 2) >= 4)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [3, 16],
+    "claim": "For all odd integers n, the 2-adic valuation of n^8 - 1 is at least 5.",
+    "predicate": "(n % 2 == 0) or (vp(pow(n, 8) - 1, 2) >= 5)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 18,
+    "parents": [15],
+    "claim": "For all odd integers n, the 2-adic valuation of n^2 - 1 is equal to the sum of the 2-adic valuations of n-1 and n+1.",
+    "predicate": "(n % 2 == 0) or (vp(pow(n, 2) - 1, 2) == vp(n - 1, 2) + vp(n + 1, 2))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 19,
+    "parents": [2],
+    "claim": "For all integers n > 1, the Euler totient of n is even.",
+    "predicate": "(n <= 1) or (phi(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [0, 19],
+    "claim": "For all odd integers n > 1, the Euler totient of n^4 - 1 is divisible by 8.",
+    "predicate": "(n <= 1) or (n % 2 == 0) or (phi(pow(n, 4) - 1) % 8 == 0)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 21,
+    "parents": [0],
+    "claim": "For all odd integers n > 1, the number of divisors of n^4 - 1 is at least 8.",
+    "predicate": "(n <= 1) or (n % 2 == 0) or (tau(pow(n, 4) - 1) >= 8)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 22,
+    "parents": [1, 5],
+    "claim": "For all odd integers n > 1, the sum of divisors of n^2 - 1 is divisible by 12.",
+    "predicate": "(n <= 1) or (n % 2 == 0) or (sigma(pow(n, 2) - 1) % 12 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [7, 22],
+    "claim": "For all odd integers n > 1 not divisible by 3, the sum of divisors of n^4 - 1 is divisible by 24.",
+    "predicate": "(n <= 1) or (n % 2 == 0) or (n % 3 == 0) or (sigma(pow(n, 4) - 1) % 24 == 0)",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 24,
+    "parents": [5],
+    "claim": "For all integers n not divisible by 3, n^3 - n is divisible by 6.",
+    "predicate": "(n % 3 == 0) or ((pow(n, 3) - n) % 6 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [1, 5],
+    "claim": "For all integers n coprime to 6, n^2 - 1 is divisible by 24.",
+    "predicate": "(gcd(n, 6) != 1) or ((pow(n, 2) - 1) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [25],
+    "claim": "For all primes p > 3, p^2 - 1 is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 2) - 1) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [9, 26],
+    "claim": "For all primes p > 5, p^4 - 1 is divisible by 240.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or ((pow(n, 4) - 1) % 240 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [2],
+    "claim": "For all integers n, the greatest common divisor of n^2 - 1 and n^2 + 1 is at most 2.",
+    "predicate": "gcd(pow(n, 2) - 1, pow(n, 2) + 1) <= 2",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [1, 5],
+    "claim": "For all integers n, the greatest common divisor of n^4 - 1 and n^6 - 1 is absolute value of n^2 - 1.",
+    "predicate": "gcd(pow(n, 4) - 1, pow(n, 6) - 1) == abs(pow(n, 2) - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [29],
+    "claim": "For all integers n, the greatest common divisor of n^4 - 1 and n^10 - 1 is absolute value of n^2 - 1.",
+    "predicate": "gcd(pow(n, 4) - 1, pow(n, 10) - 1) == abs(pow(n, 2) - 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 31,
+    "parents": [11],
+    "claim": "For all integers n, the greatest common divisor of n^6 - 1 and n^9 - 1 is absolute value of n^3 - 1.",
+    "predicate": "gcd(pow(n, 6) - 1, pow(n, 9) - 1) == abs(pow(n, 3) - 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [1],
+    "claim": "For all odd integers n, n^3 - n^2 - n + 1 is divisible by 16.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 3) - pow(n, 2) - n + 1) % 16 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 33,
+    "parents": [1],
+    "claim": "For all odd integers n, n^3 + n^2 - n - 1 is divisible by 16.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 3) + pow(n, 2) - n - 1) % 16 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 34,
+    "parents": [0],
+    "claim": "For all odd integers n, (n-1)^4 is divisible by 16.",
+    "predicate": "(n % 2 == 0) or (pow(n - 1, 4) % 16 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 35,
+    "parents": [1],
+    "claim": "For all odd integers n, (n^2 - 1)^2 is divisible by 64.",
+    "predicate": "(n % 2 == 0) or (pow(pow(n, 2) - 1, 2) % 64 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 36,
+    "parents": [0, 1],
+    "claim": "For all odd integers n, n^5 - n^4 - n + 1 is divisible by 32.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 5) - pow(n, 4) - n + 1) % 32 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 37,
+    "parents": [0, 1],
+    "claim": "For all odd integers n, n^5 + n^4 - n - 1 is divisible by 32.",
+    "predicate": "(n % 2 == 0) or ((pow(n, 5) + pow(n, 4) - n - 1) % 32 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 38,
+    "parents": [6],
+    "claim": "For all integers n not divisible by 5, n^8 - 1 is divisible by 5.",
+    "predicate": "(n % 5 == 0) or ((pow(n, 8) - 1) % 5 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [3, 38],
+    "claim": "For all odd integers n not divisible by 5, n^8 - 1 is divisible by 160.",
+    "predicate": "(n % 2 == 0) or (n % 5 == 0) or ((pow(n, 8) - 1) % 160 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [5, 39],
+    "claim": "For all odd integers n not divisible by 15, n^8 - 1 is divisible by 480.",
+    "predicate": "(n % 2 == 0) or (n % 15 == 0) or ((pow(n, 8) - 1) % 480 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [26],
+    "claim": "For all primes p > 3, the Euler totient of p^2 - 1 is divisible by 4.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (phi(pow(n, 2) - 1) % 4 == 0)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 42,
+    "parents": [27],
+    "claim": "For all primes p > 5, the Euler totient of p^4 - 1 is divisible by 32.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or (phi(pow(n, 4) - 1) % 32 == 0)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 43,
+    "parents": [26],
+    "claim": "For all primes p > 3, the number of divisors of p^2 - 1 is at least 6.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (tau(pow(n, 2) - 1) >= 6)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 44,
+    "parents": [27],
+    "claim": "For all primes p > 5, the number of divisors of p^4 - 1 is at least 16.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or (tau(pow(n, 4) - 1) >= 16)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 45,
+    "parents": [26],
+    "claim": "For all primes p > 3, the sum of divisors of p^2 - 1 is divisible by 48.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (sigma(pow(n, 2) - 1) % 48 == 0)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [27],
+    "claim": "For all primes p > 5, the sum of divisors of p^4 - 1 is divisible by 576.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or (sigma(pow(n, 4) - 1) % 576 == 0)",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 47,
+    "parents": [19],
+    "claim": "For all integers n > 1, the Euler totient of n^2 - 1 is even.",
+    "predicate": "(n <= 1) or (phi(pow(n, 2) - 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [28],
+    "claim": "For all integers n, the greatest common divisor of n - 1 and n + 1 is at most 2.",
+    "predicate": "gcd(n - 1, n + 1) <= 2",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [28],
+    "claim": "For all integers n, the greatest common divisor of n^2 + 1 and n^4 + 1 is at most 2.",
+    "predicate": "gcd(pow(n, 2) + 1, pow(n, 4) + 1) <= 2",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 50,
+    "parents": [16],
+    "claim": "For all odd integers n, the 2-adic valuation of n^4 - 1 is equal to the 2-adic valuation of n^2 - 1 plus 1.",
+    "predicate": "(n % 2 == 0) or (vp(pow(n, 4) - 1, 2) == vp(pow(n, 2) - 1, 2) + 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  }
+]

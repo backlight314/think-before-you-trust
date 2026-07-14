@@ -1,0 +1,443 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "all((tau(n) % 2 == 1) == (round(n**0.5)**2 == n) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, if n is not a perfect square, then tau(n) is even.",
+    "predicate": "all((round(n**0.5)**2 == n) or (tau(n) % 2 == 0) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then sigma(n) is odd.",
+    "predicate": "all((round(n**0.5)**2 != n) or (sigma(n) % 2 == 1) for n in range(1, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all n >= 1, sigma(n) is odd if and only if n is a perfect square or twice a perfect square.",
+    "predicate": "all((sigma(n) % 2 == 1) == ((round(n**0.5)**2 == n) or (round((n/2)**0.5)**2 == n/2)) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then phi(n) is even.",
+    "predicate": "all((round(n**0.5)**2 != n) or (phi(n) % 2 == 0) for n in range(1, 501))",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all n >= 1, if phi(n) is odd, then n is 1 or 2.",
+    "predicate": "all((phi(n) % 2 == 0) or (n == 1) or (n == 2) for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then n^5 - n is divisible by 30.",
+    "predicate": "all((round(n**0.5)**2 != n) or ((n**5 - n) % 30 == 0) for n in range(1, 501))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "For all n >= 1, n^5 - n is divisible by 30.",
+    "predicate": "all((n**5 - n) % 30 == 0 for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "For all n >= 1, n^7 - n is divisible by 42.",
+    "predicate": "all((n**7 - n) % 42 == 0 for n in range(1, 501))",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7,
+      8
+    ],
+    "claim": "For all n >= 1, n^11 - n is divisible by 66.",
+    "predicate": "all((n**11 - n) % 66 == 0 for n in range(1, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then sigma(n) >= tau(n)^2.",
+    "predicate": "all((round(n**0.5)**2 != n) or (sigma(n) >= tau(n)**2) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then sigma(n) >= 2*tau(n) - 1.",
+    "predicate": "all((round(n**0.5)**2 != n) or (sigma(n) >= 2*tau(n) - 1) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all n >= 1, if tau(n) is odd, then phi(n) is even.",
+    "predicate": "all((tau(n) % 2 == 0) or (phi(n) % 2 == 0) for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      12
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then phi(n) divides n - sqrt(n).",
+    "predicate": "all((round(n**0.5)**2 != n) or ((n - round(n**0.5)) % phi(n) == 0) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then phi(n) <= n - sqrt(n).",
+    "predicate": "all((round(n**0.5)**2 != n) or (phi(n) <= n - round(n**0.5)) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all n >= 1, if n is not a perfect square, then tau(n) >= 4.",
+    "predicate": "all((round(n**0.5)**2 == n) or (tau(n) >= 4) for n in range(1, 501))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15
+    ],
+    "claim": "For all n >= 1, if n is prime, then tau(n) == 2.",
+    "predicate": "all((not is_prime(n)) or (tau(n) == 2) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16
+    ],
+    "claim": "For all n >= 1, if tau(n) == 2, then n is prime.",
+    "predicate": "all((tau(n) != 2) or is_prime(n) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      16
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then tau(n) >= 3.",
+    "predicate": "all((round(n**0.5)**2 != n) or (tau(n) >= 3) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      18
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then tau(n) >= tau(sqrt(n)).",
+    "predicate": "all((round(n**0.5)**2 != n) or (tau(n) >= tau(round(n**0.5))) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      19
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then tau(n) is odd and >= 3.",
+    "predicate": "all((round(n**0.5)**2 != n) or ((tau(n) % 2 == 1) and (tau(n) >= 3)) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      20
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then tau(n) >= 3 and <= 2*sqrt(n) - 1.",
+    "predicate": "all((round(n**0.5)**2 != n) or ((tau(n) >= 3) and (tau(n) <= 2*round(n**0.5) - 1)) for n in range(1, 501))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      3
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then sigma(n) is odd and >= n + sqrt(n) + 1.",
+    "predicate": "all((round(n**0.5)**2 != n) or ((sigma(n) % 2 == 1) and (sigma(n) >= n + round(n**0.5) + 1)) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      22
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then sigma(n) >= (sqrt(n) + 1)^2.",
+    "predicate": "all((round(n**0.5)**2 != n) or (sigma(n) >= (round(n**0.5) + 1)**2) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      23
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then sigma(n)/n >= 1 + 1/sqrt(n).",
+    "predicate": "all((round(n**0.5)**2 != n) or (sigma(n)/n >= 1 + 1/round(n**0.5)) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then sigma(n) >= n + 2*sqrt(n) + 1.",
+    "predicate": "all((round(n**0.5)**2 != n) or (sigma(n) >= n + 2*round(n**0.5) + 1) for n in range(1, 501))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all n >= 1, if phi(n) is odd, then tau(n) is odd.",
+    "predicate": "all((phi(n) % 2 == 0) or (tau(n) % 2 == 1) for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      26
+    ],
+    "claim": "For all n >= 1, if phi(n) is odd, then n is a perfect square.",
+    "predicate": "all((phi(n) % 2 == 0) or (round(n**0.5)**2 == n) for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      27
+    ],
+    "claim": "For all n >= 1, if phi(n) is odd, then n is 1.",
+    "predicate": "all((phi(n) % 2 == 0) or (n == 1) for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      28
+    ],
+    "claim": "For all n >= 1, phi(n) is even except when n is 1 or 2.",
+    "predicate": "all((phi(n) % 2 == 0) or (n == 1) or (n == 2) for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      29
+    ],
+    "claim": "For all n >= 1, if n > 2, then phi(n) is even.",
+    "predicate": "all((n <= 2) or (phi(n) % 2 == 0) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      30
+    ],
+    "claim": "For all n >= 1, if n is a perfect square, then phi(n) is divisible by 4.",
+    "predicate": "all((round(n**0.5)**2 != n) or (phi(n) % 4 == 0) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0,
+      31
+    ],
+    "claim": "For all n >= 1, if n is a perfect square and n > 1, then phi(n) is divisible by 4.",
+    "predicate": "all((round(n**0.5)**2 != n) or (n == 1) or (phi(n) % 4 == 0) for n in range(1, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      32
+    ],
+    "claim": "For all n >= 1, if n is a perfect square and n > 4, then phi(n) is divisible by 8.",
+    "predicate": "all((round(n**0.5)**2 != n) or (n <= 4) or (phi(n) % 8 == 0) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      33
+    ],
+    "claim": "For all n >= 1, if n is a perfect square and n > 9, then phi(n) is divisible by 12.",
+    "predicate": "all((round(n**0.5)**2 != n) or (n <= 9) or (phi(n) % 12 == 0) for n in range(1, 501))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

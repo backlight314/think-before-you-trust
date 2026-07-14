@@ -1,0 +1,412 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, sigma(n) * phi(n) is at most n^2.",
+    "predicate": "n >= 1 and sigma(n) * phi(n) <= n**2",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then sigma(n) * phi(n) equals n^2.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) == n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then sigma(n) * phi(n) equals n^2.",
+    "predicate": "(not (n & (n-1) == 0)) or (sigma(n) * phi(n) == n**2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (is_prime(n) or any(n % p**i == 0 for p in range(2, n+1) for i in range(2, int(n**0.5)+1)))) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, tau(n) * phi(n) is at most n * sigma(n).",
+    "predicate": "tau(n) * phi(n) <= n * sigma(n)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then tau(n) * phi(n) equals n * sigma(n).",
+    "predicate": "(not (n & (n-1) == 0)) or (tau(n) * phi(n) == n * sigma(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n >= 1, if n is a product of two distinct primes, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not any(all(gcd(n, p) == 1 for p in range(2, int(n**0.5)+1)) and any(gcd(n, q) != 1 for q in range(p+1, int(n**0.5)+1)) for p in range(2, int(n**0.5)+1))) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(n % 2 == 0) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0,
+      7
+    ],
+    "claim": "For all integers n >= 1, if n is odd and not a prime, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(n % 2 == 0 or is_prime(n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power, then tau(n) * phi(n) is at most n * sigma(n).",
+    "predicate": "(not (is_prime(n) or any(n % p**i == 0 for p in range(2, n+1) for i in range(2, int(n**0.5)+1)))) or (tau(n) * phi(n) <= n * sigma(n))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a prime or a power of 2, then sigma(n) * phi(n) equals n^2.",
+    "predicate": "(not (is_prime(n) or (n & (n-1) == 0))) or (sigma(n) * phi(n) == n**2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then tau(n) * phi(n) equals n * sigma(n).",
+    "predicate": "(not (n & (n-1) == 0)) or (tau(n) * phi(n) == n * sigma(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n >= 1, if n is a product of two distinct primes, then tau(n) * phi(n) is at most n * sigma(n).",
+    "predicate": "(not any(all(gcd(n, p) == 1 for p in range(2, int(n**0.5)+1)) and any(gcd(n, q) != 1 for q in range(p+1, int(n**0.5)+1)) for p in range(2, int(n**0.5)+1))) or (tau(n) * phi(n) <= n * sigma(n))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      8
+    ],
+    "claim": "For all integers n >= 1, if n is odd and not a prime, then tau(n) * phi(n) is at most n * sigma(n).",
+    "predicate": "(n % 2 == 0 or is_prime(n)) or (tau(n) * phi(n) <= n * sigma(n))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      9
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (is_prime(n) or any(n % p**i == 0 for p in range(2, n+1) for i in range(2, int(n**0.5)+1)))) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is a prime or a power of 2, then tau(n) * phi(n) equals n * sigma(n).",
+    "predicate": "(not (is_prime(n) or (n & (n-1) == 0))) or (tau(n) * phi(n) == n * sigma(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then sigma(n) * phi(n) equals n^2.",
+    "predicate": "(not (n & (n-1) == 0)) or (sigma(n) * phi(n) == n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is a product of two distinct primes, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not any(all(gcd(n, p) == 1 for p in range(2, int(n**0.5)+1)) and any(gcd(n, q) != 1 for q in range(p+1, int(n**0.5)+1)) for p in range(2, int(n**0.5)+1))) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is odd and not a prime, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(n % 2 == 0 or is_prime(n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      14
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power, then tau(n) * phi(n) is at most n * sigma(n).",
+    "predicate": "(not (is_prime(n) or any(n % p**i == 0 for p in range(2, n+1) for i in range(2, int(n**0.5)+1)))) or (tau(n) * phi(n) <= n * sigma(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a prime or a power of 2, then sigma(n) * phi(n) equals n^2.",
+    "predicate": "(not (is_prime(n) or (n & (n-1) == 0))) or (sigma(n) * phi(n) == n**2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      16
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then tau(n) * phi(n) equals n * sigma(n).",
+    "predicate": "(not (n & (n-1) == 0)) or (tau(n) * phi(n) == n * sigma(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      17
+    ],
+    "claim": "For all integers n >= 1, if n is a product of two distinct primes, then tau(n) * phi(n) is at most n * sigma(n).",
+    "predicate": "(not any(all(gcd(n, p) == 1 for p in range(2, int(n**0.5)+1)) and any(gcd(n, q) != 1 for q in range(p+1, int(n**0.5)+1)) for p in range(2, int(n**0.5)+1))) or (tau(n) * phi(n) <= n * sigma(n))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is odd and not a prime, then tau(n) * phi(n) is at most n * sigma(n).",
+    "predicate": "(n % 2 == 0 or is_prime(n)) or (tau(n) * phi(n) <= n * sigma(n))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      19
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (is_prime(n) or any(n % p**i == 0 for p in range(2, n+1) for i in range(2, int(n**0.5)+1)))) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      20
+    ],
+    "claim": "For all integers n >= 1, if n is a prime or a power of 2, then tau(n) * phi(n) equals n * sigma(n).",
+    "predicate": "(not (is_prime(n) or (n & (n-1) == 0))) or (tau(n) * phi(n) == n * sigma(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      21
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then sigma(n) * phi(n) equals n^2.",
+    "predicate": "(not (n & (n-1) == 0)) or (sigma(n) * phi(n) == n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      22
+    ],
+    "claim": "For all integers n >= 1, if n is a product of two distinct primes, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not any(all(gcd(n, p) == 1 for p in range(2, int(n**0.5)+1)) and any(gcd(n, q) != 1 for q in range(p+1, int(n**0.5)+1)) for p in range(2, int(n**0.5)+1))) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      23
+    ],
+    "claim": "For all integers n >= 1, if n is odd and not a prime, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(n % 2 == 0 or is_prime(n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power, then tau(n) * phi(n) is at most n * sigma(n).",
+    "predicate": "(not (is_prime(n) or any(n % p**i == 0 for p in range(2, n+1) for i in range(2, int(n**0.5)+1)))) or (tau(n) * phi(n) <= n * sigma(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      25
+    ],
+    "claim": "For all integers n >= 1, if n is a prime or a power of 2, then sigma(n) * phi(n) equals n^2.",
+    "predicate": "(not (is_prime(n) or (n & (n-1) == 0))) or (sigma(n) * phi(n) == n**2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      26
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then tau(n) * phi(n) equals n * sigma(n).",
+    "predicate": "(not (n & (n-1) == 0)) or (tau(n) * phi(n) == n * sigma(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

@@ -1,0 +1,588 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^2 + n is even.",
+    "predicate": "(n**2 + n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is divisible by 2.",
+    "predicate": "(n**2 + n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 is congruent to n modulo 2.",
+    "predicate": "(n**2 % 2) == (n % 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n, n is even if n^2 is even.",
+    "predicate": "(n % 2 == 0) or ((n**2 % 2) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^3 + n is even.",
+    "predicate": "(n**3 + n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^3 is congruent to n modulo 2.",
+    "predicate": "(n**3 % 2) == (n % 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^3 + n is divisible by 4 if n is even.",
+    "predicate": "((n % 2 == 0) and ((n**3 + n) % 4 == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^3 + n is divisible by 4 if n is odd.",
+    "predicate": "((n % 2 != 0) and ((n**3 + n) % 4 == 0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^3 + n is divisible by 2.",
+    "predicate": "(n**3 + n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n is even if n^2 + n is even and n is odd.",
+    "predicate": "(((n**2 + n) % 2 == 0) and (n % 2 != 0)) or (n % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n is even if n^2 is even and n is odd.",
+    "predicate": "((n**2 % 2 == 0) and (n % 2 != 0)) or (n % 2 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, n is odd if n^2 is even and n is odd.",
+    "predicate": "((n**2 % 2 == 0) and (n % 2 != 0)) or (n % 2 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n, n^2 is odd if n is odd.",
+    "predicate": "((n % 2 != 0) and (n**2 % 2 == 1))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n, n^2 is even if n is even.",
+    "predicate": "((n % 2 == 0) and (n**2 % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n is prime if n^2 + n is prime.",
+    "predicate": "(((n**2 + n) % 2 == 1) and (is_prime(n**2 + n))) or (is_prime(n))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n is prime if n^2 + n is a power of 2.",
+    "predicate": "(((n**2 + n) % 2 == 1) and ((n**2 + n) & (n**2 + n - 1) == 0)) or (is_prime(n))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n is prime if n^2 + n is a perfect square.",
+    "predicate": "(((n**2 + n) % 2 == 1) and (is_square(n**2 + n))) or (is_prime(n))",
+    "confidence": 0.2,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n is prime if n^2 + n is squarefree.",
+    "predicate": "(((n**2 + n) % 2 == 1) and (is_squarefree(n**2 + n))) or (is_prime(n))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n is prime if n^2 + n is a Mersenne number.",
+    "predicate": "(((n**2 + n) % 2 == 1) and (is_mersenne(n**2 + n))) or (is_prime(n))",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n is prime if n^2 + n is a Fermat number.",
+    "predicate": "(((n**2 + n) % 2 == 1) and (is_fermat(n**2 + n))) or (is_prime(n))",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a perfect square if n is even.",
+    "predicate": "((n % 2 == 0) and (is_square(n**2 + n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a perfect power if n is even.",
+    "predicate": "((n % 2 == 0) and (is_perfect_power(n**2 + n)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a Carmichael number if n is even.",
+    "predicate": "((n % 2 == 0) and (is_carmichael(n**2 + n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a Wieferich prime if n is even.",
+    "predicate": "((n % 2 == 0) and (is_wieferich(n**2 + n)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a Mersenne number if n is even.",
+    "predicate": "((n % 2 == 0) and (is_mersenne(n**2 + n)))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a Fermat number if n is even.",
+    "predicate": "((n % 2 == 0) and (is_fermat(n**2 + n)))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a squarefree number if n is even.",
+    "predicate": "((n % 2 == 0) and (is_squarefree(n**2 + n)))",
+    "confidence": 0.2,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a perfect square if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_square(n**2 + n)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a perfect power if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_perfect_power(n**2 + n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a Carmichael number if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_carmichael(n**2 + n)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a Wieferich prime if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_wieferich(n**2 + n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a Mersenne number if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_mersenne(n**2 + n)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a Fermat number if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_fermat(n**2 + n)))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a squarefree number if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_squarefree(n**2 + n)))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n has exactly 5 divisors if n is even.",
+    "predicate": "((n % 2 == 0) and (tau(n**2 + n) == 5))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n has exactly 5 divisors if n is odd.",
+    "predicate": "((n % 2 != 0) and (tau(n**2 + n) == 5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a semiprime if n is even.",
+    "predicate": "((n % 2 == 0) and (tau(n**2 + n) == 3))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a semiprime if n is odd.",
+    "predicate": "((n % 2 != 0) and (tau(n**2 + n) == 3))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a square if n is even.",
+    "predicate": "((n % 2 == 0) and (is_square(n**2 + n)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a square if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_square(n**2 + n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a perfect cube if n is even.",
+    "predicate": "((n % 2 == 0) and (is_cube(n**2 + n)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a perfect cube if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_cube(n**2 + n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a cube of a Mersenne number if n is even.",
+    "predicate": "((n % 2 == 0) and (is_cube_of_mersenne(n**2 + n)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a cube of a Mersenne number if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_cube_of_mersenne(n**2 + n)))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a cube of a squarefree number if n is even.",
+    "predicate": "((n % 2 == 0) and (is_cube_of_squarefree(n**2 + n)))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a cube of a squarefree number if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_cube_of_squarefree(n**2 + n)))",
+    "confidence": 0.2,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a cube of a prime number if n is even.",
+    "predicate": "((n % 2 == 0) and (is_cube_of_prime(n**2 + n)))",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a cube of a prime number if n is odd.",
+    "predicate": "((n % 2 != 0) and (is_cube_of_prime(n**2 + n)))",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is a power of a prime number if n is even.",
+    "predicate": "((n % 2 == 0) and (is_power_of_prime(n**2 + n)))",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  }
+]

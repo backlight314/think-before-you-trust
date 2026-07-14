@@ -1,0 +1,540 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^2 is congruent to 0 or 1 modulo 4.",
+    "predicate": "pow(n, 2, 4) in [0, 1]",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 is even if and only if n is even.",
+    "predicate": "(pow(n, 2) % 2 == 0) == (n % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 is odd if and only if n is odd.",
+    "predicate": "(pow(n, 2) % 2 == 1) == (n % 2 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      2
+    ],
+    "claim": "For all odd integers n, n^2 - 1 is divisible by 4.",
+    "predicate": "pow(n, 2) - 1) % 4 == 0 and n % 2 == 1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, gcd(n, n^2) = n if and only if n is square-free.",
+    "predicate": "gcd(n, pow(n, 2)) == n and is_prime(n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all square-free integers n, n^2 + 1 is not divisible by n.",
+    "predicate": "pow(n, 2) + 1) % n != 0 and is_prime(n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^3 is congruent to 0, 1, or -1 modulo 8.",
+    "predicate": "pow(n, 3, 8) in [0, 1, 7]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 8 if n is odd.",
+    "predicate": "(pow(n, 3) - n) % 8 == 0 and n % 2 == 1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n is congruent to 1 or 3 modulo 4.",
+    "predicate": "(n % 2 == 1) and (n % 4 == 1 or n % 4 == 3)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      8
+    ],
+    "claim": "For all integers n, if n is prime, then n^2 is congruent to 1 modulo 4.",
+    "predicate": "(n % 2 == 1) and (pow(n, 2) % 4 == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^2 + 1 is not divisible by n.",
+    "predicate": "(is_prime(n)) and (pow(n, 2) + 1) % n != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, if n is prime, then n^3 + 1 is not divisible by n.",
+    "predicate": "(is_prime(n)) and (pow(n, 3) + 1) % n != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^4 is congruent to 0, 1, or -1 modulo 16.",
+    "predicate": "pow(n, 4, 16) in [0, 1, 15]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12
+    ],
+    "claim": "For all integers n, if n is even, then n^4 is divisible by 16.",
+    "predicate": "pow(n, 4) % 16 == 0 and n % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^4 + 1 is not divisible by n.",
+    "predicate": "(is_prime(n)) and (pow(n, 4) + 1) % n != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^5 is congruent to 1 modulo n.",
+    "predicate": "(is_prime(n)) and (pow(n, 5) % n == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n, if n is prime, then phi(n) divides n^5 - 1.",
+    "predicate": "(is_prime(n)) and (phi(n) div (pow(n, 5) - 1))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^6 is congruent to 1 modulo n.",
+    "predicate": "(is_prime(n)) and (pow(n, 6) % n == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n, if n is prime, then n^6 + 1 is not divisible by n.",
+    "predicate": "(is_prime(n)) and (pow(n, 6) + 1) % n != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^7 is congruent to 0, 1, or -1 modulo 8.",
+    "predicate": "pow(n, 7, 8) in [0, 1, 7]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n, if n is odd, then n^7 is divisible by 8.",
+    "predicate": "pow(n, 7) % 8 == 0 and n % 2 == 1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^7 - n is divisible by 8.",
+    "predicate": "(is_prime(n)) and (pow(n, 7) - n) % 8 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^8 is congruent to 0, 1, or -1 modulo 16.",
+    "predicate": "pow(n, 8, 16) in [0, 1, 15]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n, if n is even, then n^8 is divisible by 16.",
+    "predicate": "pow(n, 8) % 16 == 0 and n % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^8 + 1 is not divisible by n.",
+    "predicate": "(is_prime(n)) and (pow(n, 8) + 1) % n != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^9 is congruent to 0 or 1 modulo 2.",
+    "predicate": "pow(n, 9, 2) in [0, 1]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n, if n is odd, then n^9 is divisible by 2.",
+    "predicate": "pow(n, 9) % 2 == 0 and n % 2 == 1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^9 - 1 is divisible by 2.",
+    "predicate": "(is_prime(n)) and (pow(n, 9) - 1) % 2 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^11 is congruent to 1 modulo n.",
+    "predicate": "(is_prime(n)) and (pow(n, 11) % n == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n, if n is prime, then phi(n) divides n^11 - 1.",
+    "predicate": "(is_prime(n)) and (phi(n) div (pow(n, 11) - 1))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^12 is congruent to 1 modulo n.",
+    "predicate": "(is_prime(n)) and (pow(n, 12) % n == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30
+    ],
+    "claim": "For all integers n, if n is prime, then n^12 + 1 is not divisible by n.",
+    "predicate": "(is_prime(n)) and (pow(n, 12) + 1) % n != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^13 is congruent to 0, 1, or -1 modulo 8.",
+    "predicate": "pow(n, 13, 8) in [0, 1, 7]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      32
+    ],
+    "claim": "For all integers n, if n is odd, then n^13 is divisible by 8.",
+    "predicate": "pow(n, 13) % 8 == 0 and n % 2 == 1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^13 - 1 is divisible by 8.",
+    "predicate": "(is_prime(n)) and (pow(n, 13) - 1) % 8 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^14 is congruent to 0, 1, or -1 modulo 16.",
+    "predicate": "pow(n, 14, 16) in [0, 1, 15]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35
+    ],
+    "claim": "For all integers n, if n is even, then n^14 is divisible by 16.",
+    "predicate": "pow(n, 14) % 16 == 0 and n % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^14 + 1 is not divisible by n.",
+    "predicate": "(is_prime(n)) and (pow(n, 14) + 1) % n != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^15 is congruent to 0 or 1 modulo 2.",
+    "predicate": "pow(n, 15, 2) in [0, 1]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38
+    ],
+    "claim": "For all integers n, if n is odd, then n^15 is divisible by 2.",
+    "predicate": "pow(n, 15) % 2 == 0 and n % 2 == 1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^15 - 1 is divisible by 2.",
+    "predicate": "(is_prime(n)) and (pow(n, 15) - 1) % 2 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^16 is congruent to 0, 1, or -1 modulo 16.",
+    "predicate": "pow(n, 16, 16) in [0, 1, 15]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41
+    ],
+    "claim": "For all integers n, if n is even, then n^16 is divisible by 16.",
+    "predicate": "pow(n, 16) % 16 == 0 and n % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^16 + 1 is not divisible by n.",
+    "predicate": "(is_prime(n)) and (pow(n, 16) + 1) % n != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^17 is congruent to 0, 1, or -1 modulo 8.",
+    "predicate": "pow(n, 17, 8) in [0, 1, 7]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

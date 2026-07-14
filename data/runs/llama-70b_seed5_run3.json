@@ -1,0 +1,457 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, sigma(n) * phi(n) is at most n^2.",
+    "predicate": "n >= 1 and sigma(n) * phi(n) <= n**2",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a prime power, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "n % 2 == 0 or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "If n is an odd prime power, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (is_prime(n) and n % 2 != 0)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a multiple of 4, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "n % 4 != 0 or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "If n is a power of 2, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (is_prime(2) and n == 2**int(math.log2(n)))) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2,
+      4
+    ],
+    "claim": "If n is an odd multiple of 4 plus 1, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (n % 4 == 1 and n % 2 != 0)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (int(n**0.5)**2 == n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      1,
+      7
+    ],
+    "claim": "If n is a perfect square and a prime power, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (is_prime(n) and int(n**0.5)**2 == n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      3,
+      7
+    ],
+    "claim": "If n is an odd perfect square and a prime power, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (is_prime(n) and n % 2 != 0 and int(n**0.5)**2 == n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      5,
+      7
+    ],
+    "claim": "If n is a power of 2 and a perfect square, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (is_prime(2) and n == 2**int(math.log2(n)) and int(n**0.5)**2 == n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a prime, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "If n is a prime, then sigma(n) * phi(n) is equal to n^2 - n + n.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) == n**2 - n + n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      1,
+      11
+    ],
+    "claim": "If n is a prime power, then sigma(n) * phi(n) is at most n^2 - n + n.",
+    "predicate": "(not (is_prime(n) and n == int(n))) or (sigma(n) * phi(n) <= n**2 - n + n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      2,
+      11
+    ],
+    "claim": "If n is an odd prime, then sigma(n) * phi(n) is at most n^2 - n + n.",
+    "predicate": "(not (is_prime(n) and n % 2 != 0)) or (sigma(n) * phi(n) <= n**2 - n + n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      4,
+      11
+    ],
+    "claim": "If n is a multiple of 4 and a prime, then sigma(n) * phi(n) is at most n^2 - n + n.",
+    "predicate": "(not (is_prime(n) and n % 4 == 0)) or (sigma(n) * phi(n) <= n**2 - n + n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      5,
+      11
+    ],
+    "claim": "If n is a power of 2 and a prime, then sigma(n) * phi(n) is at most n^2 - n + n.",
+    "predicate": "(not (is_prime(2) and n == 2**int(math.log2(n)))) or (sigma(n) * phi(n) <= n**2 - n + n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      12,
+      13
+    ],
+    "claim": "If n is a prime power, then sigma(n) * phi(n) is equal to n^2 - n + n if and only if n is a prime.",
+    "predicate": "(not (is_prime(n) and n == int(n))) or (sigma(n) * phi(n) == n**2 - n + n) == is_prime(n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      14,
+      15
+    ],
+    "claim": "If n is an odd prime or a multiple of 4 and a prime, then sigma(n) * phi(n) is at most n^2 - n + n.",
+    "predicate": "(not ((is_prime(n) and n % 2 != 0) or (is_prime(n) and n % 4 == 0))) or (sigma(n) * phi(n) <= n**2 - n + n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      16,
+      17
+    ],
+    "claim": "If n is a power of 2, then sigma(n) * phi(n) is at most n^2 - n + n if and only if n is a prime.",
+    "predicate": "(not (is_prime(2) and n == 2**int(math.log2(n)))) or (sigma(n) * phi(n) <= n**2 - n + n) == is_prime(n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a multiple of 3, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "n % 3 != 0 or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20
+    ],
+    "claim": "If n is a multiple of 3, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (n % 3 == 0)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      1,
+      20
+    ],
+    "claim": "If n is a prime power and a multiple of 3, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (is_prime(n) and n % 3 == 0)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      2,
+      20
+    ],
+    "claim": "If n is an odd multiple of 3, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (n % 3 == 0 and n % 2 != 0)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      4,
+      20
+    ],
+    "claim": "If n is a multiple of 12, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (n % 12 == 0)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      5,
+      20
+    ],
+    "claim": "If n is a power of 2 and a multiple of 3, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (is_prime(2) and n == 2**int(math.log2(n)) and n % 3 == 0)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      21,
+      22
+    ],
+    "claim": "If n is a multiple of 3, then sigma(n) * phi(n) is at most n^2 - n if and only if n is not a prime power.",
+    "predicate": "(not (n % 3 == 0)) or (sigma(n) * phi(n) <= n**2 - n) == (not (is_prime(n) and n == int(n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      23,
+      24
+    ],
+    "claim": "If n is an odd multiple of 3 or a multiple of 12, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not ((n % 3 == 0 and n % 2 != 0) or (n % 12 == 0))) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      25,
+      26
+    ],
+    "claim": "If n is a power of 2 and a multiple of 3, then sigma(n) * phi(n) is at most n^2 - n if and only if n is not a prime.",
+    "predicate": "(not (is_prime(2) and n == 2**int(math.log2(n)) and n % 3 == 0)) or (sigma(n) * phi(n) <= n**2 - n) == (not is_prime(n))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect cube, then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (int(round(n**(1./3)))**3 == n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29
+    ],
+    "claim": "If n is a perfect cube, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (int(round(n**(1./3)))**3 == n)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      1,
+      29
+    ],
+    "claim": "If n is a prime power and a perfect cube, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (is_prime(n) and int(round(n**(1./3)))**3 == n)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      2,
+      29
+    ],
+    "claim": "If n is an odd perfect cube, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (int(round(n**(1./3)))**3 == n and n % 2 != 0)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      4,
+      29
+    ],
+    "claim": "If n is a multiple of 4 and a perfect cube, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (n % 4 == 0 and int(round(n**(1./3)))**3 == n)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      5,
+      29
+    ],
+    "claim": "If n is a power of 2 and a perfect cube, then sigma(n) * phi(n) is at most n^2 - n.",
+    "predicate": "(not (is_prime(2) and n == 2**int(math.log2(n)) and int(round(n**(1./3)))**3 == n)) or (sigma(n) * phi(n) <= n**2 - n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      30,
+      31
+    ],
+    "claim": "If n is a perfect cube, then sigma(n) * phi(n) is at most n^2 - n if and only if n is not a prime power.",
+    "predicate": "(not (int(round(n**(1./3)))**3 == n)) or (sigma(n) * phi(n) <= n**2 - n) == (not (is_prime(n) and n == int(n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  }
+]

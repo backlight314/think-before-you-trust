@@ -1,0 +1,540 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all odd integers n, n^4 - 1 is divisible by 16.",
+    "predicate": "(n % 2 == 1) and ((n**4 - 1) % 16 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all odd n, n^2 - 1 is divisible by 8.",
+    "predicate": "(n % 2 == 1) and ((n**2 - 1) % 8 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, n^2 + 1 is not divisible by 2.",
+    "predicate": "((n**2 + 1) % 2 != 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all prime p, n^p - n is divisible by p.",
+    "predicate": "(is_prime(p)) and ((n**p - n) % p == 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      3
+    ],
+    "claim": "For all prime p, n^p - n is divisible by the smallest prime p.",
+    "predicate": "(is_prime(p)) and ((n**p - n) % p == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      3
+    ],
+    "claim": "For all prime p, n^p - n is divisible by the largest prime p.",
+    "predicate": "(is_prime(p)) and ((n**p - n) % p == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all odd n, n^3 - n is divisible by 3.",
+    "predicate": "(n % 2 == 1) and ((n**3 - n) % 3 == 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all even n, n^3 - n is divisible by 6.",
+    "predicate": "(n % 2 == 0) and ((n**3 - n) % 6 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      1
+    ],
+    "claim": "For all odd n, n^2 - 1 is congruent to 3 mod 8.",
+    "predicate": "(n % 2 == 1) and ((n**2 - 1) % 8 == 3)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      1
+    ],
+    "claim": "For all odd n, n^2 - 1 is congruent to 7 mod 8.",
+    "predicate": "(n % 2 == 1) and ((n**2 - 1) % 8 == 7)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      2
+    ],
+    "claim": "For all n, n^2 + 1 is congruent to 1 mod 4.",
+    "predicate": "((n**2 + 1) % 4 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2
+    ],
+    "claim": "For all n, n^2 + 1 is congruent to 3 mod 4.",
+    "predicate": "((n**2 + 1) % 4 == 3)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      3
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of phi(p).",
+    "predicate": "(is_prime(p)) and ((n**p - n) % phi(p) == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      3
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of tau(p).",
+    "predicate": "(is_prime(p)) and ((n**p - n) % tau(p) == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      3
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of gcd(p, n).",
+    "predicate": "(is_prime(p)) and ((n**p - n) % gcd(p, n) == 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all odd n, n^5 - n is divisible by 5.",
+    "predicate": "(n % 2 == 1) and ((n**5 - n) % 5 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all even n, n^5 - n is divisible by 10.",
+    "predicate": "(n % 2 == 0) and ((n**5 - n) % 10 == 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      6
+    ],
+    "claim": "For all odd n, n^4 - n^2 is divisible by 3.",
+    "predicate": "(n % 2 == 1) and ((n**4 - n**2) % 3 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      6
+    ],
+    "claim": "For all odd n, n^4 - n^2 is congruent to 1 mod 3.",
+    "predicate": "(n % 2 == 1) and ((n**4 - n**2) % 3 == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      7
+    ],
+    "claim": "For all even n, n^4 - n^2 is divisible by 6.",
+    "predicate": "(n % 2 == 0) and ((n**4 - n**2) % 6 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      7
+    ],
+    "claim": "For all even n, n^4 - n^2 is congruent to 2 mod 6.",
+    "predicate": "(n % 2 == 0) and ((n**4 - n**2) % 6 == 2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      8
+    ],
+    "claim": "For all odd n, n^2 - 1 is congruent to 3 mod 32.",
+    "predicate": "(n % 2 == 1) and ((n**2 - 1) % 32 == 3)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      8
+    ],
+    "claim": "For all odd n, n^2 - 1 is congruent to 7 mod 32.",
+    "predicate": "(n % 2 == 1) and ((n**2 - 1) % 32 == 7)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      9
+    ],
+    "claim": "For all odd n, n^2 - 1 is congruent to 1 mod 32.",
+    "predicate": "(n % 2 == 1) and ((n**2 - 1) % 32 == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      9
+    ],
+    "claim": "For all odd n, n^2 - 1 is congruent to 29 mod 32.",
+    "predicate": "(n % 2 == 1) and ((n**2 - 1) % 32 == 29)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      10
+    ],
+    "claim": "For all n, n^2 + 1 is congruent to 1 mod 8.",
+    "predicate": "((n**2 + 1) % 8 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      10
+    ],
+    "claim": "For all n, n^2 + 1 is congruent to 3 mod 8.",
+    "predicate": "((n**2 + 1) % 8 == 3)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      11
+    ],
+    "claim": "For all n, n^2 + 1 is congruent to 1 mod 16.",
+    "predicate": "((n**2 + 1) % 16 == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      11
+    ],
+    "claim": "For all n, n^2 + 1 is congruent to 3 mod 16.",
+    "predicate": "((n**2 + 1) % 16 == 3)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      12
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of phi(p) if p is odd.",
+    "predicate": "(is_prime(p)) and (p > 2) and ((n**p - n) % phi(p) == 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      12
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of phi(p) if p is even.",
+    "predicate": "(is_prime(p)) and (p <= 2) and ((n**p - n) % phi(p) == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      12
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of phi(p) if n is prime.",
+    "predicate": "(is_prime(n)) and ((n**p - n) % phi(p) == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      13
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of tau(p) if p is odd.",
+    "predicate": "(is_prime(p)) and (p > 2) and ((n**p - n) % tau(p) == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      13
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of tau(p) if p is even.",
+    "predicate": "(is_prime(p)) and (p <= 2) and ((n**p - n) % tau(p) == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      13
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of tau(p) if n is prime.",
+    "predicate": "(is_prime(n)) and ((n**p - n) % tau(p) == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      14
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of gcd(p, n) if p is odd.",
+    "predicate": "(is_prime(p)) and (p > 2) and ((n**p - n) % gcd(p, n) == 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      14
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of gcd(p, n) if p is even.",
+    "predicate": "(is_prime(p)) and (p <= 2) and ((n**p - n) % gcd(p, n) == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      14
+    ],
+    "claim": "For all prime p, n^p - n is a multiple of gcd(p, n) if n is prime.",
+    "predicate": "(is_prime(n)) and ((n**p - n) % gcd(p, n) == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      15
+    ],
+    "claim": "For all odd n, n^5 - n is divisible by 3.",
+    "predicate": "(n % 2 == 1) and ((n**5 - n) % 3 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      15
+    ],
+    "claim": "For all odd n, n^5 - n is congruent to 0 mod 3.",
+    "predicate": "(n % 2 == 1) and ((n**5 - n) % 3 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      16
+    ],
+    "claim": "For all even n, n^5 - n is divisible by 3.",
+    "predicate": "(n % 2 == 0) and ((n**5 - n) % 3 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      16
+    ],
+    "claim": "For all even n, n^5 - n is congruent to 0 mod 3.",
+    "predicate": "(n % 2 == 0) and ((n**5 - n) % 3 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      17
+    ],
+    "claim": "For all odd n, n^4 - n^2 is congruent to 1 mod 3.",
+    "predicate": "(n % 2 == 1) and ((n**4 - n**2) % 3 == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      17
+    ],
+    "claim": "For all odd n, n^4 - n^2 is congruent to 2 mod 3.",
+    "predicate": "(n % 2 == 1) and ((n**4 - n**2) % 3 == 2)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      19
+    ],
+    "claim": "For all even n, n^4 - n^2 is congruent to 2 mod 6.",
+    "predicate": "(n % 2 == 0) and ((n**4 - n**2) % 6 == 2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

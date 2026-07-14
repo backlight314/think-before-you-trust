@@ -1,0 +1,439 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "(tau(n) % 2 == 1) == (int(n**0.5) ** 2 == n)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then the sum of its divisors is odd.",
+    "predicate": "(int(n**0.5) ** 2 == n) == (sigma(n) % 2 == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd, then n is not a prime power.",
+    "predicate": "(tau(n) % 2 == 1) == (not (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then the product of its divisors is a perfect square.",
+    "predicate": "(int(n**0.5) ** 2 == n) == (int((sigma(n) / tau(n))**0.5) ** 2 == (sigma(n) / tau(n)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is not a prime power, then the number of divisors of n is even.",
+    "predicate": "(not (is_prime(n) and vp(n, n) > 1)) == (tau(n) % 2 == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      3
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd, then n is a perfect square.",
+    "predicate": "(sigma(n) % 2 == 1) == (int(n**0.5) ** 2 == n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2,
+      4
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is even, then n is a product of distinct primes.",
+    "predicate": "(tau(n) % 2 == 0) == (all(vp(n, p) == 1 for p in range(2, int(n**0.5)+1) if is_prime(p)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if the product of its divisors is a perfect square.",
+    "predicate": "(tau(n) % 2 == 1) == (int((sigma(n) / tau(n))**0.5) ** 2 == (sigma(n) / tau(n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      3,
+      6
+    ],
+    "claim": "For all integers n >= 1, if n is a product of distinct primes, then the sum of its divisors is even.",
+    "predicate": "(all(vp(n, p) == 1 for p in range(2, int(n**0.5)+1) if is_prime(p))) == (sigma(n) % 2 == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      1,
+      7
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd, then the product of its divisors is a perfect square.",
+    "predicate": "(sigma(n) % 2 == 1) == (int((sigma(n) / tau(n))**0.5) ** 2 == (sigma(n) / tau(n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      2,
+      8
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is even, then the sum of its divisors is even.",
+    "predicate": "(tau(n) % 2 == 0) == (sigma(n) % 2 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      9
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if the sum of its divisors is odd.",
+    "predicate": "(tau(n) % 2 == 1) == (sigma(n) % 2 == 1)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      4,
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is not a prime power, then the sum of its divisors is even.",
+    "predicate": "(not (is_prime(n) and vp(n, n) > 1)) == (sigma(n) % 2 == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      3,
+      11
+    ],
+    "claim": "For all integers n >= 1, if the product of the divisors of n is a perfect square, then n is a perfect square.",
+    "predicate": "(int((sigma(n) / tau(n))**0.5) ** 2 == (sigma(n) / tau(n))) == (int(n**0.5) ** 2 == n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      1,
+      12
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd, then n is not a prime power.",
+    "predicate": "(sigma(n) % 2 == 1) == (not (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      2,
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then the number of divisors of n is odd.",
+    "predicate": "(int(n**0.5) ** 2 == n) == (tau(n) % 2 == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      6,
+      14
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is even, then n is a product of distinct primes or a prime power.",
+    "predicate": "(tau(n) % 2 == 0) == (all(vp(n, p) == 1 for p in range(2, int(n**0.5)+1) if is_prime(p)) or (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      15
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square or a prime power.",
+    "predicate": "(tau(n) % 2 == 1) == ((int(n**0.5) ** 2 == n) or (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      4,
+      16
+    ],
+    "claim": "For all integers n >= 1, if n is not a prime power, then the number of divisors of n is even.",
+    "predicate": "(not (is_prime(n) and vp(n, n) > 1)) == (tau(n) % 2 == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      3,
+      17
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square or a prime power, then the product of its divisors is a perfect square.",
+    "predicate": "((int(n**0.5) ** 2 == n) or (is_prime(n) and vp(n, n) > 1)) == (int((sigma(n) / tau(n))**0.5) ** 2 == (sigma(n) / tau(n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      1,
+      18
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd, then n is a prime power.",
+    "predicate": "(sigma(n) % 2 == 1) == ((is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      2,
+      19
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is even, then n is a product of distinct primes or a prime power.",
+    "predicate": "(tau(n) % 2 == 0) == (all(vp(n, p) == 1 for p in range(2, int(n**0.5)+1) if is_prime(p)) or (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      6,
+      20
+    ],
+    "claim": "For all integers n >= 1, if n is a product of distinct primes, then the sum of its divisors is even.",
+    "predicate": "(all(vp(n, p) == 1 for p in range(2, int(n**0.5)+1) if is_prime(p))) == (sigma(n) % 2 == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      21
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square or a prime power.",
+    "predicate": "(tau(n) % 2 == 1) == ((int(n**0.5) ** 2 == n) or (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      4,
+      22
+    ],
+    "claim": "For all integers n >= 1, if n is not a prime power, then the sum of its divisors is even.",
+    "predicate": "(not (is_prime(n) and vp(n, n) > 1)) == (sigma(n) % 2 == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      3,
+      23
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square or a prime power, then the product of its divisors is a perfect square.",
+    "predicate": "((int(n**0.5) ** 2 == n) or (is_prime(n) and vp(n, n) > 1)) == (int((sigma(n) / tau(n))**0.5) ** 2 == (sigma(n) / tau(n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      1,
+      24
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd, then n is a prime power.",
+    "predicate": "(sigma(n) % 2 == 1) == ((is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      2,
+      25
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is even, then n is a product of distinct primes or a prime power.",
+    "predicate": "(tau(n) % 2 == 0) == (all(vp(n, p) == 1 for p in range(2, int(n**0.5)+1) if is_prime(p)) or (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      6,
+      26
+    ],
+    "claim": "For all integers n >= 1, if n is a product of distinct primes, then the sum of its divisors is even.",
+    "predicate": "(all(vp(n, p) == 1 for p in range(2, int(n**0.5)+1) if is_prime(p))) == (sigma(n) % 2 == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      27
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square or a prime power.",
+    "predicate": "(tau(n) % 2 == 1) == ((int(n**0.5) ** 2 == n) or (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      4,
+      28
+    ],
+    "claim": "For all integers n >= 1, if n is not a prime power, then the sum of its divisors is even.",
+    "predicate": "(not (is_prime(n) and vp(n, n) > 1)) == (sigma(n) % 2 == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      3,
+      29
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square or a prime power, then the product of its divisors is a perfect square.",
+    "predicate": "((int(n**0.5) ** 2 == n) or (is_prime(n) and vp(n, n) > 1)) == (int((sigma(n) / tau(n))**0.5) ** 2 == (sigma(n) / tau(n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      1,
+      30
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd, then n is a prime power.",
+    "predicate": "(sigma(n) % 2 == 1) == ((is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      2,
+      31
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is even, then n is a product of distinct primes or a prime power.",
+    "predicate": "(tau(n) % 2 == 0) == (all(vp(n, p) == 1 for p in range(2, int(n**0.5)+1) if is_prime(p)) or (is_prime(n) and vp(n, n) > 1))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  }
+]

@@ -1,0 +1,504 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, if n is prime then 2^n - 2 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, n) - 2) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 3^n - 3 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(3, n, n) - 3) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 5^n - 5 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(5, n, n) - 5) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 7^n - 7 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(7, n, n) - 7) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 11^n - 11 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(11, n, n) - 11) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 13^n - 13 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(13, n, n) - 13) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 17^n - 17 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(17, n, n) - 17) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 19^n - 19 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(19, n, n) - 19) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 23^n - 23 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(23, n, n) - 23) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 29^n - 29 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(29, n, n) - 29) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 31^n - 31 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(31, n, n) - 31) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 37^n - 37 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(37, n, n) - 37) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 41^n - 41 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(41, n, n) - 41) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 43^n - 43 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(43, n, n) - 43) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 47^n - 47 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(47, n, n) - 47) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 53^n - 53 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(53, n, n) - 53) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 59^n - 59 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(59, n, n) - 59) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 61^n - 61 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(61, n, n) - 61) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 67^n - 67 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(67, n, n) - 67) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 71^n - 71 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(71, n, n) - 71) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 73^n - 73 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(73, n, n) - 73) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 79^n - 79 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(79, n, n) - 79) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 83^n - 83 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(83, n, n) - 83) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 89^n - 89 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(89, n, n) - 89) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 97^n - 97 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(97, n, n) - 97) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 101^n - 101 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(101, n, n) - 101) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 103^n - 103 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(103, n, n) - 103) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 107^n - 107 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(107, n, n) - 107) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 109^n - 109 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(109, n, n) - 109) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 113^n - 113 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(113, n, n) - 113) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 127^n - 127 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(127, n, n) - 127) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 131^n - 131 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(131, n, n) - 131) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 137^n - 137 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(137, n, n) - 137) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 139^n - 139 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(139, n, n) - 139) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 149^n - 149 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(149, n, n) - 149) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 151^n - 151 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(151, n, n) - 151) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 157^n - 157 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(157, n, n) - 157) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 163^n - 163 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(163, n, n) - 163) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 167^n - 167 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(167, n, n) - 167) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 173^n - 173 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(173, n, n) - 173) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 179^n - 179 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(179, n, n) - 179) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 181^n - 181 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(181, n, n) - 181) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

@@ -1,0 +1,472 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, n is prime if and only if (n-1)! + 1 is divisible by n.",
+    "predicate": "(not is_prime(n)) == ((math.factorial(n-1) + 1) % n != 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n > 1 is prime, then n divides (n-1)! + 1.",
+    "predicate": "is_prime(n) == ((math.factorial(n-1) + 1) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n > 1 does not divide (n-1)! + 1, then n is not prime.",
+    "predicate": "((math.factorial(n-1) + 1) % n != 0) == (not is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "If n > 1 is a composite number, then n divides (n-1)! + 1.",
+    "predicate": "not is_prime(n) == ((math.factorial(n-1) + 1) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      3
+    ],
+    "claim": "If n > 1 is composite and a divisor of (n-1)! + 1, then n > 3.",
+    "predicate": "(not is_prime(n)) and ((math.factorial(n-1) + 1) % n == 0) == (n > 3)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "If n > 1 is prime, then all its divisors are of the form k + 1, 1 \u2264 k \u2264 n - 1.",
+    "predicate": "is_prime(n) == all(i in range(1, n) for i in [k + 1 for k in range(1, n - 1) if (k + 1) % n == 0])",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      4
+    ],
+    "claim": "For all composite n > 3, if n divides (n-1)! + 1, then n > 3 is not the case.",
+    "predicate": "(not is_prime(n)) and ((math.factorial(n-1) + 1) % n == 0) == (n <= 3)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "For all composite n > 3, if n divides (n-1)! + 1, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and ((math.factorial(n-1) + 1) % n == 0) == (is_prime_power(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      5,
+      7
+    ],
+    "claim": "For all prime n > 3, if all its divisors are of the form k + 1, 1 \u2264 k \u2264 n - 1, then n is a prime power.",
+    "predicate": "is_prime(n) and all(i in range(1, n) for i in [k + 1 for k in range(1, n - 1) if (k + 1) % n == 0]) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7
+    ],
+    "claim": "For all composite n > 3, if n divides (n-1)! + 1, then the largest prime factor of n is less than n.",
+    "predicate": "(not is_prime(n)) and ((math.factorial(n-1) + 1) % n == 0) == (max(vp(n, i) for i in range(2, n)) < n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all composite n > 3, if the largest prime factor of n is less than n, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and (max(vp(n, i) for i in range(2, n)) < n) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      8,
+      10
+    ],
+    "claim": "For all prime n > 3, if n is a prime power, then all its divisors are of the form k + 1, 1 \u2264 k \u2264 n - 1.",
+    "predicate": "is_prime_power(n) == all(i in range(1, n) for i in [k + 1 for k in range(1, n - 1) if (k + 1) % n == 0])",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10
+    ],
+    "claim": "For all composite n > 3, if n is a prime power, then the largest prime factor of n is less than n.",
+    "predicate": "(not is_prime(n)) and (is_prime_power(n)) == (max(vp(n, i) for i in range(2, n)) < n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12
+    ],
+    "claim": "For all composite n > 3, if the largest prime factor of n is less than n, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and (max(vp(n, i) for i in range(2, n)) < n) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      11,
+      13
+    ],
+    "claim": "For all prime n > 3, if n is a prime power, then n is a perfect square.",
+    "predicate": "is_prime_power(n) == (round(math.sqrt(n)) ** 2 == n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      13
+    ],
+    "claim": "For all composite n > 3, if n is a prime power, then n is a perfect square.",
+    "predicate": "(not is_prime(n)) and (is_prime_power(n)) == (round(math.sqrt(n)) ** 2 == n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      14
+    ],
+    "claim": "For all prime n > 3, if n is a perfect square, then n is a prime power.",
+    "predicate": "(round(math.sqrt(n)) ** 2 == n) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15
+    ],
+    "claim": "For all composite n > 3, if n is a perfect square, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and (round(math.sqrt(n)) ** 2 == n) == (is_prime_power(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      16
+    ],
+    "claim": "For all prime n > 3, if n is a prime power, then n is a product of two distinct primes.",
+    "predicate": "is_prime_power(n) == (len(set(vp(n, i) for i in range(2, n))) == 2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      17
+    ],
+    "claim": "For all composite n > 3, if n is a perfect square, then n is a product of two distinct primes.",
+    "predicate": "(not is_prime(n)) and (round(math.sqrt(n)) ** 2 == n) == (len(set(vp(n, i) for i in range(2, n))) == 2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18
+    ],
+    "claim": "For all prime n > 3, if n is a product of two distinct primes, then n is a prime power.",
+    "predicate": "(len(set(vp(n, i) for i in range(2, n))) == 2) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      19
+    ],
+    "claim": "For all composite n > 3, if n is a product of two distinct primes, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and (len(set(vp(n, i) for i in range(2, n))) == 2) == (is_prime_power(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      20
+    ],
+    "claim": "For all prime n > 3, if n is a prime power, then n is a square of a prime.",
+    "predicate": "is_prime_power(n) == (is_prime(int(math.sqrt(n))))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      21
+    ],
+    "claim": "For all composite n > 3, if n is a prime power, then n is a square of a prime.",
+    "predicate": "(not is_prime(n)) and (is_prime_power(n)) == (is_prime(int(math.sqrt(n))))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      22
+    ],
+    "claim": "For all prime n > 3, if n is a square of a prime, then n is a prime power.",
+    "predicate": "(is_prime(int(math.sqrt(n)))) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      23
+    ],
+    "claim": "For all composite n > 3, if n is a square of a prime, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and (is_prime(int(math.sqrt(n)))) == (is_prime_power(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      24
+    ],
+    "claim": "For all prime n > 3, if n is a prime power, then n has an even number of prime factors.",
+    "predicate": "is_prime_power(n) == (len(vp(n, i) for i in range(2, n)) % 2 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25
+    ],
+    "claim": "For all composite n > 3, if n is a square of a prime, then n has an even number of prime factors.",
+    "predicate": "(not is_prime(n)) and (is_prime(int(math.sqrt(n)))) == (len(vp(n, i) for i in range(2, n)) % 2 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      26
+    ],
+    "claim": "For all prime n > 3, if n has an even number of prime factors, then n is a prime power.",
+    "predicate": "(len(vp(n, i) for i in range(2, n)) % 2 == 0) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      27
+    ],
+    "claim": "For all composite n > 3, if n has an even number of prime factors, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and (len(vp(n, i) for i in range(2, n)) % 2 == 0) == (is_prime_power(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      28
+    ],
+    "claim": "For all prime n > 3, if n is a prime power, then n has exactly two prime factors.",
+    "predicate": "is_prime_power(n) == (len(vp(n, i) for i in range(2, n)) == 2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      29
+    ],
+    "claim": "For all composite n > 3, if n has an even number of prime factors, then n has exactly two prime factors.",
+    "predicate": "(not is_prime(n)) and (len(vp(n, i) for i in range(2, n)) % 2 == 0) == (len(vp(n, i) for i in range(2, n)) == 2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      30
+    ],
+    "claim": "For all prime n > 3, if n has exactly two prime factors, then n is a prime power.",
+    "predicate": "(len(vp(n, i) for i in range(2, n)) == 2) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      31
+    ],
+    "claim": "For all composite n > 3, if n has exactly two prime factors, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and (len(vp(n, i) for i in range(2, n)) == 2) == (is_prime_power(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      32
+    ],
+    "claim": "For all prime n > 3, if n is a prime power, then n has exactly one prime factor.",
+    "predicate": "is_prime_power(n) == (len(vp(n, i) for i in range(2, n)) == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      33
+    ],
+    "claim": "For all composite n > 3, if n has exactly two prime factors, then n has exactly one prime factor.",
+    "predicate": "(not is_prime(n)) and (len(vp(n, i) for i in range(2, n)) == 2) == (len(vp(n, i) for i in range(2, n)) == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      34
+    ],
+    "claim": "For all prime n > 3, if n has exactly one prime factor, then n is a prime power.",
+    "predicate": "(len(vp(n, i) for i in range(2, n)) == 1) == (is_prime_power(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      35
+    ],
+    "claim": "For all composite n > 3, if n has exactly one prime factor, then n is a prime power.",
+    "predicate": "(not is_prime(n)) and (len(vp(n, i) for i in range(2, n)) == 1) == (is_prime_power(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      36
+    ],
+    "claim": "For all prime n > 3, if n is a prime power, then n is a square of a prime.",
+    "predicate": "is_prime_power(n) == (is_prime(int(math.sqrt(n))))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  }
+]

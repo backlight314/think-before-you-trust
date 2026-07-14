@@ -1,0 +1,438 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, if n is prime then 2^n - 2 is divisible by n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, n) - 2) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 3^n - 3 is divisible by n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(3, n, n) - 3) % n == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n^2 divides 2^n - 2",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, n*n) - 2) % (n*n) == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n > 1, if n is prime then 6 divides 2^n + 3^n - 5",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, 6) + pow(3, n, 6) - 5) % 6 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 2^(n-1) \u2261 1 mod n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (pow(2, n-1, n) == 1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n > 1, if n is prime then n^3 divides 2^{n^2} - 2^n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n*n, n*n*n) - pow(2, n, n*n*n)) % (n*n*n) == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n > 1, if n is prime then 3^(n-1) \u2261 1 mod n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (pow(3, n-1, n) == 1)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      4,
+      7
+    ],
+    "claim": "For all integers n > 1, if n is prime then 6^(n-1) \u2261 1 mod n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (pow(6, n-1, n) == 1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n > 1, if n is prime then 5 divides 2^n + 3^n - 5^n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, 5) + pow(3, n, 5) - pow(5, n, 5)) % 5 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 10 divides n^5 - n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(n, 5, 10) - n) % 10 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, 10 divides n^5 - n",
+    "predicate": "((pow(n, 5, 10) - n) % 10 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n, 30 divides n^5 - n",
+    "predicate": "((pow(n, 5, 30) - n) % 30 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      11,
+      12
+    ],
+    "claim": "For all integers n, 60 divides n^5 - n when n is odd",
+    "predicate": "(n % 2 == 0) or ((pow(n, 5, 60) - n) % 60 == 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      10
+    ],
+    "claim": "For all integers n > 1, if n is prime then 30 divides n^7 - n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(n, 7, 30) - n) % 30 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n, 42 divides n^7 - n",
+    "predicate": "((pow(n, 7, 42) - n) % 42 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      11,
+      15
+    ],
+    "claim": "For all integers n, 210 divides n^5 - n when n is divisible by 7",
+    "predicate": "(n % 7 != 0) or ((pow(n, 5, 210) - n) % 210 == 0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides the sum of the first n-1 integers raised to the (n-2)nd power",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (sum(pow(k, n-2, n) for k in range(1, n)) % n == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      4,
+      7
+    ],
+    "claim": "For all integers n > 1, if n is prime then 2^n + 3^n \u2261 5 mod n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, n) + pow(3, n, n)) % n == 5 % n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n > 1, if n is prime then 2^n + 3^n + 5^n \u2261 10 mod n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, n) + pow(3, n, n) + pow(5, n, n)) % n == 10 % n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n > 1, if n is prime then n^2 divides 2^n + 3^n - 5^n",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, n*n) + pow(3, n, n*n) - pow(5, n, n*n)) % (n*n) == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      4,
+      7,
+      8
+    ],
+    "claim": "For all integers n > 1, if n is prime then 24 divides 2^(n-1) + 3^(n-1) + 6^(n-1) - 3",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n-1, 24) + pow(3, n-1, 24) + pow(6, n-1, 24) - 3) % 24 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides the sum of the first n-1 integers raised to the nth power",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (sum(pow(k, n, n) for k in range(1, n)) % n == 0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      11,
+      15
+    ],
+    "claim": "For all integers n, 210 divides n^7 - n when n is divisible by 5",
+    "predicate": "(n % 5 != 0) or ((pow(n, 7, 210) - n) % 210 == 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      11,
+      12,
+      15
+    ],
+    "claim": "For all integers n, 2310 divides n^11 - n",
+    "predicate": "((pow(n, 11, 2310) - n) % 2310 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, 30030 divides n^13 - n",
+    "predicate": "((pow(n, 13, 30030) - n) % 30030 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides the product of the first n-1 integers raised to the (n-2)nd power",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (pow(math.prod(range(1, n)), n-2, n) % n == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      4,
+      7
+    ],
+    "claim": "For all integers n > 1, if n is prime then 6 divides 2^(n-1) + 3^(n-1) - 1",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n-1, 6) + pow(3, n-1, 6) - 1) % 6 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      1,
+      2
+    ],
+    "claim": "For all integers n > 1, if n is prime then n^2 divides 2^n + 3^n - 5^n - 1",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, n*n) + pow(3, n, n*n) - pow(5, n, n*n) - 1) % (n*n) == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      11,
+      12,
+      13
+    ],
+    "claim": "For all integers n, 120 divides n^5 - n when n is divisible by 3",
+    "predicate": "(n % 3 != 0) or ((pow(n, 5, 120) - n) % 120 == 0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides the sum of the first n-1 integers each raised to the (n-1)st power",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (sum(pow(k, n-1, n) for k in range(1, n)) % n == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      1,
+      4
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides the sum of the first n-1 integers each raised to the (2n-2)nd power",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (sum(pow(k, 2*n-2, n) for k in range(1, n)) % n == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      11,
+      15,
+      24
+    ],
+    "claim": "For all integers n, 2730 divides n^7 - n when n is divisible by 13",
+    "predicate": "(n % 13 != 0) or ((pow(n, 7, 2730) - n) % 2730 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      1,
+      2
+    ],
+    "claim": "For all integers n > 1, if n is prime then n^3 divides 2^{n^2} + 3^{n^2} - 5^{n^2} - 1",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n*n, n*n*n) + pow(3, n*n, n*n*n) - pow(5, n*n, n*n*n) - 1) % (n*n*n) == 0)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      4,
+      7,
+      8,
+      21
+    ],
+    "claim": "For all integers n > 1, if n is prime then 120 divides 2^(n-1) + 3^(n-1) + 5^(n-1) + 6^(n-1) - 4",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n-1, 120) + pow(3, n-1, 120) + pow(5, n-1, 120) + pow(6, n-1, 120) - 4) % 120 == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

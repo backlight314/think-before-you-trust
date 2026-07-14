@@ -1,0 +1,365 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "(tau(n) % 2 == 1) == (n == int(math.sqrt(n)) ** 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, the number of divisors of n is equal to 4k + 1 for some integer k.",
+    "predicate": "(tau(n) % 2 == 1) == (4 * int(math.sqrt(n)) % 4 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is not a perfect square, the number of divisors of n is even.",
+    "predicate": "(tau(n) % 2 == 0) == (n != int(math.sqrt(n)) ** 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      2
+    ],
+    "claim": "If n is not a perfect square, n can be written as n = a^2 * b where a and b are coprime integers.",
+    "predicate": "(n != int(math.sqrt(n)) ** 2) == ((n % 8 != 1) or (n % 8 != 7))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      3
+    ],
+    "claim": "If n is not a perfect square and n % 8 == 1, then n is a product of three distinct primes.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 8 == 1)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 3))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      3
+    ],
+    "claim": "If n is not a perfect square and n % 8 == 7, then n is a product of two distinct primes.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 8 == 7)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "If n is not a perfect square and n % 8 == 7, then one of the two primes is 7.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 8 == 7)) == (7 in vp(n, 7))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      4,
+      5,
+      6
+    ],
+    "claim": "If n is not a perfect square, the number of divisors of n is equal to (a+1)(b+1), where a and b are the exponents of the two distinct primes in the prime factorization of n.",
+    "predicate": "(n != int(math.sqrt(n)) ** 2) == ((tau(n) - 1) == (phi(int(math.sqrt(n)) ** 2) * phi(n // int(math.sqrt(n)) ** 2)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "If n is not a perfect square, the sum of the divisors of n is odd if and only if n is a product of two distinct primes.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (sigma(n) % 2 == 1)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7
+    ],
+    "claim": "If n is not a perfect square, the sum of the divisors of n is even.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (sigma(n) % 2 == 0)) == (True)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      8
+    ],
+    "claim": "If n is not a perfect square and n is a product of two distinct primes, then one of the primes is 2.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2)) == (2 in vp(n, 2))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      8
+    ],
+    "claim": "If n is not a perfect square and n is a product of two distinct primes, then the other prime is not 3.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2)) == (3 not in vp(n, 3))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10,
+      11
+    ],
+    "claim": "If n is not a perfect square and n is a product of two distinct primes, then the other prime is 3.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2)) == (3 in vp(n, 3))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12
+    ],
+    "claim": "If n is not a perfect square and n is a product of two distinct primes, then n is of the form 3^k * 2^l where k >= 1 and l >= 1.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2)) == ((3 in vp(n, 3)) and (2 in vp(n, 2)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "If n is not a perfect square and n is a product of two distinct primes, then n is of the form 3^k * 2^l where k >= 2 and l >= 1.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2)) == ((3 in vp(n, 3)) and (2 in vp(n, 2)) and (3 * 2 in vp(n, 3 * 2)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      4,
+      5
+    ],
+    "claim": "If n is not a perfect square, n can be written as n = a^4 * b^2 where a and b are coprime integers.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((n % 8 == 0) and (n % 4 != 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15
+    ],
+    "claim": "If n is not a perfect square and n % 2 == 0, then n is a product of four distinct primes.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5) + vp(n, 7))) == 4))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15
+    ],
+    "claim": "If n is not a perfect square and n % 2 == 0, then n is a product of two distinct primes and a perfect square.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (int(math.sqrt(n)) ** 2 in vp(n, int(math.sqrt(n)) ** 2)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      16,
+      17
+    ],
+    "claim": "If n is not a perfect square and n % 2 == 0, then n is a product of two distinct primes and 2^2.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (2 in vp(n, 2)) and (2 * 2 in vp(n, 2 * 2)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "If n is not a perfect square and n % 2 == 0, then n is a product of two distinct primes, 2^2, and another prime.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (2 in vp(n, 2)) and (2 * 2 in vp(n, 2 * 2)) and (3 in vp(n, 3)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18
+    ],
+    "claim": "If n is not a perfect square and n % 2 == 0, then n is a product of two distinct primes and 2^3.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (2 in vp(n, 2)) and (2 * 2 in vp(n, 2 * 2)) and (2 * 2 * 2 in vp(n, 2 * 2 * 2)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20
+    ],
+    "claim": "If n is not a perfect square and n % 2 == 0, then n is a product of two distinct primes, 2^3, and another prime.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (2 in vp(n, 2)) and (2 * 2 in vp(n, 2 * 2)) and (2 * 2 * 2 in vp(n, 2 * 2 * 2)) and (3 in vp(n, 3)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      7
+    ],
+    "claim": "If n is not a perfect square, the sum of the divisors of n is congruent to 0 modulo 4.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (sigma(n) % 4 == 0)) == True",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "If n is not a perfect square, the sum of the divisors of n is congruent to 0 modulo 8.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (sigma(n) % 8 == 0)) == True",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      22
+    ],
+    "claim": "If n is not a perfect square, the sum of the divisors of n is divisible by 8.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (sigma(n) % 8 == 0)) == ((sigma(n) >= 8))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24
+    ],
+    "claim": "If n is not a perfect square and n is a product of two distinct primes, then the sum of the divisors of n is congruent to 0 modulo 8.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (sigma(n) % 8 == 0)) == True",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "If n is not a perfect square and n is a product of two distinct primes, then the sum of the divisors of n is divisible by 24.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (sigma(n) % 24 == 0)) == True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26
+    ],
+    "claim": "If n is not a perfect square and n is a product of two distinct primes, then the sum of the divisors of n is congruent to 0 modulo 24.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (sigma(n) % 24 == 0)) == True",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      15
+    ],
+    "claim": "If n is not a perfect square and n % 2 == 0, then n is a product of two distinct primes and a perfect square of a prime.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (int(math.sqrt(n)) ** 2 in vp(n, int(math.sqrt(n)) ** 2)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "If n is not a perfect square and n % 2 == 0, then n is a product of two distinct primes and 2^2.",
+    "predicate": "((n != int(math.sqrt(n)) ** 2) and (n % 2 == 0)) == ((len(set(vp(n, 2) + vp(n, 3) + vp(n, 5))) == 2) and (2 in vp(n, 2)) and (2 * 2 in vp(n, 2 * 2)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  }
+]

@@ -1,0 +1,467 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, sigma(n) * phi(n) is at most n^2.",
+    "predicate": "n >= 1 and sigma(n) * phi(n) <= n**2",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and n is prime then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(not (n & (n - 1) == 0) or not is_prime(n)) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, sigma(n) * phi(n) is at most n^2 and tau(n) is at most n.",
+    "predicate": "sigma(n) * phi(n) <= n**2 and tau(n) <= n",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) * phi(n) is at most n^2 and tau(n) is at most n then sigma(n) is at most n.",
+    "predicate": "(sigma(n) * phi(n) > n**2 or tau(n) > n) or (sigma(n) <= n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) is at most n.",
+    "predicate": "(not is_prime(n)) or (sigma(n) <= n)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) is at most n.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) <= n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      6,
+      7
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and n is prime then sigma(n) is at most n.",
+    "predicate": "(not (n & (n - 1) == 0) or not is_prime(n)) or (sigma(n) <= n)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is odd then sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(n % 2 == 0) or (sigma(n) * phi(n) <= n**2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n >= 1, if n is odd then sigma(n) is at most n.",
+    "predicate": "(n % 2 == 0) or (sigma(n) <= n)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is prime then phi(n) is at most n-1.",
+    "predicate": "(not is_prime(n)) or (phi(n) <= n-1)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) is at most n+1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) <= n+1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) * phi(n) is at most n^2 and sigma(n) is at most n+1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n+1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then phi(n) is at most n/2.",
+    "predicate": "(not (n & (n - 1) == 0)) or (phi(n) <= n/2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) is at most 2*n.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) <= 2*n)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) * phi(n) is at most n^2 and sigma(n) is at most 2*n.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= 2*n)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n >= 1, if n is odd then phi(n) is at most n-1.",
+    "predicate": "(n % 2 == 0) or (phi(n) <= n-1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n >= 1, if n is odd then sigma(n) is at most n+1.",
+    "predicate": "(n % 2 == 0) or (sigma(n) <= n+1)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is odd then sigma(n) * phi(n) is at most n^2 and sigma(n) is at most n+1.",
+    "predicate": "(n % 2 == 0) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n+1)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      1,
+      6
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) * phi(n) is at most n^2 and sigma(n) is at most n.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      2,
+      7
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) * phi(n) is at most n^2 and sigma(n) is at most n.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      9,
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is odd then sigma(n) * phi(n) is at most n^2 and sigma(n) is at most n.",
+    "predicate": "(n % 2 == 0) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      11,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is prime then phi(n) is at most n-1 and sigma(n) is at most n+1.",
+    "predicate": "(not is_prime(n)) or (phi(n) <= n-1 and sigma(n) <= n+1)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      14,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then phi(n) is at most n/2 and sigma(n) is at most 2*n.",
+    "predicate": "(not (n & (n - 1) == 0)) or (phi(n) <= n/2 and sigma(n) <= 2*n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      17,
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is odd then phi(n) is at most n-1 and sigma(n) is at most n+1.",
+    "predicate": "(n % 2 == 0) or (phi(n) <= n-1 and sigma(n) <= n+1)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      1,
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) * phi(n) is at most n^2 and phi(n) is at most n-1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) <= n**2 and phi(n) <= n-1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      2,
+      14
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) * phi(n) is at most n^2 and phi(n) is at most n/2.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) * phi(n) <= n**2 and phi(n) <= n/2)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      9,
+      17
+    ],
+    "claim": "For all integers n >= 1, if n is odd then sigma(n) * phi(n) is at most n^2 and phi(n) is at most n-1.",
+    "predicate": "(n % 2 == 0) or (sigma(n) * phi(n) <= n**2 and phi(n) <= n-1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      6,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) is at most n and sigma(n) is at most n+1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) <= n and sigma(n) <= n+1)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      7,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) is at most n and sigma(n) is at most 2*n.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) <= n and sigma(n) <= 2*n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      10,
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is odd then sigma(n) is at most n and sigma(n) is at most n+1.",
+    "predicate": "(n % 2 == 0) or (sigma(n) <= n and sigma(n) <= n+1)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) * phi(n) is at most n^2, sigma(n) is at most n+1, and phi(n) is at most n-1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n+1 and phi(n) <= n-1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      16
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) * phi(n) is at most n^2, sigma(n) is at most 2*n, and phi(n) is at most n/2.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= 2*n and phi(n) <= n/2)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      19
+    ],
+    "claim": "For all integers n >= 1, if n is odd then sigma(n) * phi(n) is at most n^2, sigma(n) is at most n+1, and phi(n) is at most n-1.",
+    "predicate": "(n % 2 == 0) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n+1 and phi(n) <= n-1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      1,
+      20
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) * phi(n) is at most n^2, sigma(n) is at most n, and phi(n) is at most n-1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n and phi(n) <= n-1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      2,
+      21
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 then sigma(n) * phi(n) is at most n^2, sigma(n) is at most n, and phi(n) is at most n/2.",
+    "predicate": "(not (n & (n - 1) == 0)) or (sigma(n) * phi(n) <= n**2 and sigma(n) <= n and phi(n) <= n/2)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

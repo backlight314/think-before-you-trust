@@ -1,0 +1,626 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^3 - n is divisible by 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 2.",
+    "predicate": "(n**3 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 3.",
+    "predicate": "(n**3 - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 6, and hence by lcm(2,3).",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 42.",
+    "predicate": "(n**7 - n) % 42 == 0",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 2730.",
+    "predicate": "(n**11 - n) % 2730 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2.",
+    "predicate": "(n**5 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 3.",
+    "predicate": "(n**5 - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 5.",
+    "predicate": "(n**5 - n) % 5 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      7,
+      8,
+      9
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by lcm(2,3,5)=30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 2.",
+    "predicate": "(n**7 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 3.",
+    "predicate": "(n**7 - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 7.",
+    "predicate": "(n**7 - n) % 7 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      11,
+      12,
+      13
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by lcm(2,3,7)=42.",
+    "predicate": "(n**7 - n) % 42 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 2.",
+    "predicate": "(n**11 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 3.",
+    "predicate": "(n**11 - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 5.",
+    "predicate": "(n**11 - n) % 5 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 7.",
+    "predicate": "(n**11 - n) % 7 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 11.",
+    "predicate": "(n**11 - n) % 11 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by lcm(2,3,5,7,11)=2310.",
+    "predicate": "(n**11 - n) % 2310 == 0",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20,
+      6
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 2730 = 2310 * 13 / gcd(2310,13).",
+    "predicate": "(n**11 - n) % 2730 == 0",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^3 - n is even, and n^3 - n is divisible by 3, so n^3 - n \u2261 0 mod 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 2, and n^5 - n is divisible by 2, so their difference is divisible by 2.",
+    "predicate": "((n**5 - n) - (n**3 - n)) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 3, and n^5 - n is divisible by 3, so their difference is divisible by 3.",
+    "predicate": "((n**5 - n) - (n**3 - n)) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      23,
+      24
+    ],
+    "claim": "For all integers n, (n^5 - n) - (n^3 - n) is divisible by 6.",
+    "predicate": "((n**5 - n) - (n**3 - n)) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all odd integers n, n^3 - n is divisible by 8.",
+    "predicate": "(n % 2 == 0) or ((n**3 - n) % 8 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26
+    ],
+    "claim": "For all odd integers n, n^3 - n is divisible by 8 and by 3, so by 24.",
+    "predicate": "(n % 2 == 0) or ((n**3 - n) % 24 == 0)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      2,
+      26
+    ],
+    "claim": "For all integers n, if n is odd then n^3 - n is divisible by 24; if even, divisible by 6.",
+    "predicate": "(n % 2 == 1 and (n**3 - n) % 24 == 0) or (n % 2 == 0 and (n**3 - n) % 6 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^3 - n = (n-1)n(n+1), the product of three consecutive integers.",
+    "predicate": "(n**3 - n) == (n-1)*n*(n+1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n, the product (n-1)n(n+1) contains at least one multiple of 2 and one multiple of 3.",
+    "predicate": "(any([((n-1) % 2 == 0), (n % 2 == 0), ((n+1) % 2 == 0)]) and any([((n-1) % 3 == 0), (n % 3 == 0), ((n+1) % 3 == 0)]))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30
+    ],
+    "claim": "For all integers n, since (n-1)n(n+1) contains a multiple of 2 and a multiple of 3, and 2 and 3 are coprime, the product is divisible by 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n, among (n-1), n, (n+1), at least one is divisible by 2, and exactly one is divisible by 3 if n mod 3 != 0.",
+    "predicate": "(any([((n-1) % 2 == 0), (n % 2 == 0), ((n+1) % 2 == 0)]) and (n % 3 == 0 or any([((n-1) % 3 == 0), ((n+1) % 3 == 0)])))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      29
+    ],
+    "claim": "For all integers n, the sum of the three consecutive integers (n-1)+n+(n+1) = 3n, and their product (n^3 - n) is divisible by 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 4.",
+    "predicate": "(n**5 - n) % 4 == 0",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 15.",
+    "predicate": "(n**5 - n) % 15 == 0",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      34,
+      35
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by lcm(4,15)=60.",
+    "predicate": "(n**5 - n) % 60 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      4,
+      29
+    ],
+    "claim": "For all integers n, n^5 - n = n(n^4 - 1) = n(n^2 - 1)(n^2 + 1) = (n-1)n(n+1)(n^2 + 1), and since (n-1)n(n+1) divisible by 6, and n^2+1 is even when n odd, so overall divisible by 12.",
+    "predicate": "(n**5 - n) % 12 == 0",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37,
+      8
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by lcm(12,5)=60.",
+    "predicate": "(n**5 - n) % 60 == 0",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 4.",
+    "predicate": "(n**7 - n) % 4 == 0",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 21.",
+    "predicate": "(n**7 - n) % 21 == 0",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      39,
+      40
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by lcm(4,21)=84.",
+    "predicate": "(n**7 - n) % 84 == 0",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      5,
+      29
+    ],
+    "claim": "For all integers n, n^7 - n = n(n^6 - 1) = n(n^2 - 1)(n^4 + n^2 + 1) = (n-1)n(n+1)(n^4 + n^2 + 1), and since (n-1)n(n+1) divisible by 6, and n^4 + n^2 + 1 is odd when n even, even when n odd, so overall divisible by 12.",
+    "predicate": "(n**7 - n) % 12 == 0",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42,
+      13
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by lcm(12,7)=84.",
+    "predicate": "(n**7 - n) % 84 == 0",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      6,
+      39
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 4.",
+    "predicate": "(n**11 - n) % 4 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      6,
+      40
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 21.",
+    "predicate": "(n**11 - n) % 21 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      44,
+      45
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by lcm(4,21)=84.",
+    "predicate": "(n**11 - n) % 84 == 0",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      6,
+      42
+    ],
+    "claim": "For all integers n, n^11 - n = n(n^10 - 1) = n(n^2 - 1)(n^8 + n^6 + n^4 + n^2 + 1) = (n-1)n(n+1)(...), and since (n-1)n(n+1) divisible by 6, and the other factor is always odd, so overall divisible by 12.",
+    "predicate": "(n**11 - n) % 12 == 0",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      19
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by lcm(12,11)=132.",
+    "predicate": "(n**11 - n) % 132 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      1,
+      11,
+      15
+    ],
+    "claim": "For all integers n, n^3 - n, n^5 - n, and n^7 - n are all even, so their sum is even.",
+    "predicate": "((n**3 - n) + (n**5 - n) + (n**7 - n)) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

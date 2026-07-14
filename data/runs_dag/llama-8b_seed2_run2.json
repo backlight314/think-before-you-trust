@@ -1,0 +1,492 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is odd.",
+    "predicate": "n**2 + 1 % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n + 1 is even if n^2 + 1 is odd.",
+    "predicate": "n**2 + 1 % 2 == 1 and (n + 1) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      2
+    ],
+    "claim": "For all even integers n, n + 1 is odd.",
+    "predicate": "(n + 1) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 >= 2.",
+    "predicate": "n**2 + 1 >= 2",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^2 + 1 is composite if n^2 + 1 >= 2.",
+    "predicate": "n**2 + 1 >= 2 and not is_prime(n**2 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "For all composite integers n, n^2 + 1 is not prime.",
+    "predicate": "not is_prime(n) and not is_prime(n**2 + 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "For all even integers n, n^2 + 1 is not prime.",
+    "predicate": "(n % 2 == 0) and not is_prime(n**2 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) is a divisor of n^2 + 1.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      8
+    ],
+    "claim": "For all integers n, the divisor of n^2 + 1 is a factor of n^2 + 1.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n**2 + 1) == 0",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n + 1 is a divisor of n^2 + 1.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, if n + 1 is a divisor of n^2 + 1 then n + 1 divides 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and (n + 1) % 2 == 0",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n, n + 1 divides 2.",
+    "predicate": "(n + 1) % 2 == 0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n + 1 divides n^2 + 1 if n + 1 divides 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and (n + 1) % 2 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n, if n + 1 divides n^2 + 1 then n + 1 is a divisor of 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and not ((n + 1) % 2 == 0)",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is a square if n^2 + 1 >= 2.",
+    "predicate": "n**2 + 1 >= 2 and is_square(n**2 + 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15
+    ],
+    "claim": "For all composite integers n, n^2 + 1 is not a square.",
+    "predicate": "not is_prime(n) and not is_square(n**2 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15
+    ],
+    "claim": "For all even integers n, n^2 + 1 is a square.",
+    "predicate": "(n % 2 == 0) and is_square(n**2 + 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n + 1 divides n^2 + 1 if n^2 + 1 is a square.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and is_square(n**2 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n, if n + 1 divides n^2 + 1 then n + 1 is a divisor of n^2 + 1.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and (n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is a square if n^2 + 1 divides n^2 + 1.",
+    "predicate": "n**2 + 1 >= 2 and is_square(n**2 + 1) and gcd(n**2 + 1, n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20
+    ],
+    "claim": "For all integers n, if n^2 + 1 is a square then n^2 + 1 divides n^2 + 1.",
+    "predicate": "is_square(n**2 + 1) and gcd(n**2 + 1, n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n, n^2 + 1 divides n^2 + 1.",
+    "predicate": "(n**2 + 1) % (n**2 + 1) == 0",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n + 1 is a divisor of n^2 + 1 if n + 1 divides 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and (n + 1) % 2 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23
+    ],
+    "claim": "For all integers n, if n + 1 divides n^2 + 1 then n + 1 is a divisor of 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and not ((n + 1) % 2 == 0)",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is odd if n^2 + 1 >= 2.",
+    "predicate": "n**2 + 1 >= 2 and (n**2 + 1) % 2 == 1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all composite integers n, n^2 + 1 is not odd.",
+    "predicate": "not is_prime(n) and (n**2 + 1) % 2 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25
+    ],
+    "claim": "For all even integers n, n^2 + 1 is odd.",
+    "predicate": "(n % 2 == 0) and (n**2 + 1) % 2 == 1",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n + 1 divides n^2 + 1 if n^2 + 1 is odd.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and (n**2 + 1) % 2 == 1",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n, if n + 1 divides n^2 + 1 then n + 1 is a divisor of n^2 + 1.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and (n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is a square if n^2 + 1 divides n^2 + 1.",
+    "predicate": "n**2 + 1 >= 2 and is_square(n**2 + 1) and gcd(n**2 + 1, n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30
+    ],
+    "claim": "For all integers n, if n^2 + 1 is a square then n^2 + 1 divides n^2 + 1.",
+    "predicate": "is_square(n**2 + 1) and gcd(n**2 + 1, n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31
+    ],
+    "claim": "For all integers n, n^2 + 1 divides n^2 + 1.",
+    "predicate": "(n**2 + 1) % (n**2 + 1) == 0",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is a square if n^2 + 1 is odd.",
+    "predicate": "n**2 + 1 >= 2 and (n**2 + 1) % 2 == 1 and is_square(n**2 + 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33
+    ],
+    "claim": "For all composite integers n, n^2 + 1 is not a square.",
+    "predicate": "not is_prime(n) and not is_square(n**2 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      33
+    ],
+    "claim": "For all even integers n, n^2 + 1 is a square.",
+    "predicate": "(n % 2 == 0) and is_square(n**2 + 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n + 1 is a divisor of n^2 + 1 if n^2 + 1 is a square.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and is_square(n**2 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36
+    ],
+    "claim": "For all integers n, if n + 1 divides n^2 + 1 then n + 1 is a divisor of n^2 + 1.",
+    "predicate": "gcd(n**2 + 1, n + 1) % (n + 1) == 0 and (n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is a square if n^2 + 1 divides n^2 + 1.",
+    "predicate": "n**2 + 1 >= 2 and is_square(n**2 + 1) and gcd(n**2 + 1, n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38
+    ],
+    "claim": "For all integers n, if n^2 + 1 is a square then n^2 + 1 divides n^2 + 1.",
+    "predicate": "is_square(n**2 + 1) and gcd(n**2 + 1, n + 1) % (n**2 + 1) == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39
+    ],
+    "claim": "For all integers n, n^2 + 1 divides n^2 + 1.",
+    "predicate": "(n**2 + 1) % (n**2 + 1) == 0",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

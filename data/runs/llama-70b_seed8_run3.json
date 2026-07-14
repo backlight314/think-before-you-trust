@@ -1,0 +1,408 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "tau(n) % 2 == 0 if n < 1 else int(n**0.5) ** 2 == n",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then the sum of its divisors is odd.",
+    "predicate": "int(n**0.5) ** 2 == n and sigma(n) % 2 == 1",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd, then n is not a prime power with an even exponent.",
+    "predicate": "tau(n) % 2 == 1 and all(vp(n, p) % 2 == 1 for p in range(2, n+1) if is_prime(p))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and the sum of its divisors is odd, then n is a square of a prime.",
+    "predicate": "int(n**0.5) ** 2 == n and sigma(n) % 2 == 1 and is_prime(int(n**0.5))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is not a perfect square, then the number of divisors of n-1 is even.",
+    "predicate": "int(n**0.5) ** 2 != n and tau(n-1) % 2 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd, then n is not divisible by 4.",
+    "predicate": "tau(n) % 2 == 1 and n % 4 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n-1 is not a perfect square, then n-1 is not divisible by 4.",
+    "predicate": "int(n**0.5) ** 2 == n and int((n-1)**0.5) ** 2 != n-1 and (n-1) % 4 != 0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd, then n is not divisible by 3.",
+    "predicate": "sigma(n) % 2 == 1 and n % 3 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n >= 1, if n is a square of a prime and the sum of its divisors is odd, then n is a square of a prime congruent to 1 modulo 4.",
+    "predicate": "is_prime(int(n**0.5)) and sigma(n) % 2 == 1 and int(n**0.5) % 4 == 1",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd and n is not divisible by 4, then n is not divisible by 8.",
+    "predicate": "tau(n) % 2 == 1 and n % 4 != 0 and n % 8 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      7
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and the sum of its divisors is odd, then n is not divisible by 6.",
+    "predicate": "int(n**0.5) ** 2 == n and sigma(n) % 2 == 1 and n % 6 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2,
+      9
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd and n is not divisible by 8, then n is not a prime power with an even exponent greater than 2.",
+    "predicate": "tau(n) % 2 == 1 and n % 8 != 0 and all(vp(n, p) % 2 == 1 or vp(n, p) <= 2 for p in range(2, n+1) if is_prime(p))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      4,
+      10
+    ],
+    "claim": "For all integers n >= 1, if n-1 is not a perfect square and n is not divisible by 6, then n is not a perfect square.",
+    "predicate": "int((n-1)**0.5) ** 2 != n-1 and n % 6 != 0 and int(n**0.5) ** 2 != n",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      1,
+      8
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd and n is a square of a prime congruent to 1 modulo 4, then n is a square of a prime congruent to 1 modulo 8.",
+    "predicate": "sigma(n) % 2 == 1 and is_prime(int(n**0.5)) and int(n**0.5) % 4 == 1 and int(n**0.5) % 8 == 1",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and the number of divisors of n is odd, then n is not a prime power with an even exponent greater than 2.",
+    "predicate": "int(n**0.5) ** 2 == n and tau(n) % 2 == 1 and all(vp(n, p) % 2 == 1 or vp(n, p) <= 2 for p in range(2, n+1) if is_prime(p))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      3,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is a square of a prime and n-1 is not a perfect square, then n is not divisible by 12.",
+    "predicate": "is_prime(int(n**0.5)) and int((n-1)**0.5) ** 2 != n-1 and n % 12 != 0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      5,
+      13
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd and n is a square of a prime congruent to 1 modulo 8, then n is not divisible by 24.",
+    "predicate": "tau(n) % 2 == 1 and is_prime(int(n**0.5)) and int(n**0.5) % 8 == 1 and n % 24 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      7,
+      14
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd and n is not a prime power with an even exponent greater than 2, then n is not divisible by 30.",
+    "predicate": "sigma(n) % 2 == 1 and all(vp(n, p) % 2 == 1 or vp(n, p) <= 2 for p in range(2, n+1) if is_prime(p)) and n % 30 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n-1 is not a perfect square, then n is not divisible by 42.",
+    "predicate": "int(n**0.5) ** 2 == n and int((n-1)**0.5) ** 2 != n-1 and n % 42 != 0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      2,
+      16
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd and n is not divisible by 24, then n is not a prime power with an even exponent greater than 3.",
+    "predicate": "tau(n) % 2 == 1 and n % 24 != 0 and all(vp(n, p) % 2 == 1 or vp(n, p) <= 3 for p in range(2, n+1) if is_prime(p))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      4,
+      17
+    ],
+    "claim": "For all integers n >= 1, if n-1 is not a perfect square and n is not divisible by 30, then n is not a perfect square.",
+    "predicate": "int((n-1)**0.5) ** 2 != n-1 and n % 30 != 0 and int(n**0.5) ** 2 != n",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      1,
+      18
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd and n is not divisible by 42, then n is not divisible by 70.",
+    "predicate": "sigma(n) % 2 == 1 and n % 42 != 0 and n % 70 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      3,
+      19
+    ],
+    "claim": "For all integers n >= 1, if n is a square of a prime and n is not a prime power with an even exponent greater than 3, then n is not divisible by 120.",
+    "predicate": "is_prime(int(n**0.5)) and all(vp(n, p) % 2 == 1 or vp(n, p) <= 3 for p in range(2, n+1) if is_prime(p)) and n % 120 != 0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      5,
+      20
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd and n is not a perfect square, then n is not divisible by 168.",
+    "predicate": "tau(n) % 2 == 1 and int(n**0.5) ** 2 != n and n % 168 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      7,
+      21
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd and n is not divisible by 70, then n is not divisible by 210.",
+    "predicate": "sigma(n) % 2 == 1 and n % 70 != 0 and n % 210 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      22
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is not divisible by 120, then n is not a perfect square of a prime power with an even exponent.",
+    "predicate": "int(n**0.5) ** 2 == n and n % 120 != 0 and all(vp(n, p) % 2 == 1 for p in range(2, n+1) if is_prime(p))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      2,
+      23
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd and n is not divisible by 168, then n is not a prime power with an even exponent greater than 4.",
+    "predicate": "tau(n) % 2 == 1 and n % 168 != 0 and all(vp(n, p) % 2 == 1 or vp(n, p) <= 4 for p in range(2, n+1) if is_prime(p))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      4,
+      24
+    ],
+    "claim": "For all integers n >= 1, if n-1 is not a perfect square and n is not divisible by 210, then n is not a perfect square.",
+    "predicate": "int((n-1)**0.5) ** 2 != n-1 and n % 210 != 0 and int(n**0.5) ** 2 != n",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      1,
+      25
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd and n is not a perfect square of a prime power with an even exponent, then n is not divisible by 420.",
+    "predicate": "sigma(n) % 2 == 1 and all(vp(n, p) % 2 == 1 for p in range(2, n+1) if is_prime(p)) and n % 420 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      3,
+      26
+    ],
+    "claim": "For all integers n >= 1, if n is a square of a prime and n is not a prime power with an even exponent greater than 4, then n is not divisible by 840.",
+    "predicate": "is_prime(int(n**0.5)) and all(vp(n, p) % 2 == 1 or vp(n, p) <= 4 for p in range(2, n+1) if is_prime(p)) and n % 840 != 0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      5,
+      27
+    ],
+    "claim": "For all integers n >= 1, if the number of divisors of n is odd and n is not a perfect square, then n is not divisible by 1680.",
+    "predicate": "tau(n) % 2 == 1 and int(n**0.5) ** 2 != n and n % 1680 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      7,
+      28
+    ],
+    "claim": "For all integers n >= 1, if the sum of the divisors of n is odd and n is not divisible by 420, then n is not divisible by 2520.",
+    "predicate": "sigma(n) % 2 == 1 and n % 420 != 0 and n % 2520 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

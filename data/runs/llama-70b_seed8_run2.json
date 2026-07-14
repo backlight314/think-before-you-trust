@@ -1,0 +1,422 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "(tau(n) % 2 == 1) == (round(n ** 0.5) ** 2 == n)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then the number of divisors of n is odd.",
+    "predicate": "(round(n ** 0.5) ** 2 == n) <= (tau(n) % 2 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If the number of divisors of n is odd, then n is a perfect square.",
+    "predicate": "(tau(n) % 2 == 1) <= (round(n ** 0.5) ** 2 == n)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n, n is a perfect square if and only if the number of divisors of n is odd.",
+    "predicate": "(round(n ** 0.5) ** 2 == n) == (tau(n) % 2 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "If n is not a perfect square, then the number of divisors of n is even.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (tau(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1
+    ],
+    "claim": "If n is a perfect square, then n is not prime unless n is 1.",
+    "predicate": "(round(n ** 0.5) ** 2 == n) <= (not is_prime(n)) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2
+    ],
+    "claim": "If the number of divisors of n is odd, then n is not prime unless n is 1.",
+    "predicate": "(tau(n) % 2 == 1) <= (not is_prime(n)) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n, if n is prime, then the number of divisors of n is 2 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (tau(n) == 2) or (n == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      4
+    ],
+    "claim": "If n is not a perfect square, then n is not a prime power unless n is 1.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (not (is_prime(n) and tau(n) == (vp(n, n) + 1))) or (n == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      5,
+      6
+    ],
+    "claim": "If n is not prime, then the number of divisors of n is even unless n is 1.",
+    "predicate": "(not is_prime(n)) <= (tau(n) % 2 == 0) or (n == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n, if n is prime, then the sum of divisors of n is n + 1 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (sigma(n) == n + 1) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      8
+    ],
+    "claim": "If n is not a perfect square, then the Euler's totient function of n is even unless n is 1 or n is prime.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (phi(n) % 2 == 0) or (n == 1) or (is_prime(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      9
+    ],
+    "claim": "If n is not prime, then the Euler's totient function of n is even unless n is 1 or n is a perfect square.",
+    "predicate": "(not is_prime(n)) <= (phi(n) % 2 == 0) or (n == 1) or (round(n ** 0.5) ** 2 == n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, if n is prime, then the number of divisors of n^2 is 3 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (tau(n ** 2) == 3) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      11
+    ],
+    "claim": "If n is not a perfect square, then the Euler's totient function of n is not a perfect square unless n is 1 or n is prime.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (round(phi(n) ** 0.5) ** 2 != phi(n)) or (n == 1) or (is_prime(n))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      12
+    ],
+    "claim": "If n is not prime, then the Euler's totient function of n is not a perfect square unless n is 1 or n is a perfect square.",
+    "predicate": "(not is_prime(n)) <= (round(phi(n) ** 0.5) ** 2 != phi(n)) or (n == 1) or (round(n ** 0.5) ** 2 == n)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n, if n is prime, then the sum of divisors of n^2 is n^2 + n + 1 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (sigma(n ** 2) == n ** 2 + n + 1) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      14
+    ],
+    "claim": "If n is not a perfect square, then the number of divisors of the Euler's totient function of n is even unless n is 1 or n is prime.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (tau(phi(n)) % 2 == 0) or (n == 1) or (is_prime(n))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      15
+    ],
+    "claim": "If n is not prime, then the number of divisors of the Euler's totient function of n is even unless n is 1 or n is a perfect square.",
+    "predicate": "(not is_prime(n)) <= (tau(phi(n)) % 2 == 0) or (n == 1) or (round(n ** 0.5) ** 2 == n)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      16
+    ],
+    "claim": "For all integers n, if n is prime, then the Euler's totient function of n^2 is n * (n - 1) unless n is 1.",
+    "predicate": "(is_prime(n)) <= (phi(n ** 2) == n * (n - 1)) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      17
+    ],
+    "claim": "If n is not a perfect square, then the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is prime.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (phi(phi(n)) % 2 == 0) or (n == 1) or (is_prime(n))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      18
+    ],
+    "claim": "If n is not prime, then the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is a perfect square.",
+    "predicate": "(not is_prime(n)) <= (phi(phi(n)) % 2 == 0) or (n == 1) or (round(n ** 0.5) ** 2 == n)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n, if n is prime, then the number of divisors of n^3 is 4 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (tau(n ** 3) == 4) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      20
+    ],
+    "claim": "If n is not a perfect square, then the number of divisors of the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is prime.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (tau(phi(phi(n))) % 2 == 0) or (n == 1) or (is_prime(n))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      21
+    ],
+    "claim": "If n is not prime, then the number of divisors of the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is a perfect square.",
+    "predicate": "(not is_prime(n)) <= (tau(phi(phi(n))) % 2 == 0) or (n == 1) or (round(n ** 0.5) ** 2 == n)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n, if n is prime, then the sum of divisors of n^3 is n^3 + n^2 + n + 1 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (sigma(n ** 3) == n ** 3 + n ** 2 + n + 1) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      23
+    ],
+    "claim": "If n is not a perfect square, then the Euler's totient function of the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is prime.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (phi(phi(phi(n))) % 2 == 0) or (n == 1) or (is_prime(n))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      24
+    ],
+    "claim": "If n is not prime, then the Euler's totient function of the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is a perfect square.",
+    "predicate": "(not is_prime(n)) <= (phi(phi(phi(n))) % 2 == 0) or (n == 1) or (round(n ** 0.5) ** 2 == n)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n, if n is prime, then the number of divisors of n^5 is 6 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (tau(n ** 5) == 6) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      26
+    ],
+    "claim": "If n is not a perfect square, then the number of divisors of the Euler's totient function of the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is prime.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (tau(phi(phi(phi(n))))) % 2 == 0) or (n == 1) or (is_prime(n))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      27
+    ],
+    "claim": "If n is not prime, then the number of divisors of the Euler's totient function of the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is a perfect square.",
+    "predicate": "(not is_prime(n)) <= (tau(phi(phi(phi(n))))) % 2 == 0) or (n == 1) or (round(n ** 0.5) ** 2 == n)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n, if n is prime, then the sum of divisors of n^5 is n^5 + n^4 + n^3 + n^2 + n + 1 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (sigma(n ** 5) == n ** 5 + n ** 4 + n ** 3 + n ** 2 + n + 1) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      29
+    ],
+    "claim": "If n is not a perfect square, then the Euler's totient function of the Euler's totient function of the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is prime.",
+    "predicate": "(round(n ** 0.5) ** 2 != n) <= (phi(phi(phi(phi(n))))) % 2 == 0) or (n == 1) or (is_prime(n))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      30
+    ],
+    "claim": "If n is not prime, then the Euler's totient function of the Euler's totient function of the Euler's totient function of the Euler's totient function of n is even unless n is 1 or n is a perfect square.",
+    "predicate": "(not is_prime(n)) <= (phi(phi(phi(phi(n))))) % 2 == 0) or (n == 1) or (round(n ** 0.5) ** 2 == n)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      31
+    ],
+    "claim": "For all integers n, if n is prime, then the number of divisors of n^7 is 8 unless n is 1.",
+    "predicate": "(is_prime(n)) <= (tau(n ** 7) == 8) or (n == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

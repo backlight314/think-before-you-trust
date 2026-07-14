@@ -1,0 +1,284 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, if n is prime then 2^n - 2 is divisible by n.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**n - 2) % n == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 3^n - 3 is divisible by n.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((3**n - 3) % n == 0))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then 5^n - 5 is divisible by n.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((5**n - 5) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n^5 - n is divisible by 30.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((n**5 - n) % 30 == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and 3^n - 3 are divisible by n.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((3**n - 3) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      3
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n > 1, if n is prime then 3^n - 3 is divisible by n and n^3 + n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (((3**n - 3) % n == 0) and ((n**3 + n) % 3 == 0))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      2,
+      3
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 5^n - 5 and n^5 - n are divisible by 30.",
+    "predicate": "(not is_prime(n)) or (((5**n - 5) % 30 == 0) and ((n**5 - n) % 30 == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and 3^n - 3 are divisible by n and n is odd.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((3**n - 3) % n == 0) and (n % 2 != 0))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      5,
+      6
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n and 3^n - 3 is divisible by n.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 5^n - 5 and n^5 - n are divisible by 30 and n^3 + n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (((5**n - 5) % 30 == 0) and ((n**5 - n) % 30 == 0) and ((n**3 + n) % 3 == 0))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      8
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and 3^n - 3 are divisible by n, n is odd, and gcd(n, 6) = 1.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((3**n - 3) % n == 0) and (n % 2 != 0) and (gcd(n, 6) == 1))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      9,
+      10
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n, 3^n - 3 is divisible by n, and 5^n - 5 is divisible by 30.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0) and ((5**n - 5) % 30 == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and 3^n - 3 are divisible by n, n is odd, gcd(n, 6) = 1, and tau(n) = 2.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((3**n - 3) % n == 0) and (n % 2 != 0) and (gcd(n, 6) == 1) and (tau(n) == 2))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      12
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n, 3^n - 3 is divisible by n, 5^n - 5 is divisible by 30, and phi(n) = n - 1.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0) and ((5**n - 5) % 30 == 0) and (phi(n) == n - 1))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      13,
+      14
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and 3^n - 3 are divisible by n, n is odd, gcd(n, 6) = 1, tau(n) = 2, and phi(n) = n - 1.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((3**n - 3) % n == 0) and (n % 2 != 0) and (gcd(n, 6) == 1) and (tau(n) == 2) and (phi(n) == n - 1))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and 3^n - 3 are divisible by n, n is odd, gcd(n, 6) = 1, tau(n) = 2, phi(n) = n - 1, and sigma(n) = n + 1.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((3**n - 3) % n == 0) and (n % 2 != 0) and (gcd(n, 6) == 1) and (tau(n) == 2) and (phi(n) == n - 1) and (sigma(n) == n + 1))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      14,
+      16
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n, 3^n - 3 is divisible by n, 5^n - 5 is divisible by 30, phi(n) = n - 1, and sigma(n) = n + 1.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0) and ((5**n - 5) % 30 == 0) and (phi(n) == n - 1) and (sigma(n) == n + 1))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n, 3^n - 3 is divisible by n, 5^n - 5 is divisible by 30, phi(n) = n - 1, sigma(n) = n + 1, and tau(n) = 2.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0) and ((5**n - 5) % 30 == 0) and (phi(n) == n - 1) and (sigma(n) == n + 1) and (tau(n) == 2))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n, 3^n - 3 is divisible by n, 5^n - 5 is divisible by 30, phi(n) = n - 1, sigma(n) = n + 1, tau(n) = 2, and gcd(n, 6) = 1.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0) and ((5**n - 5) % 30 == 0) and (phi(n) == n - 1) and (sigma(n) == n + 1) and (tau(n) == 2) and (gcd(n, 6) == 1))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n, 3^n - 3 is divisible by n, 5^n - 5 is divisible by 30, phi(n) = n - 1, sigma(n) = n + 1, tau(n) = 2, gcd(n, 6) = 1, and n is odd.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0) and ((5**n - 5) % 30 == 0) and (phi(n) == n - 1) and (sigma(n) == n + 1) and (tau(n) == 2) and (gcd(n, 6) == 1) and (n % 2 != 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n, 3^n - 3 is divisible by n, 5^n - 5 is divisible by 30, phi(n) = n - 1, sigma(n) = n + 1, tau(n) = 2, gcd(n, 6) = 1, n is odd, and vp(n, 2) = 0.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0) and ((5**n - 5) % 30 == 0) and (phi(n) == n - 1) and (sigma(n) == n + 1) and (tau(n) == 2) and (gcd(n, 6) == 1) and (n % 2 != 0) and (vp(n, 2) == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n > 1, if n is prime then both 2^n - 2 and n^5 - n are divisible by n, 3^n - 3 is divisible by n, 5^n - 5 is divisible by 30, phi(n) = n - 1, sigma(n) = n + 1, tau(n) = 2, gcd(n, 6) = 1, n is odd, vp(n, 2) = 0, and vp(n, 3) = 0.",
+    "predicate": "(not is_prime(n)) or (((2**n - 2) % n == 0) and ((n**5 - n) % n == 0) and ((3**n - 3) % n == 0) and ((5**n - 5) % 30 == 0) and (phi(n) == n - 1) and (sigma(n) == n + 1) and (tau(n) == 2) and (gcd(n, 6) == 1) and (n % 2 != 0) and (vp(n, 2) == 0) and (vp(n, 3) == 0))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

@@ -1,0 +1,600 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^3 - n is divisible by 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 42.",
+    "predicate": "(n**7 - n) % 42 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 66.",
+    "predicate": "(n**11 - n) % 66 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^13 - n is divisible by 78.",
+    "predicate": "(n**13 - n) % 78 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^17 - n is divisible by 102.",
+    "predicate": "(n**17 - n) % 102 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^19 - n is divisible by 114.",
+    "predicate": "(n**19 - n) % 114 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^23 - n is divisible by 138.",
+    "predicate": "(n**23 - n) % 138 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^29 - n is divisible by 174.",
+    "predicate": "(n**29 - n) % 174 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^31 - n is divisible by 186.",
+    "predicate": "(n**31 - n) % 186 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^37 - n is divisible by 222.",
+    "predicate": "(n**37 - n) % 222 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^41 - n is divisible by 246.",
+    "predicate": "(n**41 - n) % 246 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^43 - n is divisible by 258.",
+    "predicate": "(n**43 - n) % 258 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^47 - n is divisible by 282.",
+    "predicate": "(n**47 - n) % 282 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^53 - n is divisible by 318.",
+    "predicate": "(n**53 - n) % 318 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^59 - n is divisible by 354.",
+    "predicate": "(n**59 - n) % 354 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^61 - n is divisible by 366.",
+    "predicate": "(n**61 - n) % 366 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^67 - n is divisible by 402.",
+    "predicate": "(n**67 - n) % 402 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^71 - n is divisible by 426.",
+    "predicate": "(n**71 - n) % 426 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^73 - n is divisible by 438.",
+    "predicate": "(n**73 - n) % 438 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^79 - n is divisible by 474.",
+    "predicate": "(n**79 - n) % 474 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^83 - n is divisible by 498.",
+    "predicate": "(n**83 - n) % 498 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^89 - n is divisible by 534.",
+    "predicate": "(n**89 - n) % 534 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^97 - n is divisible by 582.",
+    "predicate": "(n**97 - n) % 582 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^101 - n is divisible by 606.",
+    "predicate": "(n**101 - n) % 606 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^103 - n is divisible by 618.",
+    "predicate": "(n**103 - n) % 618 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^107 - n is divisible by 642.",
+    "predicate": "(n**107 - n) % 642 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^109 - n is divisible by 654.",
+    "predicate": "(n**109 - n) % 654 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^113 - n is divisible by 678.",
+    "predicate": "(n**113 - n) % 678 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^127 - n is divisible by 762.",
+    "predicate": "(n**127 - n) % 762 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^131 - n is divisible by 786.",
+    "predicate": "(n**131 - n) % 786 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^137 - n is divisible by 822.",
+    "predicate": "(n**137 - n) % 822 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^139 - n is divisible by 834.",
+    "predicate": "(n**139 - n) % 834 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^149 - n is divisible by 894.",
+    "predicate": "(n**149 - n) % 894 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^151 - n is divisible by 906.",
+    "predicate": "(n**151 - n) % 906 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^157 - n is divisible by 942.",
+    "predicate": "(n**157 - n) % 942 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^163 - n is divisible by 978.",
+    "predicate": "(n**163 - n) % 978 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^167 - n is divisible by 1002.",
+    "predicate": "(n**167 - n) % 1002 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^173 - n is divisible by 1038.",
+    "predicate": "(n**173 - n) % 1038 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^179 - n is divisible by 1074.",
+    "predicate": "(n**179 - n) % 1074 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^181 - n is divisible by 1086.",
+    "predicate": "(n**181 - n) % 1086 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^191 - n is divisible by 1146.",
+    "predicate": "(n**191 - n) % 1146 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^193 - n is divisible by 1158.",
+    "predicate": "(n**193 - n) % 1158 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^197 - n is divisible by 1182.",
+    "predicate": "(n**197 - n) % 1182 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^199 - n is divisible by 1194.",
+    "predicate": "(n**199 - n) % 1194 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^211 - n is divisible by 1266.",
+    "predicate": "(n**211 - n) % 1266 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^223 - n is divisible by 1338.",
+    "predicate": "(n**223 - n) % 1338 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^227 - n is divisible by 1362.",
+    "predicate": "(n**227 - n) % 1362 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^229 - n is divisible by 1374.",
+    "predicate": "(n**229 - n) % 1374 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^233 - n is divisible by 1398.",
+    "predicate": "(n**233 - n) % 1398 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

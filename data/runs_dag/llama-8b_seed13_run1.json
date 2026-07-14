@@ -1,0 +1,440 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, n is prime if and only if (n-1)! + 1 is divisible by n.",
+    "predicate": "(not is_prime(n)) or ((factorial(n-1) + 1) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, n is prime if and only if (n-1)! is congruent to -1 mod n.",
+    "predicate": "(not is_prime(n)) or ((factorial(n-1)) % n == n-1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, n is prime if and only if (n-2)! is congruent to -1 mod n.",
+    "predicate": "(not is_prime(n)) or ((factorial(n-2)) % n == n-1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then (n-1)! is congruent to -1 mod n.",
+    "predicate": "is_prime(n) and ((factorial(n-1)) % n == n-1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n > 1, if (n-1)! is congruent to -1 mod n then (n-2)! is congruent to -1 mod n.",
+    "predicate": "((factorial(n-1)) % n == n-1) -> ((factorial(n-2)) % n == n-1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is prime then (n-2)! is congruent to -1 mod n.",
+    "predicate": "is_prime(n) and ((factorial(n-2)) % n == n-1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n > 2, if n is prime then (n-2)! is congruent to -1 mod n and (n-3)! is congruent to 1 mod n.",
+    "predicate": "is_prime(n) and ((factorial(n-2)) % n == n-1) and ((factorial(n-3)) % n == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      1,
+      5
+    ],
+    "claim": "For all integers n > 2, if (n-1)! is congruent to -1 mod n then n is not prime.",
+    "predicate": "((factorial(n-1)) % n == n-1) -> not is_prime(n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      3,
+      7
+    ],
+    "claim": "For all integers n > 2, if n is prime then (n-1)! is congruent to -1 mod n and if (n-1)! is congruent to -1 mod n then n is not prime.",
+    "predicate": "is_prime(n) and ((factorial(n-1)) % n == n-1) and ((factorial(n-1)) % n == n-1) -> not is_prime(n)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a * k^b where k is an odd prime and a, b are non-negative integers.",
+    "predicate": "is_prime(n) and (sigma(n) == (1 + 2**tau(n)) * (1 + pow(n, 1, 2)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form k^a where k is an odd prime and a is a positive integer.",
+    "predicate": "is_prime(n) and (sigma(n) == 1 + pow(n, 1, 2))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form k where k is an odd prime.",
+    "predicate": "is_prime(n) and (n % 2 != 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a where a is a non-negative integer.",
+    "predicate": "is_prime(n) and (n % 2 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then phi(n) = n - 1.",
+    "predicate": "is_prime(n) and (phi(n) == n - 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then tau(n) = 2.",
+    "predicate": "is_prime(n) and (tau(n) == 2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      13,
+      14
+    ],
+    "claim": "For all integers n > 1, if phi(n) = n - 1 and tau(n) = 2 then n is prime.",
+    "predicate": "((phi(n) == n - 1) and (tau(n) == 2)) -> is_prime(n)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then vp(n, 2) = 1.",
+    "predicate": "is_prime(n) and (vp(n, 2) == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2 * k where k is an odd integer.",
+    "predicate": "is_prime(n) and (n % 2 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      16,
+      17
+    ],
+    "claim": "For all integers n > 1, if vp(n, 2) = 1 and n is of the form 2 * k where k is an odd integer then n is prime.",
+    "predicate": "((vp(n, 2) == 1) and (n % 2 == 0)) -> is_prime(n)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 4 * k + 1 where k is a non-negative integer.",
+    "predicate": "is_prime(n) and (n == 4 * ((n - 1) // 4))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 4 * k + 3 where k is a non-negative integer.",
+    "predicate": "is_prime(n) and (n == 4 * ((n - 3) // 4))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 8 * k + 1 or 8 * k + 3 or 8 * k + 5 or 8 * k + 7 where k is a non-negative integer.",
+    "predicate": "is_prime(n) and (n % 8 == 1 or n % 8 == 3 or n % 8 == 5 or n % 8 == 7)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 6 * k + 1 or 6 * k + 5 where k is a non-negative integer.",
+    "predicate": "is_prime(n) and (n == 6 * ((n - 1) // 6) or n == 6 * ((n - 5) // 6))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      21,
+      22
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 12 * k + 1 or 12 * k + 5 or 12 * k + 7 or 12 * k + 11 where k is a non-negative integer.",
+    "predicate": "is_prime(n) and (n % 12 == 1 or n % 12 == 5 or n % 12 == 7 or n % 12 == 11)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2 * k + 1 where k is a non-negative integer.",
+    "predicate": "is_prime(n) and (n % 2 == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form k^a where k is an integer greater than 1 and a is a positive integer.",
+    "predicate": "is_prime(n) and (sigma(n) == 1 + n)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      24,
+      25
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a * k^b where k is an odd prime and a, b are non-negative integers.",
+    "predicate": "is_prime(n) and (sigma(n) == (1 + 2**tau(n)) * (1 + pow(n, 1, 2)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form k^a where k is an odd prime and a is a positive integer.",
+    "predicate": "is_prime(n) and (sigma(n) == 1 + pow(n, 1, 2))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      26,
+      27
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a where a is a non-negative integer.",
+    "predicate": "is_prime(n) and (n % 2 == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n-1 is not divisible by any prime less than or equal to sqrt(n).",
+    "predicate": "is_prime(n) and (all(p in range(2, int(math.sqrt(n)) + 1) for p in range(2, n+1) if p > 1 and is_prime(p) and (n - 1) % p == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n > 1, if n-1 is not divisible by any prime less than or equal to sqrt(n) then n is prime.",
+    "predicate": "((all(p in range(2, int(math.sqrt(n)) + 1) for p in range(2, n+1) if p > 1 and is_prime(p) and (n - 1) % p == 0)) -> is_prime(n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a * (4k+1)^b where a, b are non-negative integers and k is a positive integer.",
+    "predicate": "is_prime(n) and (sigma(n) == (1 + 2**tau(n)) * (1 + pow(4 * ((n - 1) // 4), 1, 2)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a * (4k+3)^b where a, b are non-negative integers and k is a positive integer.",
+    "predicate": "is_prime(n) and (sigma(n) == (1 + 2**tau(n)) * (1 + pow(4 * ((n - 3) // 4), 1, 2)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a * (6k+1)^b where a, b are non-negative integers and k is a positive integer.",
+    "predicate": "is_prime(n) and (sigma(n) == (1 + 2**tau(n)) * (1 + pow(6 * ((n - 1) // 6), 1, 2)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a * (6k+5)^b where a, b are non-negative integers and k is a positive integer.",
+    "predicate": "is_prime(n) and (sigma(n) == (1 + 2**tau(n)) * (1 + pow(6 * ((n - 5) // 6), 1, 2)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is of the form 2^a * (12k+1)^b where a, b are non-negative integers and k is a positive integer.",
+    "predicate": "is_prime(n) and (sigma(n) == (1 + 2**tau(n)) * (1 + pow(12 * ((n - 1) // 12), 1, 2)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

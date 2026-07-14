@@ -1,0 +1,623 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is prime.",
+    "predicate": "all(is_prime(n*n + n + 41) for n in range(0, 501))",
+    "confidence": 0.98,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n in [0, 39], n^2 + n + 41 is prime.",
+    "predicate": "all(is_prime(n*n + n + 41) for n in range(0, 40))",
+    "confidence": 0.99,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n in [0, 40], n^2 + n + 41 is either prime or 41^2.",
+    "predicate": "all(is_prime(n*n + n + 41) or (n*n + n + 41 == 1681) for n in range(0, 41))",
+    "confidence": 0.97,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n in [0, 40], n^2 + n + 41 is not divisible by any prime less than 41.",
+    "predicate": "all(not any((n*n + n + 41) % p == 0 for p in [2,3,5,7,11,13,17,19,23,29,31,37]) for n in range(0, 41))",
+    "confidence": 0.96,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is odd.",
+    "predicate": "(n*n + n + 41) % 2 == 1",
+    "confidence": 0.99,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 2.",
+    "predicate": "(n*n + n + 41) % 2 != 0",
+    "confidence": 0.99,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n \u2261 0 mod 41 then n^2 + n + 41 is divisible by 41.",
+    "predicate": "(n % 41 == 0) implies ((n*n + n + 41) % 41 == 0)",
+    "confidence": 0.95,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n, n^2 + n + 41 \u2261 41 mod 41 when n \u2261 0 mod 41.",
+    "predicate": "(n % 41 == 0) implies ((n*n + n + 41) % 41 == 0)",
+    "confidence": 0.94,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 3.",
+    "predicate": "(n*n + n + 41) % 3 != 0",
+    "confidence": 0.92,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      8
+    ],
+    "claim": "For all integers n, n^2 + n + 41 \u2261 1 or 2 mod 3.",
+    "predicate": "(n*n + n + 41) % 3 in [1,2]",
+    "confidence": 0.93,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 5.",
+    "predicate": "(n*n + n + 41) % 5 != 0",
+    "confidence": 0.91,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      10
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 5 is in {1,2,3,4}.",
+    "predicate": "(n*n + n + 41) % 5 in [1,2,3,4]",
+    "confidence": 0.92,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 7.",
+    "predicate": "(n*n + n + 41) % 7 != 0",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      12
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 7 is in {1,2,3,4,5,6}.",
+    "predicate": "(n*n + n + 41) % 7 in [1,2,3,4,5,6]",
+    "confidence": 0.91,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 11.",
+    "predicate": "(n*n + n + 41) % 11 != 0",
+    "confidence": 0.89,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      14
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 11 is in {1,2,...,10}.",
+    "predicate": "(n*n + n + 41) % 11 in range(1,11)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 13.",
+    "predicate": "(n*n + n + 41) % 13 != 0",
+    "confidence": 0.88,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      16
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 13 is in {1,2,...,12}.",
+    "predicate": "(n*n + n + 41) % 13 in range(1,13)",
+    "confidence": 0.89,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 17.",
+    "predicate": "(n*n + n + 41) % 17 != 0",
+    "confidence": 0.87,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      18
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 17 is in {1,2,...,16}.",
+    "predicate": "(n*n + n + 41) % 17 in range(1,17)",
+    "confidence": 0.88,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 19.",
+    "predicate": "(n*n + n + 41) % 19 != 0",
+    "confidence": 0.86,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      20
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 19 is in {1,2,...,18}.",
+    "predicate": "(n*n + n + 41) % 19 in range(1,19)",
+    "confidence": 0.87,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 23.",
+    "predicate": "(n*n + n + 41) % 23 != 0",
+    "confidence": 0.85,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      22
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 23 is in {1,2,...,22}.",
+    "predicate": "(n*n + n + 41) % 23 in range(1,23)",
+    "confidence": 0.86,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 29.",
+    "predicate": "(n*n + n + 41) % 29 != 0",
+    "confidence": 0.84,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 29 is in {1,2,...,28}.",
+    "predicate": "(n*n + n + 41) % 29 in range(1,29)",
+    "confidence": 0.85,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 31.",
+    "predicate": "(n*n + n + 41) % 31 != 0",
+    "confidence": 0.83,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      26
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 31 is in {1,2,...,30}.",
+    "predicate": "(n*n + n + 41) % 31 in range(1,31)",
+    "confidence": 0.84,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 37.",
+    "predicate": "(n*n + n + 41) % 37 != 0",
+    "confidence": 0.82,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      28
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 37 is in {1,2,...,36}.",
+    "predicate": "(n*n + n + 41) % 37 in range(1,37)",
+    "confidence": 0.83,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 43.",
+    "predicate": "(n*n + n + 41) % 43 != 0",
+    "confidence": 0.81,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      30
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 43 is in {1,2,...,42}.",
+    "predicate": "(n*n + n + 41) % 43 in range(1,43)",
+    "confidence": 0.82,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 47.",
+    "predicate": "(n*n + n + 41) % 47 != 0",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      32
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 47 is in {1,2,...,46}.",
+    "predicate": "(n*n + n + 41) % 47 in range(1,47)",
+    "confidence": 0.81,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 53.",
+    "predicate": "(n*n + n + 41) % 53 != 0",
+    "confidence": 0.79,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0,
+      34
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 53 is in {1,2,...,52}.",
+    "predicate": "(n*n + n + 41) % 53 in range(1,53)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 59.",
+    "predicate": "(n*n + n + 41) % 59 != 0",
+    "confidence": 0.78,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0,
+      36
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 59 is in {1,2,...,58}.",
+    "predicate": "(n*n + n + 41) % 59 in range(1,58)",
+    "confidence": 0.79,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 61.",
+    "predicate": "(n*n + n + 41) % 61 != 0",
+    "confidence": 0.77,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0,
+      38
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 61 is in {1,2,...,60}.",
+    "predicate": "(n*n + n + 41) % 61 in range(1,61)",
+    "confidence": 0.78,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 67.",
+    "predicate": "(n*n + n + 41) % 67 != 0",
+    "confidence": 0.76,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0,
+      40
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 67 is in {1,2,...,66}.",
+    "predicate": "(n*n + n + 41) % 67 in range(1,67)",
+    "confidence": 0.77,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 71.",
+    "predicate": "(n*n + n + 41) % 71 != 0",
+    "confidence": 0.75,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      0,
+      42
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 71 is in {1,2,...,70}.",
+    "predicate": "(n*n + n + 41) % 71 in range(1,71)",
+    "confidence": 0.76,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 73.",
+    "predicate": "(n*n + n + 41) % 73 != 0",
+    "confidence": 0.74,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      0,
+      44
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 73 is in {1,2,...,72}.",
+    "predicate": "(n*n + n + 41) % 73 in range(1,73)",
+    "confidence": 0.75,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 79.",
+    "predicate": "(n*n + n + 41) % 79 != 0",
+    "confidence": 0.73,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      0,
+      46
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 79 is in {1,2,...,78}.",
+    "predicate": "(n*n + n + 41) % 79 in range(1,78)",
+    "confidence": 0.74,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 83.",
+    "predicate": "(n*n + n + 41) % 83 != 0",
+    "confidence": 0.72,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      0,
+      48
+    ],
+    "claim": "For all integers n, n^2 + n + 41 mod 83 is in {1,2,...,82}.",
+    "predicate": "(n*n + n + 41) % 83 in range(1,83)",
+    "confidence": 0.73,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]
