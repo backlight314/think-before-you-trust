@@ -46,21 +46,7 @@ Every strategy scores a claim to decide what to verify.
 Each entry-point script writes to a matching `results*/` directory. The figures that
 carry the argument:
 
-- **`results_adaptive_dag/adaptive_vs_baseline_calibration.png`** — the central result.
-  Expected-damage-greedy vs a minimal random stop/expand baseline on identical hidden
-  ground-truth DAGs. *[reliability: adaptive ___ vs baseline ___ at budget ___]*
-- **`results_tree/heuristic_gap.png`** (and the DAG/adaptive variants) — every heuristic
-  placed between Random and DP Oracle. The gap between **DP Optimal** (optimal w.r.t. the
-  model's own `p_false`) and **DP Oracle** (optimal w.r.t. truth) is the number worth
-  reporting: it's the ceiling that better confidence calibration, not better allocation,
-  would have to close. *[DP Optimal ___ vs DP Oracle ___]*
-- **`*/adaptive_sigma_sweep.png`** — contamination vs over-quarantine as the threshold
-  moves. *[best sigma ≈ ___]*
-- **`results_warmup_checkpoint*/policy_comparison.png`** — warm-up-then-checkpoint vs the
-  Dependency-aware composite. *[___]*
-- **`results_*/ablation.png`** — mechanism decomposition: how much of the advantage
-  survives when gating / timing / structural prioritization is removed one at a time.
-  *[summary of what drops out]*
+(to be filled in) 
 
 Confidence-calibration findings for real models (whether verbalized confidence tracks
 actual correctness on number-theory claims) live in `christestv1/`. *[Claude / Gemini /
