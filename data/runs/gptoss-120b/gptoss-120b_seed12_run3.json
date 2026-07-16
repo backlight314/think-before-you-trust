@@ -1,0 +1,637 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is at least n.",
+    "predicate": "(n<1) or (vp(math.factorial(2*n),2) >= n)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, (2n)! is divisible by 2^n.",
+    "predicate": "(n<1) or (math.factorial(2*n) % (2**n) == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 3 in (3n)! is at least n.",
+    "predicate": "(n<1) or (vp(math.factorial(3*n),3) >= n)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 1, (6n)! is divisible by 2^n * 3^n.",
+    "predicate": "(n<1) or (math.factorial(6*n) % (2**n * 3**n) == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n >= 1, (2n)! is even.",
+    "predicate": "(n<1) or (math.factorial(2*n) % 2 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n >= 1, (2n)!/2 is an integer.",
+    "predicate": "(n<1) or ((math.factorial(2*n)//2)*2 == math.factorial(2*n))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5,
+      2
+    ],
+    "claim": "For all integers n >= 1, (6n)!/(2*3) is an integer.",
+    "predicate": "(n<1) or ((math.factorial(6*n)//6)*6 == math.factorial(6*n))",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n >= 1, vp((6n)!,6) >= n.",
+    "predicate": "(n<1) or (vp(math.factorial(6*n),2)+vp(math.factorial(6*n),3) >= n)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 1, (3n)! is divisible by 3^n.",
+    "predicate": "(n<1) or (math.factorial(3*n) % (3**n) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      8,
+      4
+    ],
+    "claim": "For all integers n >= 1, (6n)! is divisible by 2^n * 3^n (re\u2011stated).",
+    "predicate": "(n<1) or (math.factorial(6*n) % (2**n * 3**n) == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      1,
+      8
+    ],
+    "claim": "For all integers n >= 1, vp((6n)!,2) >= n and vp((6n)!,3) >= n.",
+    "predicate": "(n<1) or (vp(math.factorial(6*n),2) >= n and vp(math.factorial(6*n),3) >= n)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 5 in (5n)! is at least n.",
+    "predicate": "(n<1) or (vp(math.factorial(5*n),5) >= n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11,
+      1
+    ],
+    "claim": "For all integers n >= 1, (10n)! is divisible by 2^n * 5^n.",
+    "predicate": "(n<1) or (math.factorial(10*n) % (2**n * 5**n) == 0)",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12,
+      2
+    ],
+    "claim": "For all integers n >= 1, (30n)! is divisible by 2^n * 3^n * 5^n.",
+    "predicate": "(n<1) or (math.factorial(30*n) % (2**n * 3**n * 5**n) == 0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13,
+      8
+    ],
+    "claim": "For all integers n >= 1, vp((30n)!,2) >= n, vp((30n)!,3) >= n, vp((30n)!,5) >= n.",
+    "predicate": "(n<1) or (vp(math.factorial(30*n),2) >= n and vp(math.factorial(30*n),3) >= n and vp(math.factorial(30*n),5) >= n)",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      4,
+      5
+    ],
+    "claim": "For all integers n >= 1, (2n)!/2 is even.",
+    "predicate": "(n<1) or ((math.factorial(2*n)//2) % 2 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15,
+      1
+    ],
+    "claim": "For all integers n >= 1, (2n)! is divisible by 4.",
+    "predicate": "(n<1) or (math.factorial(2*n) % 4 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16,
+      2
+    ],
+    "claim": "For all integers n >= 1, (6n)! is divisible by 4*3^n.",
+    "predicate": "(n<1) or (math.factorial(6*n) % (4 * 3**n) == 0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      7,
+      10
+    ],
+    "claim": "For all integers n >= 1, vp((6n)!,6) >= n and vp((6n)!,2) >= n.",
+    "predicate": "(n<1) or (vp(math.factorial(6*n),2)+vp(math.factorial(6*n),3) >= n and vp(math.factorial(6*n),2) >= n)",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in n! is at most n-1.",
+    "predicate": "(n<1) or (vp(math.factorial(n),2) <= n-1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19,
+      1
+    ],
+    "claim": "For all integers n >= 1, vp((2n)!,2) = vp(n!,2)+n.",
+    "predicate": "(n<1) or (vp(math.factorial(2*n),2) == vp(math.factorial(n),2)+n)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20,
+      5
+    ],
+    "claim": "For all integers n >= 1, (2n)!/2^n is an integer divisible by n!.",
+    "predicate": "(n<1) or ((math.factorial(2*n)//(2**n)) % math.factorial(n) == 0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      3,
+      13
+    ],
+    "claim": "For all integers n >= 1, (30n)! is divisible by (6n)! * (5n)! .",
+    "predicate": "(n<1) or (math.factorial(30*n) % (math.factorial(6*n)*math.factorial(5*n)) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22,
+      11
+    ],
+    "claim": "For all integers n >= 1, (30n)!/(5n)! is divisible by 2^n*3^n.",
+    "predicate": "(n<1) or ((math.factorial(30*n)//math.factorial(5*n)) % (2**n * 3**n) == 0)",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:KeyError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      14,
+      23
+    ],
+    "claim": "For all integers n >= 1, vp((30n)!,30) >= n.",
+    "predicate": "(n<1) or (vp(math.factorial(30*n),2) >= n and vp(math.factorial(30*n),3) >= n and vp(math.factorial(30*n),5) >= n)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, n^2 - n is always even.",
+    "predicate": "(n<1) or ((n**2 - n) % 2 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25,
+      4
+    ],
+    "claim": "For all integers n >= 1, n^2 - n is divisible by 2 and (2n)! is even, hence (2n)! + n^2 - n is even.",
+    "predicate": "(n<1) or ((math.factorial(2*n) + n**2 - n) % 2 == 0)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25,
+      1
+    ],
+    "claim": "For all integers n >= 1, n^2 - n is divisible by 2^1 (i.e., even).",
+    "predicate": "(n<1) or ((n**2 - n) % 2 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      27,
+      16
+    ],
+    "claim": "For all integers n >= 1, n^2 - n is divisible by 4 whenever n is even.",
+    "predicate": "(n%2!=0) or ((n**2 - n) % 4 == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28,
+      8
+    ],
+    "claim": "For all integers n >= 1, if n is a multiple of 3 then n^2 - n is divisible by 6.",
+    "predicate": "(n%3!=0) or ((n**2 - n) % 6 == 0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is a multiple of 10 then n^2 - n is divisible by 20.",
+    "predicate": "(n%10!=0) or ((n**2 - n) % 20 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, sigma(n) >= n+1 (sum of divisors at least n+1).",
+    "predicate": "(n<1) or (sigma(n) >= n+1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      25
+    ],
+    "claim": "For all integers n >= 1, sigma(n) + n^2 - n is even.",
+    "predicate": "(n<1) or ((sigma(n) + n**2 - n) % 2 == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      31,
+      1
+    ],
+    "claim": "For all integers n >= 1, sigma(2n) is even.",
+    "predicate": "(n<1) or (sigma(2*n) % 2 == 0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33,
+      16
+    ],
+    "claim": "For all integers n >= 1, sigma(2n) is divisible by 4.",
+    "predicate": "(n<1) or (sigma(2*n) % 4 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      2,
+      11
+    ],
+    "claim": "For all integers n >= 1, vp(n!,6) >= floor(n/2).",
+    "predicate": "(n<1) or (vp(math.factorial(n),2)+vp(math.factorial(n),3) >= n//2)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35,
+      10
+    ],
+    "claim": "For all integers n >= 1, vp((6n)!,6) >= n and vp((6n)!,6) >= 3*vp(n!,6).",
+    "predicate": "(n<1) or (vp(math.factorial(6*n),2)+vp(math.factorial(6*n),3) >= n and vp(math.factorial(6*n),2)+vp(math.factorial(6*n),3) >= 3*(vp(math.factorial(n),2)+vp(math.factorial(n),3)))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, tau(n) <= 2*sqrt(n).",
+    "predicate": "(n<1) or (tau(n) <= 2*math.isqrt(n))",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37,
+      25
+    ],
+    "claim": "For all integers n >= 1, tau(n) and n^2-n have same parity.",
+    "predicate": "(n<1) or ((tau(n) % 2) == ((n**2 - n) % 2))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      31
+    ],
+    "claim": "For all integers n >= 1, sigma(n) and tau(n) have the same parity.",
+    "predicate": "(n<1) or ((sigma(n) % 2) == (tau(n) % 2))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39,
+      4
+    ],
+    "claim": "For all integers n >= 1, sigma(2n) is even and has same parity as tau(2n).",
+    "predicate": "(n<1) or ((sigma(2*n) % 2) == (tau(2*n) % 2))",
+    "confidence": 0.86,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is prime then n divides (n-1)! + 1 (Wilson's theorem).",
+    "predicate": "(not is_prime(n)) or ((math.factorial(n-1)+1) % n == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41,
+      20
+    ],
+    "claim": "For all integers n >= 1, if n is prime then vp((2n)!,2) = n + vp((n-1)!,2).",
+    "predicate": "(not is_prime(n)) or (vp(math.factorial(2*n),2) == n + vp(math.factorial(n-1),2))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42,
+      16
+    ],
+    "claim": "For all prime n >= 2, (2n)! is divisible by 4n.",
+    "predicate": "(not is_prime(n)) or (math.factorial(2*n) % (4*n) == 0)",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      13,
+      31
+    ],
+    "claim": "For all integers n >= 1, sigma(30n) is divisible by 30.",
+    "predicate": "(n<1) or (sigma(30*n) % 30 == 0)",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44,
+      24
+    ],
+    "claim": "For all integers n >= 1, vp(sigma(30n),2) >= 1 and vp(sigma(30n),3) >= 1 and vp(sigma(30n),5) >= 1.",
+    "predicate": "(n<1) or (vp(sigma(30*n),2) >= 1 and vp(sigma(30*n),3) >= 1 and vp(sigma(30*n),5) >= 1)",
+    "confidence": 0.83,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      14
+    ],
+    "claim": "For all integers n >= 1, sigma(30n) shares at least n factors of 2,3,5 with (30n)!.",
+    "predicate": "(n<1) or (vp(sigma(30*n),2) <= vp(math.factorial(30*n),2) and vp(sigma(30*n),3) <= vp(math.factorial(30*n),3) and vp(sigma(30*n),5) <= vp(math.factorial(30*n),5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      22,
+      31
+    ],
+    "claim": "For all integers n >= 1, sigma((6n)!) >= sigma((5n)!).",
+    "predicate": "(n<1) or (sigma(math.factorial(6*n)) >= sigma(math.factorial(5*n)))",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      35
+    ],
+    "claim": "For all integers n >= 1, sigma((6n)!) - sigma((5n)!) is divisible by 6.",
+    "predicate": "(n<1) or ((sigma(math.factorial(6*n)) - sigma(math.factorial(5*n))) % 6 == 0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      30
+    ],
+    "claim": "For all integers n >= 1, if n is a multiple of 10 then sigma((6n)!) - sigma((5n)!) is divisible by 20.",
+    "predicate": "(n%10!=0) or ((sigma(math.factorial(6*n)) - sigma(math.factorial(5*n))) % 20 == 0)",
+    "confidence": 0.7,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

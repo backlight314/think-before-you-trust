@@ -1,0 +1,638 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, sigma(n) * phi(n) is at most n^2.",
+    "predicate": "(n<1) or (sigma(n)*phi(n) <= n**2)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all n>=1, sigma(n) <= n * tau(n).",
+    "predicate": "(n<1) or (sigma(n) <= n* tau(n))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all n>=1, phi(n) >= sqrt(n).",
+    "predicate": "(n<1) or (phi(n) >= (n**0.5))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all n>=1, sigma(n)*phi(n) <= n^{2.5}.",
+    "predicate": "(n<1) or (sigma(n)*phi(n) <= n**2.5)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "If n is even then sigma(n) is odd.",
+    "predicate": "(n%2!=0) or (sigma(n)%2==1)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "If n is a power of two then sigma(n) = 2n-1.",
+    "predicate": "(n&(n-1)!=0) or (sigma(n)==2*n-1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2,
+      5
+    ],
+    "claim": "If n is a power of two then phi(n) = n/2.",
+    "predicate": "(n&(n-1)!=0) or (phi(n)==n//2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      1,
+      5
+    ],
+    "claim": "If n is a power of two then sigma(n) <= 2n.",
+    "predicate": "(n&(n-1)!=0) or (sigma(n) <= 2*n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      3,
+      6
+    ],
+    "claim": "If n is a power of two then sigma(n)*phi(n) <= n^{2}.",
+    "predicate": "(n&(n-1)!=0) or (sigma(n)*phi(n) <= n**2)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all n>=1, tau(n) <= sigma(n)/n + 1.",
+    "predicate": "(n<1) or (tau(n) <= sigma(n)/n + 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "If n is squarefree then tau(n) = 2^{omega(n)}.",
+    "predicate": "any(vp(n,p)>1 for p in range(2, int(abs(n)**0.5)+1) if is_prime(p)) or (tau(n) == 2**len([p for p in range(2, int(abs(n)**0.5)+1) if is_prime(p) and vp(n,p)>0]))",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2,
+      10
+    ],
+    "claim": "If n is squarefree then phi(n) >= n/2^{omega(n)}.",
+    "predicate": "any(vp(n,p)>1 for p in range(2, int(abs(n)**0.5)+1) if is_prime(p)) or (phi(n) >= n/(2**len([p for p in range(2, int(abs(n)**0.5)+1) if is_prime(p) and vp(n,p)>0])))",
+    "confidence": 0.72,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      1,
+      11
+    ],
+    "claim": "If n is squarefree then sigma(n) <= n * 2^{omega(n)-1}.",
+    "predicate": "any(vp(n,p)>1 for p in range(2, int(abs(n)**0.5)+1) if is_prime(p)) or (sigma(n) <= n * (2**(len([p for p in range(2, int(abs(n)**0.5)+1) if is_prime(p) and vp(n,p)>0])-1)))",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      8,
+      12
+    ],
+    "claim": "If n is a power of two then sigma(n)*phi(n) <= n^{2} and sigma(n) <= n*2^{k-1}.",
+    "predicate": "(n&(n-1)!=0) or ((sigma(n)*phi(n) <= n**2) and (sigma(n) <= n* (2**(int(math.log2(n))) -1)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all odd n, sigma(n) is even.",
+    "predicate": "(n%2==0) or (sigma(n)%2==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "If n is odd and squarefree then sigma(n) is divisible by 4.",
+    "predicate": "(n%2==0) or any(vp(n,p)>1 for p in range(3, int(abs(n)**0.5)+1,2) if is_prime(p)) or (sigma(n)%4==0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      2,
+      15
+    ],
+    "claim": "If n is odd then phi(n) >= sqrt(n)/2.",
+    "predicate": "(n%2==0) or (phi(n) >= (n**0.5)/2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      1,
+      16
+    ],
+    "claim": "If n is odd then sigma(n) <= n*sqrt(n).",
+    "predicate": "(n%2==0) or (sigma(n) <= n* (n**0.5))",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      7
+    ],
+    "claim": "If n is even then sigma(n) <= 2n and phi(n) >= n/3.",
+    "predicate": "(n%2!=0) or ((sigma(n) <= 2*n) and (phi(n) >= n/3))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      3,
+      18
+    ],
+    "claim": "If n is even then sigma(n)*phi(n) <= (2n)*(n/3) = 2n^2/3.",
+    "predicate": "(n%2!=0) or (sigma(n)*phi(n) <= (2*n)*(n/3))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      5,
+      19
+    ],
+    "claim": "If n is a power of two then sigma(n)*phi(n) <= n^{2} (reinforced).",
+    "predicate": "(n&(n-1)!=0) or (sigma(n)*phi(n) <= n**2)",
+    "confidence": 0.88,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, sigma(n) >= n + 1.",
+    "predicate": "(n<1) or (sigma(n) >= n+1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21,
+      2
+    ],
+    "claim": "For all n>=1, phi(n) <= sigma(n) - 1.",
+    "predicate": "(n<1) or (phi(n) <= sigma(n)-1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22,
+      9
+    ],
+    "claim": "For all n, phi(n) <= n * tau(n) - 1.",
+    "predicate": "(n<1) or (phi(n) <= n*tau(n)-1)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      23
+    ],
+    "claim": "For all n, sigma(n)*phi(n) <= n^2 * tau(n).",
+    "predicate": "(n<1) or (sigma(n)*phi(n) <= n**2 * tau(n))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      4,
+      14
+    ],
+    "claim": "If n is odd then sigma(n) is odd and even simultaneously \u21d2 sigma(n) \u2261 0 mod 2.",
+    "predicate": "(n%2!=0) or (sigma(n)%2==0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25,
+      21
+    ],
+    "claim": "If n is odd then sigma(n) >= n+2.",
+    "predicate": "(n%2!=0) or (sigma(n) >= n+2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      6,
+      16
+    ],
+    "claim": "If n is a power of two then phi(n) >= sqrt(n)/2.",
+    "predicate": "(n&(n-1)!=0) or (phi(n) >= (n**0.5)/2)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      10,
+      15
+    ],
+    "claim": "If n is squarefree and odd then sigma(n) is divisible by 8.",
+    "predicate": "any(vp(n,p)>1 for p in range(2, int(abs(n)**0.5)+1) if is_prime(p)) or (n%2==0) or (sigma(n)%8==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28,
+      24
+    ],
+    "claim": "If n is squarefree and odd then sigma(n)*phi(n) <= n^{2} * tau(n)/2.",
+    "predicate": "any(vp(n,p)>1 for p in range(2, int(abs(n)**0.5)+1) if is_prime(p)) or (n%2==0) or (sigma(n)*phi(n) <= n**2 * tau(n)/2)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, phi(n) divides n-1 whenever n is prime.",
+    "predicate": "(not is_prime(n)) or ((n-1) % phi(n) ==0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30,
+      1
+    ],
+    "claim": "If n is prime then sigma(n) = n+1.",
+    "predicate": "(not is_prime(n)) or (sigma(n)==n+1)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      2
+    ],
+    "claim": "If n is prime then phi(n)=n-1 and sigma(n)=n+1 \u21d2 sigma(n)*phi(n)=n^2-1.",
+    "predicate": "(not is_prime(n)) or (sigma(n)*phi(n)==n**2-1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      32,
+      0
+    ],
+    "claim": "For all n, sigma(n)*phi(n) <= n^2 -1 + n*tau(n).",
+    "predicate": "(n<1) or (sigma(n)*phi(n) <= n**2 -1 + n*tau(n))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      3,
+      33
+    ],
+    "claim": "If n is composite then sigma(n)*phi(n) <= n^{2.5} + n*tau(n).",
+    "predicate": "is_prime(n) or (sigma(n)*phi(n) <= n**2.5 + n*tau(n))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0,
+      14
+    ],
+    "claim": "If n \u2261 3 (mod 4) then sigma(n) is even.",
+    "predicate": "(n%4!=3) or (sigma(n)%2==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35,
+      2
+    ],
+    "claim": "If n \u2261 3 (mod 4) then phi(n) >= sqrt(n)/3.",
+    "predicate": "(n%4!=3) or (phi(n) >= (n**0.5)/3)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36,
+      1
+    ],
+    "claim": "If n \u2261 3 (mod 4) then sigma(n) <= n*sqrt(n).",
+    "predicate": "(n%4!=3) or (sigma(n) <= n* (n**0.5))",
+    "confidence": 0.66,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0,
+      18
+    ],
+    "claim": "If n \u2261 0 (mod 4) then sigma(n) <= 3n/2 and phi(n) >= n/4.",
+    "predicate": "(n%4!=0) or ((sigma(n) <= 3*n/2) and (phi(n) >= n/4))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      19
+    ],
+    "claim": "If n \u2261 0 (mod 4) then sigma(n)*phi(n) <= (3n/2)*(n/4)=3n^2/8.",
+    "predicate": "(n%4!=0) or (sigma(n)*phi(n) <= 3*n**2/8)",
+    "confidence": 0.58,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39,
+      24
+    ],
+    "claim": "If n \u2261 0 (mod 4) then sigma(n)*phi(n) <= n^2 * tau(n)/3.",
+    "predicate": "(n%4!=0) or (sigma(n)*phi(n) <= n**2 * tau(n)/3)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, sigma(n) \u2261 n (mod 2).",
+    "predicate": "(n<1) or (sigma(n)%2 == n%2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41,
+      14
+    ],
+    "claim": "If n is odd then sigma(n) is odd (reinforced).",
+    "predicate": "(n%2==0) or (sigma(n)%2==1)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42,
+      2
+    ],
+    "claim": "If n is odd then phi(n) is even.",
+    "predicate": "(n%2==0) or (phi(n)%2==0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      31
+    ],
+    "claim": "If n is odd prime then phi(n) = n-1 and sigma(n)=n+1 \u21d2 sigma(n)*phi(n)=n^2-1 (odd case).",
+    "predicate": "(not is_prime(n) or n%2==0) or (sigma(n)*phi(n)==n**2-1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      0,
+      30
+    ],
+    "claim": "If n is a prime power p^k then phi(n) = n - n/p.",
+    "predicate": "(not (is_prime(int(round(n**(1.0/ max(1, int(math.log2(abs(n))) ))))) ) ) or (phi(n) == n - n//int(round(n**(1.0/ max(1, int(math.log2(abs(n))) )))))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      5
+    ],
+    "claim": "If n is a power of two then phi(n)=n/2 and sigma(n)=2n-1 \u21d2 sigma(n)*phi(n)=n(2n-1)/2.",
+    "predicate": "(n&(n-1)!=0) or (sigma(n)*phi(n) == n*(2*n-1)//2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      24
+    ],
+    "claim": "If n is a power of two then sigma(n)*phi(n) <= n^2 * tau(n)/2.",
+    "predicate": "(n&(n-1)!=0) or (sigma(n)*phi(n) <= n**2 * tau(n)/2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      0,
+      21
+    ],
+    "claim": "For all n>=1, sigma(n) <= n * (1 + 1/2 + ... + 1/n).",
+    "predicate": "(n<1) or (sigma(n) <= n* sum(1.0/k for k in range(1,n+1)))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      1
+    ],
+    "claim": "For all n>=1, sigma(n) <= n * (1+log n).",
+    "predicate": "(n<1) or (sigma(n) <= n*(1+ math.log(n)))",
+    "confidence": 0.7,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

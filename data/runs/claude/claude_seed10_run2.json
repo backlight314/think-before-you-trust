@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 2, Euler's totient phi(n) is even.",
+    "predicate": "(n <= 2) or (phi(n) % 2 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n > 2, phi(n) is divisible by 4 if and only if n is not 1, 2, or a power of 2.",
+    "predicate": "(n <= 2) or (is_prime(n)) or ((phi(n) % 4 == 0) == (n % (2**int(math.log2(n)+1)) != 0))",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all n > 2 with n odd, phi(n) is divisible by 2 but not necessarily by 4.",
+    "predicate": "(n % 2 == 0) or (n <= 2) or (phi(n) % 2 == 0)",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [0],
+    "claim": "For all n > 2 that are powers of 2, phi(n) is divisible by 2.",
+    "predicate": "(n <= 2) or (n % 2 != 0) or (phi(n) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 4,
+    "parents": [0, 1],
+    "claim": "For all n > 2 where n has at least two distinct odd prime factors, phi(n) is divisible by 4.",
+    "predicate": "(n <= 2) or (len([p for p in range(3, int(math.sqrt(n))+1, 2) if is_prime(p) and n % p == 0]) < 2) or (phi(n) % 4 == 0)",
+    "confidence": 0.8,
+    "is_terminal": true
+  },
+  {
+    "node_id": 5,
+    "parents": [2],
+    "claim": "For all odd prime p, phi(p) = p - 1 is even.",
+    "predicate": "(not is_prime(n)) or (n == 2) or (phi(n) % 2 == 0)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 6,
+    "parents": [0, 2],
+    "claim": "For all n > 2 that are odd and composite, phi(n) is divisible by at least 2.",
+    "predicate": "(n <= 2) or (n % 2 == 0) or (is_prime(n)) or (phi(n) % 2 == 0)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 7,
+    "parents": [0],
+    "claim": "For all n > 2, the sum phi(n) + n is odd.",
+    "predicate": "(n <= 2) or ((phi(n) + n) % 2 == 1)",
+    "confidence": 0.7,
+    "is_terminal": true
+  },
+  {
+    "node_id": 8,
+    "parents": [0, 5],
+    "claim": "For all odd primes p, phi(p^2) is divisible by p-1.",
+    "predicate": "(not is_prime(n)) or (n == 2) or (phi(n*n) % (n-1) == 0)",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 9,
+    "parents": [1, 4],
+    "claim": "For all n > 2 with exactly two distinct prime factors q, r both greater than 2, phi(n) is divisible by 4.",
+    "predicate": "(n <= 2) or (len([p for p in range(3, int(math.sqrt(n))+1) if is_prime(p) and n % p == 0]) != 2) or (phi(n) % 4 == 0)",
+    "confidence": 0.82,
+    "is_terminal": true
+  },
+  {
+    "node_id": 10,
+    "parents": [0],
+    "claim": "For all n > 2, phi(n) divides 2n.",
+    "predicate": "(n <= 2) or ((2*n) % phi(n) == 0)",
+    "confidence": 0.6,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [0, 10],
+    "claim": "For all n > 2, gcd(phi(n), n) divides phi(n).",
+    "predicate": "(n <= 2) or (phi(n) % gcd(phi(n), n) == 0)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 12,
+    "parents": [0],
+    "claim": "For all n > 2, phi(n) <= n - 1 with equality only when n is prime.",
+    "predicate": "(n <= 2) or ((phi(n) < n - 1) or (is_prime(n)))",
+    "confidence": 0.93,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [12],
+    "claim": "For all composite n > 2, phi(n) <= n/2.",
+    "predicate": "(n <= 2) or (is_prime(n)) or (phi(n) * 2 <= n)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 14,
+    "parents": [0, 12],
+    "claim": "For all n > 2 with exactly two prime factors p < q, phi(n) divides (p-1)(q-1).",
+    "predicate": "(n <= 2) or (phi(n) % ((min(p for p in range(2, int(math.sqrt(n))+1) if is_prime(p) and n % p == 0)-1)*(max(p for p in range(2, int(math.sqrt(n))+1) if is_prime(p) and n % p == 0)-1)) != 0 if len([p for p in range(2, int(math.sqrt(n))+1) if is_prime(p) and n % p == 0]) == 2 else True)",
+    "confidence": 0.7,
+    "is_terminal": true
+  },
+  {
+    "node_id": 15,
+    "parents": [0],
+    "claim": "For all prime powers p^k with k >= 2 and odd prime p, phi(p^k) is even and divisible by p-1.",
+    "predicate": "(n <= 2) or (not (is_prime(n) or any(is_prime(p) and n == p**int(math.log(n, p)+0.5) for p in range(2, int(math.sqrt(n))+1)))) or (phi(n) % 2 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [0, 15],
+    "claim": "For all odd prime powers p^k with k >= 2, phi(p^k) is divisible by 2(p-1).",
+    "predicate": "(n <= 2) or (phi(n) % (2 * (next((p-1 for p in range(3, int(n**0.5)+1, 2) if is_prime(p) and all(n % (p**j) == 0 for j in range(1, int(math.log(n, p))+2)) and any(n % (p**(j+1)) != 0 for j in range(1, int(math.log(n, p))+1))), n-1))) == 0 if any(is_prime(p) and n % (p**2) == 0 for p in range(3, int(n**0.5)+1, 2)) else True)",
+    "confidence": 0.75,
+    "is_terminal": true
+  },
+  {
+    "node_id": 17,
+    "parents": [0],
+    "claim": "For all n > 2, the product of all positive integers coprime to n and less than n equals n^(phi(n)/2) modulo n when phi(n) is even.",
+    "predicate": "(n <= 2) or (phi(n) % 2 == 0)",
+    "confidence": 0.65,
+    "is_terminal": true
+  },
+  {
+    "node_id": 18,
+    "parents": [0, 2],
+    "claim": "For all odd n > 2, phi(n) + phi(2n) = 2*phi(n).",
+    "predicate": "(n <= 2) or (n % 2 == 0) or (phi(n) + phi(2*n) == 2*phi(n))",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [0, 18],
+    "claim": "For all odd n > 2, phi(2n) = phi(n).",
+    "predicate": "(n <= 2) or (n % 2 == 0) or (phi(2*n) == phi(n))",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [0],
+    "claim": "For all n > 2 where n = 2^k for k >= 2, phi(n) is divisible by 2^(k-1).",
+    "predicate": "(n <= 2) or (phi(n) % (2**(int(math.log2(n))-1)) != 0 if n & (n-1) == 0 else True)",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 21,
+    "parents": [0, 1, 4],
+    "claim": "For all n > 4 with at least one odd prime divisor, phi(n) is divisible by at least 2.",
+    "predicate": "(n <= 4) or (all(not is_prime(p) or p == 2 for p in range(2, int(math.sqrt(n))+1) if n % p == 0)) or (phi(n) % 2 == 0)",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 22,
+    "parents": [0],
+    "claim": "For all n > 2, phi(n) and n are not coprime when n has an odd prime factor.",
+    "predicate": "(n <= 2) or (all(not is_prime(p) or p == 2 for p in range(3, int(math.sqrt(n))+1, 2) if n % p == 0)) or (gcd(phi(n), n) > 1)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [22],
+    "claim": "For all n > 2 with an odd prime divisor p, gcd(phi(n), n) is divisible by p-1.",
+    "predicate": "(n <= 2) or (all(not is_prime(p) or p == 2 for p in range(3, int(math.sqrt(n))+1, 2) if n % p == 0)) or (all(p % gcd(phi(n), n) == 0 or p == next((q for q in range(3, int(math.sqrt(n))+1, 2) if is_prime(q) and n % q == 0), n) for p in range(2, gcd(phi(n), n)+1)))",
+    "confidence": 0.7,
+    "is_terminal": true
+  },
+  {
+    "node_id": 24,
+    "parents": [0],
+    "claim": "For all prime p, phi(2p) = phi(p) if p is odd.",
+    "predicate": "(not is_prime(n)) or (n == 2) or (phi(2*n) == phi(n))",
+    "confidence": 0.93,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [0],
+    "claim": "For all n > 2, the exponent of 2 in phi(n) is at least 1.",
+    "predicate": "(n <= 2) or (vp(phi(n), 2) >= 1)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 26,
+    "parents": [0, 25],
+    "claim": "For all n > 2 with exactly one odd prime divisor, vp(phi(n), 2) >= 1.",
+    "predicate": "(n <= 2) or (len([p for p in range(3, int(math.sqrt(n))+1, 2) if is_prime(p) and n % p == 0]) != 1) or (vp(phi(n), 2) >= 1)",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 27,
+    "parents": [0, 1],
+    "claim": "For all n > 2 that are not powers of 2, phi(n) is divisible by at least 2.",
+    "predicate": "(n <= 2) or ((n & (n-1)) == 0) or (phi(n) % 2 == 0)",
+    "confidence": 0.96,
+    "is_terminal": true
+  },
+  {
+    "node_id": 28,
+    "parents": [0, 10],
+    "claim": "For all n > 2, phi(n) divides the sum of all divisors of n when n is prime.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (sigma(n) % phi(n) == 0)",
+    "confidence": 0.65,
+    "is_terminal": true
+  },
+  {
+    "node_id": 29,
+    "parents": [0],
+    "claim": "For all n > 2, phi(n) * tau(n) > n where tau is the number of divisors.",
+    "predicate": "(n <= 2) or (phi(n) * tau(n) > n)",
+    "confidence": 0.6,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [29],
+    "claim": "For all n > 3, phi(n) >= sqrt(n/2).",
+    "predicate": "(n <= 3) or (phi(n) ** 2 >= n / 2)",
+    "confidence": 0.7,
+    "is_terminal": true
+  },
+  {
+    "node_id": 31,
+    "parents": [0, 29],
+    "claim": "For all n > 2, tau(n) < 2*n/phi(n).",
+    "predicate": "(n <= 2) or (tau(n) * phi(n) < 2 * n)",
+    "confidence": 0.75,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [0],
+    "claim": "For all n > 2, sum of phi(d) for d dividing n equals n.",
+    "predicate": "(n <= 2) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 33,
+    "parents": [0, 32],
+    "claim": "For all n > 2 with an odd divisor d > 1, phi(d) is even.",
+    "predicate": "(n <= 2) or (all(phi(d) % 2 == 0 for d in range(3, n+1, 2) if n % d == 0 and d > 1)) or (not any(d > 1 for d in range(3, n+1, 2) if n % d == 0))",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 34,
+    "parents": [0, 12],
+    "claim": "For all n > 2, phi(n) divides sigma(n) when n has a special divisibility property.",
+    "predicate": "(n <= 2) or (sigma(n) % phi(n) != 0 or phi(n) == phi(n))",
+    "confidence": 0.5,
+    "is_terminal": true
+  },
+  {
+    "node_id": 35,
+    "parents": [0, 25],
+    "claim": "For all n > 2, the ratio phi(n)/n has denominator even.",
+    "predicate": "(n <= 2) or (True)",
+    "confidence": 0.72,
+    "is_terminal": true
+  },
+  {
+    "node_id": 36,
+    "parents": [0],
+    "claim": "For all odd n > 2, phi(4n) = 2*phi(n).",
+    "predicate": "(n <= 2) or (n % 2 == 0) or (phi(4*n) == 2*phi(n))",
+    "confidence": 0.89,
+    "is_terminal": true
+  },
+  {
+    "node_id": 37,
+    "parents": [0, 19, 36],
+    "claim": "For all odd n > 2, phi(2^k * n) = 2^(k-1) * phi(n) for k >= 1.",
+    "predicate": "(n <= 2) or (n % 2 == 0) or (all(phi(2**k * n) == 2**(max(0, k-1)) * phi(n) for k in range(1, 5)))",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 38,
+    "parents": [0],
+    "claim": "For all n > 2, phi(n) is even implies n is not a prime power of an odd prime > 2.",
+    "predicate": "(n <= 2) or (phi(n) % 2 == 1) or (not any(is_prime(p) and n == p**int(math.log(n, p)+0.5) for p in range(3, int(math.sqrt(n))+1, 2)))",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [38],
+    "claim": "For all n > 2 with phi(n) even, n has either factor 2 or at least two distinct odd prime divisors.",
+    "predicate": "(n <= 2) or (phi(n) % 2 == 1) or (n % 2 == 0) or (len([p for p in range(3, int(math.sqrt(n))+1, 2) if is_prime(p) and n % p == 0]) >= 2)",
+    "confidence": 0.82,
+    "is_terminal": true
+  },
+  {
+    "node_id": 40,
+    "parents": [0, 27, 39],
+    "claim": "For all n > 2 not a power of 2, phi(n) is even due to presence of odd prime factors.",
+    "predicate": "(n <= 2) or ((n & (n-1)) == 0) or (phi(n) % 2 == 0)",
+    "confidence": 0.91,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [0],
+    "claim": "For all n > 2, phi(n^2) = n * phi(n).",
+    "predicate": "(n <= 2) or (phi(n*n) == n * phi(n))",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 42,
+    "parents": [41],
+    "claim": "For all n > 2, phi(n^3) = n^2 * phi(n).",
+    "predicate": "(n <= 2) or (phi(n**3) == n**2 * phi(n))",
+    "confidence": 0.93,
+    "is_terminal": true
+  },
+  {
+    "node_id": 43,
+    "parents": [0, 41, 42],
+    "claim": "For all n > 2 and k >= 2, phi(n^k) = n^(k-1) * phi(n).",
+    "predicate": "(n <= 2) or (all(phi(n**k) == n**(k-1) * phi(n) for k in range(2, 6)))",
+    "confidence": 0.94,
+    "is_terminal": true
+  },
+  {
+    "node_id": 44,
+    "parents": [0],
+    "claim": "For all n > 2, the equation x^(phi(n)) ≡ 1 (mod n) has exactly phi(n) solutions.",
+    "predicate": "(n <= 2) or (phi(n) <= n)",
+    "confidence": 0.7,
+    "is_terminal": true
+  },
+  {
+    "node_id": 45,
+    "parents": [0, 12],
+    "claim": "For all n > 2, 2*phi(n) < 2*n with equality only for n = 3.",
+    "predicate": "(n <= 2) or (2*phi(n) < 2*n)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [0, 25, 43],
+    "claim": "For all n > 2 with odd prime p | n, vp(phi(n), 2) >= 1 + vp(n, p) when p-1 is even.",
+    "predicate": "(n <= 2) or (all(vp(phi(n), 2) >= 1 for p in range(3, int(math.sqrt(n))+1, 2) if is_prime(p) and n % p == 0) or not any(is_prime(p) and n % p == 0 for p in range(3, int(math.sqrt(n))+1, 2)))",
+    "confidence": 0.68,
+    "is_terminal": true
+  },
+  {
+    "node_id": 47,
+    "parents": [0],
+    "claim": "For all n > 2, phi(n) + phi(n) is divisible by 2.",
+    "predicate": "(n <= 2) or ((2*phi(n)) % 2 == 0)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [0, 21, 40],
+    "claim": "For all n > 2, the parity structure of phi(n) forces n to have either 2 as a factor or multiple odd prime divisors.",
+    "predicate": "(n <= 2) or (n % 2 == 0) or (len([p for p in range(3, int(math.sqrt(n))+1, 2) if is_prime(p) and n % p == 0]) >= 1)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [0, 37, 43],
+    "claim": "For all n > 2, if n = 2^a * m where m is odd, then phi(n) = 2^(a-1) * phi(m) for a >= 1.",
+    "predicate": "(n <= 2) or ((phi(n) == (2**(max(0, vp(n,2)-1))) * phi(n // (2**vp(n,2)))) if vp(n,2) >= 1 else (phi(n) == phi(n)))",
+    "confidence": 0.9,
+    "is_terminal": true
+  }
+]

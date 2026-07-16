@@ -1,0 +1,605 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^3 - n is divisible by 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 42.",
+    "predicate": "(n**7 - n) % 42 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 66.",
+    "predicate": "(n**11 - n) % 66 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^13 - n is divisible by 2730.",
+    "predicate": "(n**13 - n) % 2730 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 - n is divisible by 2.",
+    "predicate": "(n**2 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^4 - n^2 is divisible by 12.",
+    "predicate": "(n**4 - n**2) % 12 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^5 - n^3 is divisible by 60.",
+    "predicate": "(n**5 - n**3) % 60 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^6 - n^2 is divisible by 60.",
+    "predicate": "(n**6 - n**2) % 60 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^7 - n^3 is divisible by 420.",
+    "predicate": "(n**7 - n**3) % 420 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^8 - n^4 is divisible by 840.",
+    "predicate": "(n**8 - n**4) % 840 == 0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^9 - n^5 is divisible by 2520.",
+    "predicate": "(n**9 - n**5) % 2520 == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^10 - n^2 is divisible by 1320.",
+    "predicate": "(n**10 - n**2) % 1320 == 0",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^11 - n^3 is divisible by 4620.",
+    "predicate": "(n**11 - n**3) % 4620 == 0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^12 - n^4 is divisible by 9240.",
+    "predicate": "(n**12 - n**4) % 9240 == 0",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^13 - n^5 is divisible by 27720.",
+    "predicate": "(n**13 - n**5) % 27720 == 0",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^14 - n^2 is divisible by 5460.",
+    "predicate": "(n**14 - n**2) % 5460 == 0",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^15 - n^3 is divisible by 32760.",
+    "predicate": "(n**15 - n**3) % 32760 == 0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^16 - n^4 is divisible by 65520.",
+    "predicate": "(n**16 - n**4) % 65520 == 0",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^17 - n^5 is divisible by 196560.",
+    "predicate": "(n**17 - n**5) % 196560 == 0",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^18 - n^2 is divisible by 13860.",
+    "predicate": "(n**18 - n**2) % 13860 == 0",
+    "confidence": 0.25,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^19 - n^3 is divisible by 83160.",
+    "predicate": "(n**19 - n**3) % 83160 == 0",
+    "confidence": 0.2,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^20 - n^4 is divisible by 166320.",
+    "predicate": "(n**20 - n**4) % 166320 == 0",
+    "confidence": 0.15,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^21 - n^5 is divisible by 498960.",
+    "predicate": "(n**21 - n**5) % 498960 == 0",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^22 - n^2 is divisible by 13860.",
+    "predicate": "(n**22 - n**2) % 13860 == 0",
+    "confidence": 0.05,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^23 - n^3 is divisible by 83160.",
+    "predicate": "(n**23 - n**3) % 83160 == 0",
+    "confidence": 0.01,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^24 - n^4 is divisible by 166320.",
+    "predicate": "(n**24 - n**4) % 166320 == 0",
+    "confidence": 0.005,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^25 - n^5 is divisible by 498960.",
+    "predicate": "(n**25 - n**5) % 498960 == 0",
+    "confidence": 0.001,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^26 - n^2 is divisible by 13860.",
+    "predicate": "(n**26 - n**2) % 13860 == 0",
+    "confidence": 0.0005,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^27 - n^3 is divisible by 83160.",
+    "predicate": "(n**27 - n**3) % 83160 == 0",
+    "confidence": 0.0001,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^28 - n^4 is divisible by 166320.",
+    "predicate": "(n**28 - n**4) % 166320 == 0",
+    "confidence": 5e-05,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^29 - n^5 is divisible by 498960.",
+    "predicate": "(n**29 - n**5) % 498960 == 0",
+    "confidence": 1e-05,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^30 - n^2 is divisible by 13860.",
+    "predicate": "(n**30 - n**2) % 13860 == 0",
+    "confidence": 5e-06,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^31 - n^3 is divisible by 83160.",
+    "predicate": "(n**31 - n**3) % 83160 == 0",
+    "confidence": 1e-06,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^32 - n^4 is divisible by 166320.",
+    "predicate": "(n**32 - n**4) % 166320 == 0",
+    "confidence": 5e-07,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^33 - n^5 is divisible by 498960.",
+    "predicate": "(n**33 - n**5) % 498960 == 0",
+    "confidence": 1e-07,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^34 - n^2 is divisible by 13860.",
+    "predicate": "(n**34 - n**2) % 13860 == 0",
+    "confidence": 5e-08,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^35 - n^3 is divisible by 83160.",
+    "predicate": "(n**35 - n**3) % 83160 == 0",
+    "confidence": 1e-08,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^36 - n^4 is divisible by 166320.",
+    "predicate": "(n**36 - n**4) % 166320 == 0",
+    "confidence": 5e-09,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^37 - n^5 is divisible by 498960.",
+    "predicate": "(n**37 - n**5) % 498960 == 0",
+    "confidence": 1e-09,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^38 - n^2 is divisible by 13860.",
+    "predicate": "(n**38 - n**2) % 13860 == 0",
+    "confidence": 5e-10,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^39 - n^3 is divisible by 83160.",
+    "predicate": "(n**39 - n**3) % 83160 == 0",
+    "confidence": 1e-10,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^40 - n^4 is divisible by 166320.",
+    "predicate": "(n**40 - n**4) % 166320 == 0",
+    "confidence": 5e-11,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^41 - n^5 is divisible by 498960.",
+    "predicate": "(n**41 - n**5) % 498960 == 0",
+    "confidence": 1e-11,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^42 - n^2 is divisible by 13860.",
+    "predicate": "(n**42 - n**2) % 13860 == 0",
+    "confidence": 5e-12,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^43 - n^3 is divisible by 83160.",
+    "predicate": "(n**43 - n**3) % 83160 == 0",
+    "confidence": 1e-12,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

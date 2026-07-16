@@ -1,0 +1,637 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^5 is congruent to n modulo 10.",
+    "predicate": "(pow(n,5) - n) % 10 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2.",
+    "predicate": "(pow(n,5) - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 5.",
+    "predicate": "(pow(n,5) - n) % 5 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 10.",
+    "predicate": "(pow(n,5) - n) % 10 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^7 is congruent to n modulo 10.",
+    "predicate": "(pow(n,7) - n) % 10 == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^11 is congruent to n modulo 10.",
+    "predicate": "(pow(n,11) - n) % 10 == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      4,
+      5
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 10.",
+    "predicate": "(pow(n,7) - n) % 10 == 0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 2.",
+    "predicate": "(pow(n,7) - n) % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      2,
+      5
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 5.",
+    "predicate": "(pow(n,11) - n) % 5 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      6,
+      7,
+      8
+    ],
+    "claim": "For all integers n, n^7 - n and n^11 - n are both divisible by 10.",
+    "predicate": "(pow(n,7) - n) % 10 == 0 and (pow(n,11) - n) % 10 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 2 and by 5.",
+    "predicate": "(pow(n,7) - n) % 2 == 0 and (pow(n,7) - n) % 5 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2,
+      5
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 2 and by 5.",
+    "predicate": "(pow(n,11) - n) % 2 == 0 and (pow(n,11) - n) % 5 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10,
+      11
+    ],
+    "claim": "For all integers n, n^7 - n and n^11 - n are both divisible by 10.",
+    "predicate": "(pow(n,7) - n) % 10 == 0 and (pow(n,11) - n) % 10 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 3.",
+    "predicate": "(pow(n,5) - n) % 3 == 0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 6.",
+    "predicate": "(pow(n,5) - n) % 6 == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      1,
+      13
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2 and 3.",
+    "predicate": "(pow(n,5) - n) % 2 == 0 and (pow(n,5) - n) % 3 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15,
+      3
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(pow(n,5) - n) % 30 == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 4.",
+    "predicate": "(pow(n,5) - n) % 4 == 0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17,
+      1
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 8.",
+    "predicate": "(pow(n,5) - n) % 8 == 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 40.",
+    "predicate": "(pow(n,5) - n) % 40 == 0",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19,
+      3
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 120.",
+    "predicate": "(pow(n,5) - n) % 120 == 0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by n.",
+    "predicate": "n == 0 or (pow(n,5) - n) % n == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by n^2.",
+    "predicate": "n == 0 or (pow(n,5) - n) % (n*n) == 0",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22,
+      1
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2n^2.",
+    "predicate": "n == 0 or (pow(n,5) - n) % (2*n*n) == 0",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 10n^2.",
+    "predicate": "n == 0 or (pow(n,5) - n) % (10*n*n) == 0",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by n.",
+    "predicate": "n == 0 or (pow(n,7) - n) % n == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by n^2.",
+    "predicate": "n == 0 or (pow(n,7) - n) % (n*n) == 0",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26,
+      1
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 2n^2.",
+    "predicate": "n == 0 or (pow(n,7) - n) % (2*n*n) == 0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      27,
+      2
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 10n^2.",
+    "predicate": "n == 0 or (pow(n,7) - n) % (10*n*n) == 0",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      12,
+      16,
+      24
+    ],
+    "claim": "For all integers n, n^5 - n, n^7 - n, and n^11 - n are each divisible by 120.",
+    "predicate": "(pow(n,5)-n)%120==0 and (pow(n,7)-n)%120==0 and (pow(n,11)-n)%120==0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by phi(10).",
+    "predicate": "(pow(n,5)-n)%phi(10)==0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30,
+      3
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by lcm(2,5,phi(10)).",
+    "predicate": "(pow(n,5)-n)%lcm(2,5,phi(10))==0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by tau(n).",
+    "predicate": "tau(n)==0 or (pow(n,5)-n)%tau(n)==0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      32,
+      1
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2*tau(n).",
+    "predicate": "tau(n)==0 or (pow(n,5)-n)%(2*tau(n))==0",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 5*tau(n).",
+    "predicate": "tau(n)==0 or (pow(n,5)-n)%(5*tau(n))==0",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34,
+      3
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 10*tau(n).",
+    "predicate": "tau(n)==0 or (pow(n,5)-n)%(10*tau(n))==0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by sigma(n).",
+    "predicate": "sigma(n)==0 or (pow(n,5)-n)%sigma(n)==0",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36,
+      1
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2*sigma(n).",
+    "predicate": "sigma(n)==0 or (pow(n,5)-n)%(2*sigma(n))==0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 5*sigma(n).",
+    "predicate": "sigma(n)==0 or (pow(n,5)-n)%(5*sigma(n))==0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      3
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 10*sigma(n).",
+    "predicate": "sigma(n)==0 or (pow(n,5)-n)%(10*sigma(n))==0",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by vp(n,2).",
+    "predicate": "vp(n,2)==0 or (pow(n,5)-n)%vp(n,2)==0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40,
+      1
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2*vp(n,2).",
+    "predicate": "vp(n,2)==0 or (pow(n,5)-n)%(2*vp(n,2))==0",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 5*vp(n,2).",
+    "predicate": "vp(n,2)==0 or (pow(n,5)-n)%(5*vp(n,2))==0",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42,
+      3
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 10*vp(n,2).",
+    "predicate": "vp(n,2)==0 or (pow(n,5)-n)%(10*vp(n,2))==0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by vp(n,5).",
+    "predicate": "vp(n,5)==0 or (pow(n,5)-n)%vp(n,5)==0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44,
+      1
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2*vp(n,5).",
+    "predicate": "vp(n,5)==0 or (pow(n,5)-n)%(2*vp(n,5))==0",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 5*vp(n,5).",
+    "predicate": "vp(n,5)==0 or (pow(n,5)-n)%(5*vp(n,5))==0",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      3
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 10*vp(n,5).",
+    "predicate": "vp(n,5)==0 or (pow(n,5)-n)%(10*vp(n,5))==0",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      29,
+      35,
+      39,
+      43,
+      47
+    ],
+    "claim": "For all integers n, n^5 - n, n^7 - n, and n^11 - n are each divisible by 120 and by 10 times tau(n), sigma(n), vp(n,2), and vp(n,5).",
+    "predicate": "(pow(n,5)-n)%120==0 and (pow(n,7)-n)%120==0 and (pow(n,11)-n)%120==0 and (pow(n,5)-n)%(10*tau(n))==0 and (pow(n,5)-n)%(10*sigma(n))==0 and (pow(n,5)-n)%(10*vp(n,2))==0 and (pow(n,5)-n)%(10*vp(n,5))==0",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48
+    ],
+    "claim": "For all integers n, the product (n^5 - n)(n^7 - n)(n^11 - n) is divisible by 120^3.",
+    "predicate": "(pow(n,5)-n)*(pow(n,7)-n)*(pow(n,11)-n) % (120**3) == 0",
+    "confidence": 0.4,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

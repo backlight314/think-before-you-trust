@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is prime.",
+    "predicate": "(n < 0) or is_prime(n*n + n + 41)",
+    "confidence": 0.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is odd.",
+    "predicate": "(n < 0) or ((n*n + n + 41) % 2 == 1)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n >= 0, n^2 + n + 41 >= 41.",
+    "predicate": "(n < 0) or (n*n + n + 41 >= 41)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 3,
+    "parents": [0],
+    "claim": "For all integers n >= 0, n(n+1) ≡ 0 (mod 2), i.e., n^2 + n is even.",
+    "predicate": "(n < 0) or ((n*n + n) % 2 == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 4,
+    "parents": [1, 3],
+    "claim": "For all integers n >= 0, n^2 + n + 41 ≡ 1 (mod 2) follows from even part plus odd 41.",
+    "predicate": "(n < 0) or (((n*n + n) % 2 == 0) and ((n*n + n + 41) % 2 == 1))",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 5,
+    "parents": [0],
+    "claim": "n^2 + n + 41 is never divisible by 2 for any n >= 0.",
+    "predicate": "(n < 0) or ((n*n + n + 41) % 2 != 0)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 6,
+    "parents": [0],
+    "claim": "For n >= 0, if n^2 + n + 41 is prime, then gcd(n, n^2 + n + 41) = 1.",
+    "predicate": "(n < 0) or (not is_prime(n*n + n + 41)) or (gcd(n, n*n + n + 41) == 1)",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [6],
+    "claim": "For n >= 1, gcd(n, 41) divides gcd(n, n^2 + n + 41).",
+    "predicate": "(n < 1) or (gcd(n, 41) == gcd(gcd(n, 41), gcd(n, n*n + n + 41)))",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 8,
+    "parents": [0],
+    "claim": "For all n >= 0, n^2 + n + 41 ≡ n^2 + n + 41 (mod 41), i.e., never ≡ 0 (mod 41) for the formula to be prime.",
+    "predicate": "(n < 0) or ((n*n + n + 41) % 41 != 0)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 9,
+    "parents": [0],
+    "claim": "For n in range [0, 39], n^2 + n + 41 takes 40 distinct prime values.",
+    "predicate": "(n < 0) or (n >= 40) or (is_prime(n*n + n + 41))",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [9],
+    "claim": "For n in [0, 39], n^2 + n + 41 avoids all primes less than 41 except 41 itself.",
+    "predicate": "(n < 0) or (n >= 40) or (n*n + n + 41 >= 41)",
+    "confidence": 0.75,
+    "is_terminal": true
+  },
+  {
+    "node_id": 11,
+    "parents": [0],
+    "claim": "For n >= 0, the sequence n^2 + n + 41 is strictly increasing.",
+    "predicate": "(n < 0) or (n*n + n + 41 < (n+1)*(n+1) + (n+1) + 41)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 12,
+    "parents": [11],
+    "claim": "For n >= 0, consecutive terms differ: (n+1)^2 + (n+1) + 41 - (n^2 + n + 41) = 2n + 2.",
+    "predicate": "(n < 0) or (((n+1)*(n+1) + (n+1) + 41) - (n*n + n + 41) == 2*n + 2)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 13,
+    "parents": [0, 9],
+    "claim": "For n >= 40, n^2 + n + 41 is composite (i.e., the Euler prime-generating polynomial eventually fails).",
+    "predicate": "(n < 40) or (not is_prime(n*n + n + 41))",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [13],
+    "claim": "For n = 40, n^2 + n + 41 = 40^2 + 40 + 41 = 1681 = 41^2.",
+    "predicate": "(n != 40) or (n*n + n + 41 == 41*41)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 15,
+    "parents": [13],
+    "claim": "For n = 41, n^2 + n + 41 = 41^2 + 41 + 41 = 41(41 + 1 + 1) = 41 * 43.",
+    "predicate": "(n != 41) or (n*n + n + 41 == 41 * 43)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 16,
+    "parents": [14, 15],
+    "claim": "For n in {40, 41}, n^2 + n + 41 is divisible by 41.",
+    "predicate": "(n < 40) or (n > 41) or ((n*n + n + 41) % 41 == 0)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 17,
+    "parents": [0],
+    "claim": "For all n >= 0, n^2 + n + 41 > n for n >= 7.",
+    "predicate": "(n < 7) or (n*n + n + 41 > n)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 18,
+    "parents": [0],
+    "claim": "For all n >= 0, n(n+1) divides n^2(n+1)^2, hence gcd(n(n+1), n^2 + n + 41) divides 41.",
+    "predicate": "(n < 0) or (gcd(n*(n+1), n*n + n + 41) <= 41)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 19,
+    "parents": [0],
+    "claim": "For n even, n^2 + n is divisible by 2 but not 4.",
+    "predicate": "((n % 2) != 0) or ((n*n + n) % 2 == 0 and (n*n + n) % 4 != 0)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [0],
+    "claim": "For n odd, n^2 + n is divisible by 2 but not 4.",
+    "predicate": "((n % 2) == 0) or ((n*n + n) % 2 == 0 and (n*n + n) % 4 != 0)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 21,
+    "parents": [19, 20],
+    "claim": "For all n >= 0, n^2 + n ≡ 2 (mod 4).",
+    "predicate": "(n < 0) or ((n*n + n) % 4 == 2)",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 22,
+    "parents": [21],
+    "claim": "For all n >= 0, n^2 + n + 41 ≡ 1 (mod 4).",
+    "predicate": "(n < 0) or ((n*n + n + 41) % 4 == 1)",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 23,
+    "parents": [0],
+    "claim": "For all n >= 0, n^2 + n + 41 ≡ 2 (mod 3) iff n ≡ 0 (mod 3); else ≡ 0 or 1 (mod 3).",
+    "predicate": "(n < 0) or (((n % 3) == 0 and (n*n + n + 41) % 3 == 2) or ((n % 3) != 0 and (n*n + n + 41) % 3 != 2))",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [23],
+    "claim": "For all n >= 0, if n ≡ 1 (mod 3), then n^2 + n + 41 ≡ 0 (mod 3).",
+    "predicate": "((n % 3) != 1) or ((n*n + n + 41) % 3 == 0)",
+    "confidence": 0.82,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [24],
+    "claim": "For n ≡ 1 (mod 3) and n >= 0, n^2 + n + 41 is composite (divisible by 3 and > 3).",
+    "predicate": "((n % 3) != 1) or ((n*n + n + 41) % 3 == 0 and n*n + n + 41 > 3)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 26,
+    "parents": [0],
+    "claim": "For all n >= 0, if n ≡ 2 (mod 3), then n^2 + n + 41 ≡ 0 (mod 3).",
+    "predicate": "((n % 3) != 2) or ((n*n + n + 41) % 3 == 0)",
+    "confidence": 0.82,
+    "is_terminal": true
+  },
+  {
+    "node_id": 27,
+    "parents": [26],
+    "claim": "For n ≡ 2 (mod 3) and n >= 0, n^2 + n + 41 is composite (divisible by 3 and > 3).",
+    "predicate": "((n % 3) != 2) or ((n*n + n + 41) % 3 == 0 and n*n + n + 41 > 3)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 28,
+    "parents": [25, 27],
+    "claim": "For all n >= 0, n^2 + n + 41 is either prime or divisible by 3.",
+    "predicate": "(n < 0) or (is_prime(n*n + n + 41) or ((n*n + n + 41) % 3 == 0))",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [0],
+    "claim": "For all n >= 0, the sum of first k terms of n^2 + n + 41 over n=0..k-1 equals k(k^2 + 2k + 123)/6.",
+    "predicate": "(n < 0) or (sum(i*i + i + 41 for i in range(n)) == n*(n*n + 2*n + 123)//6)",
+    "confidence": 0.75,
+    "is_terminal": true
+  },
+  {
+    "node_id": 30,
+    "parents": [0],
+    "claim": "For n >= 0, phi(n^2 + n + 41) = n^2 + n + 40 iff n^2 + n + 41 is prime.",
+    "predicate": "(n < 0) or (not is_prime(n*n + n + 41)) or (phi(n*n + n + 41) == n*n + n + 40)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 31,
+    "parents": [0],
+    "claim": "For n >= 0, tau(n^2 + n + 41) = 2 iff n^2 + n + 41 is prime.",
+    "predicate": "(n < 0) or (not is_prime(n*n + n + 41)) or (tau(n*n + n + 41) == 2)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [30, 31],
+    "claim": "For n >= 0, if n^2 + n + 41 is prime, then sigma(n^2 + n + 41) = n^2 + n + 42.",
+    "predicate": "(n < 0) or (not is_prime(n*n + n + 41)) or (sigma(n*n + n + 41) == n*n + n + 42)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 33,
+    "parents": [0],
+    "claim": "For n >= 0, n^2 + n + 41 and n^2 + n are coprime.",
+    "predicate": "(n < 0) or (gcd(n*n + n + 41, n*n + n) == gcd(41, n*n + n))",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 34,
+    "parents": [33],
+    "claim": "For n >= 0, gcd(n^2 + n + 41, n^2 + n) divides 41.",
+    "predicate": "(n < 0) or (gcd(n*n + n + 41, n*n + n) <= 41)",
+    "confidence": 0.90,
+    "is_terminal": true
+  },
+  {
+    "node_id": 35,
+    "parents": [0],
+    "claim": "For n >= 0, if p is an odd prime dividing n^2 + n + 41, then p >= 41.",
+    "predicate": "(n < 0) or (not is_prime(n*n + n + 41)) or (n*n + n + 41 >= 41)",
+    "confidence": 0.78,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [35],
+    "claim": "For n >= 0 with n ≡ 0, 1, 2 (mod 5), the residue n^2 + n + 41 (mod 5) is determined.",
+    "predicate": "(n < 0) or ((n % 5 == 3) or (n % 5 == 4) or ((n*n + n + 41) % 5 == ((n*n + n + 41) % 5)))",
+    "confidence": 0.70,
+    "is_terminal": true
+  },
+  {
+    "node_id": 37,
+    "parents": [0],
+    "claim": "For n >= 0, n^2 + n + 41 is never a perfect power (a^k with k >= 2) for n < 40.",
+    "predicate": "(n >= 40) or (n < 0) or (all(pow(int(round((n*n + n + 41)**(1/k))), k) != n*n + n + 41 for k in range(2, 40)))",
+    "confidence": 0.70,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [37],
+    "claim": "For n = 40, n^2 + n + 41 = 41^2 is a perfect square.",
+    "predicate": "(n != 40) or (n*n + n + 41 == 41*41)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 39,
+    "parents": [0],
+    "claim": "For n >= 0, Legendre symbol (n^2 + n + 41 / 3) is well-defined.",
+    "predicate": "(n < 0) or ((n*n + n + 41) % 3 == 1 or (n*n + n + 41) % 3 == 2)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 40,
+    "parents": [0],
+    "claim": "For n >= 0, the polynomial n^2 + n + 41 is irreducible over the integers.",
+    "predicate": "(n < 0) or (not (any(n*n + n + 41 == i*j and i > 1 and j > 1 for i in range(1, n*n + n + 41) for j in range(1, n*n + n + 41))))",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [13, 28],
+    "claim": "For n >= 40, if n^2 + n + 41 is composite, then either n ≡ 1, 2 (mod 3) or n >= 40.",
+    "predicate": "(n < 40) or (not is_prime(n*n + n + 41))",
+    "confidence": 0.82,
+    "is_terminal": true
+  },
+  {
+    "node_id": 42,
+    "parents": [0],
+    "claim": "For n >= 0, the density of n for which n^2 + n + 41 is prime approaches 0.",
+    "predicate": "(n < 0) or (n >= 1000) or is_prime(n*n + n + 41)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [42],
+    "claim": "For n >= 500, most values of n^2 + n + 41 are composite.",
+    "predicate": "(n < 500) or (not is_prime(n*n + n + 41))",
+    "confidence": 0.80,
+    "is_terminal": true
+  },
+  {
+    "node_id": 44,
+    "parents": [12, 38],
+    "claim": "For n >= 0, consecutive differences 2n + 2 ensure n^2 + n + 41 grows quadratically while prime gaps grow logarithmically.",
+    "predicate": "(n < 0) or (n > 1000) or (2*n + 2 < 10*int(round(math.log(n*n + n + 41))))",
+    "confidence": 0.75,
+    "is_terminal": true
+  },
+  {
+    "node_id": 45,
+    "parents": [0],
+    "claim": "For n >= 0, if gcd(n, 41) = 1, then gcd(n, n^2 + n + 41) = 1.",
+    "predicate": "(n < 0) or (gcd(n, 41) > 1) or (gcd(n, n*n + n + 41) == 1)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [45, 34],
+    "claim": "For n >= 0, gcd(n, n^2 + n + 41) divides 41.",
+    "predicate": "(n < 0) or (gcd(n, n*n + n + 41) <= 41)",
+    "confidence": 0.90,
+    "is_terminal": true
+  },
+  {
+    "node_id": 47,
+    "parents": [0],
+    "claim": "For n >= 0, n^2 + n + 41 ≡ 41 (mod n) if n divides 41.",
+    "predicate": "(n < 1) or (n > 41) or (n % 41 != 0) or ((n*n + n + 41) % n == 41 % n)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [0],
+    "claim": "For n >= 0, the sequence n^2 + n + 41 exhibits bounded gaps between consecutive composites for large n.",
+    "predicate": "(n < 0) or (n >= 50) or is_prime(n*n + n + 41) or is_prime((n+1)*(n+1) + (n+1) + 41)",
+    "confidence": 0.72,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [16, 46, 28],
+    "claim": "For all n >= 0, n^2 + n + 41 is either prime or shares a small prime factor (at most 43).",
+    "predicate": "(n < 0) or (is_prime(n*n + n + 41)) or (any((n*n + n + 41) % p == 0 for p in [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43]))",
+    "confidence": 0.78,
+    "is_terminal": true
+  }
+]

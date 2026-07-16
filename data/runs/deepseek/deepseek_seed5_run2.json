@@ -1,0 +1,288 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, sigma(n) * phi(n) is at most n^2.",
+    "predicate": "all(sigma(n) * phi(n) <= n ** 2 for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then sigma(n) * phi(n) = n^2 - n.",
+    "predicate": "all((not is_prime(n)) or (sigma(n) * phi(n) == n ** 2 - n) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then sigma(n) * phi(n) = n^2 / 2.",
+    "predicate": "all((n & (n - 1) != 0) or (sigma(n) * phi(n) == n ** 2 / 2) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is the product of two distinct primes, then sigma(n) * phi(n) <= n^2 - n.",
+    "predicate": "all((len([p for p in range(2, n) if n % p == 0 and is_prime(p)]) != 2) or (sigma(n) * phi(n) <= n ** 2 - n) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 multiplied by an odd prime, then sigma(n) * phi(n) <= n^2 - n.",
+    "predicate": "all((vp(n, 2) == 0 or not is_prime(n // (2 ** vp(n, 2)))) or (sigma(n) * phi(n) <= n ** 2 - n) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is square-free, then sigma(n) * phi(n) <= n^2 - n.",
+    "predicate": "all((any(vp(n, p) >= 2 for p in range(2, n + 1) if n % p == 0 and is_prime(p))) or (sigma(n) * phi(n) <= n ** 2 - n) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is square-free and has exactly three prime factors, then sigma(n) * phi(n) <= n^2 - n^2 / 2.",
+    "predicate": "all((not (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)]) == 3 and all(vp(n, p) == 1 for p in range(2, n + 1) if n % p == 0 and is_prime(p)))) or (sigma(n) * phi(n) <= n ** 2 - n ** 2 / 2) for n in range(1, 501))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power, then sigma(n) * phi(n) = n^2 - n^(k + 1) / p^(k - 1), where p is the prime and k is the exponent.",
+    "predicate": "all((len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p) and n == p ** vp(n, p)]) != 1) or (sigma(n) * phi(n) == n ** 2 - n ** (vp(n, [p for p in range(2, n + 1) if n % p == 0 and is_prime(p) and n == p ** vp(n, p)][0]) + 1) / [p for p in range(2, n + 1) if n % p == 0 and is_prime(p) and n == p ** vp(n, p)][0] ** (vp(n, [p for p in range(2, n + 1) if n % p == 0 and is_prime(p) and n == p ** vp(n, p)][0]) - 1)) for n in range(1, 501))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0,
+      3,
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is the product of two distinct primes and is square-free, then sigma(n) * phi(n) = (p + 1)(q + 1)(p - 1)(q - 1), where p and q are the primes.",
+    "predicate": "all((not (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)]) == 2 and all(vp(n, p) == 1 for p in range(2, n + 1) if n % p == 0 and is_prime(p)))) or (sigma(n) * phi(n) == ([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)][0] + 1) * ([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)][1] + 1) * ([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)][0] - 1) * ([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)][1] - 1)) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n >= 1, if n is twice an odd prime, then sigma(n) * phi(n) = 3 * (p - 1) * (p + 1), where p is the odd prime.",
+    "predicate": "all((not (n % 2 == 0 and is_prime(n // 2) and n // 2 != 2)) or (sigma(n) * phi(n) == 3 * (n // 2 - 1) * (n // 2 + 1)) for n in range(1, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      1,
+      9
+    ],
+    "claim": "For all integers n >= 1, if n is a prime or twice a prime, then sigma(n) * phi(n) is divisible by 3.",
+    "predicate": "all((not (is_prime(n) or (n % 2 == 0 and is_prime(n // 2) and n // 2 != 2))) or (sigma(n) * phi(n) % 3 == 0) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      2,
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 or a prime or twice a prime, then sigma(n) * phi(n) is divisible by 3.",
+    "predicate": "all((not (n & (n - 1) == 0 or is_prime(n) or (n % 2 == 0 and is_prime(n // 2) and n // 2 != 2))) or (sigma(n) * phi(n) % 3 == 0) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      5,
+      8
+    ],
+    "claim": "For all integers n >= 1, if n is square-free and has exactly two distinct prime factors, then sigma(n) * phi(n) is divisible by 8.",
+    "predicate": "all((not (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)]) == 2 and all(vp(n, p) == 1 for p in range(2, n + 1) if n % p == 0 and is_prime(p)))) or (sigma(n) * phi(n) % 8 == 0) for n in range(1, 501))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      6,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is square-free and has exactly three distinct prime factors, then sigma(n) * phi(n) is divisible by 16.",
+    "predicate": "all((not (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)]) == 3 and all(vp(n, p) == 1 for p in range(2, n + 1) if n % p == 0 and is_prime(p)))) or (sigma(n) * phi(n) % 16 == 0) for n in range(1, 501))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      7,
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power or square-free with exactly three distinct prime factors, then sigma(n) * phi(n) is divisible by 8.",
+    "predicate": "all((not (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p) and n == p ** vp(n, p)]) == 1 or (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)]) == 3 and all(vp(n, p) == 1 for p in range(2, n + 1) if n % p == 0 and is_prime(p))))) or (sigma(n) * phi(n) % 8 == 0) for n in range(1, 501))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      1,
+      2,
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is prime, a power of 2, or square-free, then sigma(n) * phi(n) is divisible by n.",
+    "predicate": "all((not (is_prime(n) or (n & (n - 1) == 0) or all(vp(n, p) == 1 for p in range(2, n + 1) if n % p == 0 and is_prime(p)))) or (sigma(n) * phi(n) % n == 0) for n in range(1, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is the product of two distinct primes and is square-free, then sigma(n) * phi(n) is divisible by n * (p + q - 1), where p and q are the primes.",
+    "predicate": "all((not (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)]) == 2 and all(vp(n, p) == 1 for p in range(2, n + 1) if n % p == 0 and is_prime(p)))) or (sigma(n) * phi(n) % (n * ([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)][0] + [p for p in range(2, n + 1) if n % p == 0 and is_prime(p)][1] - 1)) == 0) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      4,
+      9,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is twice an odd prime, then sigma(n) * phi(n) is divisible by 3 * n.",
+    "predicate": "all((not (n % 2 == 0 and is_prime(n // 2) and n // 2 != 2)) or (sigma(n) * phi(n) % (3 * n) == 0) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      6,
+      13,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is square-free and has exactly three distinct prime factors, then sigma(n) * phi(n) is divisible by n * (p + q + r - 2), where p, q, and r are the primes.",
+    "predicate": "all((not (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)]) == 3 and all(vp(n, p) == 1 for p in range(2, n + 1) if n % p == 0 and is_prime(p)))) or (sigma(n) * phi(n) % (n * (sum([p for p in range(2, n + 1) if n % p == 0 and is_prime(p)]) - 2)) == 0) for n in range(1, 501))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      7,
+      14,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power, then sigma(n) * phi(n) is divisible by n * (p - 1), where p is the prime.",
+    "predicate": "all((not (len([p for p in range(2, n + 1) if n % p == 0 and is_prime(p) and n == p ** vp(n, p)]) == 1)) or (sigma(n) * phi(n) % (n * ([p for p in range(2, n + 1) if n % p == 0 and is_prime(p) and n == p ** vp(n, p)][0] - 1)) == 0) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      10,
+      11,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, a prime, or twice a prime, then sigma(n) * phi(n) is divisible by 3 * n.",
+    "predicate": "all((not (n & (n - 1) == 0 or is_prime(n) or (n % 2 == 0 and is_prime(n // 2) and n // 2 != 2))) or (sigma(n) * phi(n) % (3 * n) == 0) for n in range(1, 501))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

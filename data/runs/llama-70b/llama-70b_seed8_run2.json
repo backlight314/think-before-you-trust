@@ -1,0 +1,400 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "tau(n) % 2 == 1 if n >= 1 and round(n ** 0.5) ** 2 == n else True",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then the number of divisors of n is odd.",
+    "predicate": "tau(n) % 2 == 1 if round(n ** 0.5) ** 2 == n else True",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If the number of divisors of n is odd, then n is a perfect square.",
+    "predicate": "round(n ** 0.5) ** 2 == n if tau(n) % 2 == 1 else True",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "If n is a perfect square and the number of divisors of n is odd, then n is a perfect square.",
+    "predicate": "round(n ** 0.5) ** 2 == n if round(n ** 0.5) ** 2 == n and tau(n) % 2 == 1 else True",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then n is divisible by the square of its smallest prime factor.",
+    "predicate": "vp(n, min([x for x in range(2, n + 1) if n % x == 0])) >= 2 if round(n ** 0.5) ** 2 == n else True",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is not a perfect square, then the number of divisors of n is even.",
+    "predicate": "tau(n) % 2 == 0 if not round(n ** 0.5) ** 2 == n else True",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      1,
+      5
+    ],
+    "claim": "If n is a perfect square and the number of divisors of n is odd, then n is not divisible by 4.",
+    "predicate": "n % 4!= 0 if round(n ** 0.5) ** 2 == n and tau(n) % 2 == 1 else True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      2,
+      5
+    ],
+    "claim": "If the number of divisors of n is odd and n is not a perfect square, then n is divisible by 2 but not by 4.",
+    "predicate": "n % 2 == 0 and n % 4!= 0 if tau(n) % 2 == 1 and not round(n ** 0.5) ** 2 == n else True",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 3, then n is divisible by 9.",
+    "predicate": "n % 9 == 0 if round(n ** 0.5) ** 2 == n and n % 3 == 0 else True",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      6
+    ],
+    "claim": "If n is a perfect square and n is not divisible by 4, then n is divisible by a prime number.",
+    "predicate": "any([n % x == 0 for x in range(2, n + 1) if is_prime(x)]) if round(n ** 0.5) ** 2 == n and n % 4!= 0 else True",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      7
+    ],
+    "claim": "If the number of divisors of n is odd and n is not a perfect square, then n is divisible by a prime number.",
+    "predicate": "any([n % x == 0 for x in range(2, n + 1) if is_prime(x)]) if tau(n) % 2 == 1 and not round(n ** 0.5) ** 2 == n else True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      8
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 9, then n is divisible by 27.",
+    "predicate": "n % 27 == 0 if round(n ** 0.5) ** 2 == n and n % 9 == 0 else True",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      9,
+      10
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then n is divisible by a prime number.",
+    "predicate": "any([n % x == 0 for x in range(2, n + 1) if is_prime(x)]) if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 27, then n is divisible by 81.",
+    "predicate": "n % 81 == 0 if round(n ** 0.5) ** 2 == n and n % 27 == 0 else True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      12
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the sum of divisors of n is greater than n.",
+    "predicate": "sigma(n) > n if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 81, then n is divisible by 243.",
+    "predicate": "n % 243 == 0 if round(n ** 0.5) ** 2 == n and n % 81 == 0 else True",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      14
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the Euler's totient function of n is less than n.",
+    "predicate": "phi(n) < n if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 243, then n is divisible by 729.",
+    "predicate": "n % 729 == 0 if round(n ** 0.5) ** 2 == n and n % 243 == 0 else True",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      16
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the number of divisors of n is less than or equal to the sum of divisors of n.",
+    "predicate": "tau(n) <= sigma(n) if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 729, then n is divisible by 2187.",
+    "predicate": "n % 2187 == 0 if round(n ** 0.5) ** 2 == n and n % 729 == 0 else True",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the product of the prime factors of n is greater than 1.",
+    "predicate": "math.prod([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) > 1 if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 2187, then n is divisible by 6561.",
+    "predicate": "n % 6561 == 0 if round(n ** 0.5) ** 2 == n and n % 2187 == 0 else True",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      20
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the sum of the prime factors of n is greater than the number of divisors of n.",
+    "predicate": "sum([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) > tau(n) if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 6561, then n is divisible by 19683.",
+    "predicate": "n % 19683 == 0 if round(n ** 0.5) ** 2 == n and n % 6561 == 0 else True",
+    "confidence": 0.2,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      22
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the product of the prime factors of n is less than or equal to the sum of divisors of n.",
+    "predicate": "math.prod([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) <= sigma(n) if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      23
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 19683, then n is divisible by 59049.",
+    "predicate": "n % 59049 == 0 if round(n ** 0.5) ** 2 == n and n % 19683 == 0 else True",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      24
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the number of divisors of n is less than or equal to the product of the prime factors of n.",
+    "predicate": "tau(n) <= math.prod([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 59049, then n is divisible by 177147.",
+    "predicate": "n % 177147 == 0 if round(n ** 0.5) ** 2 == n and n % 59049 == 0 else True",
+    "confidence": 0.05,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      26
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the sum of the prime factors of n is less than or equal to the product of the prime factors of n.",
+    "predicate": "sum([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) <= math.prod([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      27
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 177147, then n is divisible by 531441.",
+    "predicate": "n % 531441 == 0 if round(n ** 0.5) ** 2 == n and n % 177147 == 0 else True",
+    "confidence": 0.01,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      28
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the number of divisors of n is greater than or equal to the sum of the prime factors of n.",
+    "predicate": "tau(n) >= sum([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n is divisible by 531441, then n is divisible by 1594323.",
+    "predicate": "n % 1594323 == 0 if round(n ** 0.5) ** 2 == n and n % 531441 == 0 else True",
+    "confidence": 0.005,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      30
+    ],
+    "claim": "If n is a perfect square or the number of divisors of n is odd, then the product of the prime factors of n is greater than or equal to the sum of the prime factors of n.",
+    "predicate": "math.prod([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) >= sum([x for x in range(2, n + 1) if n % x == 0 and is_prime(x)]) if round(n ** 0.5) ** 2 == n or tau(n) % 2 == 1 else True",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  }
+]

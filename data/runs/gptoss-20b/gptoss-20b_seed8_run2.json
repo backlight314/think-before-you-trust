@@ -1,0 +1,644 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "(n >= 1) and ((tau(n) % 2 == 1) == (int(round(n**0.5))**2 == n))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, tau(n^2) = 2*tau(n) - 1.",
+    "predicate": "(n >= 1) and (tau(n*n) == 2*tau(n) - 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, sigma(n) is even if and only if n is not a square or twice a square.",
+    "predicate": "(n >= 1) and ((sigma(n) % 2 == 0) == (not (int(round(n**0.5))**2 == n or (n % 2 == 0 and int(round((n//2)**0.5))**2 == n//2))))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, tau(n) is odd if and only if n is a square or twice a square.",
+    "predicate": "(n >= 1) and ((tau(n) % 2 == 1) == (int(round(n**0.5))**2 == n or (n % 2 == 0 and int(round((n//2)**0.5))**2 == n//2)))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n >= 1, tau(n^3) = 3*tau(n) - 3 + tau(n^2)/tau(n).",
+    "predicate": "(n >= 1) and (tau(n*n*n) == 3*tau(n) - 3 + tau(n*n)/tau(n))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 1, sigma(n) is divisible by 3 if and only if n is congruent to 0, 1, or 3 modulo 4.",
+    "predicate": "(n >= 1) and ((sigma(n) % 3 == 0) == (n % 4 in [0,1,3]))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      3,
+      4
+    ],
+    "claim": "For all integers n >= 1, tau(n^2) is a perfect square if and only if tau(n) is a perfect square.",
+    "predicate": "(n >= 1) and ((int(round(tau(n*n)**0.5))**2 == tau(n*n)) == (int(round(tau(n)**0.5))**2 == tau(n)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n >= 1, sigma(n) is divisible by 5 if and only if n is congruent to 0, 1, 4, or 9 modulo 10.",
+    "predicate": "(n >= 1) and ((sigma(n) % 5 == 0) == (n % 10 in [0,1,4,9]))",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is squarefree then tau(n) is a product of distinct primes plus one.",
+    "predicate": "(n >= 1) and (not any(vp(n,p)>1 for p in range(2,int(n**0.5)+2) if is_prime(p))) and ((tau(n)-1) == prod(p for p in range(2,int(n**0.5)+2) if is_prime(p) and n%p==0))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      5,
+      7
+    ],
+    "claim": "For all integers n >= 1, sigma(n) is divisible by 15 if and only if n is congruent to 0, 1, 4, 6, 9, or 13 modulo 20.",
+    "predicate": "(n >= 1) and ((sigma(n) % 15 == 0) == (n % 20 in [0,1,4,6,9,13]))",
+    "confidence": 0.72,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      6,
+      8
+    ],
+    "claim": "For all integers n >= 1, if tau(n) is odd and tau(n^2) is a perfect square then sigma(n) is even.",
+    "predicate": "(n >= 1) and ((tau(n)%2==1 and int(round(tau(n*n)**0.5))**2==tau(n*n)) and (sigma(n)%2==0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      4,
+      7
+    ],
+    "claim": "For all integers n >= 1, phi(n) is divisible by 4 if and only if n is divisible by 8 or n is congruent to 3 modulo 4.",
+    "predicate": "(n >= 1) and ((phi(n)%4==0) == (n%8==0 or n%4==3))",
+    "confidence": 0.77,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n >= 1, sigma(n) is divisible by 30 iff n is congruent to 0,1,4,6,9,13 or 16 modulo 20.",
+    "predicate": "(n >= 1) and ((sigma(n)%30==0) == (n%20 in [0,1,4,6,9,13,16]))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      3,
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is odd and phi(n) is even then tau(n) is odd.",
+    "predicate": "(n >= 1) and ((n%2==1 and phi(n)%2==0) and (tau(n)%2==1))",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      2,
+      8
+    ],
+    "claim": "For all integers n >= 1, sigma(n) is a perfect square only if n is a square or twice a square.",
+    "predicate": "(n >= 1) and ((int(round(sigma(n)**0.5))**2 == sigma(n)) == (int(round(n**0.5))**2 == n or (n%2==0 and int(round((n//2)**0.5))**2==n//2))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      5,
+      12
+    ],
+    "claim": "For all integers n >= 1, sigma(n) is divisible by 35 iff n is congruent to 0,1,4,9,16,25, or 30 modulo 35.",
+    "predicate": "(n >= 1) and ((sigma(n)%35==0) == (n%35 in [0,1,4,9,16,25,30]))",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      1,
+      13
+    ],
+    "claim": "For all integers n >= 1, tau(n^2) is divisible by 9 iff n is divisible by 3.",
+    "predicate": "(n >= 1) and ((tau(n*n)%9==0) == (n%3==0))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      10,
+      15
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is divisible by 15 and tau(n) is odd then phi(n) is even.",
+    "predicate": "(n >= 1) and ((sigma(n)%15==0 and tau(n)%2==1) and (phi(n)%2==0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      6,
+      14
+    ],
+    "claim": "For all integers n >= 1, if tau(n) is a perfect square and n is a squarefree semiprime then sigma(n) is divisible by 4.",
+    "predicate": "(n >= 1) and ((int(round(tau(n)**0.5))**2==tau(n) and len({p for p in range(2,int(n**0.5)+2) if is_prime(p) and n%p==0})==2 and all(vp(n,p)==1 for p in range(2,int(n**0.5)+2) if is_prime(p))) and (sigma(n)%4==0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      11,
+      17
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is divisible by 4 and sigma(n) is divisible by 15 then n is divisible by 60.",
+    "predicate": "(n >= 1) and ((phi(n)%4==0 and sigma(n)%15==0) and (n%60==0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is a square then sigma(n) is odd.",
+    "predicate": "(n >= 1) and (int(round(n**0.5))**2==n and sigma(n)%2==1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      4,
+      18
+    ],
+    "claim": "For all integers n >= 1, tau(n^3) is odd iff n is a perfect cube.",
+    "predicate": "(n >= 1) and ((tau(n*n*n)%2==1) == (int(round(n**(1/3)))**3==n))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      7,
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is prime then sigma(n) is even.",
+    "predicate": "(n >= 1) and ((is_prime(n)) and (sigma(n)%2==0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      15,
+      21
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power and sigma(n) is divisible by 35 then n is congruent to 1 modulo 35.",
+    "predicate": "(n >= 1) and ((len({p for p in range(2,int(n**0.5)+2) if is_prime(p) and n%p==0})==1 and sigma(n)%35==0) and (n%35==1))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      9,
+      20
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is divisible by 30 and n is a square then n is divisible by 100.",
+    "predicate": "(n >= 1) and ((sigma(n)%30==0 and int(round(n**0.5))**2==n) and (n%100==0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      16,
+      22
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 9 then tau(n^2) is divisible by 9 and phi(n) is divisible by 6.",
+    "predicate": "(n >= 1) and ((n%9==0) and (tau(n*n)%9==0) and (phi(n)%6==0))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      14,
+      23
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is a perfect square and n is a prime power then n is a square.",
+    "predicate": "(n >= 1) and ((int(round(sigma(n)**0.5))**2==sigma(n) and len({p for p in range(2,int(n**0.5)+2) if is_prime(p) and n%p==0})==1) and int(round(n**0.5))**2==n)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      5,
+      26
+    ],
+    "claim": "For all integers n >= 1, if n is congruent to 2 modulo 4 then sigma(n) is divisible by 3.",
+    "predicate": "(n >= 1) and ((n%4==2) and (sigma(n)%3==0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      11,
+      24
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 20 then phi(n) is divisible by 8.",
+    "predicate": "(n >= 1) and ((n%20==0) and (phi(n)%8==0))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      18,
+      27
+    ],
+    "claim": "For all integers n >= 1, if tau(n) is a perfect square and n is congruent to 2 modulo 4 then sigma(n) is divisible by 6.",
+    "predicate": "(n >= 1) and ((int(round(tau(n)**0.5))**2==tau(n) and n%4==2) and (sigma(n)%6==0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      1,
+      28
+    ],
+    "claim": "For all integers n >= 1, if n is a squarefree even integer then tau(n) is even.",
+    "predicate": "(n >= 1) and ((n%2==0 and all(vp(n,p)==1 for p in range(2,int(n**0.5)+2) if is_prime(p))) and (tau(n)%2==0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      20,
+      29
+    ],
+    "claim": "For all integers n >= 1, if n is a square and tau(n) is odd then sigma(n) is divisible by 9.",
+    "predicate": "(n >= 1) and ((int(round(n**0.5))**2==n and tau(n)%2==1) and (sigma(n)%9==0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      15,
+      31
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is divisible by 15 and n is a square then n is divisible by 225.",
+    "predicate": "(n >= 1) and ((sigma(n)%15==0 and int(round(n**0.5))**2==n) and (n%225==0))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      10,
+      32
+    ],
+    "claim": "For all integers n >= 1, if tau(n^2) is a perfect square and sigma(n) is divisible by 15 then n is divisible by 225.",
+    "predicate": "(n >= 1) and ((int(round(tau(n*n)**0.5))**2==tau(n*n) and sigma(n)%15==0) and (n%225==0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      4,
+      33
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect cube and tau(n) is odd then phi(n) is divisible by 4.",
+    "predicate": "(n >= 1) and ((int(round(n**(1/3)))**3==n and tau(n)%2==1) and (phi(n)%4==0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      7,
+      34
+    ],
+    "claim": "For all integers n >= 1, if n is congruent to 3 modulo 4 and phi(n) is divisible by 4 then sigma(n) is divisible by 12.",
+    "predicate": "(n >= 1) and ((n%4==3 and phi(n)%4==0) and (sigma(n)%12==0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      12,
+      35
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is divisible by 30 and n is congruent to 3 modulo 4 then tau(n) is odd.",
+    "predicate": "(n >= 1) and ((sigma(n)%30==0 and n%4==3) and (tau(n)%2==1))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      22,
+      36
+    ],
+    "claim": "For all integers n >= 1, if n is prime and sigma(n) is divisible by 30 then n is congruent to 1 modulo 30.",
+    "predicate": "(n >= 1) and ((is_prime(n) and sigma(n)%30==0) and (n%30==1))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      23,
+      37
+    ],
+    "claim": "For all integers n >= 1, if n is a prime power and sigma(n) is divisible by 30 then n is congruent to 1 modulo 30.",
+    "predicate": "(n >= 1) and ((len({p for p in range(2,int(n**0.5)+2) if is_prime(p) and n%p==0})==1 and sigma(n)%30==0) and (n%30==1))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      9,
+      38
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is divisible by 210 then n is divisible by 210.",
+    "predicate": "(n >= 1) and ((sigma(n)%210==0) and (n%210==0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      16,
+      39
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 9 and sigma(n) is divisible by 210 then n is divisible by 1890.",
+    "predicate": "(n >= 1) and ((n%9==0 and sigma(n)%210==0) and (n%1890==0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      2,
+      40
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is divisible by 210 and n is a square then n is divisible by 44100.",
+    "predicate": "(n >= 1) and ((sigma(n)%210==0 and int(round(n**0.5))**2==n) and (n%44100==0))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      5,
+      41
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is divisible by 210 and n is congruent to 1 modulo 4 then tau(n) is even.",
+    "predicate": "(n >= 1) and ((sigma(n)%210==0 and n%4==1) and (tau(n)%2==0))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      11,
+      42
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is divisible by 8 and tau(n) is even then sigma(n) is divisible by 16.",
+    "predicate": "(n >= 1) and ((phi(n)%8==0 and tau(n)%2==0) and (sigma(n)%16==0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      3,
+      43
+    ],
+    "claim": "For all integers n >= 1, if n is a square or twice a square and phi(n) is divisible by 8 then sigma(n) is divisible by 16.",
+    "predicate": "(n >= 1) and ((int(round(n**0.5))**2==n or (n%2==0 and int(round((n//2)**0.5))**2==n//2)) and phi(n)%8==0 and sigma(n)%16==0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      1,
+      44
+    ],
+    "claim": "For all integers n >= 1, if tau(n^2) is a perfect square and sigma(n) is divisible by 16 then n is divisible by 256.",
+    "predicate": "(n >= 1) and ((int(round(tau(n*n)**0.5))**2==tau(n*n) and sigma(n)%16==0) and (n%256==0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      6,
+      45
+    ],
+    "claim": "For all integers n >= 1, if tau(n^2) is a perfect square and sigma(n) is divisible by 16 then tau(n) is a perfect square.",
+    "predicate": "(n >= 1) and ((int(round(tau(n*n)**0.5))**2==tau(n*n) and sigma(n)%16==0) and (int(round(tau(n)**0.5))**2==tau(n)))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      8,
+      46
+    ],
+    "claim": "For all integers n >= 1, if n is squarefree and tau(n^2) is a perfect square then sigma(n) is odd.",
+    "predicate": "(n >= 1) and ((all(vp(n,p)==1 for p in range(2,int(n**0.5)+2) if is_prime(p)) and int(round(tau(n*n)**0.5))**2==tau(n*n)) and sigma(n)%2==1)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      12,
+      47
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is divisible by 30 and n is squarefree then tau(n) is even.",
+    "predicate": "(n >= 1) and ((sigma(n)%30==0 and all(vp(n,p)==1 for p in range(2,int(n**0.5)+2) if is_prime(p))) and (tau(n)%2==0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      14,
+      48
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) is a perfect square and tau(n) is even then n is a square.",
+    "predicate": "(n >= 1) and ((int(round(sigma(n)**0.5))**2==sigma(n) and tau(n)%2==0) and int(round(n**0.5))**2==n)",
+    "confidence": 0.5,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

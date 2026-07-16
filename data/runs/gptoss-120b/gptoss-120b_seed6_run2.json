@@ -1,0 +1,647 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 is congruent to 1 modulo 24.",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is an odd prime then n \u2261 1 or 5 modulo 6.",
+    "predicate": "(not is_prime(n)) or (n%2==0) or (n%6 in (1,5))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is prime and n>3 then n is congruent to 1 modulo 4 or 3 modulo 4.",
+    "predicate": "(not is_prime(n)) or (n<=3) or (n%4 in (1,3))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "If n is prime >3 then n^2 \u2261 1 (mod 8).",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((n*n - 1) % 8 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "If n is prime >3 then n^2 \u2261 1 (mod 3).",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((n*n - 1) % 3 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      3,
+      4
+    ],
+    "claim": "If n is prime >3 then n^2 \u2261 1 (mod 24).",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.99,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "If n is prime then phi(n) = n-1.",
+    "predicate": "(not is_prime(n)) or (phi(n) == n-1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "If n is prime then sigma(n) = n+1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) == n+1)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      6,
+      7
+    ],
+    "claim": "If n is prime then tau(n) = 2.",
+    "predicate": "(not is_prime(n)) or (tau(n) == 2)",
+    "confidence": 0.99,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      2
+    ],
+    "claim": "If n is an odd integer then n^2 \u2261 1 (mod 8).",
+    "predicate": "(n%2==0) or ((n*n - 1) % 8 == 0)",
+    "confidence": 0.97,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      1,
+      9
+    ],
+    "claim": "If n \u2261 1 (mod 6) then n^2 \u2261 1 (mod 24).",
+    "predicate": "(n%6 != 1) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.95,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      1,
+      9
+    ],
+    "claim": "If n \u2261 5 (mod 6) then n^2 \u2261 1 (mod 24).",
+    "predicate": "(n%6 != 5) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.95,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "If n is prime then n divides sigma(n)-1.",
+    "predicate": "(not is_prime(n)) or ((sigma(n)-1) % n == 0)",
+    "confidence": 0.94,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12,
+      8
+    ],
+    "claim": "If n is prime then n does not divide tau(n).",
+    "predicate": "(not is_prime(n)) or (tau(n) % n != 0)",
+    "confidence": 0.96,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      9
+    ],
+    "claim": "If n is prime >3 then n \u2261 1 (mod 8) or n \u2261 3 (mod 8).",
+    "predicate": "(not is_prime(n)) or (n<=3) or (n%8 in (1,3,5,7))",
+    "confidence": 0.93,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      3,
+      6
+    ],
+    "claim": "If n is prime >3 then phi(n^2) = n*(n-1).",
+    "predicate": "(not is_prime(n)) or (n<=3) or (phi(n*n) == n*(n-1))",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      7,
+      8
+    ],
+    "claim": "If n is prime then sigma(n^2) = n^2 + n + 1.",
+    "predicate": "(not is_prime(n)) or (sigma(n*n) == n*n + n + 1)",
+    "confidence": 0.88,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      5,
+      10,
+      11
+    ],
+    "claim": "For any integer n>3, if n is odd then n^2 \u2261 1 (mod 24).",
+    "predicate": "(n%2==0) or (n<=3) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      2,
+      9
+    ],
+    "claim": "If n is odd then n^4 \u2261 1 (mod 16).",
+    "predicate": "(n%2==0) or ((n**4 - 1) % 16 == 0)",
+    "confidence": 0.92,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      6,
+      15
+    ],
+    "claim": "If n is prime then phi(n^k) = n^{k-1}*(n-1) for k=3.",
+    "predicate": "(not is_prime(n)) or (phi(n**3) == n**2*(n-1))",
+    "confidence": 0.85,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      8,
+      13
+    ],
+    "claim": "If n is prime then gcd(n, tau(n)) = 1.",
+    "predicate": "(not is_prime(n)) or (gcd(n, tau(n)) == 1)",
+    "confidence": 0.97,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      4,
+      9
+    ],
+    "claim": "If n \u2261 3 (mod 4) then n^2 \u2261 9 (mod 16).",
+    "predicate": "(n%4 != 3) or ((n*n - 9) % 16 == 0)",
+    "confidence": 0.94,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      3,
+      21
+    ],
+    "claim": "If n \u2261 3 (mod 8) then n^2 \u2261 9 (mod 64).",
+    "predicate": "(n%8 != 3) or ((n*n - 9) % 64 == 0)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      5,
+      22
+    ],
+    "claim": "If n is prime >3 then n^2 \u2261 1 (mod 48).",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((n*n - 1) % 48 == 0)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      7,
+      12
+    ],
+    "claim": "If n is prime then sigma(n) - phi(n) = 2.",
+    "predicate": "(not is_prime(n)) or (sigma(n) - phi(n) == 2)",
+    "confidence": 0.85,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "If n is prime >3 then n divides sigma(n)-phi(n)-2.",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((sigma(n)-phi(n)-2) % n == 0)",
+    "confidence": 0.82,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      1,
+      18
+    ],
+    "claim": "If n \u2261 1 (mod 6) then n^4 \u2261 1 (mod 16).",
+    "predicate": "(n%6 != 1) or ((n**4 - 1) % 16 == 0)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      2,
+      18
+    ],
+    "claim": "If n \u2261 3 (mod 4) then n^4 \u2261 1 (mod 16).",
+    "predicate": "(n%4 != 3) or ((n**4 - 1) % 16 == 0)",
+    "confidence": 0.92,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      10,
+      26
+    ],
+    "claim": "If n \u2261 1 (mod 6) then n^2 \u2261 1 (mod 48).",
+    "predicate": "(n%6 != 1) or ((n*n - 1) % 48 == 0)",
+    "confidence": 0.78,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      11,
+      27
+    ],
+    "claim": "If n \u2261 5 (mod 6) then n^2 \u2261 1 (mod 48).",
+    "predicate": "(n%6 != 5) or ((n*n - 1) % 48 == 0)",
+    "confidence": 0.78,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      6,
+      15,
+      19
+    ],
+    "claim": "If n is prime then phi(n^k) = n^{k-1}(n-1) for all k\u22643.",
+    "predicate": "(not is_prime(n)) or (phi(n**2) == n*(n-1) and phi(n**3) == n**2*(n-1))",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      8,
+      20
+    ],
+    "claim": "If n is prime then tau(n^2) = 3.",
+    "predicate": "(not is_prime(n)) or (tau(n*n) == 3)",
+    "confidence": 0.95,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      16
+    ],
+    "claim": "If n is prime then sigma(n^2) = n^2 + n + 1 and tau(n^2)=3 implies n is odd.",
+    "predicate": "(not is_prime(n)) or ( (sigma(n*n) == n*n + n + 1) and (tau(n*n)==3) and (n%2==1) )",
+    "confidence": 0.93,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      5,
+      23
+    ],
+    "claim": "If n is prime >3 then n^2 \u2261 1 (mod 96).",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((n*n - 1) % 96 == 0)",
+    "confidence": 0.7,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      33
+    ],
+    "claim": "If n is prime >3 then n \u2261 1,5,7,11,13,17,19,23 (mod 24).",
+    "predicate": "(not is_prime(n)) or (n<=3) or (n%24 in (1,5,7,11,13,17,19,23))",
+    "confidence": 0.96,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34,
+      1
+    ],
+    "claim": "If n is prime >3 then n \u2261 1 or 5 (mod 6) and also n%24 in the above set.",
+    "predicate": "(not is_prime(n)) or (n<=3) or ( (n%6 in (1,5)) and (n%24 in (1,5,7,11,13,17,19,23)) )",
+    "confidence": 0.97,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      6,
+      24
+    ],
+    "claim": "If n is prime then phi(n) + tau(n) = n+1.",
+    "predicate": "(not is_prime(n)) or (phi(n) + tau(n) == n+1)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      12,
+      36
+    ],
+    "claim": "If n is prime then sigma(n) = phi(n) + tau(n) + 1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) == phi(n) + tau(n) + 1)",
+    "confidence": 0.88,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      3,
+      22,
+      33
+    ],
+    "claim": "If n is prime >3 then n^2-1 is divisible by 2^5*3.",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((n*n-1) % (32*3) == 0)",
+    "confidence": 0.78,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      5
+    ],
+    "claim": "If n is prime >3 then n^2-1 is divisible by 2^4*3*5.",
+    "predicate": "(not is_prime(n)) or (n<=3) or ((n*n-1) % (16*3*5) == 0)",
+    "confidence": 0.75,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39,
+      0
+    ],
+    "claim": "If n is prime >5 then n^2-1 is divisible by 5*24.",
+    "predicate": "(not is_prime(n)) or (n<=5) or ((n*n-1) % (5*24) == 0)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      15,
+      19
+    ],
+    "claim": "If n is prime then phi(n^2) = n*phi(n) and phi(n^3)=n^2*phi(n).",
+    "predicate": "(not is_prime(n)) or (phi(n*n) == n*phi(n) and phi(n**3) == n**2*phi(n))",
+    "confidence": 0.85,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      31,
+      41
+    ],
+    "claim": "If n is prime then tau(n^k)=k+1 for k=1,2.",
+    "predicate": "(not is_prime(n)) or (tau(n) == 2 and tau(n*n) == 3)",
+    "confidence": 0.96,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      7,
+      24
+    ],
+    "claim": "If n is prime then sigma(n) = phi(n) + 2.",
+    "predicate": "(not is_prime(n)) or (sigma(n) == phi(n) + 2)",
+    "confidence": 0.89,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      37
+    ],
+    "claim": "If n is prime then phi(n) = n-1 and sigma(n) = n+1 are consistent with sigma = phi+tau+1.",
+    "predicate": "(not is_prime(n)) or ( (phi(n) == n-1) and (sigma(n) == phi(n)+tau(n)+1) )",
+    "confidence": 0.92,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      2,
+      14
+    ],
+    "claim": "If n is odd prime >3 then n \u2261 1,3,5,7 (mod 8).",
+    "predicate": "(not is_prime(n)) or (n<=3) or (n%8 in (1,3,5,7))",
+    "confidence": 0.97,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      22
+    ],
+    "claim": "If n \u2261 3 (mod 8) and prime then n^2 \u2261 9 (mod 64).",
+    "predicate": "(not is_prime(n)) or (n%8 != 3) or ((n*n - 9) % 64 == 0)",
+    "confidence": 0.91,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      33
+    ],
+    "claim": "If n is prime >3 and n%8==3 then n^2-1 divisible by 192.",
+    "predicate": "(not is_prime(n)) or (n<=3) or (n%8 != 3) or ((n*n-1) % 192 == 0)",
+    "confidence": 0.7,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      40,
+      47
+    ],
+    "claim": "If n is prime >5 then n^2-1 divisible by lcm(5*24,192)=960.",
+    "predicate": "(not is_prime(n)) or (n<=5) or ((n*n-1) % 960 == 0)",
+    "confidence": 0.68,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      25
+    ],
+    "claim": "If n is prime >5 then n divides (sigma(n)-phi(n)-2) and n^2-1 divisible by 960.",
+    "predicate": "(not is_prime(n)) or (n<=5) or ( ((sigma(n)-phi(n)-2) % n == 0) and ((n*n-1) % 960 == 0) )",
+    "confidence": 0.65,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

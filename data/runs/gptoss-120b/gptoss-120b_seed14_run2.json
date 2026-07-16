@@ -1,0 +1,624 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n \u2265 0, n^2 + n + 41 is prime.",
+    "predicate": "(n<0) or is_prime(n*n + n + 41)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is even then n^2 + n + 41 is odd.",
+    "predicate": "(n%2!=0) or ((n*n + n + 41)%2==1)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a multiple of 3 then n^2 + n + 41 is not divisible by 3.",
+    "predicate": "(n%3!=0) or ((n*n + n + 41)%3!=0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all n, n^2 + n + 41 is odd and not divisible by 3.",
+    "predicate": "((n*n + n + 41)%2==1) and ((n*n + n + 41)%3!=0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "If n is prime then n^2 + n + 41 is not a perfect square.",
+    "predicate": "(not is_prime(n)) or (int((n*n + n + 41)**0.5)**2 != n*n + n + 41)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      3,
+      4
+    ],
+    "claim": "n^2 + n + 41 is odd, not divisible by 3, and never a perfect square.",
+    "predicate": "((n*n + n + 41)%2==1) and ((n*n + n + 41)%3!=0) and (int((n*n + n + 41)**0.5)**2 != n*n + n + 41)",
+    "confidence": 0.86,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "n^5 - n is divisible by 2, 3 and 5 simultaneously.",
+    "predicate": "((n**5 - n)%2==0) and ((n**5 - n)%3==0) and ((n**5 - n)%5==0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      6
+    ],
+    "claim": "n^5 - n is divisible by 6.",
+    "predicate": "(n**5 - n) % 6 == 0",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7,
+      8
+    ],
+    "claim": "n^5 - n is divisible by lcm(30,6)=30 (reinforced).",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [],
+    "claim": "For all integers n, n^7 - n is divisible by 42.",
+    "predicate": "(n**7 - n) % 42 == 0",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "n^7 - n is divisible by 2,3,7 simultaneously.",
+    "predicate": "((n**7 - n)%2==0) and ((n**7 - n)%3==0) and ((n**7 - n)%7==0)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      6,
+      10
+    ],
+    "claim": "Both n^5 - n and n^7 - n are divisible by 30 and 42 respectively, hence their sum is divisible by 6.",
+    "predicate": "((n**5 - n + n**7 - n) % 6 == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [],
+    "claim": "For all integers n, n^11 - n is divisible by 66.",
+    "predicate": "(n**11 - n) % 66 == 0",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "n^11 - n is divisible by 2,3,11 simultaneously.",
+    "predicate": "((n**11 - n)%2==0) and ((n**11 - n)%3==0) and ((n**11 - n)%11==0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      12,
+      14
+    ],
+    "claim": "The sum (n^5 - n)+(n^7 - n)+(n^11 - n) is divisible by 6.",
+    "predicate": "((n**5 - n + n**7 - n + n**11 - n) % 6 == 0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [],
+    "claim": "For all integers n, gcd(n, n^2+1)=1.",
+    "predicate": "gcd(n, n*n+1)==1",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16
+    ],
+    "claim": "If n is odd then n and n^2+1 are coprime (reinforced).",
+    "predicate": "(n%2==0) or (gcd(n, n*n+1)==1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      1,
+      16
+    ],
+    "claim": "n^2+ n +41 is odd and coprime to n.",
+    "predicate": "((n*n + n + 41)%2==1) and (gcd(n, n*n + n + 41)==1)",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      2,
+      16
+    ],
+    "claim": "n^2+ n +41 is not divisible by 3 and is coprime to n.",
+    "predicate": "((n*n + n + 41)%3!=0) and (gcd(n, n*n + n + 41)==1)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      5,
+      18,
+      19
+    ],
+    "claim": "n^2 + n +41 is odd, not divisible by 3, not a square, and coprime to n.",
+    "predicate": "((n*n + n + 41)%2==1) and ((n*n + n + 41)%3!=0) and (int((n*n + n + 41)**0.5)**2 != n*n + n + 41) and (gcd(n, n*n + n + 41)==1)",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [],
+    "claim": "For all integers n, sigma(n) \u2265 n + 1, with equality only for n=1.",
+    "predicate": "(n<=0) or (sigma(n) >= n+1) and ((sigma(n)==n+1) == (n==1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "If n is prime then sigma(n)=n+1.",
+    "predicate": "(not is_prime(n)) or (sigma(n)==n+1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      21,
+      22
+    ],
+    "claim": "For composite n, sigma(n) > n+1.",
+    "predicate": "(is_prime(n)) or (sigma(n) > n+1)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      6,
+      21
+    ],
+    "claim": "n^5 - n is even and sigma(n) \u2265 n+1.",
+    "predicate": "((n**5 - n)%2==0) and (sigma(n) >= n+1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      10,
+      23
+    ],
+    "claim": "For n where n^7 - n is divisible by 42, sigma(n) > n+1 unless n is prime.",
+    "predicate": "((n**7 - n)%42==0) and ((is_prime(n)) or (sigma(n) > n+1))",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [],
+    "claim": "For all integers n, phi(n) \u2264 n-1 with equality iff n is prime.",
+    "predicate": "(n<=1) or (phi(n) <= n-1) and ((phi(n)==n-1) == is_prime(n))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26
+    ],
+    "claim": "If n is even then phi(n) is even.",
+    "predicate": "(n%2!=0) or (phi(n)%2==0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      27,
+      16
+    ],
+    "claim": "If n is even then phi(n) is even and gcd(n,n^2+1)=1.",
+    "predicate": "(n%2!=0) or ((phi(n)%2==0) and (gcd(n,n*n+1)==1))",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      5,
+      27
+    ],
+    "claim": "n^2 + n +41 is odd and phi(n) is even when n is even.",
+    "predicate": "((n*n + n + 41)%2==1) and ((n%2!=0) or (phi(n)%2==0))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      3,
+      24
+    ],
+    "claim": "n^2 + n +41 is odd, not divisible by 3, and n^5 - n is even.",
+    "predicate": "((n*n + n + 41)%2==1) and ((n*n + n + 41)%3!=0) and ((n**5 - n)%2==0)",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [],
+    "claim": "For all integers n, tau(n) is odd iff n is a perfect square.",
+    "predicate": "(tau(n)%2==1) == (int(n**0.5)**2 == n)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31
+    ],
+    "claim": "If n is a square then tau(n) is odd and sigma(n) is odd.",
+    "predicate": "(int(n**0.5)**2 != n) or ((tau(n)%2==1) and (sigma(n)%2==1))",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      31,
+      22
+    ],
+    "claim": "If n is prime then tau(n)=2 (even) and sigma(n)=n+1 (odd).",
+    "predicate": "(not is_prime(n)) or ((tau(n)==2) and ((sigma(n))%2==1))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      15,
+      32
+    ],
+    "claim": "The sum S = n^5 - n + n^7 - n + n^11 - n is even whenever n is a square.",
+    "predicate": "(int(n**0.5)**2 != n) or ((n**5 - n + n**7 - n + n**11 - n) % 2 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      12,
+      34
+    ],
+    "claim": "S from node 34 is divisible by 6 for all n (strengthening node 12).",
+    "predicate": "(n**5 - n + n**7 - n + n**11 - n) % 6 == 0",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [],
+    "claim": "For all integers n, vp(n!,2) \u2265 n - s_2(n) where s_2 is sum of binary digits.",
+    "predicate": "vp(math.factorial(n),2) >= n - sum(int(d) for d in bin(n)[2:])",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36,
+      6
+    ],
+    "claim": "vp((n^5 - n)!,2) \u2265 n - s_2(n).",
+    "predicate": "vp(math.factorial(n**5 - n),2) >= (n**5 - n) - sum(int(d) for d in bin(n**5 - n)[2:])",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      1,
+      27,
+      31
+    ],
+    "claim": "If n is even then n^2+ n +41 is odd, phi(n) even, and tau(n) parity matches square\u2011ness of n.",
+    "predicate": "(n%2!=0) or (((n*n + n + 41)%2==1) and (phi(n)%2==0) and ((tau(n)%2==1) == (int(n**0.5)**2==n))) )",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      3,
+      22,
+      33
+    ],
+    "claim": "n^2 + n +41 is odd, not divisible by 3, and sigma of any prime equals n+1 (trivial consistency).",
+    "predicate": "((n*n + n + 41)%2==1) and ((n*n + n + 41)%3!=0) and ((is_prime(n)) or (sigma(n)==n+1))",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      8,
+      21,
+      31
+    ],
+    "claim": "n^5 - n is divisible by 6, sigma(n) \u2265 n+1, and tau(n) odd \u21d4 n square.",
+    "predicate": "((n**5 - n)%6==0) and (sigma(n) >= n+1) and ((tau(n)%2==1) == (int(n**0.5)**2==n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      13,
+      26,
+      31
+    ],
+    "claim": "n^11 - n divisible by 66, phi(n)\u2264 n-1, and tau parity linked to square\u2011ness.",
+    "predicate": "((n**11 - n)%66==0) and (phi(n) <= n-1) and ((tau(n)%2==1) == (int(n**0.5)**2==n))",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      20,
+      34,
+      41
+    ],
+    "claim": "Combined properties: odd, non\u20113\u2011divisible, non\u2011square, coprime to n, plus S even and n^11\u2011n divisibility.",
+    "predicate": "((n*n + n + 41)%2==1) and ((n*n + n + 41)%3!=0) and (int((n*n + n + 41)**0.5)**2 != n*n + n + 41) and (gcd(n, n*n + n + 41)==1) and ((n**5 - n + n**7 - n + n**11 - n)%2==0) and ((n**11 - n)%66==0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      16,
+      24,
+      27
+    ],
+    "claim": "gcd(n,n^2+1)=1, n^5\u2011n even, and phi(n) even when n even.",
+    "predicate": "(gcd(n,n*n+1)==1) and ((n**5 - n)%2==0) and ((n%2!=0) or (phi(n)%2==0))",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      5,
+      31,
+      33
+    ],
+    "claim": "n^2 + n +41 satisfies parity, square\u2011free, and tau parity consistency for primes.",
+    "predicate": "((n*n + n + 41)%2==1) and (int((n*n + n + 41)**0.5)**2 != n*n + n + 41) and ((is_prime(n)) or ((tau(n)%2==0) and (sigma(n)%2==1)))",
+    "confidence": 0.83,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      23,
+      40,
+      41
+    ],
+    "claim": "For composite n, sigma(n)>n+1, n^5\u2011n divisible by 6, and n^11\u2011n divisible by 66.",
+    "predicate": "(is_prime(n)) or (sigma(n)>n+1) and ((n**5 - n)%6==0) and ((n**11 - n)%66==0)",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      2,
+      6,
+      14
+    ],
+    "claim": "If n \u2261 0 (mod 3) then both n^5\u2011n and n^11\u2011n avoid divisibility by 3 beyond the guaranteed factor.",
+    "predicate": "(n%3!=0) or (((n**5 - n)%3==0) and ((n**11 - n)%3==0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      9,
+      35,
+      45
+    ],
+    "claim": "S = n^5\u2011n + n^7\u2011n + n^11\u2011n is divisible by 6 and each summand respects its own modulus constraints.",
+    "predicate": "(n**5 - n + n**7 - n + n**11 - n)%6==0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      42,
+      47
+    ],
+    "claim": "All combined earlier properties imply S is even and n^2+n+41 is coprime to n.",
+    "predicate": "((n**5 - n + n**7 - n + n**11 - n)%2==0) and (gcd(n, n*n + n + 41)==1)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48
+    ],
+    "claim": "Therefore for all n, the number n^2 + n + 41 shares no non\u2011trivial divisor with the even sum S.",
+    "predicate": "(gcd(n, n*n + n + 41)==1) or ((n**5 - n + n**7 - n + n**11 - n)%2!=0)",
+    "confidence": 0.75,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

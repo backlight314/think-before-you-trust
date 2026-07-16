@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 equals 1^3 + 2^3 + ... + n^3.",
+    "predicate": "(n < 1) or (sum(range(1, n+1))**2 == sum(i**3 for i in range(1, n+1)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n >= 1, the sum 1 + 2 + ... + n is an integer.",
+    "predicate": "(n < 1) or (isinstance(sum(range(1, n+1)), int))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0, 1],
+    "claim": "For all integers n >= 1, if n is odd, then n divides 1 + 2 + ... + n.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (sum(range(1, n+1)) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [0, 1],
+    "claim": "For all integers n >= 1, if n is even, then n + 1 divides 1 + 2 + ... + n.",
+    "predicate": "(n < 1) or (n % 2 != 0) or (sum(range(1, n+1)) % (n + 1) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [0, 2],
+    "claim": "For all integers n >= 1, if n is odd, then n^2 divides 1^3 + 2^3 + ... + n^3.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (sum(i**3 for i in range(1, n+1)) % (n**2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [0, 3],
+    "claim": "For all integers n >= 1, if n is even, then (n + 1)^2 divides 1^3 + 2^3 + ... + n^3.",
+    "predicate": "(n < 1) or (n % 2 != 0) or (sum(i**3 for i in range(1, n+1)) % ((n + 1)**2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [],
+    "claim": "For all integers n, the product of n and n + 1 is always even.",
+    "predicate": "(n * (n + 1)) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [1, 6],
+    "claim": "For all integers n >= 1, the sum 1 + 2 + ... + n equals n * (n + 1) / 2.",
+    "predicate": "(n < 1) or (2 * sum(range(1, n+1)) == n * (n + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [],
+    "claim": "For all integers n, the greatest common divisor of n and n + 1 is 1.",
+    "predicate": "math.gcd(n, n + 1) == 1",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [7, 8],
+    "claim": "For all integers n >= 1, the greatest common divisor of n and (1 + 2 + ... + n) is n if n is odd, and n / 2 if n is even.",
+    "predicate": "(n < 1) or (math.gcd(n, sum(range(1, n+1))) == (n if n % 2 != 0 else n // 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [7, 8],
+    "claim": "For all integers n >= 1, the greatest common divisor of n + 1 and (1 + 2 + ... + n) is n + 1 if n is even, and (n + 1) / 2 if n is odd.",
+    "predicate": "(n < 1) or (math.gcd(n + 1, sum(range(1, n+1))) == (n + 1 if n % 2 == 0 else (n + 1) // 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [0, 9],
+    "claim": "For all integers n >= 1, the greatest common divisor of n^2 and 1^3 + 2^3 + ... + n^3 is n^2 if n is odd, and n^2 / 4 if n is even.",
+    "predicate": "(n < 1) or (math.gcd(n**2, sum(i**3 for i in range(1, n+1))) == (n**2 if n % 2 != 0 else n**2 // 4))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [0, 10],
+    "claim": "For all integers n >= 1, the greatest common divisor of (n + 1)^2 and 1^3 + 2^3 + ... + n^3 is (n + 1)^2 if n is even, and (n + 1)^2 / 4 if n is odd.",
+    "predicate": "(n < 1) or (math.gcd((n + 1)**2, sum(i**3 for i in range(1, n+1))) == ((n + 1)**2 if n % 2 == 0 else (n + 1)**2 // 4))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [1, 7],
+    "claim": "For all integers n >= 1, the sum of the first n integers, 1 + 2 + ... + n, is less than or equal to n^2.",
+    "predicate": "(n < 1) or (sum(range(1, n+1)) <= n**2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [0, 13],
+    "claim": "For all integers n >= 1, the sum 1^3 + 2^3 + ... + n^3 is less than or equal to n^4.",
+    "predicate": "(n < 1) or (sum(i**3 for i in range(1, n+1)) <= n**4)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [7, 13],
+    "claim": "For all integers n >= 1, the sum 1 + 2 + ... + (n - 1) is equal to n * (n - 1) / 2.",
+    "predicate": "(n < 1) or (2 * sum(range(1, n)) == n * (n - 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [7, 15],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n) + (1 + 2 + ... + (n - 1)) equals n^2.",
+    "predicate": "(n < 1) or (sum(range(1, n+1)) + sum(range(1, n)) == n**2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [7, 15],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n) - (1 + 2 + ... + (n - 1)) equals n.",
+    "predicate": "(n < 1) or (sum(range(1, n+1)) - sum(range(1, n)) == n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [16, 17],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 - (1 + 2 + ... + (n - 1))^2 equals n^3.",
+    "predicate": "(n < 1) or (sum(range(1, n+1))**2 - sum(range(1, n))**2 == n**3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [0, 18],
+    "claim": "For all integers n >= 1, the sum of cubes can be defined recursively as sum_{i=1}^n i^3 = (sum_{i=1}^{n-1} i^3) + n^3.",
+    "predicate": "(n < 1) or (sum(i**3 for i in range(1, n+1)) == sum(i**3 for i in range(1, n)) + n**3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [],
+    "claim": "For all integers n, n^3 - n is always divisible by 3.",
+    "predicate": "(n**3 - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [19, 20],
+    "claim": "For all integers n >= 1, the sum 1^3 + 2^3 + ... + n^3 is congruent to 1 + 2 + ... + n modulo 3.",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) - sum(range(1, n+1))) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [20],
+    "claim": "For all integers n, n^5 - n is always divisible by 5.",
+    "predicate": "(n**5 - n) % 5 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [1, 22],
+    "claim": "For all integers n >= 1, the sum 1^5 + 2^5 + ... + n^5 is congruent to 1 + 2 + ... + n modulo 5.",
+    "predicate": "(n < 1) or ((sum(i**5 for i in range(1, n+1)) - sum(range(1, n+1))) % 5 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [20, 22],
+    "claim": "For all integers n, n^7 - n is always divisible by 7.",
+    "predicate": "(n**7 - n) % 7 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [1, 24],
+    "claim": "For all integers n >= 1, the sum 1^7 + 2^7 + ... + n^7 is congruent to 1 + 2 + ... + n modulo 7.",
+    "predicate": "(n < 1) or ((sum(i**7 for i in range(1, n+1)) - sum(range(1, n+1))) % 7 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [0, 6],
+    "claim": "For all integers n >= 1, the difference (1^3 + 2^3 + ... + n^3) - (1 + 2 + ... + n) is always even.",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) - sum(range(1, n+1))) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [21, 26],
+    "claim": "For all integers n >= 1, the difference (1^3 + 2^3 + ... + n^3) - (1 + 2 + ... + n) is always divisible by 6.",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) - sum(range(1, n+1))) % 6 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [],
+    "claim": "For all integers n >= 2, if n is prime, then the number of divisors tau(n) is 2.",
+    "predicate": "(n < 2) or (not is_prime(n)) or (tau(n) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [28],
+    "claim": "For all integers n >= 2, if n is prime, then the sum of divisors sigma(n) is n + 1.",
+    "predicate": "(n < 2) or (not is_prime(n)) or (sigma(n) == n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [28, 29],
+    "claim": "For all integers n >= 2, if n is prime, then Euler's totient phi(n) is n - 1.",
+    "predicate": "(n < 2) or (not is_prime(n)) or (phi(n) == n - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [28, 30],
+    "claim": "For all integers n >= 2, if n is prime, then phi(n) * tau(n) equals 2 * (n - 1).",
+    "predicate": "(n < 2) or (not is_prime(n)) or (phi(n) * tau(n) == 2 * (n - 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [15, 30],
+    "claim": "For all integers n >= 2, if n is prime, then 2 * (1 + 2 + ... + (n - 1)) equals n * phi(n).",
+    "predicate": "(n < 2) or (not is_prime(n)) or (2 * sum(range(1, n)) == n * phi(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [30, 32],
+    "claim": "For all integers n >= 2, if n is prime, then phi(n) divides 2 * (1 + 2 + ... + (n - 1)).",
+    "predicate": "(n < 2) or (not is_prime(n)) or ((2 * sum(range(1, n))) % phi(n) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [15, 29],
+    "claim": "For all integers n >= 3, if n is prime, then 1 + 2 + ... + (n - 1) is divisible by sigma(n) - 1.",
+    "predicate": "(n < 3) or (not is_prime(n)) or (sum(range(1, n)) % (sigma(n) - 1) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [0, 34],
+    "claim": "For all integers n >= 3, if n is prime, then 1^3 + 2^3 + ... + (n - 1)^3 is divisible by (sigma(n) - 1)^2.",
+    "predicate": "(n < 3) or (not is_prime(n)) or (sum(i**3 for i in range(1, n)) % ((sigma(n) - 1)**2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [7, 16],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n) + (1 + 2 + ... + (n + 1)) equals (n + 1)^2.",
+    "predicate": "(n < 1) or (sum(range(1, n+1)) + sum(range(1, n+2)) == (n + 1)**2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [0, 36],
+    "claim": "For all integers n >= 1, (1^3 + 2^3 + ... + n^3) + (1^3 + 2^3 + ... + (n + 1)^3) equals (1 + 2 + ... + n)^2 + (1 + 2 + ... + (n + 1))^2.",
+    "predicate": "(n < 1) or (sum(i**3 for i in range(1, n+1)) + sum(i**3 for i in range(1, n+2)) == sum(range(1, n+1))**2 + sum(range(1, n+2))**2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [],
+    "claim": "For all integers n >= 1, the sum of divisors sigma(n) is greater than or equal to n.",
+    "predicate": "(n < 1) or (sigma(n) >= n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [1, 38],
+    "claim": "For all integers n >= 1, the sum of divisors of (1 + 2 + ... + n) is greater than or equal to 1 + 2 + ... + n.",
+    "predicate": "(n < 1) or (sigma(sum(range(1, n+1))) >= sum(range(1, n+1)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [0, 39],
+    "claim": "For all integers n >= 1, the sum of divisors of (1^3 + 2^3 + ... + n^3) is greater than or equal to (1 + 2 + ... + n)^2.",
+    "predicate": "(n < 1) or (sigma(sum(i**3 for i in range(1, n+1))) >= sum(range(1, n+1))**2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [7, 8, 17],
+    "claim": "For all integers n >= 1, if n is odd, then the greatest common divisor of (1 + 2 + ... + n) and (1 + 2 + ... + (n - 1)) is n.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (math.gcd(sum(range(1, n+1)), sum(range(1, n))) == n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [7, 8, 17],
+    "claim": "For all integers n >= 1, if n is even, then twice the greatest common divisor of (1 + 2 + ... + n) and (1 + 2 + ... + (n - 1)) is n.",
+    "predicate": "(n < 1) or (n % 2 != 0) or (2 * math.gcd(sum(range(1, n+1)), sum(range(1, n))) == n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [0, 41],
+    "claim": "For all integers n >= 1, if n is odd, then the greatest common divisor of (1^3 + 2^3 + ... + n^3) and (1^3 + 2^3 + ... + (n - 1)^3) is n^2.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (math.gcd(sum(i**3 for i in range(1, n+1)), sum(i**3 for i in range(1, n))) == n**2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [0, 42],
+    "claim": "For all integers n >= 1, if n is even, then 4 times the greatest common divisor of (1^3 + 2^3 + ... + n^3) and (1^3 + 2^3 + ... + (n - 1)^3) is n^2.",
+    "predicate": "(n < 1) or (n % 2 != 0) or (4 * math.gcd(sum(i**3 for i in range(1, n+1)), sum(i**3 for i in range(1, n))) == n**2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [1, 16],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 + (1 + 2 + ... + (n - 1))^2 is equal to n^2 * (n^2 + 1) / 2.",
+    "predicate": "(n < 1) or (sum(range(1, n+1))**2 + sum(range(1, n))**2 == (n**2 * (n**2 + 1)) // 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [0, 45],
+    "claim": "For all integers n >= 1, (1^3 + 2^3 + ... + n^3) + (1^3 + 2^3 + ... + (n - 1)^3) is equal to n^2 * (n^2 + 1) / 2.",
+    "predicate": "(n < 1) or (sum(i**3 for i in range(1, n+1)) + sum(i**3 for i in range(1, n)) == (n**2 * (n**2 + 1)) // 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [44, 46],
+    "claim": "For all integers n >= 1, 2 * ((1^3 + 2^3 + ... + n^3) + (1^3 + 2^3 + ... + (n - 1)^3)) is divisible by n^2.",
+    "predicate": "(n < 1) or ((2 * (sum(i**3 for i in range(1, n+1)) + sum(i**3 for i in range(1, n)))) % (n**2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [],
+    "claim": "For all integers n, the greatest common divisor of n^2 + 1 and 3 is always 1.",
+    "predicate": "math.gcd(n**2 + 1, 3) == 1",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [46, 48],
+    "claim": "For all integers n >= 1, if n is not a multiple of 3, then the greatest common divisor of (1^3 + 2^3 + ... + n^3) + (1^3 + 2^3 + ... + (n - 1)^3) and 3 is 1.",
+    "predicate": "(n < 1) or (n % 3 == 0) or (math.gcd(sum(i**3 for i in range(1, n+1)) + sum(i**3 for i in range(1, n)), 3) == 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  }
+]

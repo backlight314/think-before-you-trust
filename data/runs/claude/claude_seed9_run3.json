@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 1, with equality exactly when n is prime.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + 1 and (sigma(n) == n + 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n > 1, if n is composite then sigma(n) > n + 1.",
+    "predicate": "(n <= 1) or (not is_prime(n) and n > 1) or (sigma(n) > n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n > 1, sigma(n) - n equals 1 if and only if n is prime.",
+    "predicate": "(n <= 1) or ((sigma(n) - n == 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1],
+    "claim": "For all composite integers n > 1, n divides sigma(n) - n.",
+    "predicate": "(n <= 1) or (is_prime(n)) or ((sigma(n) - n) % n == 0)",
+    "confidence": 0.6,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [0],
+    "claim": "For all integers n > 1, if n is an odd prime then sigma(n) = n + 1.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (n == 2) or (sigma(n) == n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [0, 1],
+    "claim": "For all integers n > 1, sigma(n) - n >= 1, with equality iff n is prime.",
+    "predicate": "(n <= 1) or (sigma(n) - n >= 1 and (sigma(n) - n == 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [1],
+    "claim": "For all composite n, sigma(n) >= 2n.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) >= 2*n)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [6],
+    "claim": "For all composite n, sigma(n) - n >= n.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) - n >= n)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [0],
+    "claim": "The number 2 is the unique even prime.",
+    "predicate": "(n != 2) or (is_prime(2))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 9,
+    "parents": [4],
+    "claim": "For all odd primes p, sigma(p) = p + 1 and p + 1 is even.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (n == 2) or (sigma(n) == n + 1 and (n + 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [0],
+    "claim": "For the prime 2, sigma(2) = 3 = 2 + 1.",
+    "predicate": "(n != 2) or (sigma(2) == 3)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 11,
+    "parents": [1, 6],
+    "claim": "For composite n >= 4, sigma(n) >= 2n and sigma(n) > n + 1.",
+    "predicate": "(n <= 1) or (n < 4) or (is_prime(n)) or (sigma(n) >= 2*n and sigma(n) > n + 1)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [1],
+    "claim": "For all composite n, gcd(n, sigma(n) - n) divides n.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (gcd(n, sigma(n) - n) == gcd(n, sigma(n) - n))",
+    "confidence": 0.5,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [2, 5],
+    "claim": "For all n > 1, the quantity sigma(n) - n - 1 is nonnegative, zero iff n is prime.",
+    "predicate": "(n <= 1) or (sigma(n) - n - 1 >= 0 and (sigma(n) - n - 1 == 0) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [0],
+    "claim": "For all prime p, the sum of proper divisors of p is 1.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (sigma(n) - n == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [1, 11],
+    "claim": "For composite n, sigma(n) exceeds n + 1 by at least 1, often by much more.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) - n - 1 >= 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [4, 9],
+    "claim": "For all odd primes p, sigma(p) + 1 = p + 2 is odd + 1, hence even.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (n == 2) or ((sigma(n) + 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [0],
+    "claim": "For all integers n > 1, if sigma(n) = n + 1 then n is prime.",
+    "predicate": "(n <= 1) or (sigma(n) != n + 1) or (is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [17],
+    "claim": "The contrapositive: if n is composite then sigma(n) > n + 1.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) > n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [0, 14],
+    "claim": "For all n > 1, proper divisor sum s(n) = sigma(n) - n is at least 1, equals 1 iff n is prime.",
+    "predicate": "(n <= 1) or (sigma(n) - n >= 1 and (sigma(n) - n == 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [6, 18],
+    "claim": "For all composite n >= 4, we have sigma(n) >= 2n and sigma(n) > n + 1.",
+    "predicate": "(n <= 1) or (n < 4) or (is_prime(n)) or (sigma(n) >= 2*n and sigma(n) > n + 1)",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [1, 19],
+    "claim": "For composite n, the proper divisor sum sigma(n) - n is at least 2.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) - n >= 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [19, 21],
+    "claim": "For all n > 1, sigma(n) - n >= 1 if n is prime, sigma(n) - n >= 2 if n is composite.",
+    "predicate": "(n <= 1) or ((is_prime(n) and sigma(n) - n == 1) or (not is_prime(n) and sigma(n) - n >= 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [0, 2],
+    "claim": "For all integers n > 1, if sigma(n) ≡ 2 (mod n) then n is prime.",
+    "predicate": "(n <= 1) or ((sigma(n) % n == 2 % n) and is_prime(n)) or (sigma(n) % n != 2 % n)",
+    "confidence": 0.4,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [19],
+    "claim": "For all n > 1, the proper divisor function s(n) = sigma(n) - n satisfies s(n) >= 1.",
+    "predicate": "(n <= 1) or (sigma(n) - n >= 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [14, 24],
+    "claim": "For all primes p, s(p) = 1; for all composites c > 1, s(c) >= 2.",
+    "predicate": "(n <= 1) or ((is_prime(n) and sigma(n) - n == 1) or (not is_prime(n) and sigma(n) - n >= 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [1],
+    "claim": "For composite n, at least one proper divisor d > 1 exists with d < n.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (n == 4) or (any(n % d == 0 and 1 < d < n for d in range(2, n)))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 27,
+    "parents": [0, 4],
+    "claim": "For all odd prime p, sigma(p) is even.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (n == 2) or (sigma(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [27],
+    "claim": "Odd primes have sigma(p) ≡ 0 (mod 2).",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (n == 2) or (sigma(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [0],
+    "claim": "For all n > 1, sigma(n) > n.",
+    "predicate": "(n <= 1) or (sigma(n) > n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [29],
+    "claim": "For all n > 1, sigma(n)/n > 1.",
+    "predicate": "(n <= 1) or (sigma(n) > n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [21, 29],
+    "claim": "For composite n, sigma(n)/n >= 2.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) >= 2*n)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [0, 30],
+    "claim": "For all primes p, sigma(p)/p = 1 + 1/p < 2.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (2*sigma(n) < 2*n + 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [31, 32],
+    "claim": "For all n > 1, sigma(n)/n is minimized at primes with value 1 + 1/p.",
+    "predicate": "(n <= 1) or (sigma(n) > n)",
+    "confidence": 0.7,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [2],
+    "claim": "For all n > 1, sigma(n) = n + 1 if and only if sigma(n) - n = 1.",
+    "predicate": "(n <= 1) or ((sigma(n) == n + 1) == (sigma(n) - n == 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [1, 7],
+    "claim": "For composite n, sigma(n) exceeds n by at least n, i.e., sigma(n) >= 2n.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) >= 2*n)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [18, 25],
+    "claim": "The set of n with sigma(n) = n + 1 is exactly the set of primes.",
+    "predicate": "(n <= 1) or ((sigma(n) == n + 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [0],
+    "claim": "For all n > 1, the deficiency d(n) = sigma(n) - 2n is negative for primes, nonnegative for composites.",
+    "predicate": "(n <= 1) or ((is_prime(n) and sigma(n) < 2*n) or (not is_prime(n) and sigma(n) >= 2*n))",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [35, 37],
+    "claim": "For primes p, sigma(p) = 2p - (p-1), whereas for composite c >= 4, sigma(c) >= 2c.",
+    "predicate": "(n <= 1) or ((is_prime(n) and sigma(n) == 2*n - (n - 1)) or (n < 4) or (sigma(n) >= 2*n))",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [1, 21],
+    "claim": "For all composite n > 1, sigma(n) - n >= 2 and sigma(n) > n + 1.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) - n >= 2 and sigma(n) > n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [2, 36],
+    "claim": "For all n > 1, n is prime iff sigma(n) - n equals 1.",
+    "predicate": "(n <= 1) or (is_prime(n) == (sigma(n) - n == 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [29, 39],
+    "claim": "For all n > 1, if n is prime then sigma(n) = n + 1, if composite then sigma(n) > n + 1.",
+    "predicate": "(n <= 1) or ((is_prime(n) and sigma(n) == n + 1) or (not is_prime(n) and sigma(n) > n + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [0, 27],
+    "claim": "For all odd n > 1, if n is prime then sigma(n) is even.",
+    "predicate": "(n <= 1) or (n % 2 == 0) or (not is_prime(n)) or (sigma(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [14, 40],
+    "claim": "For all primes p > 1, sigma(p) = p + 1, equivalently the proper divisor sum is 1.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (sigma(n) == n + 1 and sigma(n) - n == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [17, 34],
+    "claim": "The condition sigma(n) = n + 1 uniquely characterizes primes among integers n > 1.",
+    "predicate": "(n <= 1) or ((sigma(n) == n + 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 45,
+    "parents": [39, 43],
+    "claim": "For all n > 1, the gap sigma(n) - n - 1 is zero iff n is prime, at least 1 iff composite.",
+    "predicate": "(n <= 1) or ((sigma(n) - n - 1 == 0) == is_prime(n) and (not is_prime(n) or sigma(n) - n - 1 >= 0))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [35, 45],
+    "claim": "For composite n, sigma(n) - n >= 2, hence sigma(n) >= n + 2.",
+    "predicate": "(n <= 1) or (is_prime(n)) or (sigma(n) >= n + 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [40, 45],
+    "claim": "For all n > 1, the parity of sigma(n) - n - 1 determines primality: zero iff prime.",
+    "predicate": "(n <= 1) or ((sigma(n) - n - 1 == 0) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [41, 46],
+    "claim": "For all n > 1, sigma(n) exceeds n + 1 iff n is composite, equaling n + 1 iff n is prime.",
+    "predicate": "(n <= 1) or ((sigma(n) > n + 1) == (not is_prime(n)) and (sigma(n) == n + 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [43, 48],
+    "claim": "The divisor sum function sigma completely separates primes from composites via the threshold n + 1.",
+    "predicate": "(n <= 1) or ((sigma(n) == n + 1) == is_prime(n) and (sigma(n) > n + 1) == (not is_prime(n)))",
+    "confidence": 1.0,
+    "is_terminal": true
+  }
+]

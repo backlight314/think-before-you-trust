@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^3 - n is divisible by 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n, n^3 - n is divisible by 2.",
+    "predicate": "(n**3 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n, n^3 - n is divisible by 3.",
+    "predicate": "(n**3 - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1],
+    "claim": "For all integers n, n^3 - n is even.",
+    "predicate": "(n**3 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [1, 3],
+    "claim": "For all integers n, n(n-1)(n+1) is divisible by 2.",
+    "predicate": "(n * (n - 1) * (n + 1)) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [0, 2],
+    "claim": "For all integers n, n^3 ≡ n (mod 3).",
+    "predicate": "(n**3 - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [2],
+    "claim": "For all integers n not divisible by 3, n^2 ≡ 1 (mod 3).",
+    "predicate": "(n % 3 == 0) or (n**2 % 3 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [1, 4],
+    "claim": "For all integers n, n(n-1)(n+1) is divisible by 6.",
+    "predicate": "(n * (n - 1) * (n + 1)) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [3, 4],
+    "claim": "For all integers n, one of n, n-1, n+1 is even.",
+    "predicate": "(n % 2 == 0) or ((n - 1) % 2 == 0) or ((n + 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 9,
+    "parents": [0],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [0],
+    "claim": "For all integers n, n^7 - n is divisible by 42.",
+    "predicate": "(n**7 - n) % 42 == 0",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [9],
+    "claim": "For all integers n, n^5 - n is divisible by 5.",
+    "predicate": "(n**5 - n) % 5 == 0",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [9],
+    "claim": "For all integers n, n^5 - n is divisible by 6.",
+    "predicate": "(n**5 - n) % 6 == 0",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [10],
+    "claim": "For all integers n, n^7 - n is divisible by 7.",
+    "predicate": "(n**7 - n) % 7 == 0",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [0, 2],
+    "claim": "For all integers n, n^3 - n factors as n(n-1)(n+1).",
+    "predicate": "n**3 - n == n * (n - 1) * (n + 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 15,
+    "parents": [7, 14],
+    "claim": "For all integers n, the product n(n-1)(n+1) equals n^3 - n and is divisible by 6.",
+    "predicate": "(n * (n - 1) * (n + 1)) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [2, 6],
+    "claim": "For all integers n divisible by 3, n^3 is divisible by 27.",
+    "predicate": "(n % 3 != 0) or (n**3 % 27 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [5, 6],
+    "claim": "For all integers n, n(n^2 - 1) ≡ 0 (mod 3).",
+    "predicate": "(n * (n**2 - 1)) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [1],
+    "claim": "For all integers n, n^3 is odd if and only if n is odd.",
+    "predicate": "((n % 2 == 1) == ((n**3) % 2 == 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [18, 1],
+    "claim": "For all integers n, n^3 - n is even regardless of parity of n.",
+    "predicate": "(n**3 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [0, 9],
+    "claim": "For all integers n, n^5 - n is divisible by n^3 - n when n ≠ 0.",
+    "predicate": "(n == 0) or ((n**5 - n) % (n**3 - n) == 0)",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [11, 12],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 22,
+    "parents": [0],
+    "claim": "For all integers n, n^11 - n is divisible by 2310.",
+    "predicate": "(n**11 - n) % 2310 == 0",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [0, 9, 10],
+    "claim": "For all primes p, by Fermat's Little Theorem, n^p ≡ n (mod p).",
+    "predicate": "(not is_prime(2)) or (n**2 % 2 == n % 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [23],
+    "claim": "For all integers n, n^2 ≡ n (mod 2).",
+    "predicate": "(n**2 % 2) == (n % 2)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [5],
+    "claim": "For all integers n, n ≡ n^3 (mod 3).",
+    "predicate": "(n % 3) == (n**3 % 3)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 26,
+    "parents": [4, 15],
+    "claim": "For all integers n, exactly one of n, n-1, n+1 is divisible by 3.",
+    "predicate": "sum([1 for x in [n, n-1, n+1] if x % 3 == 0]) == 1",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [0],
+    "claim": "For all odd integers n, n^3 - n is divisible by 24.",
+    "predicate": "(n % 2 == 0) or ((n**3 - n) % 24 == 0)",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [27],
+    "claim": "For all odd integers n, n^3 - n ≡ 0 (mod 8).",
+    "predicate": "(n % 2 == 0) or ((n**3 - n) % 8 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [28],
+    "claim": "For all odd integers n, both n-1 and n+1 are even and their product is divisible by 8.",
+    "predicate": "(n % 2 == 0) or (((n - 1) * (n + 1)) % 8 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [0],
+    "claim": "For all integers n, gcd(n^3 - n, 6) = 6 when gcd(n, 6) ∈ {1, 2, 3, 6}.",
+    "predicate": "gcd(n**3 - n, 6) == 6",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [2, 26],
+    "claim": "For all integers n, the three consecutive integers n-1, n, n+1 cover all residues mod 3.",
+    "predicate": "set([(n-1) % 3, n % 3, (n+1) % 3]) == {0, 1, 2}",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [22],
+    "claim": "For all integers n, n^11 - n is divisible by 11.",
+    "predicate": "(n**11 - n) % 11 == 0",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [9, 22],
+    "claim": "For all integers n, n^2310 - n is divisible by 2310 (primorial-based divisibility).",
+    "predicate": "(n**2310 - n) % 2310 == 0",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [0, 14],
+    "claim": "For all integers n, n-1, n, n+1 are three consecutive integers.",
+    "predicate": "((n - 1) + 2 == (n + 1))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 35,
+    "parents": [4, 26, 34],
+    "claim": "For all integers n, among three consecutive integers exactly one is divisible by 3 and at least one is even.",
+    "predicate": "(sum([1 for x in [n-1, n, n+1] if x % 3 == 0]) == 1) and (sum([1 for x in [n-1, n, n+1] if x % 2 == 0]) >= 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [1, 35],
+    "claim": "For all integers n, the product of three consecutive integers is divisible by 6.",
+    "predicate": "((n - 1) * n * (n + 1)) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 37,
+    "parents": [12, 21],
+    "claim": "For all integers n, n^5 - n and n^3 - n have the same gcd with 30.",
+    "predicate": "gcd(n**5 - n, 30) == gcd(n**3 - n, 30)",
+    "confidence": 0.78,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [0, 27],
+    "claim": "For all even integers n, n^3 - n is divisible by 48.",
+    "predicate": "(n % 2 == 1) or ((n**3 - n) % 48 == 0)",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [38],
+    "claim": "For all even integers n, n(n^2 - 1) is divisible by 48.",
+    "predicate": "(n % 2 == 1) or ((n * (n**2 - 1)) % 48 == 0)",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [0, 23],
+    "claim": "For all integers n and primes p, if p | (n^p - n) then p divides the coefficient.",
+    "predicate": "True",
+    "confidence": 0.70,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [9, 11],
+    "claim": "For all integers n, n^5 - n and n^3 - n are both divisible by 5.",
+    "predicate": "((n**5 - n) % 5 == 0) and ((n**3 - n) % 5 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [41, 21],
+    "claim": "For all integers n, gcd(5, 6) = 1 implies n^5 - n is divisible by lcm(5,6) = 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 43,
+    "parents": [0, 30],
+    "claim": "For all integers n, |n^3 - n| ≥ 6 or n ∈ {-1, 0, 1}.",
+    "predicate": "(abs(n**3 - n) >= 6) or (n in [-1, 0, 1])",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [28, 29],
+    "claim": "For all odd integers n, (n-1)(n+1) = n^2 - 1 is divisible by 8.",
+    "predicate": "(n % 2 == 0) or (((n - 1) * (n + 1)) % 8 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [13, 22, 32],
+    "claim": "For all integers n, n^7 - n, n^11 - n share divisibility by 7, 11 respectively.",
+    "predicate": "((n**7 - n) % 7 == 0) and ((n**11 - n) % 11 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [10, 13],
+    "claim": "For all integers n, n^7 - n is divisible by 6.",
+    "predicate": "(n**7 - n) % 6 == 0",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [43, 44],
+    "claim": "For all odd integers n > 1, n^3 - n > 0 and divisible by 24.",
+    "predicate": "(n % 2 == 0) or (n <= 1) or ((n**3 - n > 0) and ((n**3 - n) % 24 == 0))",
+    "confidence": 0.90,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [0, 37, 41],
+    "claim": "For all integers n, the ratio (n^5 - n)/(n^3 - n) approaches n^2 + 1 as n grows large.",
+    "predicate": "(n == 0) or (abs((n**5 - n) / (n**3 - n) - (n**2 + 1)) < 0.01)",
+    "confidence": 0.82,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [45, 46],
+    "claim": "For all integers n, n^7 - n is divisible by 42 and contains all prime divisors 2, 3, 7.",
+    "predicate": "((n**7 - n) % 42 == 0) and ((n**7 - n) % 2 == 0) and ((n**7 - n) % 3 == 0) and ((n**7 - n) % 7 == 0)",
+    "confidence": 0.94,
+    "is_terminal": true
+  }
+]

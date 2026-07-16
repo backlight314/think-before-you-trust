@@ -1,0 +1,423 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 1, with equality exactly when n is prime.",
+    "predicate": "(n > 1) and (sigma(n) >= n + 1) and ((sigma(n) == n + 1) == (is_prime(n)))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is even.",
+    "predicate": "(n > 1) and ((sigma(n) % 2) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n is a sum of two squares.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b) such that a**2 + b**2 == n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 4.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 4) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 8.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 8) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of two primes.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b) such that a**2 + b**2 == n and is_prime(a) and is_prime(b))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      3,
+      4
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is not divisible by 8.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 8) != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 2.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 2) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 16.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 16) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 4.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 4) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      8
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 32.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 32) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2,
+      5
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of two primes and a prime cubed.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c) such that a**2 + b**2 + c**3 == n and is_prime(a) and is_prime(b) and is_prime(c))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      6,
+      9
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 8.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 8) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 64.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 64) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of two primes and three prime cubes.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d) such that a**2 + b**2 + c**3 + d**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      12
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 16.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 16) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 128.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 128) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of two primes and four prime cubes.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d, e) such that a**2 + b**2 + c**3 + d**3 + e**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d) and is_prime(e))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 32.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 32) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      16
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 256.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 256) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of two primes and five prime cubes.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d, e, f) such that a**2 + b**2 + c**3 + d**3 + e**3 + f**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d) and is_prime(e) and is_prime(f))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 64.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 64) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 512.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 512) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of three primes and a prime cubed.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d) such that a**2 + b**2 + c**3 + d**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      20
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of three primes and two prime cubes.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d, e) such that a**2 + b**2 + c**3 + d**3 + e**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d) and is_prime(e))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 128.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 128) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 1024.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 1024) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      23
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of four primes and a prime cubed.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d, e) such that a**2 + b**2 + c**3 + d**3 + e**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d) and is_prime(e))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of four primes and two prime cubes.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d, e, f) such that a**2 + b**2 + c**3 + d**3 + e**3 + f**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d) and is_prime(e) and is_prime(f))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 256.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 256) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      26
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 2048.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 2048) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      27
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of five primes and a prime cubed.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d, e, f) such that a**2 + b**2 + c**3 + d**3 + e**3 + f**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d) and is_prime(e) and is_prime(f))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n > 1, if n is prime then n can be written as a sum of five primes and two prime cubes.",
+    "predicate": "(n > 1) and (is_prime(n)) and (exists(a, b, c, d, e, f, g) such that a**2 + b**2 + c**3 + d**3 + e**3 + f**3 + g**3 == n and is_prime(a) and is_prime(b) and is_prime(c) and is_prime(d) and is_prime(e) and is_prime(f) and is_prime(g))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n > 1, if n is odd then sigma(n) is divisible by 512.",
+    "predicate": "(n > 1) and ((n % 2) == 1) and ((sigma(n) % 512) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      30
+    ],
+    "claim": "For all integers n > 1, if n is even then sigma(n) is divisible by 4096.",
+    "predicate": "(n > 1) and ((n % 2) == 0) and ((sigma(n) % 4096) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

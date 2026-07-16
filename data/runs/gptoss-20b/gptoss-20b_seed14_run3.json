@@ -1,0 +1,647 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is prime.",
+    "predicate": "(n >= 0) and is_prime(n*n + n + 41)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is congruent to 1 mod 4.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 4 == 1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is odd.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 2 == 1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 3.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 3 != 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is congruent to 1 mod 8.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 8 == 1)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      3
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is prime or equal to 7.",
+    "predicate": "(n >= 0) and ((is_prime(n*n + n + 41)) or (n*n + n + 41 == 7))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 5.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 5 != 0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      4,
+      6
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 3 distinct prime factors.",
+    "predicate": "(n >= 0) and (len(set(factorization(n*n + n + 41).keys())) <= 3)",
+    "confidence": 0.86,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      1,
+      3,
+      6
+    ],
+    "claim": "For all integers n >= 0, the sum of the divisors of n^2 + n + 41 is less than 3 times the number itself.",
+    "predicate": "(n >= 0) and (sigma(n*n + n + 41) < 3*(n*n + n + 41))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      8
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a Sophie Germain prime.",
+    "predicate": "(n >= 0) and is_prime(n*n + n + 41) and is_prime(2*(n*n + n + 41)+1)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      5,
+      9
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is prime then n is not divisible by 7.",
+    "predicate": "(n >= 0) and ((not is_prime(n*n + n + 41)) or (n % 7 != 0))",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2,
+      4,
+      7
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime with n+41.",
+    "predicate": "(n >= 0) and (gcd(n*n + n + 41, n + 41) == 1)",
+    "confidence": 0.82,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      1,
+      11
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is congruent to 1 mod phi(n+41).",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % phi(n + 41) == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      12
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a quadratic residue modulo n+41.",
+    "predicate": "(n >= 0) and ((pow(n*n + n + 41, (n+41)//2, n+41) == 1))",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      3,
+      12
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by any prime p <= n.",
+    "predicate": "(n >= 0) and all(((n*n + n + 41) % p != 0) for p in primes_up_to(n))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      6,
+      14
+    ],
+    "claim": "For all integers n >= 0, vp(n^2 + n + 41, 2) = 0.",
+    "predicate": "(n >= 0) and (vp(n*n + n + 41, 2) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      1,
+      15
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is congruent to 1 mod 16.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 16 == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      5,
+      16
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime with 2n+1.",
+    "predicate": "(n >= 0) and (gcd(n*n + n + 41, 2*n + 1) == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      8,
+      17
+    ],
+    "claim": "For all integers n >= 0, sigma(n^2 + n + 41) < 4*(n^2 + n + 41).",
+    "predicate": "(n >= 0) and (sigma(n*n + n + 41) < 4*(n*n + n + 41))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      13,
+      18
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a reduced residue modulo n+41.",
+    "predicate": "(n >= 0) and ((pow(n*n + n + 41, phi(n+41)-1, n+41) == 1) and (gcd(n*n + n + 41, n+41)==1))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      9,
+      19
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a safe prime.",
+    "predicate": "(n >= 0) and is_prime(n*n + n + 41) and is_prime((n*n + n + 41 - 1)//2)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      10,
+      20
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is prime then n+41 is also prime.",
+    "predicate": "(n >= 0) and ((not is_prime(n*n + n + 41)) or is_prime(n + 41))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      15,
+      21
+    ],
+    "claim": "For all integers n >= 0, vp(n^2 + n + 41, 3) = 0.",
+    "predicate": "(n >= 0) and (vp(n*n + n + 41, 3) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      4,
+      22
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is congruent to 1 mod 24.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 24 == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      19,
+      23
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime with 6n+1.",
+    "predicate": "(n >= 0) and (gcd(n*n + n + 41, 6*n + 1) == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      12,
+      24
+    ],
+    "claim": "For all integers n >= 0, tau(n^2 + n + 41) is odd.",
+    "predicate": "(n >= 0) and (tau(n*n + n + 41) % 2 == 1)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      7,
+      25
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 4 divisors.",
+    "predicate": "(n >= 0) and (tau(n*n + n + 41) <= 4)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      18,
+      26
+    ],
+    "claim": "For all integers n >= 0, sigma(n^2 + n + 41) is divisible by 5.",
+    "predicate": "(n >= 0) and (sigma(n*n + n + 41) % 5 == 0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      14,
+      27
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by any prime p <= sqrt(n^2 + n + 41).",
+    "predicate": "(n >= 0) and all(((n*n + n + 41) % p != 0) for p in primes_up_to(int((n*n + n + 41)**0.5)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      21,
+      28
+    ],
+    "claim": "For all integers n >= 0, if n is prime then n^2 + n + 41 is also prime.",
+    "predicate": "(n >= 0) and ((not is_prime(n)) or is_prime(n*n + n + 41))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      5,
+      29
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a Wilson prime candidate.",
+    "predicate": "(n >= 0) and is_prime(n*n + n + 41) and ((n*n + n + 41 - 1) % math.factorial(n*n + n + 41 - 2) == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      22,
+      30
+    ],
+    "claim": "For all integers n >= 0, vp(n^2 + n + 41, 5) = 0.",
+    "predicate": "(n >= 0) and (vp(n*n + n + 41, 5) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      23,
+      31
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is congruent to 1 mod 40.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 40 == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      24,
+      32
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime with 10n+1.",
+    "predicate": "(n >= 0) and (gcd(n*n + n + 41, 10*n + 1) == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      26,
+      33
+    ],
+    "claim": "For all integers n >= 0, tau(n^2 + n + 41) <= 5.",
+    "predicate": "(n >= 0) and (tau(n*n + n + 41) <= 5)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      27,
+      34
+    ],
+    "claim": "For all integers n >= 0, sigma(n^2 + n + 41) is a prime number.",
+    "predicate": "(n >= 0) and is_prime(sigma(n*n + n + 41))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      28,
+      35
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 divides sigma(n^2 + n + 41).",
+    "predicate": "(n >= 0) and ((sigma(n*n + n + 41) % (n*n + n + 41)) == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      29,
+      36
+    ],
+    "claim": "For all integers n >= 0, if n is odd then n^2 + n + 41 is prime.",
+    "predicate": "(n >= 0) and ((n % 2 == 0) or is_prime(n*n + n + 41))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      30,
+      37
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a prime in the arithmetic progression 41 + 40k.",
+    "predicate": "(n >= 0) and (is_prime(n*n + n + 41)) and ((n*n + n + 41 - 41) % 40 == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      31,
+      38
+    ],
+    "claim": "For all integers n >= 0, vp(n^2 + n + 41, 7) = 0.",
+    "predicate": "(n >= 0) and (vp(n*n + n + 41, 7) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      32,
+      39
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is congruent to 1 mod 56.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 56 == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      33,
+      40
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime with 14n+1.",
+    "predicate": "(n >= 0) and (gcd(n*n + n + 41, 14*n + 1) == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      34,
+      41
+    ],
+    "claim": "For all integers n >= 0, tau(n^2 + n + 41) <= 6.",
+    "predicate": "(n >= 0) and (tau(n*n + n + 41) <= 6)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      35,
+      42
+    ],
+    "claim": "For all integers n >= 0, sigma(n^2 + n + 41) is a square number.",
+    "predicate": "(n >= 0) and (int(math.isqrt(sigma(n*n + n + 41)))**2 == sigma(n*n + n + 41))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      36,
+      43
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 divides sigma(n^2 + n + 41)^2.",
+    "predicate": "(n >= 0) and ((sigma(n*n + n + 41)**2) % (n*n + n + 41) == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      37,
+      44
+    ],
+    "claim": "For all integers n >= 0, if n is prime then n^2 + n + 41 is a safe prime.",
+    "predicate": "(n >= 0) and ((not is_prime(n)) or (is_prime(n*n + n + 41) and is_prime((n*n + n + 41 - 1)//2))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      38,
+      45
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a prime in the progression 41 + 120k.",
+    "predicate": "(n >= 0) and (is_prime(n*n + n + 41)) and ((n*n + n + 41 - 41) % 120 == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      39,
+      46
+    ],
+    "claim": "For all integers n >= 0, vp(n^2 + n + 41, 11) = 0.",
+    "predicate": "(n >= 0) and (vp(n*n + n + 41, 11) == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      40,
+      47
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is congruent to 1 mod 110.",
+    "predicate": "(n >= 0) and ((n*n + n + 41) % 110 == 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      41,
+      48
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime with 22n+1.",
+    "predicate": "(n >= 0) and (gcd(n*n + n + 41, 22*n + 1) == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

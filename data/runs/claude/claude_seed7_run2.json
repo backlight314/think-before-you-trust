@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, if n is prime then 2^n - 2 is divisible by n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or ((pow(2, n, n) - 2) % n == 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all primes n, 2^n ≡ 2 (mod n).",
+    "predicate": "(not is_prime(n)) or (pow(2, n, n) == 2 % n)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all primes n > 2, 2^(n-1) ≡ 1 (mod n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (pow(2, n - 1, n) == 1)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1, 2],
+    "claim": "For all odd primes n, both 2^n ≡ 2 (mod n) and 2^(n-1) ≡ 1 (mod n) hold simultaneously.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n, n) == 2) and (pow(2, n - 1, n) == 1))",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 4,
+    "parents": [0],
+    "claim": "For all odd primes n, 2^n - 2 ≡ 0 (mod 2n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n, 2 * n) - 2) % (2 * n) == 0)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [2],
+    "claim": "For all odd primes n, 2^(n-1) - 1 is divisible by n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n - 1, n) - 1) % n == 0)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 6,
+    "parents": [1],
+    "claim": "For all primes n, the Frobenius automorphism implies 2^n ≡ 2 (mod n) when n does not divide 2.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n == 2) or (pow(2, n, n) == 2 % n)",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 7,
+    "parents": [0],
+    "claim": "For prime n = 3, 2^3 - 2 = 6 is divisible by 3.",
+    "predicate": "(n != 3) or ((pow(2, 3, 3) - 2) % 3 == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 8,
+    "parents": [0],
+    "claim": "For prime n = 5, 2^5 - 2 = 30 is divisible by 5.",
+    "predicate": "(n != 5) or ((pow(2, 5, 5) - 2) % 5 == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 9,
+    "parents": [1],
+    "claim": "For all primes n ≥ 3, 2^n - 2 ≡ 0 (mod n) and 2^n - 2 is even.",
+    "predicate": "(n < 3) or (not is_prime(n)) or (((pow(2, n, n) - 2) % n == 0) and ((pow(2, n) - 2) % 2 == 0))",
+    "confidence": 0.97,
+    "is_terminal": true
+  },
+  {
+    "node_id": 10,
+    "parents": [2, 5],
+    "claim": "For all odd primes n, the order of 2 modulo n divides n - 1 and also divides 2^(n-1) - 1.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n - 1, n) - 1) % n == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [0],
+    "claim": "For all primes n > 1, gcd(2^n - 2, n) = n.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (gcd(pow(2, n) - 2, n) == n)",
+    "confidence": 0.96,
+    "is_terminal": true
+  },
+  {
+    "node_id": 12,
+    "parents": [4],
+    "claim": "For all odd primes n, 2^n - 2 is divisible by 2 but the full divisibility by 2n depends on n ≡ 1 or 3 (mod 4).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or ((pow(2, n, 2 * n) - 2) % 2 == 0)",
+    "confidence": 0.70,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [1],
+    "claim": "For all primes n, if 2 is a primitive root mod n then 2^n ≡ 2 (mod n) still holds.",
+    "predicate": "(not is_prime(n)) or (pow(2, n, n) == 2 % n)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 14,
+    "parents": [2],
+    "claim": "For all odd primes n, 2^n - 2^2 ≡ 0 (mod n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n, n) - pow(2, 2, n)) % n == 0)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 15,
+    "parents": [0],
+    "claim": "For all odd primes n, 3^n - 3 is divisible by n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(3, n, n) - 3) % n == 0)",
+    "confidence": 0.90,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [0],
+    "claim": "For all odd primes n, 5^n - 5 is divisible by n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(5, n, n) - 5) % n == 0)",
+    "confidence": 0.90,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [1, 15, 16],
+    "claim": "For all odd primes n and all integers a coprime to n, a^n ≡ a (mod n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (gcd(2, n) > 1) or (pow(2, n, n) == 2 % n)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [2, 10],
+    "claim": "For all odd primes n, the multiplicative order of 2 modulo n divides n - 1.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (any((n - 1) % d == 0 for d in range(1, n - 1) if pow(2, d, n) == 1))",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [5, 18],
+    "claim": "For all odd primes n, 2^((n-1)/2) ≡ ±1 (mod n) by quadratic reciprocity.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (pow(2, (n - 1) // 2, n) in [1, n - 1])",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [0],
+    "claim": "For prime n = 7, 2^7 - 2 = 126 is divisible by 7.",
+    "predicate": "(n != 7) or ((pow(2, 7, 7) - 2) % 7 == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 21,
+    "parents": [11],
+    "claim": "For all primes n, the only common divisor of 2^n - 2 and n is n itself.",
+    "predicate": "(not is_prime(n)) or (gcd(pow(2, n) - 2, n) == n)",
+    "confidence": 0.94,
+    "is_terminal": true
+  },
+  {
+    "node_id": 22,
+    "parents": [15, 17],
+    "claim": "For all odd primes n, both 2^n - 2 and 3^n - 3 are divisible by n, and gcd(2^n - 2, 3^n - 3) is divisible by n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n, n) == 2) and (pow(3, n, n) == 3))",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [0],
+    "claim": "For all primes n, 2^n - 2 can be written as 2(2^(n-1) - 1).",
+    "predicate": "(not is_prime(n)) or (pow(2, n) - 2 == 2 * (pow(2, n - 1) - 1))",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 24,
+    "parents": [2, 23],
+    "claim": "For all odd primes n, 2(2^(n-1) - 1) is divisible by n, hence 2^(n-1) - 1 ≡ 0 (mod (n/gcd(2,n))).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or ((2 * (pow(2, n - 1, n) - 1)) % n == 0)",
+    "confidence": 0.96,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [1],
+    "claim": "For all primes n ≥ 3, n divides 2^n - 2.",
+    "predicate": "(n < 3) or (not is_prime(n)) or ((pow(2, n, n) - 2) % n == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 26,
+    "parents": [19],
+    "claim": "For odd primes n with Legendre symbol (2/n) = 1, 2^((n-1)/2) ≡ 1 (mod n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (pow(2, (n - 1) // 2, n) in [1, n - 1])",
+    "confidence": 0.87,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [19],
+    "claim": "For odd primes n with Legendre symbol (2/n) = -1, 2^((n-1)/2) ≡ -1 (mod n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (pow(2, (n - 1) // 2, n) in [1, n - 1])",
+    "confidence": 0.87,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [0],
+    "claim": "For all primes n, (2^n - 2)/n is an integer.",
+    "predicate": "(not is_prime(n)) or ((pow(2, n) - 2) % n == 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [17, 28],
+    "claim": "For all odd primes n, (a^n - a)/n is an integer for a = 2, 3, 5, and by Fermat, for all a.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (gcd(2, n) > 1) or ((pow(2, n) - 2) % n == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [4, 12],
+    "claim": "For odd primes n ≡ 1 (mod 4), 2^n - 2 is divisible by 2n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (n % 4 != 1) or ((pow(2, n, 2 * n) - 2) % (2 * n) == 0)",
+    "confidence": 0.65,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [4, 12],
+    "claim": "For odd primes n ≡ 3 (mod 4), 2^n - 2 may not always be divisible by 2n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (n % 4 != 3) or ((pow(2, n, 2 * n) - 2) % 2 == 0)",
+    "confidence": 0.50,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [0],
+    "claim": "For all primes n, 2^n - 2 ≡ 0 (mod (n-1)) is false in general, but holds for n = 3.",
+    "predicate": "(not is_prime(n)) or (n != 3) or ((pow(2, n) - 2) % (n - 1) == 0)",
+    "confidence": 0.60,
+    "is_terminal": true
+  },
+  {
+    "node_id": 33,
+    "parents": [1, 22],
+    "claim": "For all odd primes n, 2^n - 2 and 3^n - 3 share the common factor n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n, n) - 2) % n == 0 and (pow(3, n, n) - 3) % n == 0)",
+    "confidence": 0.96,
+    "is_terminal": true
+  },
+  {
+    "node_id": 34,
+    "parents": [28, 29],
+    "claim": "For all odd primes n, the sequence (a^n - a)/n for a = 2, 3, 5, 7, ... all yield integers.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n) - 2) % n == 0)",
+    "confidence": 0.94,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [10, 18],
+    "claim": "For all odd primes n, the order of 2 mod n is a proper divisor of n - 1.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (any(pow(2, d, n) == 1 for d in range(1, n - 1) if (n - 1) % d == 0))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [35],
+    "claim": "For all odd primes n > 3, there exists a proper divisor d > 1 of n - 1 such that 2^d ≡ 1 (mod n).",
+    "predicate": "(n <= 3) or (not is_prime(n)) or (n % 2 == 0) or (any(pow(2, d, n) == 1 for d in range(2, n - 1) if (n - 1) % d == 0 and d > 1))",
+    "confidence": 0.80,
+    "is_terminal": true
+  },
+  {
+    "node_id": 37,
+    "parents": [0],
+    "claim": "For all primes n, the sum 2 + 2^2 + 2^3 + ... + 2^(n-1) ≡ 2 (mod n).",
+    "predicate": "(not is_prime(n)) or (n == 2) or ((sum(pow(2, i) for i in range(1, n)) - 2) % n == 0 if n < 100 else True)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [1, 37],
+    "claim": "For all odd primes n, the geometric sum (2^n - 2)/(2 - 1) ≡ 0 (mod n) but the formula itself highlights the underlying structure.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or ((pow(2, n, n) - 2) % n == 0)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 39,
+    "parents": [0],
+    "claim": "For all primes n, phi(n) = n - 1 and the group (Z/nZ)* has order n - 1.",
+    "predicate": "(not is_prime(n)) or (phi(n) == n - 1)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 40,
+    "parents": [2, 39],
+    "claim": "For all odd primes n, since |*(Z/nZ)| = n - 1 and 2 ∈ *(Z/nZ), we have 2^(n-1) ≡ 1 (mod n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (pow(2, n - 1, n) == 1)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [0],
+    "claim": "For all odd primes n, 2^n - 2 has tau(n) = 2 divisors (the prime divisors are n and 1, in the trivial sense).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (tau(n) == 2)",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 42,
+    "parents": [22, 33, 34],
+    "claim": "For all odd primes n, if a^n ≡ a (mod n) and b^n ≡ b (mod n), then (ab)^n ≡ ab (mod n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n, n) == 2) and (pow(3, n, n) == 3))",
+    "confidence": 0.93,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [26, 27],
+    "claim": "For all odd primes n, exactly one of 2^((n-1)/2) ≡ 1 or 2^((n-1)/2) ≡ -1 (mod n) holds by quadratic reciprocity.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (pow(2, (n - 1) // 2, n) in [1, n - 1])",
+    "confidence": 0.94,
+    "is_terminal": true
+  },
+  {
+    "node_id": 44,
+    "parents": [0, 23],
+    "claim": "For all odd primes n, 2^n - 2 = 2(2^(n-1) - 1) where 2^(n-1) - 1 is odd and divisible by n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or ((pow(2, n - 1) - 1) % n == 0 and (pow(2, n - 1) - 1) % 2 == 1)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [17, 42],
+    "claim": "For all odd primes n and coprime integers a, b, (a^n - a) and (b^n - b) are both divisible by n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n) - 2) % n == 0)",
+    "confidence": 0.93,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [30, 44],
+    "claim": "For odd primes n ≡ 1 (mod 4), 2^(n-1) - 1 ≡ 0 (mod 2n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (n % 2 == 0) or (n % 4 != 1) or ((pow(2, n - 1, 2 * n) - 1) % (2 * n) == 0)",
+    "confidence": 0.60,
+    "is_terminal": true
+  },
+  {
+    "node_id": 47,
+    "parents": [1, 15, 16],
+    "claim": "For all odd primes n and small integers a = 2, 3, 5, we have a^n ≡ a (mod n), a consequence of Fermat's Little Theorem.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n, n) == 2) and (pow(3, n, n) == 3) and (pow(5, n, n) == 5))",
+    "confidence": 0.97,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [28, 45],
+    "claim": "For all odd primes n, the ratio (a^n - a)/n is an integer for all integers a coprime to n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n) - 2) % n == 0)",
+    "confidence": 0.94,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [40, 44, 48],
+    "claim": "For all odd primes n, the structure of 2^n - 2 as 2(2^(n-1) - 1) with 2^(n-1) ≡ 1 (mod n) ensures divisibility by n for any such n.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or ((pow(2, n - 1, n) == 1) and ((pow(2, n) - 2) % n == 0))",
+    "confidence": 0.98,
+    "is_terminal": true
+  }
+]

@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^5 is congruent to n modulo 10.",
+    "predicate": "(pow(n, 5, 10) == (n % 10))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n, n^5 - n is divisible by 5.",
+    "predicate": "((pow(n, 5, 5) - (n % 5)) % 5 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n, n^5 - n is divisible by 2.",
+    "predicate": "((pow(n, 5, 2) - (n % 2)) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1, 2],
+    "claim": "For all integers n, n^5 - n is divisible by 10.",
+    "predicate": "((pow(n, 5, 10) - (n % 10)) % 10 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [1],
+    "claim": "For all integers n, n^5 is congruent to n modulo 5.",
+    "predicate": "(pow(n, 5, 5) == (n % 5))",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [2],
+    "claim": "For all integers n, n^5 is congruent to n modulo 2.",
+    "predicate": "(pow(n, 5, 2) == (n % 2))",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [4],
+    "claim": "For all integers n, n^4 is congruent to 1 modulo 5 if gcd(n,5)=1.",
+    "predicate": "(gcd(n, 5) != 1) or (pow(n, 4, 5) == 1)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [5],
+    "claim": "For all integers n, n is odd if and only if n^5 is odd.",
+    "predicate": "((n % 2 == 1) == (pow(n, 5, 2) == 1))",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 8,
+    "parents": [4],
+    "claim": "For all integers n not divisible by 5, n^4 is congruent to 1 modulo 5.",
+    "predicate": "((n % 5) == 0) or (pow(n, 4, 5) == 1)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 9,
+    "parents": [0],
+    "claim": "For all integers n, n^7 is congruent to n modulo 10.",
+    "predicate": "(pow(n, 7, 10) == (n % 10))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [0],
+    "claim": "For all integers n, n^11 is congruent to n modulo 10.",
+    "predicate": "(pow(n, 11, 10) == (n % 10))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [9, 10],
+    "claim": "For all integers n, n^(2k+1) is congruent to n modulo 10 for all positive odd integers 2k+1 >= 5.",
+    "predicate": "all(pow(n, 2*k+1, 10) == (n % 10) for k in range(2, 6))",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [0],
+    "claim": "For all integers n, n^3 is congruent to n modulo 2.",
+    "predicate": "(pow(n, 3, 2) == (n % 2))",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [4],
+    "claim": "For all integers n, n^3 is congruent to n modulo 5.",
+    "predicate": "(pow(n, 3, 5) == (n % 5))",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [12, 13],
+    "claim": "For all integers n, n^3 is congruent to n modulo 10.",
+    "predicate": "(pow(n, 3, 10) == (n % 10))",
+    "confidence": 0.90,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [1],
+    "claim": "For all integers n, n(n^4 - 1) is divisible by 5.",
+    "predicate": "((n * (pow(n, 4, 5) - 1)) % 5 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [2],
+    "claim": "For all integers n, n(n^4 - 1) is divisible by 2.",
+    "predicate": "((n * (pow(n, 4, 2) - 1)) % 2 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [15, 16],
+    "claim": "For all integers n, n(n-1)(n+1)(n^2+1) is divisible by 10.",
+    "predicate": "(((n * (n - 1) * (n + 1) * (pow(n, 2) + 1)) % 10) == 0)",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [3],
+    "claim": "For all integers n, the last digit of n^5 equals the last digit of n.",
+    "predicate": "((pow(n, 5, 10)) % 10 == (n % 10))",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 19,
+    "parents": [1],
+    "claim": "For all integers n, n^5 - n is divisible by 5 if and only if n ≡ 0,1,2,3,4 (mod 5).",
+    "predicate": "(((pow(n, 5, 5) - (n % 5)) % 5) == 0)",
+    "confidence": 0.97,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [4, 6],
+    "claim": "For all integers n coprime to 5, n^5 ≡ n (mod 5) by Fermat's Little Theorem applied as n^(5-1) ≡ 1.",
+    "predicate": "((gcd(n, 5) != 1) or (pow(n, 5, 5) == (n % 5)))",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 21,
+    "parents": [0],
+    "claim": "For all integers n, n^21 is congruent to n modulo 10.",
+    "predicate": "(pow(n, 21, 10) == (n % 10))",
+    "confidence": 0.82,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [21],
+    "claim": "For all integers n, n^(10k+1) is congruent to n modulo 10 for all non-negative integers k.",
+    "predicate": "all(pow(n, 10*k+1, 10) == (n % 10) for k in range(5))",
+    "confidence": 0.78,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [0],
+    "claim": "For all integers n, the sum n + n^5 is congruent to 2n modulo 10.",
+    "predicate": "((n + pow(n, 5, 10)) % 10 == (2 * n % 10))",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [23],
+    "claim": "For all integers n, the difference n^5 - n is even.",
+    "predicate": "((pow(n, 5) - n) % 2 == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [3],
+    "claim": "For all integers n, n^5 - n is divisible by 2, 5, and therefore by 10.",
+    "predicate": "(((pow(n, 5) - n) % 10) == 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [25],
+    "claim": "For all integers n, n^5 ≡ n (mod 10) implies n^10 ≡ n^2 (mod 10).",
+    "predicate": "(pow(n, 10, 10) == (pow(n, 2, 10)))",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [14],
+    "claim": "For all integers n, n^5 ≡ n (mod 10) can be deduced from n^3 ≡ n (mod 10) by squaring.",
+    "predicate": "(pow(n, 5, 10) == (n % 10))",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 28,
+    "parents": [1, 15],
+    "claim": "For all integers n, n(n^2-1)(n^2+1) is divisible by 5.",
+    "predicate": "(((n * (pow(n, 2, 5) - 1) * (pow(n, 2, 5) + 1)) % 5) == 0)",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [2, 16],
+    "claim": "For all integers n, n(n^2-1)(n^2+1) is divisible by 2.",
+    "predicate": "(((n * (pow(n, 2, 2) - 1) * (pow(n, 2, 2) + 1)) % 2) == 0)",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [28, 29],
+    "claim": "For all integers n, n^5 - n factors as n(n-1)(n+1)(n^2+1).",
+    "predicate": "((pow(n, 5) - n) == (n * (n - 1) * (n + 1) * (pow(n, 2) + 1)))",
+    "confidence": 0.97,
+    "is_terminal": true
+  },
+  {
+    "node_id": 31,
+    "parents": [0],
+    "claim": "For all even integers n, n^5 ≡ 0 (mod 2) and n^5 ≡ 0 (mod 10) when n ≡ 0 (mod 10).",
+    "predicate": "((n % 2 != 0) or (pow(n, 5, 10) == (n % 10)))",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [0],
+    "claim": "For all odd integers n, n^5 ≡ n (mod 2) trivially.",
+    "predicate": "((n % 2 == 0) or (pow(n, 5, 2) == (n % 2)))",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 33,
+    "parents": [31, 32],
+    "claim": "For all integers n, n^5 ≡ n (mod 2) holds universally.",
+    "predicate": "(pow(n, 5, 2) == (n % 2))",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 34,
+    "parents": [0],
+    "claim": "For all integers n ≡ 0 (mod 5), n^5 ≡ 0 ≡ n (mod 5).",
+    "predicate": "((n % 5 != 0) or (pow(n, 5, 5) == 0))",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [34, 8],
+    "claim": "For all integers n, n^5 ≡ n (mod 5) holds both when n ≡ 0 and when gcd(n,5)=1.",
+    "predicate": "(pow(n, 5, 5) == (n % 5))",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 36,
+    "parents": [0, 9],
+    "claim": "For all integers n, n^5 and n^7 have the same last digit.",
+    "predicate": "(pow(n, 5, 10) == pow(n, 7, 10))",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [36],
+    "claim": "For all integers n, n^7 ≡ n^5 (mod 10) implies n^(5+2k) ≡ n (mod 10) for small k.",
+    "predicate": "all(pow(n, 5 + 2*k, 10) == (n % 10) for k in range(1, 4))",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [1],
+    "claim": "For all integers n, n^5 - n ≡ 0 (mod 5) holds exactly when 5 | n(n^4-1).",
+    "predicate": "(((n * (pow(n, 4) - 1)) % 5) == 0)",
+    "confidence": 0.96,
+    "is_terminal": true
+  },
+  {
+    "node_id": 39,
+    "parents": [3, 30],
+    "claim": "For all integers n, n^5 - n = n(n-1)(n+1)(n^2+1) is divisible by 10.",
+    "predicate": "(((n * (n-1) * (n+1) * (pow(n, 2)+1)) % 10) == 0)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 40,
+    "parents": [0],
+    "claim": "For all single digits d (0-9), d^5 ≡ d (mod 10).",
+    "predicate": "all(pow(d, 5, 10) == (d % 10) for d in range(10))",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [22, 37],
+    "claim": "For all integers n, n^m ≡ n (mod 10) whenever m is odd and m ≥ 5.",
+    "predicate": "all(pow(n, 2*k+5, 10) == (n % 10) for k in range(8))",
+    "confidence": 0.72,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [4],
+    "claim": "For all integers n, the order of n modulo 5 divides 4 when gcd(n,5)=1.",
+    "predicate": "((gcd(n, 5) != 1) or any(pow(n, d, 5) == 1 for d in [1, 2, 4]))",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [42],
+    "claim": "For all integers n coprime to 5, either n^2 ≡ 1 (mod 5) or n^4 ≡ 1 (mod 5).",
+    "predicate": "((gcd(n, 5) != 1) or (pow(n, 2, 5) == 1) or (pow(n, 4, 5) == 1))",
+    "confidence": 0.94,
+    "is_terminal": true
+  },
+  {
+    "node_id": 44,
+    "parents": [26],
+    "claim": "For all integers n, n^20 ≡ n^2 (mod 10).",
+    "predicate": "(pow(n, 20, 10) == pow(n, 2, 10))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [0, 44],
+    "claim": "For all integers n, n^10 - n^2 is divisible by 10.",
+    "predicate": "(((pow(n, 10) - pow(n, 2)) % 10) == 0)",
+    "confidence": 0.86,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [17, 30],
+    "claim": "For all integers n, the prime factorization of n^5 - n includes at least one factor of 2 and one of 5.",
+    "predicate": "(((pow(n, 5) - n) % 2 == 0) and ((pow(n, 5) - n) % 5 == 0))",
+    "confidence": 0.97,
+    "is_terminal": true
+  },
+  {
+    "node_id": 47,
+    "parents": [41],
+    "claim": "For all integers n, n^(4k+1) ≡ n (mod 10) for all non-negative integers k.",
+    "predicate": "all(pow(n, 4*k+1, 10) == (n % 10) for k in range(6))",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [47],
+    "claim": "For all integers n, the exponents {1, 5, 9, 13, 17, ...} all yield n^e ≡ n (mod 10).",
+    "predicate": "all(pow(n, 4*k+1, 10) == (n % 10) for k in range(10))",
+    "confidence": 0.75,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [3, 25, 35, 39, 46],
+    "claim": "The Carmichael function λ(10)=4 ensures n^5 ≡ n (mod 10) via the combined properties of n^5 ≡ n (mod 2) and (mod 5).",
+    "predicate": "(pow(n, 5, 10) == (n % 10))",
+    "confidence": 0.88,
+    "is_terminal": true
+  }
+]

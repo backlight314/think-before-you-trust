@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "(n <= 0) or ((tau(abs(n)) % 2 != 0) == (round(abs(n)**0.5)**2 == abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For any prime number n, the number of divisors tau(n) is even.",
+    "predicate": "(not is_prime(abs(n))) or (tau(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "The number of divisors of n^2 is always odd for any positive integer n.",
+    "predicate": "(n == 0) or (tau(abs(n)**2) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [],
+    "claim": "For all integers n >= 1, the sum of divisors sigma(n) is odd if and only if n is a perfect square or twice a perfect square.",
+    "predicate": "(n <= 0) or ((sigma(abs(n)) % 2 != 0) == (round(abs(n)**0.5)**2 == abs(n) or (abs(n) % 2 == 0 and round((abs(n)//2)**0.5)**2 == (abs(n)//2))))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [0, 3],
+    "claim": "If n is an odd integer, the sum of its divisors sigma(n) has the same parity as the number of its divisors tau(n).",
+    "predicate": "(abs(n) % 2 == 0) or (sigma(abs(n)) % 2 == tau(abs(n)) % 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [1],
+    "claim": "For any prime n, the number of divisors tau(n) is exactly 2.",
+    "predicate": "(not is_prime(abs(n))) or (tau(abs(n)) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [3, 5],
+    "claim": "For any prime n, the sum of divisors sigma(n) is n + 1.",
+    "predicate": "(not is_prime(abs(n))) or (sigma(abs(n)) == abs(n) + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [5, 6],
+    "claim": "For any prime n, the product of the number of divisors and the sum of divisors is 2(n + 1).",
+    "predicate": "(not is_prime(abs(n))) or (tau(abs(n)) * sigma(abs(n)) == 2 * (abs(n) + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [],
+    "claim": "For all integers n, n^2 + n is always an even integer.",
+    "predicate": "(n**2 + n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [6, 8],
+    "claim": "For any odd prime n, the sum of divisors sigma(n) is even.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) % 2 != 0)) or (sigma(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [2, 5],
+    "claim": "For any prime n, the number of divisors of its square tau(n^2) is exactly 3.",
+    "predicate": "(not is_prime(abs(n))) or (tau(abs(n)**2) == 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [6],
+    "claim": "For any prime n, the sum of divisors of its square sigma(n^2) is n^2 + n + 1.",
+    "predicate": "(not is_prime(abs(n))) or (sigma(abs(n)**2) == abs(n)**2 + abs(n) + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [8, 11],
+    "claim": "For all prime integers n, sigma(n^2) is always an odd integer.",
+    "predicate": "(not is_prime(abs(n))) or (sigma(abs(n)**2) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [10, 11, 12],
+    "claim": "For any prime n, the sum of sigma(n^2) and tau(n^2) is even.",
+    "predicate": "(not is_prime(abs(n))) or ((sigma(abs(n)**2) + tau(abs(n)**2)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [],
+    "claim": "For any integer n > 1, Euler's totient phi(n) is even.",
+    "predicate": "(abs(n) <= 2) or (phi(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [14],
+    "claim": "If n > 2, then phi(n) is divisible by 2.",
+    "predicate": "(abs(n) <= 2) or (phi(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [6, 14],
+    "claim": "For any prime n, the product phi(n) * sigma(n) is n^2 - 1.",
+    "predicate": "(not is_prime(abs(n))) or (phi(abs(n)) * sigma(abs(n)) == abs(n)**2 - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [16],
+    "claim": "For all odd primes n, phi(n) * sigma(n) is divisible by 8.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) % 2 != 0)) or ((phi(abs(n)) * sigma(abs(n))) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [5, 10],
+    "claim": "For any prime n, the number of divisors of n^k is k + 1.",
+    "predicate": "(not is_prime(abs(n))) or all(tau(abs(n)**k) == k + 1 for k in range(1, 5))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [0, 18],
+    "claim": "For any prime n, n^k is a perfect square if and only if k is even.",
+    "predicate": "(not is_prime(abs(n))) or all((round((abs(n)**k)**0.5)**2 == abs(n)**k) == (k % 2 == 0) for k in range(1, 6))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [0],
+    "claim": "The product of divisors of n is n^(tau(n)/2).",
+    "predicate": "(n <= 0) or (round(pow(abs(n), tau(abs(n))/2.0))**2 == pow(abs(n), tau(abs(n))) )",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [0, 20],
+    "claim": "The product of divisors of n is a perfect square if and only if n is a perfect square or tau(n) is a multiple of 4.",
+    "predicate": "(n <= 0) or ( (int(pow(abs(n), tau(abs(n))/2.0))**2 == pow(abs(n), tau(abs(n)))) )",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [1],
+    "claim": "For any composite n, tau(n) >= 3.",
+    "predicate": "(abs(n) <= 1 or is_prime(abs(n))) or (tau(abs(n)) >= 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [0, 22],
+    "claim": "If n is composite and not a perfect square, then tau(n) is an even integer at least 4.",
+    "predicate": "(abs(n) <= 1 or is_prime(abs(n)) or round(abs(n)**0.5)**2 == abs(n)) or (tau(abs(n)) >= 4 and tau(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [5, 14],
+    "claim": "For any prime n, the Euler totient phi(n) is exactly n - 1.",
+    "predicate": "(not is_prime(abs(n))) or (phi(abs(n)) == abs(n) - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [5, 24],
+    "claim": "For any prime n, the sum phi(n) + tau(n) is n + 1.",
+    "predicate": "(not is_prime(abs(n))) or (phi(abs(n)) + tau(abs(n)) == abs(n) + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [6, 25],
+    "claim": "For any prime n, phi(n) + tau(n) = sigma(n).",
+    "predicate": "(not is_prime(abs(n))) or (phi(abs(n)) + tau(abs(n)) == sigma(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [26],
+    "claim": "The equation phi(n) + tau(n) = sigma(n) holds for n in [2, 500] if and only if n is prime.",
+    "predicate": "(abs(n) <= 1) or ((phi(abs(n)) + tau(abs(n)) == sigma(abs(n))) == is_prime(abs(n)))",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [],
+    "claim": "For any positive integer n, phi(n) * sigma(n) <= n^2 - 1 with equality if and only if n is prime.",
+    "predicate": "(n <= 1) or (phi(abs(n)) * sigma(abs(n)) <= abs(n)**2 - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [16, 28],
+    "claim": "The product phi(n) * sigma(n) is never equal to n^2 for n > 1.",
+    "predicate": "(abs(n) <= 1) or (phi(abs(n)) * sigma(abs(n)) != abs(n)**2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [0],
+    "claim": "If n is a power of 2, n = 2^k, then tau(n) = k + 1.",
+    "predicate": "(n <= 0 or (abs(n) & (abs(n)-1) != 0)) or (tau(abs(n)) == vp(abs(n), 2) + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [3, 30],
+    "claim": "If n = 2^k, then sigma(n) = 2^{k+1} - 1.",
+    "predicate": "(n <= 0 or (abs(n) & (abs(n)-1) != 0)) or (sigma(abs(n)) == 2**(vp(abs(n), 2) + 1) - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [30, 31],
+    "claim": "For any power of 2, n = 2^k, sigma(n) = 2n - 1.",
+    "predicate": "(n <= 0 or (abs(n) & (abs(n)-1) != 0)) or (sigma(abs(n)) == 2 * abs(n) - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [31, 32],
+    "claim": "The sum of divisors of a power of 2 is always an odd integer.",
+    "predicate": "(n <= 0 or (abs(n) & (abs(n)-1) != 0)) or (sigma(abs(n)) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [0],
+    "claim": "For any positive integer n, tau(n) <= sigma(n).",
+    "predicate": "(n <= 0) or (tau(abs(n)) <= sigma(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [14, 34],
+    "claim": "For any n > 1, phi(n) < sigma(n).",
+    "predicate": "(abs(n) <= 1) or (phi(abs(n)) < sigma(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [0],
+    "claim": "For any positive integer n, tau(n) <= n.",
+    "predicate": "(n <= 0) or (tau(abs(n)) <= abs(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [5, 36],
+    "claim": "For all prime numbers n, tau(n) is strictly less than n.",
+    "predicate": "(not is_prime(abs(n))) or (tau(abs(n)) < abs(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [],
+    "claim": "Any two consecutive integers n and n+1 are relatively prime.",
+    "predicate": "gcd(abs(n), abs(n) + 1) == 1",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [14, 38],
+    "claim": "The Euler totient function is multiplicative for relatively prime integers: phi(n(n+1)) = phi(n) * phi(n+1).",
+    "predicate": "(abs(n) == 0) or (phi(abs(n) * (abs(n) + 1)) == phi(abs(n)) * phi(abs(n) + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [14, 39],
+    "claim": "For n > 2, phi(n(n+1)) is always divisible by 4.",
+    "predicate": "(abs(n) <= 2) or (phi(abs(n) * (abs(n) + 1)) % 4 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [0, 38],
+    "claim": "The number of divisors function is multiplicative for relatively prime integers: tau(n(n+1)) = tau(n) * tau(n+1).",
+    "predicate": "(abs(n) == 0) or (tau(abs(n) * (abs(n) + 1)) == tau(abs(n)) * tau(abs(n) + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [1, 41],
+    "claim": "For any integer n > 1, the number of divisors tau(n(n+1)) is an even integer.",
+    "predicate": "(abs(n) <= 1) or (tau(abs(n) * (abs(n) + 1)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [0, 41, 42],
+    "claim": "The product n(n+1) is never a perfect square for n >= 1.",
+    "predicate": "(n <= 0) or (round((abs(n)*(abs(n)+1))**0.5)**2 != abs(n)*(abs(n)+1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [],
+    "claim": "The greatest common divisor of n and n+2 is either 1 or 2.",
+    "predicate": "gcd(abs(n), abs(n) + 2) in [1, 2]",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [14, 44],
+    "claim": "If n is odd, phi(n(n+2)) = phi(n) * phi(n+2).",
+    "predicate": "(abs(n) % 2 == 0) or (phi(abs(n) * (abs(n) + 2)) == phi(abs(n)) * phi(abs(n) + 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [5, 45],
+    "claim": "For any odd prime n such that n+2 is also prime, phi(n(n+2)) = (n-1)(n+1) = n^2 - 1.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime(abs(n) + 2) and abs(n) % 2 != 0)) or (phi(abs(n) * (abs(n) + 2)) == abs(n)**2 - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [0, 44, 45],
+    "claim": "For twin primes n and n+2, the number of divisors tau(n(n+2)) is exactly 4.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime(abs(n) + 2))) or (tau(abs(n) * (abs(n) + 2)) == 4)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [46, 47],
+    "claim": "For twin primes n and n+2, phi(n(n+2)) + tau(n(n+2)) = n^2 + 3.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime(abs(n) + 2))) or (phi(abs(n) * (abs(n) + 2)) + tau(abs(n) * (abs(n) + 2)) == abs(n)**2 + 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [26, 46],
+    "claim": "For any prime n, the divisor sum of its square sigma(n^2) is phi(n) + sigma(n) + n^2.",
+    "predicate": "(not is_prime(abs(n))) or (sigma(abs(n)**2) == phi(abs(n)) + sigma(abs(n)) + abs(n)**2)",
+    "confidence": 1.0,
+    "is_terminal": true
+  }
+]

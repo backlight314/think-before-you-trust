@@ -1,0 +1,620 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 2, Euler's totient phi(n) is even.",
+    "predicate": "(n > 2) and (phi(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, phi(n) is divisible by 2 but not by 4 unless n is a power of 2.",
+    "predicate": "(n > 2) and ((phi(n) % 4 != 0) or ( (n & (n - 1)) == 0 ))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, phi(n) is even and phi(n) >= sqrt(n).",
+    "predicate": "(n > 2) and (phi(n) % 2 == 0) and (phi(n) >= int(n**0.5))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n > 2, phi(n) is divisible by 2 and phi(n)/2 is odd unless n is a power of 2.",
+    "predicate": "(n > 2) and ((phi(n) // 2) % 2 == 1 or ( (n & (n - 1)) == 0 ))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, phi(n) is even and tau(n) is odd iff n is a square.",
+    "predicate": "(n > 2) and ((tau(n) % 2 == 1) == (int(n**0.5)**2 == n))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n > 2, if tau(n) is odd then phi(n) divides sigma(n).",
+    "predicate": "(n > 2) and ((tau(n) % 2 == 1) <= (sigma(n) % phi(n) == 0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      3,
+      5
+    ],
+    "claim": "For all integers n > 2, phi(n) divides sigma(n) whenever n is a power of a prime.",
+    "predicate": "(n > 2) and ((int(n**0.5)**2 == n) <= (sigma(n) % phi(n) == 0))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n > 2, phi(n) is even and phi(n) divides n! for n > 5.",
+    "predicate": "(n > 5) and (phi(n) % 2 == 0) and (fact(n) % phi(n) == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      6,
+      7
+    ],
+    "claim": "For all integers n > 2, if phi(n) divides n! then phi(n) is even.",
+    "predicate": "(n > 2) and ((fact(n) % phi(n) == 0) <= (phi(n) % 2 == 0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n > 2, phi(n) is even and phi(n) <= n - sqrt(n).",
+    "predicate": "(n > 2) and (phi(n) % 2 == 0) and (phi(n) <= n - int(n**0.5))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n > 2, phi(n) <= n - sqrt(n) implies tau(n) >= 4.",
+    "predicate": "(n > 2) and ((phi(n) <= n - int(n**0.5)) <= (tau(n) >= 4))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      4,
+      10
+    ],
+    "claim": "For all integers n > 2, if tau(n) >= 4 and tau(n) is odd then phi(n) is a multiple of 6.",
+    "predicate": "(n > 2) and ((tau(n) >= 4 and tau(n) % 2 == 1) <= (phi(n) % 6 == 0))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      1,
+      11
+    ],
+    "claim": "For all integers n > 2, if phi(n) is a multiple of 6 then n is composite.",
+    "predicate": "(n > 2) and ((phi(n) % 6 == 0) <= (not is_prime(n)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, phi(n) is even and sigma(n) is odd iff n is a power of 2.",
+    "predicate": "(n > 2) and ((sigma(n) % 2 == 1) == ((n & (n - 1)) == 0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is odd then phi(n) is a divisor of 2^(vp(n,2)).",
+    "predicate": "(n > 2) and ((sigma(n) % 2 == 1) <= (phi(n) % (1 << vp(n,2)) == 0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      8,
+      14
+    ],
+    "claim": "For all integers n > 2, if phi(n) divides n! and sigma(n) is odd then n is a power of 2.",
+    "predicate": "(n > 2) and ((fact(n) % phi(n) == 0 and sigma(n) % 2 == 1) <= ((n & (n - 1)) == 0))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n > 2, if tau(n) is odd then sigma(n) is even.",
+    "predicate": "(n > 2) and ((tau(n) % 2 == 1) <= (sigma(n) % 2 == 0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is even then n is not a power of 2.",
+    "predicate": "(n > 2) and ((sigma(n) % 2 == 0) <= ((n & (n - 1)) != 0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      12,
+      17
+    ],
+    "claim": "For all integers n > 2, if n is composite and sigma(n) is even then phi(n) divides n!.",
+    "predicate": "(n > 2) and ((not is_prime(n) and sigma(n) % 2 == 0) <= (fact(n) % phi(n) == 0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n > 2, if phi(n) divides n! and sigma(n) is odd then phi(n) = 2.",
+    "predicate": "(n > 2) and ((fact(n) % phi(n) == 0 and sigma(n) % 2 == 1) <= (phi(n) == 2))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      1,
+      19
+    ],
+    "claim": "For all integers n > 2, if phi(n)=2 then n is a prime or n=4.",
+    "predicate": "(n > 2) and ((phi(n) == 2) <= (is_prime(n) or n == 4))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, phi(n) is divisible by 2 and sigma(n) is divisible by 3 iff n \u2261 1 (mod 3).",
+    "predicate": "(n > 2) and (((sigma(n) % 3 == 0) == (n % 3 == 1)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n > 2, if n \u2261 1 (mod 3) then phi(n) is divisible by 6.",
+    "predicate": "(n > 2) and ((n % 3 == 1) <= (phi(n) % 6 == 0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n > 2, phi(n) divisible by 6 implies n is composite.",
+    "predicate": "(n > 2) and ((phi(n) % 6 == 0) <= (not is_prime(n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23,
+      9
+    ],
+    "claim": "For all integers n > 2, if phi(n) is a multiple of 6 and phi(n) <= n - sqrt(n) then n has at least three distinct prime factors.",
+    "predicate": "(n > 2) and ((phi(n) % 6 == 0 and phi(n) <= n - int(n**0.5)) <= (len(set(factors(n)))) >= 3)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n > 2, if n has exactly three distinct prime factors then phi(n) is divisible by 6.",
+    "predicate": "(n > 2) and ((len(set(factors(n))) == 3) <= (phi(n) % 6 == 0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      6,
+      25
+    ],
+    "claim": "For all integers n > 2, if phi(n) is divisible by 6 and n has exactly three distinct prime factors then sigma(n) is divisible by 12.",
+    "predicate": "(n > 2) and ((phi(n) % 6 == 0 and len(set(factors(n))) == 3) <= (sigma(n) % 12 == 0))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      5,
+      26
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is divisible by 12 then phi(n) divides sigma(n).",
+    "predicate": "(n > 2) and ((sigma(n) % 12 == 0) <= (sigma(n) % phi(n) == 0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      12,
+      27
+    ],
+    "claim": "For all integers n > 2, if n is composite and phi(n) divides sigma(n) then n is not prime.",
+    "predicate": "(n > 2) and ((not is_prime(n) and sigma(n) % phi(n) == 0) <= (not is_prime(n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      15,
+      28
+    ],
+    "claim": "For all integers n > 2, if phi(n) divides n! and sigma(n) is odd then n is a prime power.",
+    "predicate": "(n > 2) and ((fact(n) % phi(n) == 0 and sigma(n) % 2 == 1) <= (len(set(factors(n))) == 1))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      20,
+      29
+    ],
+    "claim": "For all integers n > 2, if phi(n)=2 and n is a prime power then n is 4 or a Fermat prime.",
+    "predicate": "(n > 2) and ((phi(n) == 2 and len(set(factors(n))) == 1) <= (n == 4 or is_fermat_prime(n)))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      18,
+      30
+    ],
+    "claim": "For all integers n > 2, if phi(n) divides n! and sigma(n) is even then n is not a Fermat prime.",
+    "predicate": "(n > 2) and ((fact(n) % phi(n) == 0 and sigma(n) % 2 == 0) <= (not is_fermat_prime(n)))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      21,
+      31
+    ],
+    "claim": "For all integers n > 2, if n \u2261 1 (mod 3) and sigma(n) is even then phi(n) is divisible by 12.",
+    "predicate": "(n > 2) and ((n % 3 == 1 and sigma(n) % 2 == 0) <= (phi(n) % 12 == 0))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      32
+    ],
+    "claim": "For all integers n > 2, if phi(n) is divisible by 12 then n has at least two distinct prime factors \u2261 1 (mod 4).",
+    "predicate": "(n > 2) and ((phi(n) % 12 == 0) <= (len([p for p in set(factors(n)) if p % 4 == 1]) >= 2))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33
+    ],
+    "claim": "For all integers n > 2, if n has at least two distinct primes \u2261 1 (mod 4) then sigma(n) is divisible by 8.",
+    "predicate": "(n > 2) and ((len([p for p in set(factors(n)) if p % 4 == 1]) >= 2) <= (sigma(n) % 8 == 0))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is divisible by 8 then phi(n) is divisible by 4.",
+    "predicate": "(n > 2) and ((sigma(n) % 8 == 0) <= (phi(n) % 4 == 0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35,
+      28
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is divisible by 8 and phi(n) divides sigma(n) then n is not prime.",
+    "predicate": "(n > 2) and ((sigma(n) % 8 == 0 and sigma(n) % phi(n) == 0) <= (not is_prime(n)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is divisible by 8 and n is composite then n has at least one prime factor \u2261 3 (mod 4).",
+    "predicate": "(n > 2) and ((sigma(n) % 8 == 0 and not is_prime(n)) <= (any(p % 4 == 3 for p in set(factors(n)))))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37
+    ],
+    "claim": "For all integers n > 2, if n has a prime factor \u2261 3 (mod 4) then phi(n) is odd.",
+    "predicate": "(n > 2) and (any(p % 4 == 3 for p in set(factors(n))) <= (phi(n) % 2 == 1))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38
+    ],
+    "claim": "For all integers n > 2, if phi(n) is odd then n is a square of a prime \u2261 3 (mod 4).",
+    "predicate": "(n > 2) and ((phi(n) % 2 == 1) <= (int(n**0.5)**2 == n and is_prime(int(n**0.5)) and int(n**0.5) % 4 == 3))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39
+    ],
+    "claim": "For all integers n > 2, if n = p^2 with p \u2261 3 (mod 4) then sigma(n) is divisible by 4.",
+    "predicate": "(n > 2) and (int(n**0.5)**2 == n and is_prime(int(n**0.5)) and int(n**0.5) % 4 == 3) <= (sigma(n) % 4 == 0)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40,
+      31
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is divisible by 4 and phi(n) divides n! then n is a power of 2 or a square of a prime \u2261 3 (mod 4).",
+    "predicate": "(n > 2) and ((sigma(n) % 4 == 0 and fact(n) % phi(n) == 0) <= ((n & (n - 1)) == 0 or (int(n**0.5)**2 == n and is_prime(int(n**0.5)) and int(n**0.5) % 4 == 3)))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41
+    ],
+    "claim": "For all integers n > 2, if n is a power of 2 then phi(n) divides sigma(n).",
+    "predicate": "(n > 2) and ((n & (n - 1)) == 0) <= (sigma(n) % phi(n) == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42
+    ],
+    "claim": "For all integers n > 2, if n is a power of 2 then sigma(n) is odd.",
+    "predicate": "(n > 2) and ((n & (n - 1)) == 0) <= (sigma(n) % 2 == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      22
+    ],
+    "claim": "For all integers n > 2, if n \u2261 1 (mod 3) and n is a power of 2 then 3 divides sigma(n).",
+    "predicate": "(n > 2) and ((n % 3 == 1 and (n & (n - 1)) == 0) <= (sigma(n) % 3 == 0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44
+    ],
+    "claim": "For all integers n > 2, if 3 divides sigma(n) and n is a power of 2 then n \u2261 4 (mod 8).",
+    "predicate": "(n > 2) and ((sigma(n) % 3 == 0 and (n & (n - 1)) == 0) <= (n % 8 == 4))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45
+    ],
+    "claim": "For all integers n > 2, if n \u2261 4 (mod 8) and n is a power of 2 then sigma(n) is divisible by 12.",
+    "predicate": "(n > 2) and ((n % 8 == 4 and (n & (n - 1)) == 0) <= (sigma(n) % 12 == 0))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      27
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is divisible by 12 and phi(n) divides sigma(n) then n is a power of 2.",
+    "predicate": "(n > 2) and ((sigma(n) % 12 == 0 and sigma(n) % phi(n) == 0) <= ((n & (n - 1)) == 0))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47
+    ],
+    "claim": "For all integers n > 2, if phi(n) divides sigma(n) and n is not a power of 2 then sigma(n) is not divisible by 12.",
+    "predicate": "(n > 2) and ((sigma(n) % phi(n) == 0 and (n & (n - 1)) != 0) <= (sigma(n) % 12 != 0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48
+    ],
+    "claim": "For all integers n > 2, if sigma(n) is divisible by 12 then phi(n) is even.",
+    "predicate": "(n > 2) and ((sigma(n) % 12 == 0) <= (phi(n) % 2 == 0))",
+    "confidence": 0.5,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

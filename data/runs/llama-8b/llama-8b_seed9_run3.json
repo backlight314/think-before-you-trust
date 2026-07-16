@@ -1,0 +1,493 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 1, with equality exactly when n is prime.",
+    "predicate": "(n > 1) and ((sigma(n) >= n + 1) or (is_prime(n) and (sigma(n) == n + 1)))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, sigma(n) is at least n + 1.",
+    "predicate": "(n > 1) and (sigma(n) >= n + 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime then sigma(n) = n + 1.",
+    "predicate": "(n > 1) and (is_prime(n) or (sigma(n) == n + 1))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all n > 1, if n is composite then sigma(n) > n + 1.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (sigma(n) > n + 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      2
+    ],
+    "claim": "For all primes p, if n = p then sigma(n) = p + 1.",
+    "predicate": "(is_prime(n) and (n == 2)) or (sigma(n) == n + 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all primes p, if n = p^k then sigma(n) = p^(k+1) - p.",
+    "predicate": "(is_prime(n) and (n == 2**2)) or ((n == 3**2) and (sigma(n) == 13))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "For all primes p, if n = p^k then sigma(n) = p^(k+1) - p.",
+    "predicate": "(is_prime(n) and ((n == 2**2) or (n == 2**3)) and (sigma(n) == 8 - 2)) or ((n == 3**2) and (sigma(n) == 13))",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      5
+    ],
+    "claim": "For all primes p, if n = p * q then sigma(n) = (p^2 - 1) * (q^2 - 1).",
+    "predicate": "(is_prime(n) and (n == 2*3)) and ((sigma(n) == 31))",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "For all primes p, q, if n = p * q then sigma(n) = (p^2 - 1) * (q^2 - 1).",
+    "predicate": "(is_prime(n) and ((n == 2*3) or (n == 3*5))) and ((sigma(n) == 31) or (sigma(n) == 124))",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7
+    ],
+    "claim": "For all primes p, q, if n = p * q then sigma(n) > (p^2 - 1) * (q^2 - 1).",
+    "predicate": "(is_prime(n) and (n == 2*3)) and ((sigma(n) > 31))",
+    "confidence": 0.95,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all primes p, q, if n = p * q then sigma(n) > (p^2 - 1) * (q^2 - 1).",
+    "predicate": "(is_prime(n) and ((n == 2*3) or (n == 3*5))) and ((sigma(n) > 31) or (sigma(n) > 124))",
+    "confidence": 0.99,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      3
+    ],
+    "claim": "For all n > 1, if n is composite then tau(n) > 2.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (tau(n) > 2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "For all n > 1, if n is composite then phi(n) < n.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (phi(n) < n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12
+    ],
+    "claim": "For all n > 1, if n is composite then n is not prime-power.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (not ((is_prime(n) and (n == 2**2)) or (is_prime(n) and (n == 3**2)) or (is_prime(n) and (n == 5**2))))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "For all n > 1, if n is composite then n has at least two distinct prime factors.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (vp(n,2) + vp(n,3) > 0 and vp(n,2) + vp(n,3) >= 2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "For all n > 1, if n is composite then n is not a prime squared.",
+    "predicate": "(n > 1) and (not is_prime(n)) and ((n != 2**2) and (n != 3**2) and (n != 5**2))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15
+    ],
+    "claim": "For all n > 1, if n is composite then n is not a prime to the power of 1.",
+    "predicate": "(n > 1) and (not is_prime(n)) and ((n != 2) and (n != 3) and (n != 5))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16
+    ],
+    "claim": "For all n > 1, if n is composite then n has at least two distinct prime factors.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (vp(n,2) + vp(n,3) > 0 and vp(n,2) + vp(n,3) >= 2)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      14
+    ],
+    "claim": "For all n > 1, if n is composite then the smallest prime factor of n is greater than 1.",
+    "predicate": "(n > 1) and (not is_prime(n)) and ((vp(n,2) == 0) or (vp(n,3) == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "For all n > 1, if n is composite then the smallest prime factor of n is at least 2.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (vp(n,2) > 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19
+    ],
+    "claim": "For all n > 1, if n is composite then the smallest prime factor of n is exactly 2.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (vp(n,2) == 1)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      18
+    ],
+    "claim": "For all n > 1, if n is composite then the smallest prime factor of n is at least 3.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (vp(n,3) > 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all n > 1, if n is composite then the smallest prime factor of n is exactly 3.",
+    "predicate": "(n > 1) and (not is_prime(n)) and (vp(n,3) == 1)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      15
+    ],
+    "claim": "For all n > 1, if n is not a prime squared then n is not prime-power.",
+    "predicate": "(n > 1) and ((not is_prime(n)) or ((n != 2**2) and (n != 3**2) and (n != 5**2))) and ((not is_prime(n)) or (n == 2**3))",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      15
+    ],
+    "claim": "For all n > 1, if n is not a prime to the power of 1 then n is not prime-power.",
+    "predicate": "(n > 1) and ((n != 2) and (n != 3) and (n != 5)) and ((n != 2**2) and (n != 3**2) and (n != 5**2))",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      2
+    ],
+    "claim": "For all primes p, if n = p then tau(n) = 2.",
+    "predicate": "(is_prime(n) and (n == 2)) or (tau(n) == 2)",
+    "confidence": 0.7,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all primes p, if n = p then sigma(n) = p + 1.",
+    "predicate": "(is_prime(n) and (n == 2)) or (sigma(n) == n + 1)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25
+    ],
+    "claim": "For all primes p, if n = p then phi(n) = p - 1.",
+    "predicate": "(is_prime(n) and (n == 2)) or (phi(n) == n - 1)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      25
+    ],
+    "claim": "For all primes p, if n = p then vp(n,p) = 1.",
+    "predicate": "(is_prime(n) and (n == 2)) or (vp(n,p) == 1)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      25
+    ],
+    "claim": "For all primes p, if n = p then gcd(n-1, n+1) = 2.",
+    "predicate": "(is_prime(n) and (n == 2)) or (gcd(n-1, n+1) == 2)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      26
+    ],
+    "claim": "For all primes p, if n = p then tau(n) = 2.",
+    "predicate": "(is_prime(n) and (n == 2)) or (tau(n) == 2)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      27
+    ],
+    "claim": "For all primes p, if n = p then phi(n) = p - 1.",
+    "predicate": "(is_prime(n) and (n == 2)) or (phi(n) == n - 1)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      28
+    ],
+    "claim": "For all primes p, if n = p then vp(n,p) = 1.",
+    "predicate": "(is_prime(n) and (n == 2)) or (vp(n,p) == 1)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      29
+    ],
+    "claim": "For all primes p, if n = p then gcd(n-1, n+1) = 2.",
+    "predicate": "(is_prime(n) and (n == 2)) or (gcd(n-1, n+1) == 2)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      27
+    ],
+    "claim": "For all n > 1, if n is prime then phi(n) = n - 1.",
+    "predicate": "(n > 1) and (is_prime(n)) and (phi(n) == n - 1)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34
+    ],
+    "claim": "For all n > 1, if n is prime then tau(n) = 2.",
+    "predicate": "(n > 1) and (is_prime(n)) and (tau(n) == 2)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      34
+    ],
+    "claim": "For all n > 1, if n is prime then vp(n, n-1) = 1.",
+    "predicate": "(n > 1) and (is_prime(n)) and (vp(n, n - 1) == 1)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      34
+    ],
+    "claim": "For all n > 1, if n is prime then vp(n, n+1) = 1.",
+    "predicate": "(n > 1) and (is_prime(n)) and (vp(n, n + 1) == 1)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      34
+    ],
+    "claim": "For all n > 1, if n is prime then gcd(n-1, n+1) = 2.",
+    "predicate": "(n > 1) and (is_prime(n)) and (gcd(n-1, n+1) == 2)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      35
+    ],
+    "claim": "For all n > 1, if n is prime then sigma(n) = n + 1.",
+    "predicate": "(n > 1) and (is_prime(n)) and (sigma(n) == n + 1)",
+    "confidence": 0.8,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      38
+    ],
+    "claim": "For all n > 1, if n is prime then gcd(n-1, n+1) = 2.",
+    "predicate": "(n > 1) and (is_prime(n)) and (gcd(n-1, n+1) == 2)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

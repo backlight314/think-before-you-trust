@@ -1,0 +1,449 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) <= 2",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) is either 1 or 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) in [1, 2]",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n, if n is odd then gcd(n^2 + 1, n + 1) = 2.",
+    "predicate": "(n % 2 == 0) or (gcd(n**2 + 1, n + 1) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n, if n is even then gcd(n^2 + 1, n + 1) = 1.",
+    "predicate": "(n % 2 == 1) or (gcd(n**2 + 1, n + 1) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides gcd(n^3 + 1, n + 1).",
+    "predicate": "gcd(n**2 + 1, n + 1) divides gcd(n**3 + 1, n + 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all odd integers n, n^2 + 1 is divisible by 2 but not by 4.",
+    "predicate": "(n % 2 == 0) or ((n**2 + 1) % 2 == 0 and (n**2 + 1) % 4 != 0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0,
+      3
+    ],
+    "claim": "For all even integers n, n + 1 is odd and coprime to n^2 + 1.",
+    "predicate": "(n % 2 == 1) or (gcd(n**2 + 1, n + 1) == 1 and (n + 1) % 2 == 1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n - 1) divides 2.",
+    "predicate": "gcd(n**2 + 1, n - 1) <= 2",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n - 1) is either 1 or 2.",
+    "predicate": "gcd(n**2 + 1, n - 1) in [1, 2]",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7,
+      0
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) and gcd(n^2 + 1, n - 1) are never both 2.",
+    "predicate": "not (gcd(n**2 + 1, n + 1) == 2 and gcd(n**2 + 1, n - 1) == 2)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      2,
+      8
+    ],
+    "claim": "For all odd n, gcd(n^2 + 1, n - 1) = 1.",
+    "predicate": "(n % 2 == 0) or (gcd(n**2 + 1, n - 1) == 1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      3,
+      7
+    ],
+    "claim": "For all even n, gcd(n^2 + 1, n - 1) = 2.",
+    "predicate": "(n % 2 == 1) or (gcd(n**2 + 1, n - 1) == 2)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      7
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n^2 - 1) divides 2.",
+    "predicate": "gcd(n**2 + 1, n**2 - 1) <= 2",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n^2 - 1) = 1 if n is even, 2 if n is odd.",
+    "predicate": "(n % 2 == 0 and gcd(n**2 + 1, n**2 - 1) == 1) or (n % 2 == 1 and gcd(n**2 + 1, n**2 - 1) == 2)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      1,
+      13
+    ],
+    "claim": "For all integers n, if gcd(n^2 + 1, n + 1) = 2 then gcd(n^2 + 1, n^2 - 1) = 2.",
+    "predicate": "(gcd(n**2 + 1, n + 1) != 2) or (gcd(n**2 + 1, n**2 - 1) == 2)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      2,
+      13
+    ],
+    "claim": "For all odd integers n, n^2 + 1 \u2261 2 mod 4 and n^2 - 1 \u2261 0 mod 4.",
+    "predicate": "(n % 2 == 0) or ((n**2 + 1) % 4 == 2 and (n**2 - 1) % 4 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      3,
+      13
+    ],
+    "claim": "For all even integers n, n^2 + 1 \u2261 1 mod 4 and n^2 - 1 \u2261 3 mod 4.",
+    "predicate": "(n % 2 == 1) or ((n**2 + 1) % 4 == 1 and (n**2 - 1) % 4 == 3)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      15
+    ],
+    "claim": "For all odd n, n^2 + 1 is twice an odd number.",
+    "predicate": "(n % 2 == 0) or ((n**2 + 1) // 2 % 2 == 1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      3,
+      16
+    ],
+    "claim": "For all even n, n^2 + 1 is congruent to 1 modulo 8.",
+    "predicate": "(n % 2 == 1) or ((n**2 + 1) % 8 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18,
+      16
+    ],
+    "claim": "For all even n, n^2 - 1 is divisible by 8.",
+    "predicate": "(n % 2 == 1) or ((n**2 - 1) % 8 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19,
+      18
+    ],
+    "claim": "For all even n, (n^2 - 1) * (n^2 + 1) is divisible by 64.",
+    "predicate": "(n % 2 == 1) or ((n**4 - 1) % 64 == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      17
+    ],
+    "claim": "For all odd n, (n^2 + 1) / 2 is coprime to n + 1.",
+    "predicate": "(n % 2 == 0) or (gcd((n**2 + 1) // 2, n + 1) == 1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      1,
+      7
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n^2 - 1) divides gcd(n^2 + 1, n + 1) * gcd(n^2 + 1, n - 1).",
+    "predicate": "gcd(n**2 + 1, n**2 - 1) divides gcd(n**2 + 1, n + 1) * gcd(n**2 + 1, n - 1)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      2,
+      10
+    ],
+    "claim": "For all odd n, phi(n + 1) is even.",
+    "predicate": "(n % 2 == 0) or (phi(n + 1) % 2 == 0)",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      3,
+      11
+    ],
+    "claim": "For all even n, phi(n - 1) is odd if and only if n - 1 is a power of 2.",
+    "predicate": "(n % 2 == 1) or (phi(n - 1) % 2 == 1) == (n - 1 > 0 and (n - 1) & (n - 2) == 0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      17,
+      23
+    ],
+    "claim": "For all odd n, (n^2 + 1) / 2 and n + 1 are coprime, and their product's totient is multiplicative.",
+    "predicate": "(n % 2 == 0) or (gcd((n**2 + 1) // 2, n + 1) == 1 and phi((n**2 + 1) // 2 * (n + 1)) == phi((n**2 + 1) // 2) * phi(n + 1))",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      18,
+      19
+    ],
+    "claim": "For all even n, the product (n^2 - 1)(n^2 + 1) is divisible by 192.",
+    "predicate": "(n % 2 == 1) or ((n**4 - 1) % 192 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26,
+      12
+    ],
+    "claim": "For all even n, the radical of (n^4 - 1) divides 2^7 * 3.",
+    "predicate": "(n % 2 == 1) or (all(p <= 3 for p in {p for p in range(2, abs(n**4 - 1) + 1) if abs(n**4 - 1) % p == 0 and is_prime(p)}))",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "For all even n, if n - 1 is prime then gcd(n^2 + 1, n - 1) = 1.",
+    "predicate": "(n % 2 == 1) or (not is_prime(n - 1)) or (gcd(n**2 + 1, n - 1) == 1)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      2,
+      28
+    ],
+    "claim": "For all odd n, if n + 1 is prime then gcd(n^2 + 1, n + 1) = 2.",
+    "predicate": "(n % 2 == 0) or (not is_prime(n + 1)) or (gcd(n**2 + 1, n + 1) == 2)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      7
+    ],
+    "claim": "For all integers n, tau(gcd(n^2 + 1, n + 1)) <= tau(gcd(n^2 + 1, n - 1)).",
+    "predicate": "tau(gcd(n**2 + 1, n + 1)) <= tau(gcd(n**2 + 1, n - 1))",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      1,
+      29
+    ],
+    "claim": "For all odd n, if n + 1 is prime then n^2 + 1 has exactly 4 positive divisors.",
+    "predicate": "(n % 2 == 0) or (not is_prime(n + 1)) or (tau(n**2 + 1) == 4)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      3,
+      28
+    ],
+    "claim": "For all even n, if n - 1 is prime then n^2 + 1 is composite.",
+    "predicate": "(n % 2 == 1) or (not is_prime(n - 1)) or (not is_prime(n**2 + 1))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      29,
+      32
+    ],
+    "claim": "For all integers n, if either n + 1 or n - 1 is prime, then n^2 + 1 is composite unless n = 0 or n = 1.",
+    "predicate": "(is_prime(n + 1) or is_prime(n - 1)) implies (n in [0, 1] or not is_prime(n**2 + 1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      27
+    ],
+    "claim": "For all even n, sigma(gcd(n^2 + 1, n + 1)) <= 3 and sigma(gcd(n^2 + 1, n - 1)) <= 3.",
+    "predicate": "(n % 2 == 1) or (sigma(gcd(n**2 + 1, n + 1)) <= 3 and sigma(gcd(n**2 + 1, n - 1)) <= 3)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

@@ -1,0 +1,634 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "(n <= 0) or (tau(n) % 2 == 1) == (int(pow(n,0.5))**2 == n)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then every prime divisor of n appears with an even exponent in the prime factorization of n.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == all(vp(n,p)%2==0 for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then sigma(n) is odd.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sigma(n)%2==1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "If n is a perfect square, then sigma(n) is congruent to 1 modulo 4.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sigma(n)%4==1)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then tau(n) is odd and >= 3.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (tau(n)%2==1 and tau(n)>=3)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, n is a perfect square iff phi(n) is even.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (phi(n)%2==0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "If n is a perfect square, then phi(n) is divisible by 4.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (phi(n)%4==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      5,
+      1
+    ],
+    "claim": "If n is a perfect square, then phi(n) equals the product of (p_i^(2a_i-1)*(p_i-1)) for each prime p_i in n's factorization.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (phi(n)==abs(n)*prod([(p-1)/p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then the sum of its proper divisors is even.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == ((sigma(n)-n)%2==0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      8,
+      2
+    ],
+    "claim": "If n is a perfect square, then sigma(n)-n \u2261 1 (mod 4).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == ((sigma(n)-n)%4==1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n has an odd number of distinct prime factors.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0])%2==1)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10,
+      1
+    ],
+    "claim": "If n is a perfect square, then the product of its distinct prime factors is also a perfect square.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (int(pow(prod([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]),0.5))**2 == prod([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0])",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then sigma(n) is a perfect square.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (int(pow(sigma(n),0.5))**2 == sigma(n))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12
+    ],
+    "claim": "If n is a perfect square, then sigma(n) is divisible by 3.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sigma(n)%3==0)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then tau(n) is odd and divisible by 3.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (tau(n)%2==1 and tau(n)%3==0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14,
+      13
+    ],
+    "claim": "If n is a perfect square, then tau(n) is a multiple of sigma(n).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (tau(n)%sigma(n)==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n divides sigma(n^2).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sigma(n**2)%n==0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16,
+      3
+    ],
+    "claim": "If n is a perfect square, then n divides sigma(n^2) and sigma(n) \u2261 1 (mod 4).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sigma(n**2)%n==0 and sigma(n)%4==1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n is congruent to 0 or 1 modulo 4.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == ((n%4==0) or (n%4==1))",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18,
+      2
+    ],
+    "claim": "If n is a perfect square, then sigma(n) \u2261 1 (mod 8).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sigma(n)%8==1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then phi(n) is divisible by 2 but not by 4 unless n is a square of an odd prime.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == ((phi(n)%2==0) and ((phi(n)%4!=0) or (int(pow(n,0.5))%2==1 and is_prime(int(pow(n,0.5)))))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20,
+      1
+    ],
+    "claim": "If n is a perfect square and not a square of an odd prime, then phi(n) is divisible by 8.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n and not (int(pow(n,0.5))%2==1 and is_prime(int(pow(n,0.5))))) == (phi(n)%8==0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n has at most one primitive root modulo n.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (True)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22,
+      1
+    ],
+    "claim": "If n is a perfect square, then the number of primitive roots modulo n divides phi(n).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (True)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n is a square of a product of distinct primes each raised to an even exponent.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (True)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24,
+      1
+    ],
+    "claim": "If n is a perfect square, then the number of distinct prime factors of n is at most sqrt(n).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]) <= int(pow(n,0.25)))",
+    "confidence": 0.53,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then tau(n) is divisible by the number of distinct prime factors of n plus one.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (tau(n) % (len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]) + 1) == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26,
+      1
+    ],
+    "claim": "If n is a perfect square, then tau(n) is divisible by the number of distinct prime factors of n.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (tau(n) % len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]) == 0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then the sum of the exponents in its prime factorization is even.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sum([vp(n,p) for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0])%2==0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28,
+      1
+    ],
+    "claim": "If n is a perfect square, then the sum of the exponents in its prime factorization is divisible by 2.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sum([vp(n,p) for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0])%2==0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then the number of ways to write n as a product of two positive integers is odd.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (tau(n)%2==1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30,
+      1
+    ],
+    "claim": "If n is a perfect square, then the number of ways to write n as a product of two positive integers is equal to the number of distinct prime factors of n plus one.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (tau(n) == len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]) + 1)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n is a divisor of its square n^2.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (n**2 % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n is congruent to 0,1,4, or 9 modulo 16.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (n%16 in [0,1,4,9])",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33,
+      2
+    ],
+    "claim": "If n is a perfect square, then sigma(n) \u2261 1 (mod 16).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sigma(n)%16==1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n has an odd number of prime factors counted with multiplicity.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sum([vp(n,p) for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0])%2==1)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35,
+      1
+    ],
+    "claim": "If n is a perfect square, then the total exponent sum in its factorization is equal to twice the number of its distinct prime factors.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sum([vp(n,p) for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]) == 2*len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n is congruent to 0 or 1 modulo 3.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == ((n%3==0) or (n%3==1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37,
+      3
+    ],
+    "claim": "If n is a perfect square, then sigma(n) \u2261 1 (mod 3).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (sigma(n)%3==1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then the sum of the reciprocals of its divisors is rational with denominator dividing tau(n).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (Fraction(sum([Fraction(1,d) for d in range(1,n+1) if n%d==0])).denominator % tau(n) == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39,
+      1
+    ],
+    "claim": "If n is a perfect square, then the sum of the reciprocals of its divisors is an integer multiple of 1/tau(n).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (float(sum([1/d for d in range(1,n+1) if n%d==0])) * tau(n)).is_integer()",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n is a divisor of 2^n - 1.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == ((pow(2,n, n)==1))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41,
+      3
+    ],
+    "claim": "If n is a perfect square, then n divides 2^n - 1 and sigma(n) \u2261 1 (mod 4).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (pow(2,n,n)==1 and sigma(n)%4==1)",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then the number of prime factors of n is at most log_2(n).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]) <= int(math.log(n,2)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      1
+    ],
+    "claim": "If n is a perfect square, then the number of prime factors of n is at most sqrt(log_2(n)).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]) <= int(math.sqrt(math.log(n,2))))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then the product of its proper divisors is a perfect square.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (int(pow(math.prod([d for d in range(1,n) if n%d==0]),0.5))**2 == math.prod([d for d in range(1,n) if n%d==0]))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      2
+    ],
+    "claim": "If n is a perfect square, then the product of its proper divisors is congruent to 1 modulo 4.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (math.prod([d for d in range(1,n) if n%d==0])%4==1)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then phi(n) is divisible by the number of distinct prime factors of n.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (phi(n) % len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0]) == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      1
+    ],
+    "claim": "If n is a perfect square, then phi(n) is divisible by twice the number of distinct prime factors of n.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (phi(n) % (2*len([p for p in range(2,int(pow(n,0.5))+1) if is_prime(p) and n%p==0])) == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square, then n is a divisor of 3^n - 1.",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (pow(3,n,n)==1)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 50,
+    "parents": [
+      49,
+      3
+    ],
+    "claim": "If n is a perfect square, then n divides 3^n - 1 and sigma(n) \u2261 1 (mod 4).",
+    "predicate": "(n <= 0) or (int(pow(n,0.5))**2 == n) == (pow(3,n,n)==1 and sigma(n)%4==1)",
+    "confidence": 0.35,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

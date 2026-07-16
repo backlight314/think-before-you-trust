@@ -1,0 +1,510 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^2 is congruent to 0 or 1 modulo 4.",
+    "predicate": "n*n % 4 in [0, 1]",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^4 is congruent to 0 or 1 modulo 4.",
+    "predicate": "(n*n*n*n) % 4 in [0, 1]",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n is even.",
+    "predicate": "(n*n + n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 6.",
+    "predicate": "(n*n*n - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is never congruent to 3 modulo 4.",
+    "predicate": "(n*n + 1) % 4 != 3",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n^4 - n^2 is divisible by 12.",
+    "predicate": "(n*n*n*n - n*n) % 12 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 \u2261 1 mod 8.",
+    "predicate": "(n % 2 == 0) or ((n*n) % 8 == 1)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n, if n is odd, then n^4 \u2261 1 mod 16.",
+    "predicate": "(n % 2 == 0) or ((n*n*n*n) % 16 == 1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 mod 4 = 0 if and only if n is even.",
+    "predicate": "((n*n) % 4 == 0) == (n % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n^3 + n is divisible by 2 but not necessarily by 4.",
+    "predicate": "(n*n*n + n) % 2 == 0 and (n*n*n + n) % 4 != 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 - 1 is divisible by 8.",
+    "predicate": "(n % 2 == 0) or ((n*n - 1) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "For all integers n, if n is odd, then n^4 - 1 is divisible by 16.",
+    "predicate": "(n % 2 == 0) or ((n*n*n*n - 1) % 16 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n^3 - n^2 is even.",
+    "predicate": "(n*n*n - n*n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 - 1 is divisible by 24 if n is not divisible by 3.",
+    "predicate": "(n % 2 == 0) or (n % 3 == 0) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      11,
+      14
+    ],
+    "claim": "For all integers n, if n is odd and not divisible by 3, then n^4 - 1 is divisible by 48.",
+    "predicate": "(n % 2 == 0) or (n % 3 == 0) or ((n*n*n*n - 1) % 48 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 mod 4 \u2260 2.",
+    "predicate": "(n*n) % 4 != 2",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n^4 - 2n^2 + n is divisible by 2.",
+    "predicate": "(n**4 - 2*n*n + n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 \u2261 1 mod 12 if n is not divisible by 3.",
+    "predicate": "(n % 2 == 0) or (n % 3 == 0) or ((n*n) % 12 == 1)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      18
+    ],
+    "claim": "For all integers n, if n is odd and not divisible by 3, then n^4 \u2261 1 mod 36.",
+    "predicate": "(n % 2 == 0) or (n % 3 == 0) or ((n*n*n*n) % 36 == 1)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n^2(n+1)^2 is divisible by 4.",
+    "predicate": "(n*n * (n+1)*(n+1)) % 4 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      2,
+      11
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 - 1 divides n^4 - 1.",
+    "predicate": "(n % 2 == 0) or ((n*n - 1) != 0 and (n*n*n*n - 1) % (n*n - 1) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      6,
+      11
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 - 1 is divisible by 8 and n^2 + 1 is congruent to 2 mod 8.",
+    "predicate": "(n % 2 == 0) or ( ((n*n - 1) % 8 == 0) and ((n*n + 1) % 8 == 2) )",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      20
+    ],
+    "claim": "For all integers n, the sum of the first n cubes is divisible by 4.",
+    "predicate": "(sum(i**3 for i in range(1, abs(n)+1)) if n != 0 else 0) % 4 == 0",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n(n+1)(n+2) is divisible by 6.",
+    "predicate": "(n*(n+1)*(n+2)) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      2,
+      24
+    ],
+    "claim": "For all integers n, n^3 + 3n^2 + 2n is divisible by 12.",
+    "predicate": "(n**3 + 3*n*n + 2*n) % 12 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "For all integers n, if n is odd, then 8 divides n^2 - 1 and 16 does not divide n^2 - 1 unless 4 divides n+1 or n-1.",
+    "predicate": "(n % 2 == 0) or ( ((n*n - 1) % 8 == 0) and ((n*n - 1) % 16 != 0 or (n+1) % 4 == 0 or (n-1) % 4 == 0) )",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      26
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 - 1 is divisible by 8 but never by 32 unless n \u2261 \u00b11 mod 16.",
+    "predicate": "(n % 2 == 0) or ( ((n*n - 1) % 8 == 0) and ((n*n - 1) % 32 != 0 or (n % 16 in [1, 15])) )",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n, n^2 + n + 1 is never divisible by 2.",
+    "predicate": "(n*n + n + 1) % 2 != 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      28
+    ],
+    "claim": "For all integers n, n^2 + n + 1 is never divisible by 4.",
+    "predicate": "(n*n + n + 1) % 4 != 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      2,
+      11
+    ],
+    "claim": "For all integers n, if n is odd, then gcd(n^2 - 1, n^2 + 1) = 2.",
+    "predicate": "(n % 2 == 0) or (gcd(n*n - 1, n*n + 1) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 + 1 is congruent to 2 mod 4.",
+    "predicate": "(n % 2 == 0) or ((n*n + 1) % 4 == 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0,
+      31
+    ],
+    "claim": "For all integers n, if n is odd, then n^4 + 1 is congruent to 2 mod 8.",
+    "predicate": "(n % 2 == 0) or ((n*n*n*n + 1) % 8 == 2)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      2,
+      24
+    ],
+    "claim": "For all integers n, n(n+1)(n+2)(n+3) is divisible by 24.",
+    "predicate": "(n*(n+1)*(n+2)*(n+3)) % 24 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      33
+    ],
+    "claim": "For all integers n, n^4 + 6n^3 + 11n^2 + 6n is divisible by 24.",
+    "predicate": "(n**4 + 6*n**3 + 11*n**2 + 6*n) % 24 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0,
+      11,
+      33
+    ],
+    "claim": "For all integers n, if n is odd, then (n^2 - 1) divides (n^4 - 1) and the quotient is divisible by 3.",
+    "predicate": "(n % 2 == 0) or ( (n*n - 1) != 0 and ((n*n*n*n - 1) // (n*n - 1)) % 3 == 0 )",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0,
+      2,
+      24
+    ],
+    "claim": "For all integers n, n^3(n+1)^3 is divisible by 216.",
+    "predicate": "(n**3 * (n+1)**3) % 216 == 0",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0,
+      6,
+      11
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 - 1 is divisible by 8 and phi(n^2 - 1) is even.",
+    "predicate": "(n % 2 == 0) or ( ((n*n - 1) % 8 == 0) and (phi(n*n - 1) % 2 == 0) )",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0,
+      2,
+      24
+    ],
+    "claim": "For all integers n, the product of any three consecutive integers is divisible by 6 and their sum is divisible by 3.",
+    "predicate": "(n*(n+1)*(n+2)) % 6 == 0 and ((n + (n+1) + (n+2)) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

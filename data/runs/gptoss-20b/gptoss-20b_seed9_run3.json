@@ -1,0 +1,620 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 1, with equality exactly when n is prime.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + 1) and ((is_prime(n)) == (sigma(n) == n + 1))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 2, with equality exactly when n is the square of a prime.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + 2) and ((is_prime(int(n**0.5))) and (int(n**0.5)**2 == n)) == (sigma(n) == n + 2)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 3, with equality exactly when n is the product of two distinct primes.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + 3) and (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a) and is_prime(n//a) and a < n//a) == 1) == (sigma(n) == n + 3)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 4, with equality exactly when n is a prime cube.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + 4) and (is_prime(int(n**(1/3))) and int(n**(1/3))**3 == n) == (sigma(n) == n + 4)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 5, with equality exactly when n is a product of a prime and a prime square.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + 5) and (any(is_prime(p) and is_prime(q) and p*q*q == n for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n for p in range(2, n))) == (sigma(n) == n + 5)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n > 1, if sigma(n) = n + 2 and sigma(n) = n + 3 then n is a product of three distinct primes.",
+    "predicate": "(n <= 1) or not ((sigma(n) == n + 2) and (sigma(n) == n + 3)) or (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a)) == 3)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      3,
+      4
+    ],
+    "claim": "For all integers n > 1, if sigma(n) = n + 4 or sigma(n) = n + 5 then n is a product of a prime and a square of a distinct prime.",
+    "predicate": "(n <= 1) or not ((sigma(n) == n + 4) or (sigma(n) == n + 5)) or (any(is_prime(p) and is_prime(q) and p*q*q == n for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n for p in range(2, n)))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, tau(n) is at least 2, with equality exactly when n is prime.",
+    "predicate": "(n <= 1) or (tau(n) >= 2) and ((is_prime(n)) == (tau(n) == 2))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n > 1, tau(n) is at least 3, with equality exactly when n is the square of a prime.",
+    "predicate": "(n <= 1) or (tau(n) >= 3) and ((is_prime(int(n**0.5))) and int(n**0.5)**2 == n) == (tau(n) == 3)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n > 1, tau(n) is at least 4, with equality exactly when n is the product of two distinct primes.",
+    "predicate": "(n <= 1) or (tau(n) >= 4) and (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a) and is_prime(n//a) and a < n//a) == 1) == (tau(n) == 4)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n > 1, tau(n) is at least 5, with equality exactly when n is a prime cube.",
+    "predicate": "(n <= 1) or (tau(n) >= 5) and (is_prime(int(n**(1/3))) and int(n**(1/3))**3 == n) == (tau(n) == 5)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      8,
+      9
+    ],
+    "claim": "For all integers n > 1, if tau(n) = 3 and tau(n) = 4 then n is a product of three distinct primes.",
+    "predicate": "(n <= 1) or not ((tau(n) == 3) and (tau(n) == 4)) or (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a)) == 3)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10,
+      9
+    ],
+    "claim": "For all integers n > 1, if tau(n) = 5 or tau(n) = 4 then n is a product of a prime and a square of a distinct prime.",
+    "predicate": "(n <= 1) or not ((tau(n) == 5) or (tau(n) == 4)) or (any(is_prime(p) and is_prime(q) and p*q*q == n for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n for p in range(2, n)))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, phi(n) is at least n/2, with equality exactly when n is a power of 2.",
+    "predicate": "(n <= 1) or (phi(n) >= n/2) and ((vp(n,2) > 0) and (n & (n-1) == 0)) == (phi(n) == n/2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n > 1, phi(n) is at least n/3, with equality exactly when n is a product of a prime and a power of 3.",
+    "predicate": "(n <= 1) or (phi(n) >= n/3) and (any(is_prime(p) and vp(n,3) > 0 and n == p * (3**vp(n,3)) for p in range(2, n))) == (phi(n) == n/3)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n > 1, phi(n) is at least n/4, with equality exactly when n is a product of a prime and a power of 2.",
+    "predicate": "(n <= 1) or (phi(n) >= n/4) and (any(is_prime(p) and vp(n,2) > 0 and n == p * (2**vp(n,2)) for p in range(2, n))) == (phi(n) == n/4)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      14,
+      15
+    ],
+    "claim": "For all integers n > 1, if phi(n) = n/3 or phi(n) = n/4 then n is a product of two distinct primes.",
+    "predicate": "(n <= 1) or not ((phi(n) == n/3) or (phi(n) == n/4)) or (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a) and is_prime(n//a) and a < n//a) == 1)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      12,
+      16
+    ],
+    "claim": "For all integers n > 1, if tau(n) = 4 or phi(n) = n/3 then n is a product of a prime and a square of a distinct prime.",
+    "predicate": "(n <= 1) or not ((tau(n) == 4) or (phi(n) == n/3)) or (any(is_prime(p) and is_prime(q) and p*q*q == n for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n for p in range(2, n)))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least 2n, with equality exactly when n is a perfect square.",
+    "predicate": "(n <= 1) or (sigma(n) >= 2*n) and (int(n**0.5)**2 == n) == (sigma(n) == 2*n)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least 3n, with equality exactly when n is a product of two equal primes.",
+    "predicate": "(n <= 1) or (sigma(n) >= 3*n) and (any(is_prime(p) and p*p == n for p in range(2, n))) == (sigma(n) == 3*n)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18,
+      19
+    ],
+    "claim": "For all integers n > 1, if sigma(n) = 2n or sigma(n) = 3n then n is a perfect square or a square of a prime.",
+    "predicate": "(n <= 1) or not ((sigma(n) == 2*n) or (sigma(n) == 3*n)) or (int(n**0.5)**2 == n or any(is_prime(p) and p*p == n for p in range(2, n)))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least n + tau(n), with equality exactly when n is a prime.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + tau(n)) and ((is_prime(n)) == (sigma(n) == n + tau(n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least n + tau(n) + 1, with equality exactly when n is the square of a prime.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + tau(n) + 1) and ((is_prime(int(n**0.5))) and int(n**0.5)**2 == n) == (sigma(n) == n + tau(n) + 1)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      21,
+      22
+    ],
+    "claim": "For all integers n > 1, if sigma(n) = n + tau(n) and sigma(n) = n + tau(n) + 1 then n is a product of two distinct primes.",
+    "predicate": "(n <= 1) or not ((sigma(n) == n + tau(n)) and (sigma(n) == n + tau(n) + 1)) or (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a) and is_prime(n//a) and a < n//a) == 1)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      17,
+      23
+    ],
+    "claim": "For all integers n > 1, if tau(n) = 4 or sigma(n) = n + tau(n) + 1 then n is a product of a prime and a square of a distinct prime.",
+    "predicate": "(n <= 1) or not ((tau(n) == 4) or (sigma(n) == n + tau(n) + 1)) or (any(is_prime(p) and is_prime(q) and p*q*q == n for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n for p in range(2, n)))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least n * (1 + 1/p) where p is the smallest prime divisor of n, with equality exactly when n is a power of that prime.",
+    "predicate": "(n <= 1) or (sigma(n) >= n * (1 + 1/next(p for p in range(2, n+1) if n % p == 0))) and ((vp(n, next(p for p in range(2, n+1) if n % p == 0)) > 0) and (n == (next(p for p in range(2, n+1) if n % p == 0))**vp(n, next(p for p in range(2, n+1) if n % p == 0)))) == (sigma(n) == n * (1 + 1/next(p for p in range(2, n+1) if n % p == 0)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n > 1, if n is squarefree then sigma(n) is at least n * (1 + 1/p1)(1 + 1/p2)... over all prime divisors, with equality exactly when n is the product of two distinct primes.",
+    "predicate": "(n <= 1) or (sigma(n) >= n * prod(1 + 1/p for p in range(2, n+1) if n % p == 0)) and (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a)) == 2) == (sigma(n) == n * prod(1 + 1/p for p in range(2, n+1) if n % p == 0))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26,
+      18
+    ],
+    "claim": "For all integers n > 1, if sigma(n) = 2n and n is squarefree then n is a product of two distinct primes.",
+    "predicate": "(n <= 1) or not ((sigma(n) == 2*n) and (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a)) == 2)) or (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a)) == 2)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      24,
+      27
+    ],
+    "claim": "For all integers n > 1, if tau(n) = 4 and sigma(n) = 2n then n is a product of a prime and a square of a distinct prime.",
+    "predicate": "(n <= 1) or not ((tau(n) == 4) and (sigma(n) == 2*n)) or (any(is_prime(p) and is_prime(q) and p*q*q == n for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n for p in range(2, n)))",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, phi(n) divides sigma(n) - 1.",
+    "predicate": "(n <= 1) or (sigma(n) - 1) % phi(n) == 0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n > 1, if phi(n) divides sigma(n) - 1 then n is a Carmichael number.",
+    "predicate": "(n <= 1) or not ((sigma(n) - 1) % phi(n) == 0) or (any(is_prime(p) for p in range(2, n)) == False)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      29,
+      30
+    ],
+    "claim": "For all integers n > 1, if phi(n) divides sigma(n) - 1 and n is squarefree then n is a product of two distinct primes.",
+    "predicate": "(n <= 1) or not (((sigma(n) - 1) % phi(n) == 0) and (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a)) == 2)) or (sum(1 for a in range(2, n) if n % a == 0 and is_prime(a)) == 2)",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, sigma(n) is at least n * (1 + 1/p) for every prime divisor p of n, with equality exactly when n is a prime power.",
+    "predicate": "(n <= 1) or all(sigma(n) >= n * (1 + 1/p) for p in range(2, n+1) if n % p == 0) and (any(vp(n,p) > 0 and n == p**vp(n,p) for p in range(2, n+1))) == (sigma(n) == n * prod(1 + 1/p for p in range(2, n+1) if n % p == 0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      32
+    ],
+    "claim": "For all integers n > 1, if sigma(n) = n * (1 + 1/p) for some prime divisor p then n is a prime power.",
+    "predicate": "(n <= 1) or not (any(sigma(n) == n * (1 + 1/p) for p in range(2, n+1) if n % p == 0)) or (any(vp(n,p) > 0 and n == p**vp(n,p) for p in range(2, n+1)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33,
+      29
+    ],
+    "claim": "For all integers n > 1, if sigma(n) = n * (1 + 1/p) for some prime divisor p and phi(n) divides sigma(n) - 1 then n is a prime power.",
+    "predicate": "(n <= 1) or not ((any(sigma(n) == n * (1 + 1/p) for p in range(2, n+1) if n % p == 0)) and ((sigma(n) - 1) % phi(n) == 0)) or (any(vp(n,p) > 0 and n == p**vp(n,p) for p in range(2, n+1)))",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      24,
+      34
+    ],
+    "claim": "For all integers n > 1, if tau(n) = 4 and sigma(n) = n * (1 + 1/p) for some prime divisor p then n is a product of a prime and a square of a distinct prime.",
+    "predicate": "(n <= 1) or not ((tau(n) == 4) and (any(sigma(n) == n * (1 + 1/p) for p in range(2, n+1) if n % p == 0))) or (any(is_prime(p) and is_prime(q) and p*q*q == n for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n for p in range(2, n)))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, the sum of the reciprocals of the divisors of n is at least 1 + 1/n, with equality exactly when n is prime.",
+    "predicate": "(n <= 1) or sum(1/d for d in range(1, n+1) if n % d == 0) >= 1 + 1/n and ((is_prime(n)) == (sum(1/d for d in range(1, n+1) if n % d == 0) == 1 + 1/n))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36
+    ],
+    "claim": "For all integers n > 1, if the sum of reciprocals of divisors equals 1 + 1/n + 1/n^2 then n is the square of a prime.",
+    "predicate": "(n <= 1) or not (sum(1/d for d in range(1, n+1) if n % d == 0) == 1 + 1/n + 1/(n**2)) or (int(n**0.5)**2 == n and is_prime(int(n**0.5)))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37,
+      31
+    ],
+    "claim": "For all integers n > 1, if the sum of reciprocals of divisors equals 1 + 1/n + 1/n^2 and phi(n) divides sigma(n) - 1 then n is a prime square.",
+    "predicate": "(n <= 1) or not ((sum(1/d for d in range(1, n+1) if n % d == 0) == 1 + 1/n + 1/(n**2)) and ((sigma(n) - 1) % phi(n) == 0)) or (int(n**0.5)**2 == n and is_prime(int(n**0.5)))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, tau(n) is at least the number of distinct prime factors of n plus 1.",
+    "predicate": "(n <= 1) or tau(n) >= len([p for p in range(2, n+1) if n % p == 0 and is_prime(p)]) + 1",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39
+    ],
+    "claim": "For all integers n > 1, if tau(n) equals the number of distinct prime factors of n plus 1 then n is squarefree.",
+    "predicate": "(n <= 1) or not (tau(n) == len([p for p in range(2, n+1) if n % p == 0 and is_prime(p)]) + 1) or (all(vp(n,p) == 1 for p in range(2, n+1) if n % p == 0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40,
+      24
+    ],
+    "claim": "For all integers n > 1, if tau(n) = number of distinct prime factors of n + 1 and tau(n) = 4 then n is a product of a prime and a square of a distinct prime.",
+    "predicate": "(n <= 1) or not ((tau(n) == len([p for p in range(2, n+1) if n % p == 0 and is_prime(p)]) + 1) and (tau(n) == 4)) or (any(is_prime(p) and is_prime(q) and p*q*q == n for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n for p in range(2, n)))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is congruent to 1 modulo 4 then sigma(n) is odd.",
+    "predicate": "(n <= 1) or not (n % 4 == 1) or sigma(n) % 2 == 1",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42
+    ],
+    "claim": "For all integers n > 1, if n is congruent to 1 modulo 4 and sigma(n) is odd then n is a product of primes all congruent to 1 modulo 4.",
+    "predicate": "(n <= 1) or not ((n % 4 == 1) and sigma(n) % 2 == 1) or all(is_prime(p) and p % 4 == 1 for p in range(2, n+1) if n % p == 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      29
+    ],
+    "claim": "For all integers n > 1, if n is congruent to 1 modulo 4, sigma(n) is odd, and phi(n) divides sigma(n) - 1 then n is a product of distinct primes all congruent to 1 modulo 4.",
+    "predicate": "(n <= 1) or not ((n % 4 == 1) and sigma(n) % 2 == 1 and (sigma(n) - 1) % phi(n) == 0) or all(is_prime(p) and p % 4 == 1 and vp(n,p) == 1 for p in range(2, n+1) if n % p == 0)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      35,
+      44
+    ],
+    "claim": "For all integers n > 1, if tau(n) = 4, sigma(n) = n * (1 + 1/p) for some prime divisor p, n is congruent to 1 modulo 4, sigma(n) is odd, and phi(n) divides sigma(n) - 1 then n is a product of a prime and a square of a distinct prime both congruent to 1 modulo 4.",
+    "predicate": "(n <= 1) or not ((tau(n) == 4) and (any(sigma(n) == n * (1 + 1/p) for p in range(2, n+1) if n % p == 0)) and (n % 4 == 1) and sigma(n) % 2 == 1 and (sigma(n) - 1) % phi(n) == 0) or (any(is_prime(p) and is_prime(q) and p*q*q == n and p % 4 == 1 and q % 4 == 1 for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n and p % 4 == 1 and q % 4 == 1 for p in range(2, n)))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, phi(n) is at most n * product over prime divisors p of (1 - 1/p^2).",
+    "predicate": "(n <= 1) or phi(n) <= n * prod(1 - 1/(p**2) for p in range(2, n+1) if n % p == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46
+    ],
+    "claim": "For all integers n > 1, if phi(n) equals n * product over prime divisors p of (1 - 1/p^2) then n is squarefree.",
+    "predicate": "(n <= 1) or not (phi(n) == n * prod(1 - 1/(p**2) for p in range(2, n+1) if n % p == 0)) or all(vp(n,p) == 1 for p in range(2, n+1) if n % p == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      40
+    ],
+    "claim": "For all integers n > 1, if phi(n) equals n * product over prime divisors p of (1 - 1/p^2) and tau(n) = number of distinct prime factors of n + 1 then n is a product of distinct primes each dividing n exactly once.",
+    "predicate": "(n <= 1) or not ((phi(n) == n * prod(1 - 1/(p**2) for p in range(2, n+1) if n % p == 0)) and (tau(n) == len([p for p in range(2, n+1) if n % p == 0 and is_prime(p)]) + 1)) or all(vp(n,p) == 1 for p in range(2, n+1) if n % p == 0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      45,
+      48
+    ],
+    "claim": "For all integers n > 1, if the conditions of nodes 45 and 48 hold simultaneously then n is a product of a prime congruent to 1 mod 4 and the square of a distinct prime congruent to 1 mod 4.",
+    "predicate": "(n <= 1) or not ((tau(n) == 4) and (any(sigma(n) == n * (1 + 1/p) for p in range(2, n+1) if n % p == 0)) and (n % 4 == 1) and sigma(n) % 2 == 1 and (sigma(n) - 1) % phi(n) == 0 and phi(n) == n * prod(1 - 1/(p**2) for p in range(2, n+1) if n % p == 0) and (tau(n) == len([p for p in range(2, n+1) if n % p == 0 and is_prime(p)]) + 1)) or (any(is_prime(p) and is_prime(q) and p*q*q == n and p % 4 == 1 and q % 4 == 1 for p in range(2, n)) or any(is_prime(p) and is_prime(q) and p*p*q == n and p % 4 == 1 and q % 4 == 1 for p in range(2, n)))",
+    "confidence": 0.4,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

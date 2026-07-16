@@ -1,0 +1,599 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + 1 is even.",
+    "predicate": "(n**2 + 1) % 2 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides gcd(n + 1, 2).",
+    "predicate": "gcd(gcd(n + 1, 2), gcd(n**2 + 1, n + 1)) == gcd(n**2 + 1, n + 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n, gcd(n + 1, 2) divides 2.",
+    "predicate": "gcd(n + 1, 2) % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, n^3 + 1 is congruent to 1 modulo 3.",
+    "predicate": "(n**3 + 1) % 3 == 1",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, n^3 + 1 is not divisible by 3.",
+    "predicate": "gcd(n**3 + 1, 3) != 3",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2,
+      5
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 3.",
+    "predicate": "gcd(n**2 + 1, n + 1) % 3 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n, gcd(n + 1, 2) divides 4.",
+    "predicate": "gcd(n + 1, 2) % 4 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      1,
+      7
+    ],
+    "claim": "For all integers n, n^2 + 1 is divisible by 4.",
+    "predicate": "(n**2 + 1) % 4 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      2,
+      6,
+      8
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 6.",
+    "predicate": "gcd(n**2 + 1, n + 1) % 6 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n, gcd(n + 1, 2) divides 8.",
+    "predicate": "gcd(n + 1, 2) % 8 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, n^2 + 1 is divisible by 8.",
+    "predicate": "(n**2 + 1) % 8 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      9,
+      11
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 12.",
+    "predicate": "gcd(n**2 + 1, n + 1) % 12 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 6.",
+    "predicate": "gcd(n**5 - n, 6) == 6",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n, n^5 - n is congruent to 0 modulo 6.",
+    "predicate": "(n**5 - n) % 6 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 24.",
+    "predicate": "gcd(n**5 - n, 24) == 24",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n, n^5 - n is congruent to 0 modulo 12.",
+    "predicate": "(n**5 - n) % 12 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15,
+      16
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 24.",
+    "predicate": "gcd(n**5 - n, 24) == 24",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 8.",
+    "predicate": "gcd(n**5 - n, 8) == 8",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      16
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 3.",
+    "predicate": "gcd(n**5 - n, 3) == 3",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      15,
+      18,
+      19
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 24.",
+    "predicate": "gcd(n**5 - n, 24) == 24",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      12
+    ],
+    "claim": "For all integers n, n^3 + 1 has exactly 3 divisors.",
+    "predicate": "len([i for i in range(1, n**3 + 2) if (n**3 + 1) % i == 0]) == 3",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n, n^3 + 1 is a square.",
+    "predicate": "is_square(n**3 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n, n^3 + 1 is a perfect cube.",
+    "predicate": "is_perfect_cube(n**3 + 1)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n, n^3 + 1 is a perfect square times a perfect cube.",
+    "predicate": "is_perfect_square(n**3 + 1) and is_perfect_cube(n**3 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      23
+    ],
+    "claim": "For all integers n, n^3 + 1 is a perfect cube.",
+    "predicate": "is_perfect_cube(n**3 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, n^3 + 1 is a cube of a square.",
+    "predicate": "is_cube_of_square(n**3 + 1)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n, n^3 + 1 is a cube of a perfect square.",
+    "predicate": "is_cube_of_square(n**3 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      26
+    ],
+    "claim": "For all integers n, n^3 + 1 is a cube of a perfect square.",
+    "predicate": "is_cube_of_square(n**3 + 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      27,
+      28
+    ],
+    "claim": "For all integers n, n^3 + 1 is a cube of a perfect square.",
+    "predicate": "is_cube_of_square(n**3 + 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n, n^3 + 1 is a cube of a square.",
+    "predicate": "is_cube_of_square(n**3 + 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, n^2 + n + 1 is congruent to 2 modulo 3.",
+    "predicate": "(n**2 + n + 1) % 3 == 2",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31
+    ],
+    "claim": "For all integers n, n^2 + n + 1 is not divisible by 3.",
+    "predicate": "gcd(n**2 + n + 1, 3) != 3",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      32
+    ],
+    "claim": "For all integers n, gcd(n^2 + n + 1, n + 1) divides 2.",
+    "predicate": "gcd(n**2 + n + 1, n + 1) % 2 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33
+    ],
+    "claim": "For all integers n, gcd(n^2 + n + 1, n + 1) divides 2.",
+    "predicate": "gcd(n**2 + n + 1, n + 1) % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, n^2 - n + 1 is congruent to 2 modulo 3.",
+    "predicate": "(n**2 - n + 1) % 3 == 2",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35
+    ],
+    "claim": "For all integers n, n^2 - n + 1 is not divisible by 3.",
+    "predicate": "gcd(n**2 - n + 1, 3) != 3",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36
+    ],
+    "claim": "For all integers n, gcd(n^2 - n + 1, n + 1) divides 2.",
+    "predicate": "gcd(n**2 - n + 1, n + 1) % 2 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37
+    ],
+    "claim": "For all integers n, gcd(n^2 - n + 1, n + 1) divides 2.",
+    "predicate": "gcd(n**2 - n + 1, n + 1) % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, n^3 - n is congruent to 0 modulo 3.",
+    "predicate": "(n**3 - n) % 3 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 3.",
+    "predicate": "gcd(n**3 - n, 3) == 3",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 6.",
+    "predicate": "gcd(n**3 - n, 6) == 6",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      40
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 9.",
+    "predicate": "gcd(n**3 - n, 9) == 9",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      41
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 18.",
+    "predicate": "gcd(n**3 - n, 18) == 18",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      42
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 18.",
+    "predicate": "gcd(n**3 - n, 18) == 18",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      41,
+      43
+    ],
+    "claim": "For all integers n, n^3 - n is divisible by 18.",
+    "predicate": "gcd(n**3 - n, 18) == 18",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, n^5 - 1 is congruent to 0 modulo 5.",
+    "predicate": "(n**5 - 1) % 5 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46
+    ],
+    "claim": "For all integers n, n^5 - 1 is divisible by 5.",
+    "predicate": "gcd(n**5 - 1, 5) == 5",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47
+    ],
+    "claim": "For all integers n, n^5 - 1 is divisible by 25.",
+    "predicate": "gcd(n**5 - 1, 25) == 25",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

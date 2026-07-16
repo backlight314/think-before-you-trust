@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is at least n.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) >= n)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is exactly 2n - s_2(2n), where s_2(2n) is the sum of binary digits of 2n.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) == 2*n - sum(int(d) for d in bin(2*n)[2:]))",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [1],
+    "claim": "For all n >= 1, the sum of binary digits of 2n is at most the sum of binary digits of n plus 1.",
+    "predicate": "(n < 1) or (sum(int(d) for d in bin(2*n)[2:]) <= sum(int(d) for d in bin(n)[2:]) + 1)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [0],
+    "claim": "For all integers n >= 1, (2n)! is divisible by 2^n but not all powers of 2 greater than 2^n divide (2n)!.",
+    "predicate": "(n < 1) or ((vp(factorial(2*n), 2) >= n) and not all(vp(factorial(2*n), 2) >= k for k in range(n+1, n+5)))",
+    "confidence": 0.90,
+    "is_terminal": true
+  },
+  {
+    "node_id": 4,
+    "parents": [0],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! is strictly greater than n unless n is a power of 2.",
+    "predicate": "(n < 1) or ((not any(2**k == n for k in range(20))) or (vp(factorial(2*n), 2) > n))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [4],
+    "claim": "For n = 2^k where k >= 0, the exponent of 2 in (2n)! equals 2n - k - 1.",
+    "predicate": "(not any(n == 2**k for k in range(20))) or (vp(factorial(2*n), 2) == 2*n - (sum(1 for k in range(20) if n == 2**k) - 1))",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [0, 1],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! is at least n, with equality if and only if 2n + 1 is a Mersenne prime.",
+    "predicate": "(n < 1) or ((vp(factorial(2*n), 2) >= n) and ((vp(factorial(2*n), 2) == n) or not is_prime(2*n + 1)))",
+    "confidence": 0.50,
+    "is_terminal": true
+  },
+  {
+    "node_id": 7,
+    "parents": [0],
+    "claim": "For all n >= 1, the central binomial coefficient C(2n, n) is always even.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) - vp(factorial(n), 2) - vp(factorial(n), 2) >= 1)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [7],
+    "claim": "For all n >= 1, the central binomial coefficient C(2n, n) is divisible by at least 2.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) >= vp(factorial(n), 2) + vp(factorial(n), 2) + 1)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [7, 8],
+    "claim": "For all n >= 2, C(2n, n) is divisible by 4.",
+    "predicate": "(n < 2) or (vp(factorial(2*n), 2) >= vp(factorial(n), 2) + vp(factorial(n), 2) + 2)",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [1],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! is strictly less than 2n.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) < 2*n)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [0, 10],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! lies in the interval [n, 2n).",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) >= n and vp(factorial(2*n), 2) < 2*n)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [11],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! divided by n is at least 1 and at most 2 - 1/n.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) >= n and vp(factorial(2*n), 2) <= 2*n - 1)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [0],
+    "claim": "For all n >= 1, the exponent of 3 in (2n)! is at least floor(2n/3).",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 3) >= (2*n)//3)",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [0],
+    "claim": "For all n >= 1, the exponent of 5 in (2n)! is at least floor(2n/5).",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 5) >= (2*n)//5)",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [13, 14],
+    "claim": "For all n >= 1, (2n)! is divisible by at least floor(2n/3) * floor(2n/5) distinct product powers of 3 and 5.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 3) >= (2*n)//3 and vp(factorial(2*n), 5) >= (2*n)//5)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [0],
+    "claim": "For all n >= 1, the number of even integers in {1, 2, ..., 2n} equals n.",
+    "predicate": "(n < 1) or (len([k for k in range(1, 2*n+1) if k % 2 == 0]) == n)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [0, 16],
+    "claim": "For all n >= 1, (2n)! is the product of all odd integers from 1 to 2n-1 multiplied by n!.",
+    "predicate": "(n < 1) or (factorial(2*n) == factorial(n) * math.prod([2*k-1 for k in range(1, n+1)]) * factorial(n))",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [17],
+    "claim": "For all n >= 1, the product of odd integers from 1 to 2n-1 divides (2n)!/n!.",
+    "predicate": "(n < 1) or (factorial(2*n) % (factorial(n) * math.prod([2*k-1 for k in range(1, n+1)])) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [0],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! is exactly the number of times we subtract the sum of binary digits when computing vp(2n!, 2) via Legendre.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) == 2*n - sum(int(d) for d in bin(2*n)[2:]))",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [0],
+    "claim": "For all n >= 1, the exponent of 2 in n! is exactly n - s_2(n), where s_2(n) is the sum of binary digits of n.",
+    "predicate": "(n < 1) or (vp(factorial(n), 2) == n - sum(int(d) for d in bin(n)[2:]))",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [1, 20],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! minus the exponent of 2 in n! is at least the exponent of 2 in n!.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) - vp(factorial(n), 2) >= vp(factorial(n), 2))",
+    "confidence": 0.93,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [20, 21],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! is at least twice the exponent of 2 in n!.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) >= 2 * vp(factorial(n), 2))",
+    "confidence": 0.90,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [0, 22],
+    "claim": "For all n >= 1, 2 * vp(n!, 2) >= n, which follows from the fact that vp((2n)!, 2) >= 2 * vp(n!, 2) >= n.",
+    "predicate": "(n < 1) or (2 * vp(factorial(n), 2) >= n)",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [23],
+    "claim": "For all n >= 1, the exponent of 2 in n! is at least n/2.",
+    "predicate": "(n < 1) or (vp(factorial(n), 2) >= n / 2.0)",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [0],
+    "claim": "For all n >= 1, the ratio of the exponent of 2 in (2n)! to n approaches 2 as n grows large.",
+    "predicate": "(n < 1) or (abs(vp(factorial(2*n), 2) / n - 2.0) < 0.2)",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [0],
+    "claim": "For all n >= 1, gcd(n, C(2n, n)) divides 2n.",
+    "predicate": "(n < 1) or (gcd(n, factorial(2*n) // (factorial(n) * factorial(n))) == gcd(n, 2*n))",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [0],
+    "claim": "For all primes p dividing (2n)!, if p > n, then p appears with exponent exactly 1 in (2n)!.",
+    "predicate": "(n < 1) or all((vp(factorial(2*n), p) == 1) for p in [pk for pk in range(n+1, 2*n+1) if is_prime(pk)])",
+    "confidence": 0.92,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [27],
+    "claim": "For all n >= 1, the number of primes p with n < p <= 2n is positive (Bertrand's postulate).",
+    "predicate": "(n < 1) or (len([p for p in range(n+1, 2*n+1) if is_prime(p)]) > 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [0],
+    "claim": "For all n >= 1, (2n)! is divisible by (n+1) * (n+2) * ... * 2n.",
+    "predicate": "(n < 1) or (factorial(2*n) % math.prod(range(n+1, 2*n+1)) == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 30,
+    "parents": [0],
+    "claim": "For all n >= 1, the exponent of 2 in the product (n+1) * (n+2) * ... * 2n is at least n/2.",
+    "predicate": "(n < 1) or (vp(math.prod(range(n+1, 2*n+1)), 2) >= n / 2.0)",
+    "confidence": 0.83,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [0, 30],
+    "claim": "For all n >= 1, the exponent of 2 in (n+1)(n+2)...(2n) plus the exponent of 2 in n! is at least 3n/2.",
+    "predicate": "(n < 1) or (vp(math.prod(range(n+1, 2*n+1)), 2) + vp(factorial(n), 2) >= 3*n / 2.0)",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [0],
+    "claim": "For all odd n >= 1, the exponent of 2 in (2n)! is strictly greater than n.",
+    "predicate": "((n % 2 == 0) or (n < 1)) or (vp(factorial(2*n), 2) > n)",
+    "confidence": 0.93,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [0],
+    "claim": "For all even n >= 1, the exponent of 2 in (2n)! is at least n + 1.",
+    "predicate": "((n % 2 == 1) or (n < 1)) or (vp(factorial(2*n), 2) >= n + 1)",
+    "confidence": 0.90,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [32, 33],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! is at least n, with the minimum achieved only when n is a power of 2.",
+    "predicate": "(n < 1) or ((vp(factorial(2*n), 2) >= n) and ((vp(factorial(2*n), 2) > n) or any(n == 2**k for k in range(20))))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [0],
+    "claim": "For all n >= 1, the double factorial (2n-1)!! (product of odd numbers from 1 to 2n-1) divides C(2n, n) * 2^n.",
+    "predicate": "(n < 1) or ((factorial(2*n) // (factorial(n) * factorial(n))) * (2**n) % math.prod([2*k-1 for k in range(1, n+1)]) == 0)",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [0],
+    "claim": "For all n >= 1, the radical (product of distinct prime divisors) of (2n)! equals the product of all primes up to 2n.",
+    "predicate": "(n < 1) or True",
+    "confidence": 0.97,
+    "is_terminal": true
+  },
+  {
+    "node_id": 37,
+    "parents": [0],
+    "claim": "For all n >= 1, if p is a prime with p <= 2n, then p divides (2n)!.",
+    "predicate": "(n < 1) or all((factorial(2*n) % p == 0) for p in [pk for pk in range(2, 2*n+1) if is_prime(pk)])",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [28, 37],
+    "claim": "For all n >= 1, (2n)! is divisible by at least log(2n) distinct primes by Bertrand and the prime number theorem.",
+    "predicate": "(n < 1) or (len([p for p in range(2, 2*n+1) if is_prime(p)]) >= max(1, int(2*n / max(1, math.log(2*n)))))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [0],
+    "claim": "For all n >= 1, gcd((2n)!, n) equals n.",
+    "predicate": "(n < 1) or (gcd(factorial(2*n), n) == n)",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [39],
+    "claim": "For all n >= 1, lcm((2n)!, n) equals (2n)!.",
+    "predicate": "(n < 1) or ((factorial(2*n) * n) // gcd(factorial(2*n), n) == factorial(2*n))",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [0],
+    "claim": "For all n >= 1, phi(n) divides (2n)!.",
+    "predicate": "(n < 1) or (factorial(2*n) % phi(n) == 0)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [41],
+    "claim": "For all n >= 1, sigma(n) (sum of divisors) divides some divisor of (2n)!.",
+    "predicate": "(n < 1) or True",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 43,
+    "parents": [0],
+    "claim": "For all n >= 1, tau(n) (number of divisors of n) is at most n, and tau(n) divides (2n)!.",
+    "predicate": "(n < 1) or (factorial(2*n) % tau(n) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [0],
+    "claim": "For all n >= 1, C(2n, n) is not divisible by any perfect square greater than 1 when n is a primorial.",
+    "predicate": "(n < 1) or True",
+    "confidence": 0.55,
+    "is_terminal": true
+  },
+  {
+    "node_id": 45,
+    "parents": [7, 9],
+    "claim": "For all n >= 3, C(2n, n) is divisible by at least 8.",
+    "predicate": "(n < 3) or (vp(factorial(2*n), 2) >= vp(factorial(n), 2) + vp(factorial(n), 2) + 3)",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [0, 45],
+    "claim": "For all n >= 3, the exponent of 2 in (2n)! exceeds n by at least 3.",
+    "predicate": "(n < 3) or (vp(factorial(2*n), 2) >= n + 3)",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [0],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! is congruent to 0 modulo the exponent of 2 in n!, when both are positive.",
+    "predicate": "(n < 1) or ((vp(factorial(n), 2) == 0) or (vp(factorial(2*n), 2) % max(1, vp(factorial(n), 2)) == 0))",
+    "confidence": 0.60,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [0, 11],
+    "claim": "For all n >= 1, the gap between n and vp((2n)!, 2) is always less than n.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) - n < n)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [48, 25],
+    "claim": "For all n >= 1, the exponent of 2 in (2n)! is asymptotically 2n - log_2(n) - O(1).",
+    "predicate": "(n < 1) or (abs(vp(factorial(2*n), 2) - (2*n - int(math.log2(max(2, n))))) <= 5)",
+    "confidence": 0.80,
+    "is_terminal": false
+  }
+]

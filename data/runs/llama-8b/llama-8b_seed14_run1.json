@@ -1,0 +1,468 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is prime.",
+    "predicate": "(not is_prime(n**2 + n + 41))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime to 2.",
+    "predicate": "(gcd(n**2 + n + 41, 2) != 1) or (n**2 + n + 41 != 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime to 3.",
+    "predicate": "(gcd(n**2 + n + 41, 3) != 1) or (n**2 + n + 41 != 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is coprime to 9.",
+    "predicate": "(gcd(n**2 + n + 41, 9) != 1) or (n**2 + n + 41 != 1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 4.",
+    "predicate": "((n**2 + n + 41) % 4 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 8.",
+    "predicate": "((n**2 + n + 41) % 8 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 16.",
+    "predicate": "((n**2 + n + 41) % 16 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 2 distinct prime divisors.",
+    "predicate": "len(set(vp(n**2 + n + 41, 2))) + len(set(vp(n**2 + n + 41, 3))) <= 2",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 1 distinct prime divisor.",
+    "predicate": "len(set(vp(n**2 + n + 41, 2))) + len(set(vp(n**2 + n + 41, 3))) <= 1",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a perfect square.",
+    "predicate": "(int(math.sqrt(n**2 + n + 41)) ** 2 == n**2 + n + 41) and (n**2 + n + 41 > 0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is a cube.",
+    "predicate": "(int(round(math.pow(n**2 + n + 41, 1/3))) ** 3 == n**2 + n + 41) and (n**2 + n + 41 > 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a multiple of 5.",
+    "predicate": "((n**2 + n + 41) % 5 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a multiple of 7.",
+    "predicate": "((n**2 + n + 41) % 7 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a multiple of 11.",
+    "predicate": "((n**2 + n + 41) % 11 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a multiple of 13.",
+    "predicate": "((n**2 + n + 41) % 13 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is relatively prime to 7 and 11.",
+    "predicate": "(gcd(n**2 + n + 41, 7) != 1) or (gcd(n**2 + n + 41, 11) != 1) or (n**2 + n + 41 != 1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a perfect cube.",
+    "predicate": "((int(round(math.pow(n**2 + n + 41, 1/3))) ** 3 != n**2 + n + 41) or (n**2 + n + 41 < 0))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a perfect square.",
+    "predicate": "((int(math.sqrt(n**2 + n + 41)) ** 2 != n**2 + n + 41) or (n**2 + n + 41 < 0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a multiple of 3^2.",
+    "predicate": "((n**2 + n + 41) % 9 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a multiple of 3^3.",
+    "predicate": "((n**2 + n + 41) % 27 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a multiple of 5^2.",
+    "predicate": "((n**2 + n + 41) % 25 != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "n^2 + n + 41 = 2^a * 3^b * 7^c * 11^d.",
+    "predicate": "(n**2 + n + 41 == (2**a) * (3**b) * (7**c) * (11**d)) and (a >= 0 and b >= 0 and c >= 0 and d >= 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has no divisors greater than 11.",
+    "predicate": "all(vp(n**2 + n + 41, p) == 0 for p in range(12, 41))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has no prime divisors greater than 7.",
+    "predicate": "all(vp(n**2 + n + 41, p) == 0 for p in range(8, 12))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 1 prime divisor of 2.",
+    "predicate": "sum(vp(n**2 + n + 41, 2)) <= 1",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 1 prime divisor of 3.",
+    "predicate": "sum(vp(n**2 + n + 41, 3)) <= 1",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 1 prime divisor of 7.",
+    "predicate": "sum(vp(n**2 + n + 41, 7)) <= 1",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 1 prime divisor of 11.",
+    "predicate": "sum(vp(n**2 + n + 41, 11)) <= 1",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is divisible by 3^a * 7^b.",
+    "predicate": "(n**2 + n + 41 == (3**a) * (7**b)) and (a >= 0 and b >= 0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is divisible by 3^a * 11^b.",
+    "predicate": "(n**2 + n + 41 == (3**a) * (11**b)) and (a >= 0 and b >= 0)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a power of 2.",
+    "predicate": "((2**a) != n**2 + n + 41) or (a < 0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a power of 3.",
+    "predicate": "((3**a) != n**2 + n + 41) or (a < 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a power of 7.",
+    "predicate": "((7**a) != n**2 + n + 41) or (a < 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a power of 11.",
+    "predicate": "((11**a) != n**2 + n + 41) or (a < 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not a multiple of 7*11.",
+    "predicate": "((n**2 + n + 41) % (7*11) != 0) and (n**2 + n + 41 != 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is relatively prime to 2^a.",
+    "predicate": "(gcd(n**2 + n + 41, 2**a) == 1) or (a < 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is relatively prime to 3^a.",
+    "predicate": "(gcd(n**2 + n + 41, 3**a) == 1) or (a < 0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is relatively prime to 7^a.",
+    "predicate": "(gcd(n**2 + n + 41, 7**a) == 1) or (a < 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is relatively prime to 11^a.",
+    "predicate": "(gcd(n**2 + n + 41, 11**a) == 1) or (a < 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  }
+]
