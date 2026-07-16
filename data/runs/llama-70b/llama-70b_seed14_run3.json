@@ -1,0 +1,469 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is prime.",
+    "predicate": "n >= 0 and is_prime(n**2 + n + 41)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 2.",
+    "predicate": "n >= 0 and (n**2 + n + 41) % 2 != 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 3.",
+    "predicate": "n >= 0 and (n**2 + n + 41) % 3 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 6.",
+    "predicate": "n >= 0 and (n**2 + n + 41) % 6 != 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^4 + n^3 + n^2 + n + 41 is prime.",
+    "predicate": "n >= 0 and is_prime(n**4 + n**3 + n**2 + n + 41)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "For all integers n >= 0, n^4 + n^3 + n^2 + n + 41 is not divisible by 2.",
+    "predicate": "n >= 0 and (n**4 + n**3 + n**2 + n + 41) % 2 != 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2,
+      4
+    ],
+    "claim": "For all integers n >= 0, n^4 + n^3 + n^2 + n + 41 is not divisible by 3.",
+    "predicate": "n >= 0 and (n**4 + n**3 + n**2 + n + 41) % 3 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3,
+      4
+    ],
+    "claim": "For all integers n >= 0, n^4 + n^3 + n^2 + n + 41 is not divisible by 6.",
+    "predicate": "n >= 0 and (n**4 + n**3 + n**2 + n + 41) % 6 != 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^5 - n + 41 is prime.",
+    "predicate": "n >= 0 and is_prime(n**5 - n + 41)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      1,
+      8
+    ],
+    "claim": "For all integers n >= 0, n^5 - n + 41 is not divisible by 2.",
+    "predicate": "n >= 0 and (n**5 - n + 41) % 2 != 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      2,
+      8
+    ],
+    "claim": "For all integers n >= 0, n^5 - n + 41 is not divisible by 3.",
+    "predicate": "n >= 0 and (n**5 - n + 41) % 3 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      3,
+      8
+    ],
+    "claim": "For all integers n >= 0, n^5 - n + 41 is not divisible by 6.",
+    "predicate": "n >= 0 and (n**5 - n + 41) % 6 != 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^7 - n + 41 is prime.",
+    "predicate": "n >= 0 and is_prime(n**7 - n + 41)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      1,
+      12
+    ],
+    "claim": "For all integers n >= 0, n^7 - n + 41 is not divisible by 2.",
+    "predicate": "n >= 0 and (n**7 - n + 41) % 2 != 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      2,
+      12
+    ],
+    "claim": "For all integers n >= 0, n^7 - n + 41 is not divisible by 3.",
+    "predicate": "n >= 0 and (n**7 - n + 41) % 3 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      3,
+      12
+    ],
+    "claim": "For all integers n >= 0, n^7 - n + 41 is not divisible by 6.",
+    "predicate": "n >= 0 and (n**7 - n + 41) % 6 != 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^11 - n + 41 is prime.",
+    "predicate": "n >= 0 and is_prime(n**11 - n + 41)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      1,
+      16
+    ],
+    "claim": "For all integers n >= 0, n^11 - n + 41 is not divisible by 2.",
+    "predicate": "n >= 0 and (n**11 - n + 41) % 2 != 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      2,
+      16
+    ],
+    "claim": "For all integers n >= 0, n^11 - n + 41 is not divisible by 3.",
+    "predicate": "n >= 0 and (n**11 - n + 41) % 3 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      3,
+      16
+    ],
+    "claim": "For all integers n >= 0, n^11 - n + 41 is not divisible by 6.",
+    "predicate": "n >= 0 and (n**11 - n + 41) % 6 != 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 has at most 2 distinct prime divisors.",
+    "predicate": "n >= 0 and len(set([p for p in range(2, n**2 + n + 42) if is_prime(p) and (n**2 + n + 41) % p == 0])) <= 2",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      1,
+      20
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is composite, it has a prime divisor less than or equal to sqrt(n^2 + n + 41).",
+    "predicate": "n >= 0 and (not is_prime(n**2 + n + 41)) and any([is_prime(p) and (n**2 + n + 41) % p == 0 for p in range(2, int((n**2 + n + 41)**0.5) + 1)])",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      2,
+      20
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is composite, it has a prime divisor greater than or equal to 3.",
+    "predicate": "n >= 0 and (not is_prime(n**2 + n + 41)) and any([is_prime(p) and (n**2 + n + 41) % p == 0 for p in range(3, n**2 + n + 42)])",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      3,
+      20
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is composite, it has a prime divisor that is either 2 or 3.",
+    "predicate": "n >= 0 and (not is_prime(n**2 + n + 41)) and any([is_prime(p) and (n**2 + n + 41) % p == 0 for p in [2, 3]])",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, the sum of the divisors of n^2 + n + 41 is less than or equal to 2 * (n^2 + n + 41).",
+    "predicate": "n >= 0 and sum([d for d in range(1, n**2 + n + 42) if (n**2 + n + 41) % d == 0]) <= 2 * (n**2 + n + 41)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      1,
+      24
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is prime, the sum of its divisors is equal to n^2 + n + 42.",
+    "predicate": "n >= 0 and is_prime(n**2 + n + 41) and sum([d for d in range(1, n**2 + n + 42) if (n**2 + n + 41) % d == 0]) == n**2 + n + 42",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      2,
+      24
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is composite, the sum of its divisors is greater than n^2 + n + 41.",
+    "predicate": "n >= 0 and (not is_prime(n**2 + n + 41)) and sum([d for d in range(1, n**2 + n + 42) if (n**2 + n + 41) % d == 0]) > n**2 + n + 41",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      3,
+      24
+    ],
+    "claim": "For all integers n >= 0, the sum of the divisors of n^2 + n + 41 is divisible by 6.",
+    "predicate": "n >= 0 and sum([d for d in range(1, n**2 + n + 42) if (n**2 + n + 41) % d == 0]) % 6 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, the Euler totient function of n^2 + n + 41 is less than or equal to n^2 + n + 40.",
+    "predicate": "n >= 0 and phi(n**2 + n + 41) <= n**2 + n + 40",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      1,
+      28
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is prime, its Euler totient function is equal to n^2 + n + 40.",
+    "predicate": "n >= 0 and is_prime(n**2 + n + 41) and phi(n**2 + n + 41) == n**2 + n + 40",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      2,
+      28
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is composite, its Euler totient function is less than n^2 + n + 40.",
+    "predicate": "n >= 0 and (not is_prime(n**2 + n + 41)) and phi(n**2 + n + 41) < n**2 + n + 40",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      3,
+      28
+    ],
+    "claim": "For all integers n >= 0, the Euler totient function of n^2 + n + 41 is divisible by 2.",
+    "predicate": "n >= 0 and phi(n**2 + n + 41) % 2 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, the number of divisors of n^2 + n + 41 is less than or equal to 4.",
+    "predicate": "n >= 0 and tau(n**2 + n + 41) <= 4",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      1,
+      32
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is prime, it has exactly 2 divisors.",
+    "predicate": "n >= 0 and is_prime(n**2 + n + 41) and tau(n**2 + n + 41) == 2",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      2,
+      32
+    ],
+    "claim": "For all integers n >= 0, if n^2 + n + 41 is composite, it has more than 2 divisors.",
+    "predicate": "n >= 0 and (not is_prime(n**2 + n + 41)) and tau(n**2 + n + 41) > 2",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      3,
+      32
+    ],
+    "claim": "For all integers n >= 0, the number of divisors of n^2 + n + 41 is even.",
+    "predicate": "n >= 0 and tau(n**2 + n + 41) % 2 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, the sum of the prime factors of n^2 + n + 41 is less than or equal to n^2 + n + 41.",
+    "predicate": "n >= 0 and sum([p for p in range(2, n**2 + n + 42) if is_prime(p) and (n**2 + n + 41) % p == 0]) <= n**2 + n + 41",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

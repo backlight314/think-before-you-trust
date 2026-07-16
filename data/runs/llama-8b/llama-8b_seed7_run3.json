@@ -1,0 +1,516 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, if n is prime then 2^n - 2 is divisible by n.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**n - 2) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "2^n - 2 is even for all n > 1.",
+    "predicate": "(n > 1) and ((2**n - 2) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [],
+    "claim": "For all integers n, n^3 - n is divisible by n.",
+    "predicate": "((n**3 - n) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n, if n is prime then n^3 - n is divisible by n.",
+    "predicate": "((n**3 - n) % n == 0) and (is_prime(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 2^n - 1.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**n - 1) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 2^n + 1.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**n + 1) % n == 0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 2^n - n.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**n - n) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      1,
+      4,
+      6
+    ],
+    "claim": "For odd n > 1, if n is prime then n divides (2^n - 2) + (2^n - 1) + (2^n - n).",
+    "predicate": "((n % 2 != 0) and (n > 1) and (is_prime(n)) and (((2**n - 2) + (2**n - 1) + (2**n - n)) % n == 0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 2^(n-1) - 1.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**(n-1) - 1) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      8
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 2^(n-1) + 1.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**(n-1) + 1) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 2^(n-2) + 1.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**(n-2) + 1) % n == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 2^(n-3) - 2.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((2**(n-3) - 2) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n, if n is prime then n^3 - n is divisible by phi(n).",
+    "predicate": "((n**3 - n) % phi(n) == 0) and is_prime(n)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12
+    ],
+    "claim": "For all integers n, if n is prime then phi(n) divides n^3 - n.",
+    "predicate": "((n**3 - n) % phi(n) == 0) and is_prime(n)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides sigma(n).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((sigma(n)) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides tau(n).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((tau(n)) % n == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n,2).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n,2)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n,3).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n,3)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n,5).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n,5)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n,7).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n,7)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n,11).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n,11)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n,13).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n,13)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides gcd(n, n-1).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((gcd(n, n-1)) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides gcd(n, n+1).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((gcd(n, n+1)) % n == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides gcd(n, n-2).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((gcd(n, n-2)) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides gcd(n, n-3).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((gcd(n, n-3)) % n == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 1 + 3 + 5 + ... + (n-1).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((sum(range(1, n)) + (n-1)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 1 + 3 + 5 + ... + (n-1) + n.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((sum(range(1, n+1)) + (n-1)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 1^2 + 2^2 + ... + (n-1)^2.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((sum(i**2 for i in range(1, n))) % n == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 1^3 + 2^3 + ... + (n-1)^3.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((sum(i**3 for i in range(1, n))) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 2^2 + 3^2 + ... + (n-1)^2.",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((sum(i**2 for i in range(2, n))) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides 1*2*3 + 2*3*4 + ... + (n-1)*(n-2)*(n-3).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and (((prod(range(1, n)) // n) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides n! / phi(n).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and (((math.factorial(n) // phi(n)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides n! / tau(n).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and (((math.factorial(n) // tau(n)) % n == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides n! / sigma(n).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and (((math.factorial(n) // sigma(n)) % n == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n, 2^2).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n, 2**2)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n, 2^3).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n, 2**3)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n, 2^4).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n, 2**4)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n, 2^5).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n, 2**5)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n, 2^6).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n, 2**6)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n, 3^2).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n, 3**2)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n, 5^2).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n, 5**2)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 1, if n is prime then n divides vp(n, 7^2).",
+    "predicate": "(not is_prime(n)) or ((n > 1) and ((vp(n, 7**2)) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

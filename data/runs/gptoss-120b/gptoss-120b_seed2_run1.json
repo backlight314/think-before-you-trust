@@ -1,0 +1,632 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 2.",
+    "predicate": "abs(gcd(n*n+1, n+1)) in (1,2)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is even then n^2+1 is odd.",
+    "predicate": "(n%2!=0) or ((n*n+1)%2==1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is odd then gcd(n^2+1,n+1)=2.",
+    "predicate": "(n%2==0) or (gcd(n*n+1,n+1)==2)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all n, n^2+1 is never divisible by 4.",
+    "predicate": "(n*n+1)%4!=0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, n^2+1 and n+1 are coprime unless n is odd.",
+    "predicate": "(n%2==0) or (gcd(n*n+1,n+1)==1)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      3,
+      4
+    ],
+    "claim": "If n is even then n^2+1 is a prime of the form 4k+1 or composite with all prime factors \u22611 (mod4).",
+    "predicate": "(n%2!=0) or (is_prime(n*n+1) and (n*n+1)%4==1) or (all(((p%4)==1) for p in [d for d in range(2,abs(n*n+1)+1) if (n*n+1)%d==0 and is_prime(d)]))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "If n is even then sigma(n^2+1) is odd.",
+    "predicate": "(n%2!=0) or (sigma(n*n+1)%2==1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      2,
+      6
+    ],
+    "claim": "If n is odd then sigma(n^2+1) is even.",
+    "predicate": "(n%2==0) or (sigma(n*n+1)%2==0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      1,
+      7
+    ],
+    "claim": "For all n, tau(n^2+1) is odd iff n is even.",
+    "predicate": "((tau(n*n+1)%2==1) == (n%2==0))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "If n \u2261 0 (mod 3) then 3 \u2224 (n^2+1).",
+    "predicate": "(n%3!=0) or ((n*n+1)%3!=0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "If n \u2261 1 (mod 3) then 3 | (n^2+1).",
+    "predicate": "(n%3!=1) or ((n*n+1)%3==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      9,
+      10
+    ],
+    "claim": "For all n, gcd(n^2+1,3)=1 unless n\u22611 (mod3).",
+    "predicate": "(gcd(n*n+1,3)==1) or (n%3==1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      4,
+      11
+    ],
+    "claim": "If n is odd then gcd(n^2+1,n+1)=2 and also gcd(n^2+1,3)=3 iff n\u22611 (mod3).",
+    "predicate": "(n%2==0) or (gcd(n*n+1,n+1)==2 and ((n%3==1) == (gcd(n*n+1,3)==3)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      2,
+      12
+    ],
+    "claim": "If n \u2261 1 (mod6) then gcd(n^2+1,n+1)=2 and 3|gcd(n^2+1,3).",
+    "predicate": "(n%6!=1) or (gcd(n*n+1,n+1)==2 and gcd(n*n+1,3)==3)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      3,
+      13
+    ],
+    "claim": "If n \u2261 1 (mod6) then n^2+1 is divisible by 2 but not by 4.",
+    "predicate": "(n%6!=1) or ((n*n+1)%2==0 and (n*n+1)%4!=0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "If n \u2261 1 (mod6) then phi(n^2+1) is even.",
+    "predicate": "(n%6!=1) or (phi(n*n+1)%2==0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      5,
+      15
+    ],
+    "claim": "If n is even then phi(n^2+1) \u2261 0 (mod4).",
+    "predicate": "(n%2!=0) or (phi(n*n+1)%4==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      8,
+      16
+    ],
+    "claim": "If n is even then both tau(n^2+1) and phi(n^2+1) are odd multiples of 2.",
+    "predicate": "(n%2!=0) or ((tau(n*n+1)%2==1) and (phi(n*n+1)%2==0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "If n \u2261 2 (mod5) then 5 | (n^2+1).",
+    "predicate": "(n%5!=2) or ((n*n+1)%5==0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "If n \u2261 3 (mod5) then 5 \u2224 (n^2+1).",
+    "predicate": "(n%5!=3) or ((n*n+1)%5!=0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18,
+      19
+    ],
+    "claim": "gcd(n^2+1,5)=5 iff n\u22612 or 3 (mod5).",
+    "predicate": "(gcd(n*n+1,5)==5) == (n%5 in (2,3))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      2,
+      20
+    ],
+    "claim": "If n is odd then gcd(n^2+1,n+1) divides 2\u00b75.",
+    "predicate": "(n%2==0) or (gcd(n*n+1,n+1) in (1,2,5,10))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "If n \u2261 1 (mod10) then gcd(n^2+1,n+1)=2 and 5|gcd(n^2+1,5).",
+    "predicate": "(n%10!=1) or (gcd(n*n+1,n+1)==2 and gcd(n*n+1,5)==5)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      14,
+      22
+    ],
+    "claim": "If n \u2261 1 (mod10) then n^2+1 \u2261 2 (mod20).",
+    "predicate": "(n%10!=1) or ((n*n+1)%20==2)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23
+    ],
+    "claim": "If n \u2261 1 (mod10) then sigma(n^2+1) is even.",
+    "predicate": "(n%10!=1) or (sigma(n*n+1)%2==0)",
+    "confidence": 0.82,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      6,
+      24
+    ],
+    "claim": "For all n, sigma(n^2+1) has the same parity as n parity.",
+    "predicate": "(sigma(n*n+1)%2)==(n%2)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      9,
+      18
+    ],
+    "claim": "If n \u2261 2 (mod15) then 3\u2224(n^2+1) and 5|(n^2+1).",
+    "predicate": "(n%15!=2) or ((n*n+1)%3!=0 and (n*n+1)%5==0)",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26
+    ],
+    "claim": "If n \u2261 2 (mod15) then gcd(n^2+1,15)=5.",
+    "predicate": "(n%15!=2) or (gcd(n*n+1,15)==5)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      27,
+      13
+    ],
+    "claim": "If n \u2261 1 (mod6) and also n \u2261 2 (mod15) then gcd(n^2+1,30)=10.",
+    "predicate": "(n%6!=1 or n%15!=2) or (gcd(n*n+1,30)==10)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "If n \u2261 11 (mod30) then n^2+1 \u2261 2 (mod60).",
+    "predicate": "(n%30!=11) or ((n*n+1)%60==2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      5,
+      29
+    ],
+    "claim": "If n \u2261 11 (mod30) then n^2+1 is a product of primes all \u22611 (mod4).",
+    "predicate": "(n%30!=11) or (all(((p%4)==1) for p in [d for d in range(2,abs(n*n+1)+1) if (n*n+1)%d==0 and is_prime(d)]))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a multiple of 7 then 7 \u2224 (n^2+1).",
+    "predicate": "(n%7!=0) or ((n*n+1)%7!=0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31
+    ],
+    "claim": "If n \u2261 3 (mod7) then 7 | (n^2+1).",
+    "predicate": "(n%7!=3) or ((n*n+1)%7==0)",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      31,
+      32
+    ],
+    "claim": "gcd(n^2+1,7)=7 iff n\u22613 or 4 (mod7).",
+    "predicate": "(gcd(n*n+1,7)==7) == (n%7 in (3,4))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33,
+      2
+    ],
+    "claim": "If n is odd and n\u22613 (mod7) then gcd(n^2+1,n+1)=2 and also 7|gcd(n^2+1,7).",
+    "predicate": "(n%2==0 or n%7!=3) or (gcd(n*n+1,n+1)==2 and gcd(n*n+1,7)==7)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34,
+      15
+    ],
+    "claim": "If n \u2261 3 (mod14) then phi(n^2+1) \u2261 0 (mod8).",
+    "predicate": "(n%14!=3) or (phi(n*n+1)%8==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      8,
+      35
+    ],
+    "claim": "If n \u2261 3 (mod14) then tau(n^2+1) is odd and phi(n^2+1) is multiple of 8.",
+    "predicate": "(n%14!=3) or ((tau(n*n+1)%2==1) and (phi(n*n+1)%8==0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a square then gcd(n^2+1,n+1) divides 2.",
+    "predicate": "(int(math.isqrt(abs(n)))**2!=abs(n)) or (abs(gcd(n*n+1,n+1)) in (1,2))",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37
+    ],
+    "claim": "If n=k^2 with k even then n^2+1 \u2261 1 (mod8).",
+    "predicate": "(int(math.isqrt(abs(n)))**2!=abs(n) or int(math.isqrt(abs(n)))%2!=0) or ((n*n+1)%8==1)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      6
+    ],
+    "claim": "If n is an even square then sigma(n^2+1) is odd.",
+    "predicate": "(int(math.isqrt(abs(n)))**2!=abs(n) or int(math.isqrt(abs(n)))%2!=0) or (sigma(n*n+1)%2==1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      3,
+      39
+    ],
+    "claim": "If n is an even square then n^2+1 is not divisible by 8.",
+    "predicate": "(int(math.isqrt(abs(n)))**2!=abs(n) or int(math.isqrt(abs(n)))%2!=0) or ((n*n+1)%8!=0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      10,
+      20
+    ],
+    "claim": "If n \u2261 1 (mod3) and n \u2261 2 (mod5) then 15 | (n^2+1).",
+    "predicate": "(n%3!=1 or n%5!=2) or ((n*n+1)%15==0)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41,
+      28
+    ],
+    "claim": "If n \u2261 11 (mod30) then 30 | (n^2+1).",
+    "predicate": "(n%30!=11) or ((n*n+1)%30==0)",
+    "confidence": 0.72,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42,
+      15
+    ],
+    "claim": "If 30 | (n^2+1) then phi(n^2+1) is divisible by 8.",
+    "predicate": "((n*n+1)%30!=0) or (phi(n*n+1)%8==0)",
+    "confidence": 0.66,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      24
+    ],
+    "claim": "If 30 | (n^2+1) then sigma(n^2+1) is even.",
+    "predicate": "((n*n+1)%30!=0) or (sigma(n*n+1)%2==0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      22,
+      33
+    ],
+    "claim": "If n \u2261 1 (mod10) and n \u2261 3 (mod7) then gcd(n^2+1,70)=14.",
+    "predicate": "(n%10!=1 or n%7!=3) or (gcd(n*n+1,70)==14)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      35
+    ],
+    "claim": "If gcd(n^2+1,70)=14 then phi(n^2+1) \u2261 0 (mod16).",
+    "predicate": "(gcd(n*n+1,70)!=14) or (phi(n*n+1)%16==0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      30
+    ],
+    "claim": "If n \u2261 11 (mod30) and phi(n^2+1) \u22610 (mod16) then all prime divisors of n^2+1 are \u22611 (mod8).",
+    "predicate": "(n%30!=11 or phi(n*n+1)%16!=0) or (all(((p%8)==1) for p in [d for d in range(2,abs(n*n+1)+1) if (n*n+1)%d==0 and is_prime(d)]))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      12,
+      27
+    ],
+    "claim": "If n \u2261 1 (mod6) and n \u2261 2 (mod15) then gcd(n^2+1,210)=30.",
+    "predicate": "(n%6!=1 or n%15!=2) or (gcd(n*n+1,210)==30)",
+    "confidence": 0.58,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      47
+    ],
+    "claim": "If gcd(n^2+1,210)=30 then sigma(n^2+1) \u2261 0 (mod4).",
+    "predicate": "(gcd(n*n+1,210)!=30) or (sigma(n*n+1)%4==0)",
+    "confidence": 0.55,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

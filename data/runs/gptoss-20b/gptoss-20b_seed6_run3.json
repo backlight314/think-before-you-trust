@@ -1,0 +1,618 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 is congruent to 1 modulo 24.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n*n % 24 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by 24.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by 8.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n*n - 1) % 8 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by 3.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n*n - 1) % 3 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      2,
+      3
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by 24 by combining divisibility by 8 and 3.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 is congruent to 1 modulo 16.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**4 % 16 == 1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 is congruent to 1 modulo 3.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**4 % 3 == 1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      5,
+      6
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 is congruent to 1 modulo 48.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**4 % 48 == 1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 - 1 is divisible by 6 for all odd n.",
+    "predicate": "(n % 2 == 0) or ((n*n - 1) % 6 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      8
+    ],
+    "claim": "For all integers n, n^2 - 1 is divisible by 12 for all odd n.",
+    "predicate": "(n % 2 == 0) or ((n*n - 1) % 12 == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n, n^2 - 1 is divisible by 24 for all odd n.",
+    "predicate": "(n % 2 == 0) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      1,
+      10
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by 24 by combining prime condition and odd condition.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n*n - 1) % 24 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^3 is congruent to n modulo 6.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**3 % 6 == n % 6)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^3 - n is divisible by 6.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**3 - n) % 6 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^5 is congruent to n modulo 5.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**5 % 5 == n % 5)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^5 - n is divisible by 5.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**5 - n) % 5 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      12,
+      15
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^5 - n is divisible by 30.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**5 - n) % 30 == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 is congruent to n modulo 7.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**7 % 7 == n % 7)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 - n is divisible by 7.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**7 - n) % 7 == 0)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      16,
+      18
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 - n is divisible by 210.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**7 - n) % 210 == 0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then phi(n) = n-1.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (phi(n) == n-1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then sigma(n) = n+1.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (sigma(n) == n+1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then tau(n) = 2.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (tau(n) == 2)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then sigma(n) = tau(n) * (n+1)/2.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (sigma(n) == tau(n) * (n+1)//2)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then sigma(n) = tau(n) * phi(n)/2.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (sigma(n) == tau(n) * phi(n)//2)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by 12 by combining 8 and 3 from earlier.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n*n - 1) % 12 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25,
+      13
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 and n^3 - n are both divisible by 12.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (((n*n - 1) % 12 == 0) and ((n**3 - n) % 12 == 0))",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26,
+      18
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1, n^3 - n, and n^7 - n are all divisible by 210.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (((n*n - 1) % 210 == 0) and ((n**3 - n) % 210 == 0) and ((n**7 - n) % 210 == 0))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 - n is divisible by 210 and n^5 - n is divisible by 30, hence lcm(210,30)=210, so n^7 - n is divisible by 210.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**7 - n) % 210 == 0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 - n is divisible by 105.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**7 - n) % 105 == 0)",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^8 is congruent to 1 modulo 16.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**8 % 16 == 1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^8 - 1 is divisible by 16.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**8 - 1) % 16 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      2
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^8 - 1 is divisible by 24.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**8 - 1) % 24 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      32,
+      19
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^8 - 1 is divisible by 210.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**8 - 1) % 210 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^11 is congruent to n modulo 11.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**11 % 11 == n % 11)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^11 - n is divisible by 11.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**11 - n) % 11 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35,
+      18
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^11 - n is divisible by 77.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**11 - n) % 77 == 0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36,
+      19
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^11 - n is divisible by 2310.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**11 - n) % 2310 == 0)",
+    "confidence": 0.82,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then vp(n^2-1,2) >= 3.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (vp(n*n-1,2) >= 3)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then vp(n^2-1,3) >= 1.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (vp(n*n-1,3) >= 1)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      38,
+      39
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then vp(n^2-1,6) >= 4.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (vp(n*n-1,6) >= 4)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40,
+      32
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2-1 is divisible by 24 and vp(n^2-1,6)>=4 implies n^2-1 is divisible by 48.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (((n*n-1) % 48 == 0))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41,
+      33
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2-1 is divisible by 210 and vp(n^2-1,6)>=4 implies n^2-1 is divisible by 420.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (((n*n-1) % 420 == 0))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42,
+      27
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2-1, n^3-n, n^7-n, n^11-n are all divisible by 420.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (((n*n-1)%420==0) and ((n**3-n)%420==0) and ((n**7-n)%420==0) and ((n**11-n)%420==0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then the product (n^2-1)(n^3-n)(n^7-n)(n^11-n) is divisible by 420^4.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (((n*n-1)*(n**3-n)*(n**7-n)*(n**11-n)) % (420**4) == 0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then the sum of the divisors of n^2-1 is divisible by 420.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (sigma(n*n-1) % 420 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then sigma(n^2-1) is even.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (sigma(n*n-1) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      19
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then sigma(n^2-1) is divisible by 210.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (sigma(n*n-1) % 210 == 0)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      33
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then sigma(n^2-1) is divisible by 420.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (sigma(n*n-1) % 420 == 0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      29
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then sigma(n^2-1) is divisible by 1050.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (sigma(n*n-1) % 1050 == 0)",
+    "confidence": 0.6,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

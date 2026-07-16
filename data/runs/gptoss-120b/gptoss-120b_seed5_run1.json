@@ -1,0 +1,637 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n \u2265 1, sigma(n) * phi(n) \u2264 n^2.",
+    "predicate": "(n<1) or (sigma(n)*phi(n) <= n*n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is even then sigma(n) \u2264 2n.",
+    "predicate": "(n%2)!=0 or (sigma(n) <= 2*n)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is a perfect square then phi(n) divides n.",
+    "predicate": "(int(math.isqrt(abs(n)))**2 != abs(n)) or (n % phi(n) == 0)",
+    "confidence": 0.72,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For even n that are perfect squares, sigma(n) \u2264 n + sqrt(n).",
+    "predicate": "(n%2)!=0 or (int(math.isqrt(abs(n)))**2 != abs(n)) or (sigma(n) <= n + int(math.isqrt(abs(n))))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "If n is odd then phi(n) \u2265 sqrt(n).",
+    "predicate": "(n%2)==0 or (phi(n) >= math.isqrt(abs(n)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "If n is even then phi(n) is at most n/2.",
+    "predicate": "(n%2)!=0 or (phi(n) <= n//2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2,
+      5
+    ],
+    "claim": "If n is a square and even then sigma(n) is divisible by 3.",
+    "predicate": "(int(math.isqrt(abs(n)))**2 != abs(n)) or (n%2)!=0 or (sigma(n)%3==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3,
+      5
+    ],
+    "claim": "If n is even and sigma(n) \u2264 2n then n is not a prime power greater than 2.",
+    "predicate": "(n%2)!=0 or (sigma(n) > 2*n) or (any(is_prime(p) and vp(n,p)==int(round(math.log(abs(n),p))) and p>2 for p in range(2,abs(n)+1))) == False",
+    "confidence": 0.58,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, sigma(n) \u2265 n + 1.",
+    "predicate": "sigma(n) >= abs(n)+1",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      4,
+      8
+    ],
+    "claim": "If n is odd then sigma(n) is even.",
+    "predicate": "(n%2)==0 or (sigma(n)%2==0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      5,
+      9
+    ],
+    "claim": "If n is even and sigma(n) is even then phi(n) is divisible by 4.",
+    "predicate": "(n%2)!=0 or (sigma(n)%2!=0) or (phi(n)%4==0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2,
+      8
+    ],
+    "claim": "If n is a square then sigma(n) \u2265 3*sqrt(n).",
+    "predicate": "(int(math.isqrt(abs(n)))**2 != abs(n)) or (sigma(n) >= 3*math.isqrt(abs(n)))",
+    "confidence": 0.63,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      3,
+      11
+    ],
+    "claim": "If n is even and a square then sigma(n) \u2264 4*sqrt(n).",
+    "predicate": "(n%2)!=0 or (int(math.isqrt(abs(n)))**2 != abs(n)) or (sigma(n) <= 4*math.isqrt(abs(n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      6,
+      10
+    ],
+    "claim": "If n is even, square and sigma(n) divisible by 3 then phi(n) is divisible by 6.",
+    "predicate": "(n%2)!=0 or (int(math.isqrt(abs(n)))**2 != abs(n)) or (sigma(n)%3!=0) or (phi(n)%6==0)",
+    "confidence": 0.57,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, tau(n) \u2264 sigma(n).",
+    "predicate": "tau(n) <= sigma(n)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      4,
+      14
+    ],
+    "claim": "If n is odd then tau(n) \u2264 (n+1)/2.",
+    "predicate": "(n%2)==0 or (tau(n) <= (abs(n)+1)//2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      5,
+      14
+    ],
+    "claim": "If n is even then tau(n) \u2264 n/3.",
+    "predicate": "(n%2)!=0 or (tau(n) <= abs(n)//3)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      9,
+      15
+    ],
+    "claim": "If n is odd and sigma(n) is even then tau(n) is odd.",
+    "predicate": "(n%2)==0 or (sigma(n)%2!=0) or (tau(n)%2==1)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      10,
+      16
+    ],
+    "claim": "If n is even, sigma(n) even and phi(n) divisible by 4 then tau(n) is divisible by 3.",
+    "predicate": "(n%2)!=0 or (sigma(n)%2!=0) or (phi(n)%4!=0) or (tau(n)%3==0)",
+    "confidence": 0.52,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      1,
+      14
+    ],
+    "claim": "If n is even then sigma(n) \u2264 3 * tau(n).",
+    "predicate": "(n%2)!=0 or (sigma(n) <= 3*tau(n))",
+    "confidence": 0.66,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      2,
+      19
+    ],
+    "claim": "If n is a square and even then sigma(n) \u2264 2 * tau(n) * sqrt(n).",
+    "predicate": "(int(math.isqrt(abs(n)))**2 != abs(n)) or (n%2)!=0 or (sigma(n) <= 2*tau(n)*math.isqrt(abs(n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      7,
+      13
+    ],
+    "claim": "If n is even, not a prime power >2, and sigma(n) divisible by 3 then phi(n) is divisible by 12.",
+    "predicate": "(n%2)!=0 or (any(is_prime(p) and vp(n,p)==int(round(math.log(abs(n),p))) and p>2 for p in range(2,abs(n)+1))) or (sigma(n)%3!=0) or (phi(n)%12==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      3,
+      15
+    ],
+    "claim": "If n is even, sigma(n) \u2264 2n and n is odd\u2011indexed (n%4==2) then tau(n) \u2264 sqrt(n).",
+    "predicate": "(n%2)!=0 or (sigma(n) > 2*n) or (n%4)!=2 or (tau(n) <= math.isqrt(abs(n)))",
+    "confidence": 0.58,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, phi(n) \u2265 sqrt(n)/2.",
+    "predicate": "phi(n) >= math.isqrt(abs(n))/2",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23,
+      4
+    ],
+    "claim": "If n is odd then phi(n) \u2265 (n+1)/3.",
+    "predicate": "(n%2)==0 or (phi(n) >= (abs(n)+1)//3)",
+    "confidence": 0.62,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      5,
+      23
+    ],
+    "claim": "If n is even then phi(n) \u2265 n/4.",
+    "predicate": "(n%2)!=0 or (phi(n) >= abs(n)/4)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      12,
+      20
+    ],
+    "claim": "If n is even square then sigma(n) \u2264 5*sqrt(n).",
+    "predicate": "(n%2)!=0 or (int(math.isqrt(abs(n)))**2 != abs(n)) or (sigma(n) <= 5*math.isqrt(abs(n)))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      11,
+      24
+    ],
+    "claim": "If n is a square and odd then phi(n) is divisible by sqrt(n).",
+    "predicate": "(int(math.isqrt(abs(n)))**2 != abs(n)) or (n%2)!=0 or (phi(n) % math.isqrt(abs(n)) == 0)",
+    "confidence": 0.53,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      9,
+      27
+    ],
+    "claim": "If n is odd, sigma(n) even and phi(n) divisible by sqrt(n) then tau(n) is odd.",
+    "predicate": "(n%2)==0 or (sigma(n)%2!=0) or (phi(n) % math.isqrt(abs(n)) !=0) or (tau(n)%2==1)",
+    "confidence": 0.51,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      13,
+      21
+    ],
+    "claim": "If n is even, sigma(n) divisible by 3 and phi(n) divisible by 12 then tau(n) is divisible by 6.",
+    "predicate": "(n%2)!=0 or (sigma(n)%3!=0) or (phi(n)%12!=0) or (tau(n)%6==0)",
+    "confidence": 0.49,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, sigma(n) \u2264 n * tau(n).",
+    "predicate": "sigma(n) <= abs(n)*tau(n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30,
+      1
+    ],
+    "claim": "If n is even then sigma(n) \u2264 n * (tau(n)/2).",
+    "predicate": "(n%2)!=0 or (sigma(n) <= abs(n)*(tau(n)//2))",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      19
+    ],
+    "claim": "If n is even then sigma(n) \u2264 (3/2) * n * sqrt(n).",
+    "predicate": "(n%2)!=0 or (sigma(n) <= 1.5*abs(n)*math.isqrt(abs(n)))",
+    "confidence": 0.57,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      2,
+      30
+    ],
+    "claim": "If n is a square then sigma(n) \u2264 n * sqrt(n).",
+    "predicate": "(int(math.isqrt(abs(n)))**2 != abs(n)) or (sigma(n) <= abs(n)*math.isqrt(abs(n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33,
+      12
+    ],
+    "claim": "If n is even square then sigma(n) \u2264 n * sqrt(n) / 2.",
+    "predicate": "(n%2)!=0 or (int(math.isqrt(abs(n)))**2 != abs(n)) or (sigma(n) <= abs(n)*math.isqrt(abs(n))//2)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      8,
+      14
+    ],
+    "claim": "For all n, sigma(n) - n \u2264 n * (tau(n)-1).",
+    "predicate": "(sigma(n) - abs(n)) <= abs(n)*(tau(n)-1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35,
+      20
+    ],
+    "claim": "If n is even square then sigma(n) - n \u2264 n * (sqrt(n)-1).",
+    "predicate": "(n%2)!=0 or (int(math.isqrt(abs(n)))**2 != abs(n)) or ((sigma(n)-abs(n)) <= abs(n)*(math.isqrt(abs(n))-1))",
+    "confidence": 0.58,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, phi(n) divides sigma(n) when n is a product of two distinct primes.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and vp(n,p)>0])!=2) or (sigma(n)%phi(n)==0)",
+    "confidence": 0.62,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37,
+      5
+    ],
+    "claim": "If n is even semiprime then sigma(n) is a multiple of 4.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and vp(n,p)>0])!=2) or (n%2)!=0 or (sigma(n)%4==0)",
+    "confidence": 0.54,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      21
+    ],
+    "claim": "If n is even semiprime with sigma(n) divisible by 3 then phi(n) is divisible by 8.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and vp(n,p)>0])!=2) or (n%2)!=0 or (sigma(n)%3!=0) or (phi(n)%8==0)",
+    "confidence": 0.48,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, sigma(n) \u2264 n * (1 + 1/2 + ... + 1/p) where p is the largest prime divisor of n.",
+    "predicate": "(abs(n)==0) or (sigma(n) <= abs(n)*sum(1/p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40,
+      14
+    ],
+    "claim": "If n has at least three distinct prime factors then sigma(n) \u2264 2n.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])<3) or (sigma(n) <= 2*abs(n))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41,
+      19
+    ],
+    "claim": "If n has \u22653 prime factors and is even then sigma(n) \u2264 1.5 n.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])<3) or (n%2)!=0 or (sigma(n) <= 1.5*abs(n))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, phi(n) is even for n>2.",
+    "predicate": "(abs(n)<=2) or (phi(n)%2==0)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      5
+    ],
+    "claim": "If n is even and >2 then phi(n) is divisible by 4.",
+    "predicate": "(n%2)!=0 or (abs(n)<=2) or (phi(n)%4==0)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44,
+      21
+    ],
+    "claim": "If n is even, not a prime power >2 and phi(n) divisible by 4 then sigma(n) is divisible by 8.",
+    "predicate": "(n%2)!=0 or (any(is_prime(p) and vp(n,p)==int(round(math.log(abs(n),p))) and p>2 for p in range(2,abs(n)+1))) or (phi(n)%4!=0) or (sigma(n)%8==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, tau(n) \u2264 2*sqrt(n).",
+    "predicate": "tau(n) <= 2*math.isqrt(abs(n))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      16
+    ],
+    "claim": "If n is even then tau(n) \u2264 sqrt(n).",
+    "predicate": "(n%2)!=0 or (tau(n) <= math.isqrt(abs(n)))",
+    "confidence": 0.72,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      22
+    ],
+    "claim": "If n is even, sigma(n) \u2264 2n and n\u22612 (mod 4) then tau(n) \u2264 sqrt(n)/2.",
+    "predicate": "(n%2)!=0 or (sigma(n) > 2*abs(n)) or (n%4)!=2 or (tau(n) <= math.isqrt(abs(n))//2)",
+    "confidence": 0.56,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      0
+    ],
+    "claim": "For all n, sigma(n) * phi(n) is congruent to 0 modulo n.",
+    "predicate": "(n==0) or ((sigma(n)*phi(n)) % abs(n) == 0)",
+    "confidence": 0.67,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

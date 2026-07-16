@@ -1,0 +1,492 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "n < 1 or (tau(n) % 2 == 1) == (int(n**0.5)**2 == n)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then the sum of its divisors is odd.",
+    "predicate": "n < 1 or (int(n**0.5)**2 == n) ==> (sigma(n) % 2 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is not a perfect square, then the number of divisors of n is even.",
+    "predicate": "n < 1 or (int(n**0.5)**2 != n) ==> (tau(n) % 2 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if the sum of divisors of n is even, then n is not a perfect square.",
+    "predicate": "n < 1 or (sigma(n) % 2 == 0) ==> (int(n**0.5)**2 != n)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is twice a perfect square, then the number of divisors of n is even.",
+    "predicate": "n < 1 or (n % 2 == 0 and int((n//2)**0.5)**2 == n//2) ==> (tau(n) % 2 == 0)",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 1, the sum of divisors of n is odd if and only if n is a perfect square or twice a perfect square.",
+    "predicate": "n < 1 or (sigma(n) % 2 == 1) == (int(n**0.5)**2 == n or (n % 2 == 0 and int((n//2)**0.5)**2 == n//2))",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and odd, then the number of its odd divisors is odd.",
+    "predicate": "n < 1 or ((int(n**0.5)**2 == n) and (n % 2 == 1)) ==> (sum(d for d in range(1, n+1) if n % d == 0 and d % 2 == 1) % 2 == 1)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and divisible by 4, then the number of its divisors congruent to 1 mod 4 is odd.",
+    "predicate": "n < 1 or ((int(n**0.5)**2 == n) and (n % 4 == 0)) ==> (sum(1 for d in range(1, n+1) if n % d == 0 and d % 4 == 1) % 2 == 1)",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n >= 1, if the number of odd divisors of n is odd, then n is a perfect square.",
+    "predicate": "n < 1 or (sum(d for d in range(1, n+1) if n % d == 0 and d % 2 == 1) % 2 == 1) ==> (int(n**0.5)**2 == n)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then the average of its divisors is an integer.",
+    "predicate": "n < 1 or (int(n**0.5)**2 == n) ==> (sigma(n) % tau(n) == 0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      8
+    ],
+    "claim": "For all integers n >= 1, n is a perfect square if and only if the number of its odd divisors is odd and the number of its even divisors is even.",
+    "predicate": "n < 1 or ((sum(d for d in range(1, n+1) if n % d == 0 and d % 2 == 1) % 2 == 1) and (sum(1 for d in range(1, n+1) if n % d == 0 and d % 2 == 0) % 2 == 0)) == (int(n**0.5)**2 == n)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then the product of its divisors is a perfect square.",
+    "predicate": "n < 1 or (int(n**0.5)**2 == n) ==> (int((prod(d for d in range(1, n+1) if n % d == 0))**0.5)**2 == prod(d for d in range(1, n+1) if n % d == 0))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "For all integers n >= 1, if the product of the divisors of n is a perfect square, then n is a perfect square.",
+    "predicate": "n < 1 or (int((prod(d for d in range(1, n+1) if n % d == 0))**0.5)**2 == prod(d for d in range(1, n+1) if n % d == 0)) ==> (int(n**0.5)**2 == n)",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then tau(n) is congruent to 1 mod 4 if n is odd, and to 0 or 2 mod 4 if n is even.",
+    "predicate": "n < 1 or (int(n**0.5)**2 == n) ==> ((n % 2 == 1 and tau(n) % 4 == 1) or (n % 2 == 0 and tau(n) % 4 in [0,2]))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "For all integers n >= 1, if tau(n) \u2261 3 mod 4, then n is not a perfect square.",
+    "predicate": "n < 1 or (tau(n) % 4 == 3) ==> (int(n**0.5)**2 != n)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and square-free, then n = 1.",
+    "predicate": "n < 1 or ((int(n**0.5)**2 == n) and all(vp(n, p) <= 1 for p in range(2, n+1) if is_prime(p))) ==> (n == 1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n > 1 and n is a perfect square, then n is not square-free.",
+    "predicate": "n < 1 or (n > 1 and int(n**0.5)**2 == n) ==> (not all(vp(n, p) <= 1 for p in range(2, n+1) if is_prime(p)))",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then phi(n) is even.",
+    "predicate": "n < 1 or (int(n**0.5)**2 == n) ==> (phi(n) % 2 == 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      17
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is odd, then n is not a perfect square.",
+    "predicate": "n < 1 or (phi(n) % 2 == 1) ==> (int(n**0.5)**2 != n)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and n > 1, then sigma(n) > 2n - 1.",
+    "predicate": "n < 1 or (int(n**0.5)**2 == n and n > 1) ==> (sigma(n) > 2*n - 1)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      1,
+      19
+    ],
+    "claim": "For all integers n >= 1, if sigma(n) <= 2n - 1, then n is not a perfect square.",
+    "predicate": "n < 1 or (sigma(n) <= 2*n - 1) ==> (int(n**0.5)**2 != n)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and prime, then n = 1.",
+    "predicate": "n < 1 or ((int(n**0.5)**2 == n) and is_prime(n)) ==> (n == 1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      21
+    ],
+    "claim": "For all integers n >= 1, if n is a prime and n > 1, then n is not a perfect square.",
+    "predicate": "n < 1 or (is_prime(n) and n > 1) ==> (int(n**0.5)**2 != n)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      17
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is even and tau(n) is odd, then n is a perfect square.",
+    "predicate": "n < 1 or ((phi(n) % 2 == 0) and (tau(n) % 2 == 1)) ==> (int(n**0.5)**2 == n)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is not a perfect square, then phi(n) is even and tau(n) is even.",
+    "predicate": "n < 1 or (int(n**0.5)**2 != n) ==> ((phi(n) % 2 == 0) and (tau(n) % 2 == 0))",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      11,
+      18
+    ],
+    "claim": "For all integers n >= 1, if the product of the divisors of n is a perfect square and phi(n) is odd, then n = 1.",
+    "predicate": "n < 1 or ((int((prod(d for d in range(1, n+1) if n % d == 0))**0.5)**2 == prod(d for d in range(1, n+1) if n % d == 0)) and (phi(n) % 2 == 1)) ==> (n == 1)",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      23
+    ],
+    "claim": "For all integers n >= 1, n is a perfect square if and only if phi(n) is even and tau(n) is odd.",
+    "predicate": "n < 1 or ((phi(n) % 2 == 0) and (tau(n) % 2 == 1)) == (int(n**0.5)**2 == n)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "For all integers n >= 1, if n is not a perfect square, then either phi(n) is odd or tau(n) is odd, but not both.",
+    "predicate": "n < 1 or (int(n**0.5)**2 != n) ==> ((phi(n) % 2 == 1) != (tau(n) % 2 == 1))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      26
+    ],
+    "claim": "For all integers n >= 1, if n is not a perfect square, then at least one of phi(n) or tau(n) is odd.",
+    "predicate": "n < 1 or (int(n**0.5)**2 != n) ==> (phi(n) % 2 == 1 or tau(n) % 2 == 1)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      1,
+      26
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then both phi(n) is even and the sum of divisors is odd.",
+    "predicate": "n < 1 or (int(n**0.5)**2 == n) ==> ((phi(n) % 2 == 0) and (sigma(n) % 2 == 1))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      5,
+      26
+    ],
+    "claim": "For all integers n >= 1, n is a perfect square if and only if both tau(n) is odd and sigma(n) is odd.",
+    "predicate": "n < 1 or ((tau(n) % 2 == 1) and (sigma(n) % 2 == 1)) == (int(n**0.5)**2 == n)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      25,
+      29
+    ],
+    "claim": "For all integers n >= 1, if n > 1 and the product of its divisors is a perfect square and both phi(n) and sigma(n) are even, then n is not a perfect square.",
+    "predicate": "n < 1 or (n > 1 and int((prod(d for d in range(1, n+1) if n % d == 0))**0.5)**2 == prod(d for d in range(1, n+1) if n % d == 0) and phi(n) % 2 == 0 and sigma(n) % 2 == 0) ==> (int(n**0.5)**2 != n)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0,
+      17,
+      20
+    ],
+    "claim": "For all integers n >= 1, if n is not a perfect square and sigma(n) <= 2n - 1, then phi(n) is even.",
+    "predicate": "n < 1 or ((int(n**0.5)**2 != n) and (sigma(n) <= 2*n - 1)) ==> (phi(n) % 2 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      14,
+      28
+    ],
+    "claim": "For all integers n >= 1, if tau(n) \u2261 3 mod 4, then phi(n) is even.",
+    "predicate": "n < 1 or (tau(n) % 4 == 3) ==> (phi(n) % 2 == 0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      8,
+      28
+    ],
+    "claim": "For all integers n >= 1, if the number of odd divisors of n is odd, then phi(n) is even.",
+    "predicate": "n < 1 or (sum(d for d in range(1, n+1) if n % d == 0 and d % 2 == 1) % 2 == 1) ==> (phi(n) % 2 == 0)",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0,
+      29,
+      33
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and tau(n) \u2261 3 mod 4, then n = 1.",
+    "predicate": "n < 1 or ((int(n**0.5)**2 == n) and (tau(n) % 4 == 3)) ==> (n == 1)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0,
+      13,
+      26
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and tau(n) \u2261 1 mod 4, then n is odd.",
+    "predicate": "n < 1 or ((int(n**0.5)**2 == n) and (tau(n) % 4 == 1)) ==> (n % 2 == 1)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0,
+      1,
+      36
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square and sigma(n) is odd and tau(n) \u2261 1 mod 4, then n is an odd perfect square.",
+    "predicate": "n < 1 or ((int(n**0.5)**2 == n) and (sigma(n) % 2 == 1) and (tau(n) % 4 == 1)) ==> (n % 2 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

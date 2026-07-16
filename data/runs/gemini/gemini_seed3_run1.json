@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the square of the sum of the first n integers equals the sum of their cubes.",
+    "predicate": "(n < 1) or (sum(range(1, n+1))**2 == sum(i**3 for i in range(1, n+1)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is divisible by n.",
+    "predicate": "(n < 1) or (sum(i**3 for i in range(1, n+1)) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is divisible by n+1.",
+    "predicate": "(n < 1) or (sum(i**3 for i in range(1, n+1)) % (n+1) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1, 2],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is divisible by the triangular number n(n+1)/2.",
+    "predicate": "(n < 1) or (sum(i**3 for i in range(1, n+1)) % (n*(n+1)//2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [0],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is a perfect square.",
+    "predicate": "(n < 1) or (round(sum(i**3 for i in range(1, n+1))**0.5)**2 == sum(i**3 for i in range(1, n+1)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [0],
+    "claim": "For all integers n >= 1, the sum of the first n odd cubes is equal to n^2 * (2n^2 - 1).",
+    "predicate": "(n < 1) or (sum((2*i-1)**3 for i in range(1, n+1)) == n**2 * (2*n**2 - 1))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 6,
+    "parents": [0],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is odd if and only if n modulo 4 is 1 or 2.",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) % 2 == 1) == (n % 4 in [1, 2]))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [1, 3],
+    "claim": "For all integers n >= 1, if n is odd, then the sum of the first n cubes is divisible by n^2.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (sum(i**3 for i in range(1, n+1)) % (n**2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [2, 3],
+    "claim": "For all integers n >= 1, if n is even, then the sum of the first n cubes is divisible by (n+1)^2.",
+    "predicate": "(n < 1) or (n % 2 == 1) or (sum(i**3 for i in range(1, n+1)) % ((n+1)**2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [4, 6],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is divisible by 8 if and only if n modulo 8 is 0 or 7.",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) % 8 == 0) == (n % 8 in [0, 7]))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 10,
+    "parents": [0],
+    "claim": "For all integers n >= 1, 12 times the sum of the first n fifth powers equals n^2 * (n+1)^2 * (2n^2 + 2n - 1).",
+    "predicate": "(n < 1) or (sum(i**5 for i in range(1, n+1)) * 12 == n**2 * (n+1)**2 * (2*n**2 + 2*n - 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [0, 10],
+    "claim": "For all integers n >= 1, the sum of the first n fifth powers is divisible by the sum of the first n cubes.",
+    "predicate": "(n < 1) or (sum(i**5 for i in range(1, n+1)) % sum(i**3 for i in range(1, n+1)) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [0, 10, 11],
+    "claim": "For all integers n >= 1, 3 times the sum of the first n fifth powers divided by the sum of the first n cubes equals 2n^2 + 2n - 1.",
+    "predicate": "(n < 1) or (sum(i**5 for i in range(1, n+1)) * 3 == sum(i**3 for i in range(1, n+1)) * (2*n**2 + 2*n - 1))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 13,
+    "parents": [10],
+    "claim": "For all integers n >= 1, the sum of the first n fifth powers is divisible by the triangular number n(n+1)/2.",
+    "predicate": "(n < 1) or (sum(i**5 for i in range(1, n+1)) % (n*(n+1)//2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 14,
+    "parents": [3, 7],
+    "claim": "For all integers n >= 1, if n is congruent to 1 modulo 3, the sum of the first n cubes is divisible by 9.",
+    "predicate": "(n < 1) or (n % 3 != 1) or (sum(i**3 for i in range(1, n+1)) % 9 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 15,
+    "parents": [3, 8],
+    "claim": "For all integers n >= 1, if n is congruent to 2 modulo 3, the sum of the first n cubes is divisible by 9.",
+    "predicate": "(n < 1) or (n % 3 != 2) or (sum(i**3 for i in range(1, n+1)) % 9 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 16,
+    "parents": [0],
+    "claim": "For all integers n >= 1, 24 times the sum of the first n seventh powers equals n^2 * (n+1)^2 * (3n^4 + 6n^3 - n^2 - 4n + 2).",
+    "predicate": "(n < 1) or (sum(i**7 for i in range(1, n+1)) * 24 == n**2 * (n+1)**2 * (3*n**4 + 6*n**3 - n**2 - 4*n + 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [0, 16],
+    "claim": "For all integers n >= 1, the sum of the first n seventh powers is divisible by the sum of the first n cubes.",
+    "predicate": "(n < 1) or (sum(i**7 for i in range(1, n+1)) % sum(i**3 for i in range(1, n+1)) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [7, 8],
+    "claim": "For all integers n >= 1, if n is an odd prime, the sum of the first n-1 cubes is divisible by n^2.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (sum(i**3 for i in range(1, n)) % (n**2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [0],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is congruent to the square of the sum of the first n integers modulo n.",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) - sum(range(1, n+1))**2) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [1, 2],
+    "claim": "For all integers n >= 1, if n is prime, then the square of the divisor sum sigma(n) minus 1 is divisible by n.",
+    "predicate": "(n < 1) or (not is_prime(n)) or ((sigma(n)**2 - 1) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [],
+    "claim": "For all integers n >= 3, the Euler totient function phi(n) is even.",
+    "predicate": "(n < 3) or (phi(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [18, 21],
+    "claim": "For all integers n >= 1, if n is an odd prime, the sum of the first n-1 cubes is divisible by phi(n).",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (sum(i**3 for i in range(1, n)) % phi(n) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [],
+    "claim": "For all integers n > 2, the divisor sum sigma(n) is strictly less than n * sqrt(n).",
+    "predicate": "(n <= 2) or (sigma(n) < n * (n**0.5))",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 24,
+    "parents": [2, 20],
+    "claim": "For all integers n >= 1, if n is prime, the divisor sum sigma(n) is equal to n + 1.",
+    "predicate": "(n < 1) or (not is_prime(n)) or (sigma(n) == n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [8, 24],
+    "claim": "For all integers n >= 1, if n is prime, the sum of the first n cubes is divisible by sigma(n)^2.",
+    "predicate": "(n < 1) or (not is_prime(n)) or (sum(i**3 for i in range(1, n+1)) % (sigma(n)**2) == 0)",
+    "confidence": 0.8,
+    "is_terminal": true
+  },
+  {
+    "node_id": 26,
+    "parents": [3, 18],
+    "claim": "For all integers n >= 1, if n is prime, the sum of the first n-1 cubes is divisible by n(n-1)/2.",
+    "predicate": "(n < 2) or (not is_prime(n)) or (sum(i**3 for i in range(1, n)) % (n*(n-1)//2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [],
+    "claim": "For all integers n >= 1, 6 times the sum of the first n squares equals n * (n+1) * (2n+1).",
+    "predicate": "(n < 1) or (sum(i**2 for i in range(1, n+1)) * 6 == n * (n+1) * (2*n + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [3, 27],
+    "claim": "For all integers n >= 1, 6 times the greatest common divisor of the sum of first n squares and the sum of first n cubes is divisible by n(n+1).",
+    "predicate": "(n < 1) or ((6 * gcd(sum(i**2 for i in range(1, n+1)), sum(i**3 for i in range(1, n+1)))) % (n*(n+1)) == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 29,
+    "parents": [],
+    "claim": "For all integers n >= 1, 30 times the sum of the first n fourth powers equals n * (n+1) * (2n+1) * (3n^2 + 3n - 1).",
+    "predicate": "(n < 1) or (sum(i**4 for i in range(1, n+1)) * 30 == n * (n+1) * (2*n + 1) * (3*n**2 + 3*n - 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [3, 29],
+    "claim": "For all integers n >= 1, 30 times the greatest common divisor of the sum of first n cubes and the sum of first n fourth powers is divisible by n(n+1).",
+    "predicate": "(n < 1) or ((30 * gcd(sum(i**3 for i in range(1, n+1)), sum(i**4 for i in range(1, n+1)))) % (n*(n+1)) == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 31,
+    "parents": [3, 24],
+    "claim": "For all integers n >= 3, if n is prime, the sum of the first n cubes is divisible by sigma(n)/2.",
+    "predicate": "(n < 3) or (not is_prime(n)) or (sum(i**3 for i in range(1, n+1)) % (sigma(n)//2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [22, 26],
+    "claim": "For all integers n >= 1, if n is an odd prime, the sum of the first n-1 cubes is divisible by n * phi(n)/2.",
+    "predicate": "(n <= 2) or (not is_prime(n)) or (sum(i**3 for i in range(1, n)) % (n * phi(n) // 2) == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 33,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors tau(n) is less than or equal to n.",
+    "predicate": "(n < 1) or (tau(n) <= n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [24],
+    "claim": "For all integers n >= 1, if n is prime, then the number of divisors of n^2 is 3.",
+    "predicate": "(n < 1) or (not is_prime(n)) or (tau(n**2) == 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [3, 34],
+    "claim": "For all integers n >= 1, if n is prime, then the sum of the first n cubes is divisible by tau(n).",
+    "predicate": "(n < 1) or (not is_prime(n)) or (sum(i**3 for i in range(1, n+1)) % tau(n) == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 36,
+    "parents": [6, 11],
+    "claim": "For all integers n >= 1, the sum of the first n cubes has the same parity as the sum of the first n fifth powers.",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) - sum(i**5 for i in range(1, n+1))) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [6, 17],
+    "claim": "For all integers n >= 1, the sum of the first n cubes has the same parity as the sum of the first n seventh powers.",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) - sum(i**7 for i in range(1, n+1))) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [36, 37],
+    "claim": "For all integers n >= 1, the sum of the first n fifth powers has the same parity as the sum of the first n seventh powers.",
+    "predicate": "(n < 1) or ((sum(i**5 for i in range(1, n+1)) - sum(i**7 for i in range(1, n+1))) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 39,
+    "parents": [1, 2],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is divisible by 5 if n is congruent to 0 or 4 modulo 5.",
+    "predicate": "(n < 1) or (n % 5 not in [0, 4]) or (sum(i**3 for i in range(1, n+1)) % 5 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [7, 39],
+    "claim": "For all integers n >= 1, if n is divisible by 5, the sum of the first n cubes is divisible by 25.",
+    "predicate": "(n < 1) or (n % 5 != 0) or (sum(i**3 for i in range(1, n+1)) % 25 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [8, 39],
+    "claim": "For all integers n >= 1, if n is congruent to 4 modulo 5, the sum of the first n cubes is divisible by 25.",
+    "predicate": "(n < 1) or (n % 5 != 4) or (sum(i**3 for i in range(1, n+1)) % 25 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 42,
+    "parents": [],
+    "claim": "For all integers n >= 2, the sum of divisors sigma(n) is greater than or equal to n + 1.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [24, 42],
+    "claim": "For all integers n >= 2, sigma(n) equals n + 1 if and only if n is prime.",
+    "predicate": "(n <= 1) or ((sigma(n) == n + 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [21],
+    "claim": "For all integers n >= 2, the Euler totient function phi(n) is less than or equal to n - 1.",
+    "predicate": "(n <= 1) or (phi(n) <= n - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [22, 44],
+    "claim": "For all integers n >= 2, phi(n) equals n - 1 if and only if n is prime.",
+    "predicate": "(n <= 1) or ((phi(n) == n - 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [43, 45],
+    "claim": "For all integers n >= 2, the product phi(n) * sigma(n) is less than or equal to n^2 - 1.",
+    "predicate": "(n <= 1) or (phi(n) * sigma(n) <= n**2 - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [43, 45, 46],
+    "claim": "For all integers n >= 2, phi(n) * sigma(n) equals n^2 - 1 if and only if n is prime.",
+    "predicate": "(n <= 1) or ((phi(n) * sigma(n) == n**2 - 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [0, 21],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is congruent to the square of the sum of the first n integers modulo phi(n).",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) - sum(range(1, n+1))**2) % phi(n) == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [0, 42],
+    "claim": "For all integers n >= 1, the sum of the first n cubes is congruent to the square of the sum of the first n integers modulo sigma(n).",
+    "predicate": "(n < 1) or ((sum(i**3 for i in range(1, n+1)) - sum(range(1, n+1))**2) % sigma(n) == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  }
+]

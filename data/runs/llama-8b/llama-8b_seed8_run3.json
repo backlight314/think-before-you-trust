@@ -1,0 +1,410 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "(int(n >= 1) and (tau(n) % 2 == 1)) == (int(n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd implies n is a perfect square.",
+    "predicate": "(int(n >= 1) and (tau(n) % 2 == 1)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, n is a perfect square implies the number of divisors of n is odd.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) -> (tau(n) % 2 == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 3,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if n is congruent to 0 or 1 mod 4.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == ((n % 4 == 0) or (n % 4 == 1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n, n is a perfect square if and only if n is congruent to 0 mod 4.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == (n % 4 == 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n, n is congruent to 0 or 1 mod 4 implies n is a perfect square.",
+    "predicate": "((n % 4 == 0) or (n % 4 == 1)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n, n is congruent to 1 mod 4 implies n is a perfect square.",
+    "predicate": "(n % 4 == 1) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 7,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if all prime factors of n have even multiplicities.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n, all prime factors of n have even multiplicities implies n is a perfect square.",
+    "predicate": "all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n, n is a perfect square if and only if tau(n) = 2^k for some integer k.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == (int(tau(n) ** 0.5) == int(tau(n) ** 0.5))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n, tau(n) = 2^k for some integer k implies n is a perfect square.",
+    "predicate": "(int(tau(n) ** 0.5) == int(tau(n) ** 0.5)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 11,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if all prime factors of n have multiplicities that are perfect squares.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n, all prime factors of n have multiplicities that are perfect squares implies n is a perfect square.",
+    "predicate": "all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 13,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if sigma(n) = n * tau(n).",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == (sigma(n) == n * tau(n))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n, sigma(n) = n * tau(n) implies n is a perfect square.",
+    "predicate": "(sigma(n) == n * tau(n)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, tau(n) is odd if and only if n is a perfect square.",
+    "predicate": "(int(n >= 1) and (tau(n) % 2 == 1)) == (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n >= 1, n is a perfect square implies tau(n) is odd.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) -> (tau(n) % 2 == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n >= 1, tau(n) is odd implies n is a perfect square.",
+    "predicate": "(tau(n) % 2 == 1) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 18,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if n is congruent to 0 or 1 mod 8.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == ((n % 8 == 0) or (n % 8 == 1))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n, n is congruent to 0 or 1 mod 8 implies n is a perfect square.",
+    "predicate": "((n % 8 == 0) or (n % 8 == 1)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n, n is congruent to 1 mod 8 implies n is a perfect square.",
+    "predicate": "(n % 8 == 1) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 21,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if all prime factors of n have even multiplicities and all prime factors of n have multiplicities that are perfect squares.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == (all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p)) and all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n, all prime factors of n have even multiplicities and all prime factors of n have multiplicities that are perfect squares implies n is a perfect square.",
+    "predicate": "(all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p)) and all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p))) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 23,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if phi(n) = n.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == (phi(n) == n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23
+    ],
+    "claim": "For all integers n, phi(n) = n implies n is a perfect square.",
+    "predicate": "(phi(n) == n) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 25,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if n is congruent to 0, 1, or 4 mod 9.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == ((n % 9 == 0) or (n % 9 == 1) or (n % 9 == 4))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n, n is congruent to 0, 1, or 4 mod 9 implies n is a perfect square.",
+    "predicate": "((n % 9 == 0) or (n % 9 == 1) or (n % 9 == 4)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n, n is congruent to 1 or 4 mod 9 implies n is a perfect square.",
+    "predicate": "((n % 9 == 1) or (n % 9 == 4)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 28,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if n is congruent to 0, 1, or 3 mod 8.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == ((n % 8 == 0) or (n % 8 == 1) or (n % 8 == 3))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n, n is congruent to 0, 1, or 3 mod 8 implies n is a perfect square.",
+    "predicate": "((n % 8 == 0) or (n % 8 == 1) or (n % 8 == 3)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n, n is congruent to 1 or 3 mod 8 implies n is a perfect square.",
+    "predicate": "((n % 8 == 1) or (n % 8 == 3)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 31,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if n is congruent to 0 or 1 mod 4.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == ((n % 4 == 0) or (n % 4 == 1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31
+    ],
+    "claim": "For all integers n, n is congruent to 0 or 1 mod 4 implies n is a perfect square.",
+    "predicate": "((n % 4 == 0) or (n % 4 == 1)) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      31
+    ],
+    "claim": "For all integers n, n is congruent to 1 mod 4 implies n is a perfect square.",
+    "predicate": "(n % 4 == 1) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 34,
+    "parents": [],
+    "claim": "For all integers n, n is a perfect square if and only if all prime factors of n have even multiplicities and n is congruent to 0 or 1 mod 8.",
+    "predicate": "(n ** 0.5 == int(n ** 0.5)) == (all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p)) and ((n % 8 == 0) or (n % 8 == 1)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34
+    ],
+    "claim": "For all integers n, all prime factors of n have even multiplicities and n is congruent to 0 or 1 mod 8 implies n is a perfect square.",
+    "predicate": "(all(vp(n, p) % 2 == 0 for p in range(2, n + 1) if is_prime(p)) and ((n % 8 == 0) or (n % 8 == 1))) -> (n ** 0.5 == int(n ** 0.5))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  }
+]

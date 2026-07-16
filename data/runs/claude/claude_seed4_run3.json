@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the sum of phi(d) over all positive divisors d of n equals n.",
+    "predicate": "(n < 1) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all prime p, phi(p) + phi(1) = p.",
+    "predicate": "(not is_prime(n)) or (phi(n) + phi(1) == n)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n, the divisor sum identity applied to n^2 equals sum of phi(d) * phi(n^2/d) over divisors d of n^2.",
+    "predicate": "(n < 1) or (sum(phi(d) for d in range(1, n*n+1) if (n*n) % d == 0) == n*n)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [0],
+    "claim": "For n = p^k where p is prime and k >= 1, the sum phi(1) + phi(p) + phi(p^2) + ... + phi(p^k) equals p^k.",
+    "predicate": "(n < 1) or (not all(vp(n, p) == k for p in range(2, n+1) if is_prime(p) and vp(n, p) > 0 for k in [vp(n, p)])) or (sum(phi(pow(p, i)) for p in range(2, n+1) if is_prime(p) and vp(n, p) > 0 for i in range(vp(n, p) + 1) if vp(n, p) > 0) == n)",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [1],
+    "claim": "For all primes p, phi(p) = p - 1.",
+    "predicate": "(not is_prime(n)) or (phi(n) == n - 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 5,
+    "parents": [0, 4],
+    "claim": "For n = p^2 where p is prime, sum phi(d) over divisors 1, p, p^2 equals p^2.",
+    "predicate": "(n < 1) or (all(vp(n, q) == 0 for q in range(2, n+1) if is_prime(q) and q != (int(n**0.5) if int(n**0.5)**2 == n else -1)) and (int(n**0.5)**2 == n and is_prime(int(n**0.5))) or (n < 2)) or (sum(phi(d) for d in [1, int(n**0.5)] if int(n**0.5)**2 == n) + (n if int(n**0.5)**2 == n else 0) == n)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 6,
+    "parents": [4],
+    "claim": "For all odd primes p, phi(p) is even.",
+    "predicate": "((n % 2 == 0) or (not is_prime(n))) or (phi(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 7,
+    "parents": [0],
+    "claim": "For all n, the multiplicative property of phi implies that if gcd(a,b)=1 then phi(ab) = phi(a)*phi(b).",
+    "predicate": "(n < 2) or (all(phi(i*j) == phi(i)*phi(j) for i in range(1, int(n**0.5)+2) for j in range(1, int(n**0.5)+2) if gcd(i,j)==1 and i*j <= n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [7],
+    "claim": "For n = 6, phi(6) = phi(2)*phi(3) = 1*2 = 2.",
+    "predicate": "(n != 6) or (phi(6) == 2)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 9,
+    "parents": [7],
+    "claim": "For n = 15, phi(15) = phi(3)*phi(5) = 2*4 = 8.",
+    "predicate": "(n != 15) or (phi(15) == 8)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 10,
+    "parents": [0, 7],
+    "claim": "For n = p*q where p and q are distinct primes, sum phi(d) over divisors 1,p,q,pq equals pq.",
+    "predicate": "(n < 1) or ((not (is_prime(n) and all(vp(n, p) == 1 for p in range(2, n+1) if is_prime(p) and vp(n, p) > 0))) and len([p for p in range(2, n+1) if is_prime(p) and n % p == 0]) == 2) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 11,
+    "parents": [4, 6],
+    "claim": "For all odd primes p > 2, phi(p) = p - 1 is even.",
+    "predicate": "((n == 2) or (not is_prime(n))) or ((n - 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 12,
+    "parents": [0],
+    "claim": "For all n >= 1, phi(n) <= n - 1 with equality if and only if n is prime.",
+    "predicate": "(n < 1) or (phi(n) <= n - 1) and ((phi(n) == n - 1) == is_prime(n))",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [12],
+    "claim": "For all composite n >= 4, phi(n) < n - 1.",
+    "predicate": "(n < 4) or is_prime(n) or (phi(n) < n - 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 14,
+    "parents": [12],
+    "claim": "For n = 1, phi(1) = 1.",
+    "predicate": "(n != 1) or (phi(1) == 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 15,
+    "parents": [0, 12],
+    "claim": "For all n >= 1, sum of phi(d) equals n, and the maximum summand phi(n) itself satisfies phi(n) <= n.",
+    "predicate": "(n < 1) or ((sum(phi(d) for d in range(1, n+1) if n % d == 0) == n) and (phi(n) <= n))",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 16,
+    "parents": [4],
+    "claim": "For n = 4, phi(4) = 2.",
+    "predicate": "(n != 4) or (phi(4) == 2)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 17,
+    "parents": [4, 16],
+    "claim": "For n = 2^k where k >= 1, phi(2^k) = 2^(k-1).",
+    "predicate": "(n < 1) or (all(vp(n, p) == 0 for p in range(3, n+1) if is_prime(p)) and vp(n, 2) >= 1) or (phi(n) == pow(2, vp(n, 2) - 1))",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [17],
+    "claim": "For n = 8, phi(8) = 4.",
+    "predicate": "(n != 8) or (phi(8) == 4)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 19,
+    "parents": [17],
+    "claim": "For n = 16, phi(16) = 8.",
+    "predicate": "(n != 16) or (phi(16) == 8)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [0, 17],
+    "claim": "For n = 2^k, sum phi(2^i) for i=0 to k equals 2^k.",
+    "predicate": "(n < 1) or (all(vp(n, p) == 0 for p in range(3, n+1) if is_prime(p)) and vp(n, 2) >= 0) or (sum(phi(pow(2, i)) for i in range(vp(n, 2) + 1)) == n)",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 21,
+    "parents": [0],
+    "claim": "For n >= 2, sum phi(d) equals n where d ranges over all positive divisors of n.",
+    "predicate": "(n < 2) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [21],
+    "claim": "For n = 2, phi(1) + phi(2) = 1 + 1 = 2.",
+    "predicate": "(n != 2) or (phi(1) + phi(2) == 2)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 23,
+    "parents": [21],
+    "claim": "For n = 3, phi(1) + phi(3) = 1 + 2 = 3.",
+    "predicate": "(n != 3) or (phi(1) + phi(3) == 3)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 24,
+    "parents": [21],
+    "claim": "For n = 12, sum phi(d) over 1,2,3,4,6,12 equals 12.",
+    "predicate": "(n != 12) or (sum(phi(d) for d in [1,2,3,4,6,12]) == 12)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [0, 7],
+    "claim": "For squarefree n, phi(n) equals the product of (p-1) for each prime p dividing n.",
+    "predicate": "(n < 1) or (any(vp(n, p) > 1 for p in range(2, n+1) if is_prime(p))) or (phi(n) == int(all(vp(n,p) <= 1 for p in range(2, int(n**0.5)+2) if is_prime(p)) and (1 if n == 1 else pow(int(pow(n, 1.0/(sum(1 for p in range(2, int(n**0.5)+2) if is_prime(p) and n % p == 0 and vp(n,p)==1))), sum(1 for p in range(2, int(n**0.5)+2) if is_prime(p) and n % p == 0 and vp(n,p)==1)), -1)) if sum(1 for p in range(2, int(n**0.5)+2) if is_prime(p) and n % p == 0) > 0 else 1))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [25],
+    "claim": "For n = 30 = 2*3*5, phi(30) = 1*2*4 = 8.",
+    "predicate": "(n != 30) or (phi(30) == 8)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 27,
+    "parents": [0],
+    "claim": "For all n, if d is a divisor of n and m = n/d, then the pair (d, phi(d)) contributes to the divisor sum.",
+    "predicate": "(n < 1) or (all(sum(phi(d) for d in range(1, n+1) if n % d == 0 and d == k) in [0, phi(k)] for k in range(1, n+1) if n % k == 0))",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 28,
+    "parents": [12, 13],
+    "claim": "For n > 1 composite and not a prime power, phi(n) divides n.",
+    "predicate": "((n <= 1) or is_prime(n) or (any(vp(n, p) > 1 for p in range(2, n+1) if is_prime(p)) and sum(1 for p in range(2, n+1) if is_prime(p) and n % p == 0) == 1)) or (n % phi(n) == 0)",
+    "confidence": 0.65,
+    "is_terminal": true
+  },
+  {
+    "node_id": 29,
+    "parents": [0],
+    "claim": "For n >= 3, the sum sum phi(d) equals n is strictly less than the product of all divisors if n has more than 2 divisors.",
+    "predicate": "(n < 3) or (len([d for d in range(1, n+1) if n % d == 0]) <= 2) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) < pow(int(pow(n, sum(1 for d in range(1, n+1) if n % d == 0) / 2)), 1.0))",
+    "confidence": 0.7,
+    "is_terminal": true
+  },
+  {
+    "node_id": 30,
+    "parents": [0, 21],
+    "claim": "For n >= 1, the sum phi(d) over divisors d of n equals n, and exactly one of these summands is phi(n) itself.",
+    "predicate": "(n < 1) or ((sum(phi(d) for d in range(1, n+1) if n % d == 0) == n) and (phi(n) in [phi(d) for d in range(1, n+1) if n % d == 0]))",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 31,
+    "parents": [4],
+    "claim": "For all odd primes p, p - phi(p) = 1.",
+    "predicate": "((n % 2 == 0) or (not is_prime(n))) or (n - phi(n) == 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [17, 31],
+    "claim": "For n = 2^k with k >= 1, n - phi(n) = 2^(k-1).",
+    "predicate": "(n < 1) or (all(vp(n, p) == 0 for p in range(3, n+1) if is_prime(p)) and vp(n, 2) < 1) or (n - phi(n) == pow(2, vp(n, 2) - 1))",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 33,
+    "parents": [0, 32],
+    "claim": "For n >= 2, n - phi(n) >= 1 and equals 1 exactly when n is prime.",
+    "predicate": "(n < 2) or ((n - phi(n) >= 1) and ((n - phi(n) == 1) == is_prime(n)))",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [33],
+    "claim": "For n = 4, n - phi(n) = 4 - 2 = 2.",
+    "predicate": "(n != 4) or (n - phi(n) == 2)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 35,
+    "parents": [0],
+    "claim": "For all n, sum phi(d) * (n/d) over divisors d of n is related to the divisor function sigma(n).",
+    "predicate": "(n < 1) or (sum(phi(d) * (n // d) for d in range(1, n+1) if n % d == 0) == sigma(n))",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [35],
+    "claim": "For n = 6, sum phi(d) * (6/d) = phi(1)*6 + phi(2)*3 + phi(3)*2 + phi(6)*1 = 6 + 3 + 2 + 2 = 12.",
+    "predicate": "(n != 6) or (sum(phi(d) * (n // d) for d in range(1, n+1) if n % d == 0) == sigma(6))",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 37,
+    "parents": [0, 21],
+    "claim": "For all n >= 1, sum phi(d) = n is a convolution identity in number theory.",
+    "predicate": "(n < 1) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 38,
+    "parents": [12, 33],
+    "claim": "For all n >= 2, phi(n) >= sqrt(n/2) unless n is a small prime or prime power.",
+    "predicate": "((n < 2) or (phi(n) >= pow(n/2.0, 0.5)) or is_prime(n) or any(vp(n, p) > 1 for p in range(2, min(10, n+1)) if is_prime(p)))",
+    "confidence": 0.6,
+    "is_terminal": true
+  },
+  {
+    "node_id": 39,
+    "parents": [7, 25],
+    "claim": "For n = p^a * q^b where p, q are distinct primes, phi(n) = p^(a-1)*(p-1)*q^(b-1)*(q-1).",
+    "predicate": "(n < 1) or (len([p for p in range(2, n+1) if is_prime(p) and n % p == 0]) != 2) or (phi(n) == pow(int([p for p in range(2, n+1) if is_prime(p) and n % p == 0][0]), vp(n, int([p for p in range(2, n+1) if is_prime(p) and n % p == 0][0])) - 1) * (int([p for p in range(2, n+1) if is_prime(p) and n % p == 0][0]) - 1) * pow(int([p for p in range(2, n+1) if is_prime(p) and n % p == 0][1]), vp(n, int([p for p in range(2, n+1) if is_prime(p) and n % p == 0][1])) - 1) * (int([p for p in range(2, n+1) if is_prime(p) and n % p == 0][1]) - 1))",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 40,
+    "parents": [0, 35],
+    "claim": "For all n, sum phi(d) = n and sum phi(d) * (n/d) = sigma(n) are dual identities.",
+    "predicate": "(n < 1) or ((sum(phi(d) for d in range(1, n+1) if n % d == 0) == n) and (sum(phi(d) * (n // d) for d in range(1, n+1) if n % d == 0) == sigma(n)))",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [4, 31],
+    "claim": "For all odd primes p, phi(p) = p - 1 and gcd(phi(p), p) = 1.",
+    "predicate": "((n % 2 == 0) or (not is_prime(n))) or ((phi(n) == n - 1) and (gcd(phi(n), n) == 1))",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 42,
+    "parents": [0, 21],
+    "claim": "For n >= 2, the divisor function tau(n) satisfies tau(n) >= 2, and sum has at least 2 summands.",
+    "predicate": "(n < 2) or (tau(n) >= 2) and (len([d for d in range(1, n+1) if n % d == 0]) >= 2)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 43,
+    "parents": [0, 12],
+    "claim": "For all n >= 1, phi(n) >= 1 with equality only when n = 1 or n = 2.",
+    "predicate": "(n < 1) or ((phi(n) >= 1) and ((phi(n) == 1) == ((n == 1) or (n == 2))))",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 44,
+    "parents": [0, 37],
+    "claim": "For n = 1, sum phi(d) = phi(1) = 1, which matches the foundational case.",
+    "predicate": "(n != 1) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) == 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 45,
+    "parents": [0, 7, 25],
+    "claim": "For n whose prime factorization is p1^a1 * p2^a2 * ... * pk^ak, phi(n) = n * product (1 - 1/pi) over distinct primes pi dividing n.",
+    "predicate": "(n < 1) or (n == 1) or (abs(phi(n) - int(n * pow(1 - 1.0/max(1, int(pow(p, vp(n, p)))), 1))) < 0.5)",
+    "confidence": 0.85,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [15, 40],
+    "claim": "For all n >= 1, sum phi(d) = n and sum sigma(d) over divisors relates to multiplicative structure.",
+    "predicate": "(n < 1) or ((sum(phi(d) for d in range(1, n+1) if n % d == 0) == n) and (sum(sigma(d) for d in range(1, n+1) if n % d == 0) >= n))",
+    "confidence": 0.8,
+    "is_terminal": true
+  },
+  {
+    "node_id": 47,
+    "parents": [3, 20],
+    "claim": "For n = p^k, sum phi(p^i) for i=0 to k equals p^k.",
+    "predicate": "(n < 1) or (len([p for p in range(2, n+1) if is_prime(p) and n % p == 0]) != 1) or (sum(phi(pow(int([p for p in range(2, n+1) if is_prime(p) and n % p == 0][0]), i)) for i in range(vp(n, int([p for p in range(2, n+1) if is_prime(p) and n % p == 0][0])) + 1)) == n)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [0, 43],
+    "claim": "For all n >= 3, phi(n) >= 2 and sum phi(d) >= phi(1) + phi(n) >= 1 + 2 = 3.",
+    "predicate": "((n < 3) or (phi(n) >= 2)) and ((n < 1) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) >= 3))",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [21, 37, 40],
+    "claim": "For all n >= 1, the divisor sum phi identity is fundamental: sum phi(d) over d|n equals n, encoding the multiplicative structure of the totient function.",
+    "predicate": "(n < 1) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 0.98,
+    "is_terminal": true
+  }
+]

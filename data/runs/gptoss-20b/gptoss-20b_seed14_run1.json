@@ -1,0 +1,812 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is prime.",
+    "predicate": "(n < 0) or (n > 500) or is_prime(n*n + n + 41)",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is odd.",
+    "predicate": "(n % 2 == 0) or ((n*n + n + 41) % 2 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is not divisible by 3.",
+    "predicate": "(n % 3 == 0) or ((n*n + n + 41) % 3 != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 40, n^2 + n + 41 is composite.",
+    "predicate": "(n < 40) or ((n*n + n + 41) % (n*n + n + 41) == 0) and not is_prime(n*n + n + 41)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is not divisible by 5.",
+    "predicate": "(n % 5 == 0) or ((n*n + n + 41) % 5 != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, gcd(n, n^2 + n + 41) divides 41.",
+    "predicate": "gcd(n, n*n + n + 41) % 41 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is not a perfect square unless n = 40 or n = -41.",
+    "predicate": "((n*n + n + 41) == int((n*n + n + 41)**0.5)**2) == (n == 40 or n == -41)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, gcd(n+1, n^2 + n + 41) divides 41.",
+    "predicate": "gcd(n+1, n*n + n + 41) % 41 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 1 or 3 modulo 4.",
+    "predicate": "((n*n + n + 41) % 4 == 1) or ((n*n + n + 41) % 4 == 3)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      2,
+      4
+    ],
+    "claim": "For all prime integers n > 41, n^2 + n + 41 is composite.",
+    "predicate": "((not is_prime(n)) or n <= 41) or not is_prime(n*n + n + 41)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      1,
+      2
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never divisible by 7.",
+    "predicate": "(n % 7 == 0) or ((n*n + n + 41) % 7 != 0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, phi(n^2 + n + 41) is even.",
+    "predicate": "phi(n*n + n + 41) % 2 == 0",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) is odd if and only if n = 40 or n = -41.",
+    "predicate": "((tau(n*n + n + 41) % 2 == 1) == (n == 40 or n == -41))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      1,
+      4,
+      10
+    ],
+    "claim": "For all integers n, sigma(n^2 + n + 41) is congruent to 1 modulo 4.",
+    "predicate": "(sigma(n*n + n + 41) % 4 == 1)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      2,
+      4,
+      10
+    ],
+    "claim": "For all integers n, n^2 + n + 41 divides n^4 + 1.",
+    "predicate": "((n*n + n + 41) == 0) or ((n**4 + 1) % (n*n + n + 41) == 0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      1,
+      5
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is coprime with 41 * n.",
+    "predicate": "gcd(n*n + n + 41, 41*n) == 1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0,
+      3
+    ],
+    "claim": "For all integers n >= 41, n^2 + n + 41 is divisible by 41.",
+    "predicate": "(n < 41) or ((n*n + n + 41) % 41 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      2,
+      5,
+      8
+    ],
+    "claim": "For all integers n, if n is divisible by 41 then n^2 + n + 41 is also divisible by 41.",
+    "predicate": "((n % 41 != 0) or ((n*n + n + 41) % 41 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      1,
+      2
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is never a multiple of 11.",
+    "predicate": "(n % 11 == 0) or ((n*n + n + 41) % 11 != 0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      6,
+      12
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) is at most 4 unless n = 40 or n = -41.",
+    "predicate": "tau(n*n + n + 41) <= 4 or (n == 40 or n == -41)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      1,
+      4,
+      10,
+      18
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 1 modulo 20.",
+    "predicate": "(n*n + n + 41) % 20 == 1",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is a quadratic residue modulo 13.",
+    "predicate": "((n*n + n + 41) % 13) in {0,1,3,4,9,10,12}",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n, if n is not divisible by 41 then n^2 + n + 41 is coprime with n.",
+    "predicate": "((n % 41 == 0) or gcd(n*n + n + 41, n) == 1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      6,
+      12,
+      19
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) equals 3 if and only if n = 40 or n = -41.",
+    "predicate": "((tau(n*n + n + 41) == 3) == (n == 40 or n == -41))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 5 modulo 12.",
+    "predicate": "(n*n + n + 41) % 12 == 5",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      15
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is relatively prime to 41*n^2.",
+    "predicate": "gcd(n*n + n + 41, 41*n*n) == 1",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      2,
+      4,
+      10,
+      18
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is not divisible by any prime p <= 13 except possibly p=41.",
+    "predicate": "all((p <= 13 and p != 41) or ((n*n + n + 41) % p != 0) for p in [2,3,5,7,11,13])",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      1,
+      5,
+      7
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 1 modulo 8 when n \u2261 0 or 3 mod 4.",
+    "predicate": "((n % 4 in [0,3]) and ((n*n + n + 41) % 8 == 1)) or (n % 4 not in [0,3])",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      2,
+      4,
+      10,
+      18,
+      24
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 9 modulo 16.",
+    "predicate": "(n*n + n + 41) % 16 == 9",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      6,
+      12,
+      19,
+      23
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) is 4 if and only if n=40 or n=-41.",
+    "predicate": "((tau(n*n + n + 41) == 4) == (n == 40 or n == -41))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 13 modulo 20.",
+    "predicate": "(n*n + n + 41) % 20 == 13",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      2,
+      5,
+      7
+    ],
+    "claim": "For all integers n, if n is divisible by 41 then n^2 + n + 41 is also divisible by 41^2.",
+    "predicate": "((n % 41 != 0) or ((n*n + n + 41) % (41*41) == 0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 7 modulo 28.",
+    "predicate": "(n*n + n + 41) % 28 == 7",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      6,
+      12,
+      19,
+      23,
+      29
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) equals 5 if and only if n=40 or n=-41.",
+    "predicate": "((tau(n*n + n + 41) == 5) == (n == 40 or n == -41))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30,
+      32
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 3 modulo 32.",
+    "predicate": "(n*n + n + 41) % 32 == 3",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      2,
+      5,
+      7,
+      15
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is coprime with 41*n^3.",
+    "predicate": "gcd(n*n + n + 41, 41*n*n*n) == 1",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30,
+      32,
+      34
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 17 modulo 48.",
+    "predicate": "(n*n + n + 41) % 48 == 17",
+    "confidence": 0.25,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      6,
+      12,
+      19,
+      23,
+      29,
+      33
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) equals 6 if and only if n=40 or n=-41.",
+    "predicate": "((tau(n*n + n + 41) == 6) == (n == 40 or n == -41))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30,
+      32,
+      34,
+      36
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 25 modulo 60.",
+    "predicate": "(n*n + n + 41) % 60 == 25",
+    "confidence": 0.2,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      2,
+      5,
+      7,
+      15,
+      31
+    ],
+    "claim": "For all integers n, if n is a multiple of 41 then n^2 + n + 41 is a multiple of 41^3.",
+    "predicate": "((n % 41 != 0) or ((n*n + n + 41) % (41*41*41) == 0))",
+    "confidence": 0.3,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 37 modulo 80.",
+    "predicate": "(n*n + n + 41) % 80 == 37",
+    "confidence": 0.15,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      6,
+      12,
+      19,
+      23,
+      29,
+      33,
+      37
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) equals 7 if and only if n=40 or n=-41.",
+    "predicate": "((tau(n*n + n + 41) == 7) == (n == 40 or n == -41))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 49 modulo 100.",
+    "predicate": "(n*n + n + 41) % 100 == 49",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      2,
+      5,
+      7,
+      15,
+      31,
+      39
+    ],
+    "claim": "For all integers n, if n is divisible by 41 then n^2 + n + 41 is divisible by 41^4.",
+    "predicate": "((n % 41 != 0) or ((n*n + n + 41) % (41**4) == 0))",
+    "confidence": 0.2,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 61 modulo 120.",
+    "predicate": "(n*n + n + 41) % 120 == 61",
+    "confidence": 0.05,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      6,
+      12,
+      19,
+      23,
+      29,
+      33,
+      37,
+      41
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) equals 8 if and only if n=40 or n=-41.",
+    "predicate": "((tau(n*n + n + 41) == 8) == (n == 40 or n == -41))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 73 modulo 140.",
+    "predicate": "(n*n + n + 41) % 140 == 73",
+    "confidence": 0.05,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      2,
+      5,
+      7,
+      15,
+      31,
+      39,
+      43
+    ],
+    "claim": "For all integers n, if n is divisible by 41 then n^2 + n + 41 is divisible by 41^5.",
+    "predicate": "((n % 41 != 0) or ((n*n + n + 41) % (41**5) == 0))",
+    "confidence": 0.1,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      0,
+      1,
+      2,
+      4,
+      10,
+      18,
+      24,
+      28,
+      30,
+      32,
+      34,
+      36,
+      38,
+      40,
+      42,
+      44,
+      46
+    ],
+    "claim": "For all integers n, n^2 + n + 41 is congruent to 85 modulo 160.",
+    "predicate": "(n*n + n + 41) % 160 == 85",
+    "confidence": 0.02,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      6,
+      12,
+      19,
+      23,
+      29,
+      33,
+      37,
+      41,
+      45
+    ],
+    "claim": "For all integers n, tau(n^2 + n + 41) equals 9 if and only if n=40 or n=-41.",
+    "predicate": "((tau(n*n + n + 41) == 9) == (n == 40 or n == -41))",
+    "confidence": 0.3,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

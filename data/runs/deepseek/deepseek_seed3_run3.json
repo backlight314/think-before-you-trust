@@ -1,0 +1,379 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 equals 1^3 + 2^3 + ... + n^3.",
+    "predicate": "all((sum(range(1, n+1))**2 == sum(k**3 for k in range(1, n+1))) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, n^3 + (n+1)^3 is divisible by 2n + 1.",
+    "predicate": "all((n**3 + (n+1)**3) % (2*n + 1) == 0 for n in range(1, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum 1^3 + 2^3 + ... + n^3 is divisible by the sum 1 + 2 + ... + n.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % sum(range(1, n+1)) == 0) for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all n >= 1, (2n + 1) divides n(n+1)(n^2 + n + 1).",
+    "predicate": "all((n*(n+1)*(n**2 + n + 1)) % (2*n + 1) == 0 for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is a perfect square.",
+    "predicate": "all(round(sum(k**3 for k in range(1, n+1))**0.5)**2 == sum(k**3 for k in range(1, n+1)) for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is equal to the square of the sum from 1 to n.",
+    "predicate": "all(sum(k**3 for k in range(1, n+1)) == sum(range(1, n+1))**2 for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      1,
+      3
+    ],
+    "claim": "For all n >= 1, n^2 + n + 1 is divisible by gcd(n, 2n + 1).",
+    "predicate": "all((n**2 + n + 1) % gcd(n, 2*n + 1) == 0 for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is congruent to the sum from 1 to n modulo 2.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % 2) == (sum(range(1, n+1)) % 2) for n in range(1, 501))",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0,
+      7
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is even if and only if n is congruent to 0 or 3 modulo 4.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % 2 == 0) == (n % 4 in [0, 3]) for n in range(1, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by n if n is odd.",
+    "predicate": "all((n % 2 == 0) or (sum(k**3 for k in range(1, n+1)) % n == 0) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      9
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by n if and only if n is not congruent to 2 modulo 4.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % n == 0) == (n % 4 != 2) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by the triangular number T_n = n(n+1)/2.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % (n*(n+1)//2) == 0) for n in range(1, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is equal to the triangular number T_n squared.",
+    "predicate": "all(sum(k**3 for k in range(1, n+1)) == (n*(n+1)//2)**2 for n in range(1, 501))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 3 if n is congruent to 0 or 2 modulo 3.",
+    "predicate": "all((n % 3 == 1) or (sum(k**3 for k in range(1, n+1)) % 3 == 0) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "timeout"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 9 if n is congruent to 0 modulo 3.",
+    "predicate": "all((n % 3 != 0) or (sum(k**3 for k in range(1, n+1)) % 9 == 0) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      14
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 9 if and only if n is congruent to 0, 2, 5, or 6 modulo 9.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % 9 == 0) == (n % 9 in [0, 2, 5, 6]) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 5 if n is congruent to 0, 1, or 4 modulo 5.",
+    "predicate": "all((n % 5 in [2, 3]) or (sum(k**3 for k in range(1, n+1)) % 5 == 0) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      16
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 25 if n is congruent to 0 modulo 5.",
+    "predicate": "all((n % 5 != 0) or (sum(k**3 for k in range(1, n+1)) % 25 == 0) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      17
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 25 if and only if n is congruent to 0, 4, 10, 15, 20, or 24 modulo 25.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % 25 == 0) == (n % 25 in [0, 4, 10, 15, 20, 24]) for n in range(1, 501))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 4 if n is congruent to 0 or 3 modulo 4.",
+    "predicate": "all((n % 4 in [1, 2]) or (sum(k**3 for k in range(1, n+1)) % 4 == 0) for n in range(1, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      19
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 8 if n is congruent to 0 modulo 4.",
+    "predicate": "all((n % 4 != 0) or (sum(k**3 for k in range(1, n+1)) % 8 == 0) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      20
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 16 if n is congruent to 0 modulo 8.",
+    "predicate": "all((n % 8 != 0) or (sum(k**3 for k in range(1, n+1)) % 16 == 0) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      21
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 16 if and only if n is congruent to 0, 3, 7, 8, 11, or 15 modulo 16.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % 16 == 0) == (n % 16 in [0, 3, 7, 8, 11, 15]) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 7 if n is congruent to 0, 1, or 6 modulo 7.",
+    "predicate": "all((n % 7 in [2, 3, 4, 5]) or (sum(k**3 for k in range(1, n+1)) % 7 == 0) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      23
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 49 if n is congruent to 0 modulo 7.",
+    "predicate": "all((n % 7 != 0) or (sum(k**3 for k in range(1, n+1)) % 49 == 0) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 49 if and only if n is congruent to 0, 6, 14, 21, 28, or 35 modulo 49.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % 49 == 0) == (n % 49 in [0, 6, 14, 21, 28, 35]) for n in range(1, 501))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 6 if n is congruent to 0, 1, or 3 modulo 4.",
+    "predicate": "all((n % 4 != 2) or (sum(k**3 for k in range(1, n+1)) % 6 == 0) for n in range(1, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      26
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 12 if n is congruent to 0 modulo 4.",
+    "predicate": "all((n % 4 != 0) or (sum(k**3 for k in range(1, n+1)) % 12 == 0) for n in range(1, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      27
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 24 if n is congruent to 0 modulo 8.",
+    "predicate": "all((n % 8 != 0) or (sum(k**3 for k in range(1, n+1)) % 24 == 0) for n in range(1, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      28
+    ],
+    "claim": "For all n >= 1, the sum of cubes from 1 to n is divisible by 24 if and only if n is congruent to 0, 3, 7, 8, 11, or 15 modulo 16.",
+    "predicate": "all((sum(k**3 for k in range(1, n+1)) % 24 == 0) == (n % 16 in [0, 3, 7, 8, 11, 15]) for n in range(1, 501))",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

@@ -1,0 +1,410 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is at least n.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) >= n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [],
+    "claim": "For all integers n >= 1, the 2-adic valuation of n! is equal to n minus the sum of its digits in binary.",
+    "predicate": "(n < 1) or (vp(factorial(n), 2) == n - bin(n).count('1'))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0, 1],
+    "claim": "For all integers n >= 1, the 2-adic valuation of (2n)! is exactly 2n minus the sum of the digits of n in binary.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) == 2*n - bin(n).count('1'))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [0, 1, 2],
+    "claim": "The 2-adic valuation of (2n)! is exactly n plus the 2-adic valuation of n!.",
+    "predicate": "(n < 1) or (vp(factorial(2*n), 2) == n + vp(factorial(n), 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [1, 2],
+    "claim": "The 2-adic valuation of the central binomial coefficient C(2n, n) is equal to the sum of the digits of n in binary.",
+    "predicate": "(n < 1) or (vp(factorial(2*n) // (factorial(n)**2), 2) == bin(n).count('1'))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of '1's in the binary representation of n is at least 1.",
+    "predicate": "(n < 1) or (bin(n).count('1') >= 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [4, 5],
+    "claim": "For all integers n >= 1, the central binomial coefficient C(2n, n) is an even integer.",
+    "predicate": "(n < 1) or ((factorial(2*n) // (factorial(n)**2)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [1],
+    "claim": "The 2-adic valuation of n! is strictly less than n for all n >= 1.",
+    "predicate": "(n < 1) or (vp(factorial(n), 2) < n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [1, 7],
+    "claim": "The 2-adic valuation of n! is exactly n - 1 if and only if n is a power of 2.",
+    "predicate": "(n < 1) or ((vp(factorial(n), 2) == n - 1) == (n > 0 and (n & (n - 1) == 0)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [],
+    "claim": "Any two consecutive integers n and n+1 are relatively prime.",
+    "predicate": "gcd(abs(n), abs(n) + 1) == 1",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [],
+    "claim": "Euler's totient function phi(n) is at most n - 1 for all integers n > 1.",
+    "predicate": "(abs(n) <= 1) or (phi(abs(n)) <= abs(n) - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [10],
+    "claim": "For all integers n > 1, phi(n) = n - 1 if and only if n is a prime number.",
+    "predicate": "(abs(n) <= 1) or ((phi(abs(n)) == abs(n) - 1) == is_prime(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [],
+    "claim": "The sum of divisors function sigma(n) is at least n + 1 for all integers n > 1.",
+    "predicate": "(abs(n) <= 1) or (sigma(abs(n)) >= abs(n) + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [12],
+    "claim": "For all integers n > 1, sigma(n) = n + 1 if and only if n is a prime number.",
+    "predicate": "(abs(n) <= 1) or ((sigma(abs(n)) == abs(n) + 1) == is_prime(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [],
+    "claim": "The number of divisors tau(n) is equal to 2 if and only if n is prime.",
+    "predicate": "(abs(n) <= 1) or ((tau(abs(n)) == 2) == is_prime(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [11, 13],
+    "claim": "If n is a prime number, then the sum of its Euler totient and its divisor sum is exactly 2n.",
+    "predicate": "(not is_prime(abs(n))) or (phi(abs(n)) + sigma(abs(n)) == 2 * abs(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [13, 14, 15],
+    "claim": "An integer n > 1 is prime if and only if the sum of its totient and divisor sum is n times its divisor count.",
+    "predicate": "(abs(n) <= 1) or ((phi(abs(n)) + sigma(abs(n)) == abs(n) * tau(abs(n))) == is_prime(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [5, 9],
+    "claim": "The central binomial coefficient C(2n, n) is always divisible by n + 1, resulting in the n-th Catalan number.",
+    "predicate": "(n < 1) or ((factorial(2*n) // (factorial(n)**2)) % (n + 1) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [4, 17],
+    "claim": "The 2-adic valuation of the n-th Catalan number is the binary digit sum of n minus the 2-adic valuation of n + 1.",
+    "predicate": "(n < 1) or (vp((factorial(2*n) // (factorial(n)**2)) // (n + 1), 2) == bin(n).count('1') - vp(n + 1, 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [8, 18],
+    "claim": "The n-th Catalan number is an odd integer if and only if n is of the form 2^k - 1.",
+    "predicate": "(n < 1) or (((factorial(2*n) // (factorial(n)**2)) // (n + 1) % 2 != 0) == ((n + 1) & n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [],
+    "claim": "Legendre's formula states that for any prime p, the p-adic valuation of n! is (n - s_p(n)) / (p - 1).",
+    "predicate": "(n < 1) or all(vp(factorial(n), p) == (n - sum((n // (p**k)) % p for k in range(1, 11))) // (p - 1) for p in [2, 3, 5] if p <= n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [20],
+    "claim": "The 3-adic valuation of n! is equal to (n minus the sum of its digits in base 3) divided by 2.",
+    "predicate": "(n < 1) or (vp(factorial(n), 3) == (n - sum((n // (3**k)) % 3 for k in range(1, 11))) // 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [0, 21],
+    "claim": "For all integers n >= 1, the exponent of 3 in (3n)! is at least n + v_3(n!).",
+    "predicate": "(n < 1) or (vp(factorial(3*n), 3) >= n + vp(factorial(n), 3))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [],
+    "claim": "Wilson's theorem states that (n-1)! is congruent to -1 modulo n if and only if n is prime.",
+    "predicate": "(abs(n) <= 1) or (((factorial(abs(n) - 1) + 1) % abs(n) == 0) == is_prime(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [0, 23],
+    "claim": "If n is prime, then n divides the sum (n-1)! + 1.",
+    "predicate": "(not is_prime(abs(n))) or ((factorial(abs(n) - 1) + 1) % abs(n) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [6, 23],
+    "claim": "For all prime numbers n > 2, the factorial (n-1)! is an even integer.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (factorial(abs(n) - 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [1, 2, 3],
+    "claim": "For all integers n >= 1, the 2-adic valuation of (4n)! is at least 3n.",
+    "predicate": "(n < 1) or (vp(factorial(4*n), 2) >= 3 * n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [],
+    "claim": "For all composite integers n > 4, n divides (n-1)!.",
+    "predicate": "(is_prime(abs(n)) or abs(n) <= 4) or (factorial(abs(n) - 1) % abs(n) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [0, 24],
+    "claim": "The greatest common divisor of n and (n-1)! + 1 is equal to n if and only if n is prime.",
+    "predicate": "(abs(n) <= 1) or ((gcd(abs(n), factorial(abs(n) - 1) + 1) == abs(n)) == is_prime(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [23, 27],
+    "claim": "The greatest common divisor of n and (n-1)! is 1 if and only if n is prime.",
+    "predicate": "(abs(n) <= 1) or ((gcd(abs(n), factorial(abs(n) - 1)) == 1) == is_prime(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [4],
+    "claim": "The sum of divisors of a perfect square is always an odd integer.",
+    "predicate": "(abs(n) == 0) or (sigma(abs(n)**2) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [0, 14],
+    "claim": "The number of divisors of a square n^2 is always odd.",
+    "predicate": "(abs(n) == 0) or (tau(abs(n)**2) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [13],
+    "claim": "For any prime number n, the sum of its divisors sigma(n^2) is exactly n^2 + n + 1.",
+    "predicate": "(not is_prime(abs(n))) or (sigma(abs(n)**2) == abs(n)**2 + abs(n) + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [11],
+    "claim": "For any prime number n, its Euler totient phi(n^2) is exactly n(n - 1).",
+    "predicate": "(not is_prime(abs(n))) or (phi(abs(n)**2) == abs(n) * (abs(n) - 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [32, 33],
+    "claim": "For every prime n, the greatest common divisor of sigma(n^2) and phi(n^2) is either 1 or 3.",
+    "predicate": "(not is_prime(abs(n))) or (gcd(sigma(abs(n)**2), phi(abs(n)**2)) in [1, 3])",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [0, 11],
+    "claim": "If n is prime, then n divides the Euler totient of its square phi(n^2).",
+    "predicate": "(not is_prime(abs(n))) or (phi(abs(n)**2) % abs(n) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [0, 13],
+    "claim": "If n is a prime number greater than 2, then phi(n) is an even integer.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (phi(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [],
+    "claim": "Bertrand's Postulate: For every integer n > 1, there exists a prime p such that n < p < 2n.",
+    "predicate": "(abs(n) <= 1) or any(is_prime(p) for p in range(abs(n) + 1, 2 * abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [0, 37],
+    "claim": "The central binomial coefficient C(2n, n) is divisible by every prime p such that n < p < 2n.",
+    "predicate": "(n < 2) or all((factorial(2*n) // (factorial(n)**2)) % p == 0 for p in range(n + 1, 2 * n) if is_prime(p))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [],
+    "claim": "The product of an integer n and its totient phi(n) is always even for n > 2.",
+    "predicate": "(abs(n) <= 2) or ((abs(n) * phi(abs(n))) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [0, 39],
+    "claim": "The product of n and its sum of divisors sigma(n) is even for all even integers n.",
+    "predicate": "(abs(n) % 2 != 0) or ((abs(n) * sigma(abs(n))) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [1, 7],
+    "claim": "The 2-adic valuation of n! is at least the floor of the base-2 logarithm of n.",
+    "predicate": "(n < 1) or (vp(factorial(n), 2) >= int(math.log2(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [11],
+    "claim": "Fermat's Little Theorem: For prime n and any integer a, a^n is congruent to a modulo n.",
+    "predicate": "(not is_prime(abs(n))) or all(pow(a, abs(n), abs(n)) == a % abs(n) for a in range(1, 6))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [11, 42],
+    "claim": "If n is a prime number greater than 3, then n^2 - 1 is divisible by 24.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 3)) or ((abs(n)**2 - 1) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [11, 13],
+    "claim": "For all integers n > 1, the product of the divisor sum and Euler totient is at most n^2 - 1.",
+    "predicate": "(abs(n) <= 1) or (sigma(abs(n)) * phi(abs(n)) <= abs(n)**2 - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [11, 13, 44],
+    "claim": "An integer n > 1 is prime if and only if the product sigma(n) * phi(n) is exactly n^2 - 1.",
+    "predicate": "(abs(n) <= 1) or ((sigma(abs(n)) * phi(abs(n)) == abs(n)**2 - 1) == is_prime(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [12],
+    "claim": "The sum of divisors of a power of 2, 2^n, is exactly 2^(n+1) - 1.",
+    "predicate": "(n < 0) or (sigma(pow(2, n)) == pow(2, n + 1) - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [10],
+    "claim": "The Euler totient of a power of 2, 2^n, is exactly 2^(n-1) for all n >= 1.",
+    "predicate": "(n < 1) or (phi(pow(2, n)) == pow(2, n - 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [46, 47],
+    "claim": "For all n >= 1, the sum of the totient and the divisor sum of 2^n is 2^(n+1) + 2^(n-1) - 1.",
+    "predicate": "(n < 1) or (phi(pow(2, n)) + sigma(pow(2, n)) == pow(2, n + 1) + pow(2, n - 1) - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [4, 48],
+    "claim": "For all integers n >= 1, the sum of the totient and the divisor sum of 2^n is an odd integer.",
+    "predicate": "(n < 1) or ((phi(pow(2, n)) + sigma(pow(2, n))) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 50,
+    "parents": [0, 48],
+    "claim": "For n >= 1, the product of 2^n and the sum of its totient and divisor sum is even.",
+    "predicate": "(n < 1) or ((pow(2, n) * (phi(pow(2, n)) + sigma(pow(2, n)))) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  }
+]

@@ -1,0 +1,641 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the sum of phi(d) over all positive divisors d of n equals n.",
+    "predicate": "n>=1 and sum(phi(d) for d in range(1,abs(n)+1) if abs(n)%d==0)==abs(n)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, n is divisible by the number of its coprime residues modulo n.",
+    "predicate": "n>=1 and n % phi(n)==0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, sigma(n) is at least n+1.",
+    "predicate": "n>=1 and sigma(n) >= n+1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "If n is composite then sigma(n) is divisible by phi(n).",
+    "predicate": "(is_prime(n) or n<2) or (sigma(n) % phi(n)==0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, tau(n)^2 divides n!.",
+    "predicate": "n>=1 and math.factorial(n) % (tau(n)**2)==0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "If n is odd then n divides tau(n)! .",
+    "predicate": "(n%2==0) or (n % math.factorial(tau(n))==0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2
+    ],
+    "claim": "For all n >= 1, sigma(n) is congruent to 0 mod tau(n).",
+    "predicate": "n>=1 and sigma(n) % tau(n)==0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3,
+      6
+    ],
+    "claim": "If n is a perfect square then sigma(n) is a multiple of phi(n).",
+    "predicate": "(int(math.isqrt(abs(n)))**2!=abs(n)) or (sigma(n) % phi(n)==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all n >= 1, phi(n) is even except when n=1 or n=2.",
+    "predicate": "n>=1 and ((n==1 or n==2) or (phi(n)%2==0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      8
+    ],
+    "claim": "For all n >= 3, n - phi(n) is composite.",
+    "predicate": "n>=3 and any((n-phi(n))%d==0 for d in range(2,abs(n-phi(n))))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      5,
+      9
+    ],
+    "claim": "If n is a product of two distinct odd primes then n divides (sigma(n)-phi(n)).",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=2) or (n % (sigma(n)-phi(n))==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2,
+      4
+    ],
+    "claim": "For all n >= 1, sigma(n) is at most n * tau(n).",
+    "predicate": "n>=1 and sigma(n) <= n * tau(n)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "If n is a power of 2 then sigma(n)=2n-1.",
+    "predicate": "(n & (n-1))!=0 or sigma(n)==2*n-1",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      8
+    ],
+    "claim": "For all n >= 1, phi(n) divides n-1 when n is prime.",
+    "predicate": "(not is_prime(n)) or ((n-1) % phi(n)==0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "If n is a Sophie Germain prime then 2n+1 divides sigma(n).",
+    "predicate": "(not (is_prime(n) and is_prime(2*n+1))) or (sigma(n) % (2*n+1)==0)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      6,
+      9
+    ],
+    "claim": "If n is odd then sigma(n) and phi(n) have the same parity.",
+    "predicate": "(n%2==0) or ((sigma(n)%2)==(phi(n)%2))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      7,
+      12
+    ],
+    "claim": "If n is a square of an odd prime then tau(n) is odd.",
+    "predicate": "(int(math.isqrt(abs(n)))**2!=abs(n) or not is_prime(int(math.isqrt(abs(n))))) or (tau(n)%2==1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      3,
+      15
+    ],
+    "claim": "If n \u2261 1 (mod 4) then n divides phi(n)^2 + 1.",
+    "predicate": "(n%4!=1) or (n % (phi(n)**2 + 1)==0)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      2,
+      10
+    ],
+    "claim": "If n is a product of three distinct primes then sigma(n) is divisible by 8.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=3) or (sigma(n)%8==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      4,
+      11
+    ],
+    "claim": "For all n >= 1, n! is divisible by sigma(n).",
+    "predicate": "n>=1 and math.factorial(n) % sigma(n)==0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19,
+      5
+    ],
+    "claim": "If n is odd then n! is divisible by phi(n).",
+    "predicate": "(n%2==0) or (math.factorial(n) % phi(n)==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      14,
+      17
+    ],
+    "claim": "If n is a safe prime then n divides phi(n)^2 - 1.",
+    "predicate": "(not (is_prime(n) and is_prime((n-1)//2))) or (n % (phi(n)**2 - 1)==0)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      8,
+      12
+    ],
+    "claim": "If n is a power of 2 greater than 2 then phi(n) is a multiple of 4.",
+    "predicate": "(n & (n-1))!=0 or n<=2 or (phi(n)%4==0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22,
+      16
+    ],
+    "claim": "If n is a square of an odd prime then phi(n) \u2261 0 (mod 8).",
+    "predicate": "(int(math.isqrt(abs(n)))**2!=abs(n) or not is_prime(int(math.isqrt(abs(n))))) or (phi(n)%8==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      1,
+      23
+    ],
+    "claim": "If n is odd and composite then n is divisible by phi(n)/2.",
+    "predicate": "(n%2==0 or is_prime(n)) or (n % (phi(n)//2)==0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "For all n >= 1, n - phi(n) is divisible by tau(n).",
+    "predicate": "n>=1 and (n-phi(n)) % tau(n)==0",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25,
+      6
+    ],
+    "claim": "If n is a perfect cube then sigma(n) is divisible by tau(n)^2.",
+    "predicate": "round(abs(n)**(1/3))**3!=abs(n) or (sigma(n) % (tau(n)**2)==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      2,
+      9
+    ],
+    "claim": "If n is a prime power then sigma(n) - n is divisible by phi(n).",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=1) or ((sigma(n)-n) % phi(n)==0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      13,
+      27
+    ],
+    "claim": "If n is a Fermat prime then n divides sigma(n) - 1.",
+    "predicate": "(not (is_prime(n) and (n-1 & (n-2))==0)) or (sigma(n)-1) % n==0",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      3,
+      18
+    ],
+    "claim": "If n is a product of two distinct odd primes then sigma(n) is congruent to 0 mod 4.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=2) or (sigma(n)%4==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      7,
+      15
+    ],
+    "claim": "If n \u2261 3 (mod 4) then phi(n) is divisible by 4.",
+    "predicate": "(n%4!=3) or (phi(n)%4==0)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      20,
+      26
+    ],
+    "claim": "If n is odd then n! is divisible by sigma(n).",
+    "predicate": "(n%2==0) or (math.factorial(n) % sigma(n)==0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      10
+    ],
+    "claim": "If n is a product of two distinct primes then n! is divisible by phi(n).",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=2) or (math.factorial(n) % phi(n)==0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      12,
+      22
+    ],
+    "claim": "If n is a power of 2 then sigma(n) = 2n-1 and phi(n)=n/2.",
+    "predicate": "(n & (n-1))!=0 or (sigma(n)==2*n-1 and phi(n)==n//2)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33,
+      5
+    ],
+    "claim": "If n is a power of 2 greater than 2 then n divides sigma(n)! .",
+    "predicate": "(n & (n-1))!=0 or n<=2 or (sigma(n) % n==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      14,
+      21
+    ],
+    "claim": "If n is a safe prime then sigma(n) is odd.",
+    "predicate": "(not (is_prime(n) and is_prime((n-1)//2))) or (sigma(n)%2==1)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      8,
+      30
+    ],
+    "claim": "If n is an odd composite then phi(n) is divisible by 6.",
+    "predicate": "(n%2==0 or is_prime(n)) or (phi(n)%6==0)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      9,
+      24
+    ],
+    "claim": "If n is a product of three distinct odd primes then n divides phi(n)^3 + 1.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=3) or (n % (phi(n)**3 + 1)==0)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      2,
+      34
+    ],
+    "claim": "If n is a power of 2 then tau(n) = log2(n)+1.",
+    "predicate": "(n & (n-1))!=0 or tau(n)==int(math.log2(n))+1",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      16
+    ],
+    "claim": "If n is a square of a power of 2 then tau(n) is odd.",
+    "predicate": "(int(math.isqrt(abs(n)))**2!=abs(n) or (int(math.log2(int(math.isqrt(abs(n)))))%1)!=0) or (tau(n)%2==1)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:TypeError"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      25,
+      29
+    ],
+    "claim": "If n is a product of two distinct primes then n - phi(n) is divisible by 4.",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=2) or ((n-phi(n))%4==0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40,
+      6
+    ],
+    "claim": "If n is a product of two distinct primes then sigma(n) \u2261 0 (mod 8).",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=2) or (sigma(n)%8==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      3,
+      41
+    ],
+    "claim": "If n is a product of two distinct odd primes then phi(n) divides sigma(n).",
+    "predicate": "(len([p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])!=2 or any(p%2==0 for p in [p for p in range(2,abs(n)+1) if is_prime(p) and n%p==0])) or (sigma(n) % phi(n)==0)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      22,
+      36
+    ],
+    "claim": "If n is an odd power of 2 then phi(n) is divisible by 8.",
+    "predicate": "(n & (n-1))!=0 or n%2==0 or (phi(n)%8==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      13,
+      23
+    ],
+    "claim": "If n is a prime >3 then n \u2261 1 (mod phi(n)).",
+    "predicate": "(not is_prime(n) or n<=3) or (n % phi(n)==1)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44,
+      30
+    ],
+    "claim": "If n is a prime congruent to 1 mod 4 then phi(n) is divisible by 4.",
+    "predicate": "(not (is_prime(n) and n%4==1)) or (phi(n)%4==0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      17
+    ],
+    "claim": "If n is a prime \u2261 1 (mod 4) then n divides phi(n)^2+1.",
+    "predicate": "(not (is_prime(n) and n%4==1)) or (n % (phi(n)**2 + 1)==0)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      21
+    ],
+    "claim": "If n is a safe prime congruent to 1 mod 4 then n divides phi(n)^2-1.",
+    "predicate": "(not (is_prime(n) and is_prime((n-1)//2) and n%4==1)) or (n % (phi(n)**2 - 1)==0)",
+    "confidence": 0.35,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      28
+    ],
+    "claim": "If n is a Fermat prime then phi(n)^2 \u2261 1 (mod n).",
+    "predicate": "(not (is_prime(n) and (n-1 & (n-2))==0)) or ((phi(n)**2 - 1) % n==0)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      33
+    ],
+    "claim": "If n is a Fermat prime then sigma(n)=n+1.",
+    "predicate": "(not (is_prime(n) and (n-1 & (n-2))==0)) or (sigma(n)==n+1)",
+    "confidence": 0.9,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

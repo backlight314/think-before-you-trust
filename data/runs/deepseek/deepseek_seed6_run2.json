@@ -1,0 +1,516 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 is congruent to 1 modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 24) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 is congruent to 1 modulo 48.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 4, 48) == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^3 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 3, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^5 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 5, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 7, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^11 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 11, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^13 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 13, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^17 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 17, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^19 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 19, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^23 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 23, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^29 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 29, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^31 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 31, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^37 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 37, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^41 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 41, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^43 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 43, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^47 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 47, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^53 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 53, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^59 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 59, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^61 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 61, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^67 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 67, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^71 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 71, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^73 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 73, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^79 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 79, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^83 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 83, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^89 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 89, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^97 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 97, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^101 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 101, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^103 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 103, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^107 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 107, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^109 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 109, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^113 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 113, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^127 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 127, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^131 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 131, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^137 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 137, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^139 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 139, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^149 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 149, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^151 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 151, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^157 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 157, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^163 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 163, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^167 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 167, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^173 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 173, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^179 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 179, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^181 is congruent to n modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 181, 24) == n % 24)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

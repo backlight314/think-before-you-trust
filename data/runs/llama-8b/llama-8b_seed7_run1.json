@@ -1,0 +1,568 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, if n is prime then 2^n - 2 is divisible by n.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (2**n - 2) % n == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if 2^n - 2 is not divisible by n then n is composite.",
+    "predicate": "(n > 1) -> ((2**n - 2) % n != 0) -> (not is_prime(n))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime and n != 2 then 2^n - 2 is not divisible by 2.",
+    "predicate": "(n > 1) and (is_prime(n)) and (n != 2) -> (2**n - 2) % 2 != 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime and n != 2 then 2^n - 2 is not divisible by n.",
+    "predicate": "(n > 1) and (is_prime(n)) and (n != 2) -> (2**n - 2) % n != 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime and n != 3 then 2^n - 2 is not divisible by 3.",
+    "predicate": "(n > 1) and (is_prime(n)) and (n != 3) -> (2**n - 2) % 3 != 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime and n != 2 then 2^n - 2 is not divisible by 4.",
+    "predicate": "(n > 1) and (is_prime(n)) and (n != 2) -> (2**n - 2) % 4 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime then 2^n - 2 is not divisible by 5.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (2**n - 2) % 5 != 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all n > 1, if n is prime then 2^n - 2 is not divisible by n or n/2.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((2**n - 2) % n != 0) or ((2**n - 2) % (n/2) != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      3,
+      7
+    ],
+    "claim": "For all n > 1, if n is prime then 2^n - 2 is not divisible by n or 2.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((2**n - 2) % n != 0) or ((2**n - 2) % 2 != 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all n > 1, if n is prime then 2^n - 2 is divisible by 2 or 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (2**n - 2) % 2 == 0 or (2**n - 2) % 4 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all n > 1, if n is prime then 2^n - 2 is divisible by 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (2**n - 2) % 4 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is divisible by 2.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 2 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is divisible by 4.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 4 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is not divisible by 3.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 3 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is not divisible by 5.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 5 != 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all n > 1, if 2^(n+1) - 2 is divisible by n then n is composite.",
+    "predicate": "(n > 1) -> ((2**(n+1) - 2) % n == 0) -> (not is_prime(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      12
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is divisible by 8.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 8 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      13
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is not divisible by 6.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 6 != 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all n > 1, if n is prime then 2^(n+1) - 2 is not divisible by n or n/3.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((2**(n+1) - 2) % n != 0) or ((2**(n+1) - 2) % (n/3) != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      16
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is divisible by 16.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 16 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime then n^2 - n is divisible by n.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**2 - n) % n == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20
+    ],
+    "claim": "For all n > 1, if n is prime then n^2 - n is divisible by n or 2.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((n**2 - n) % n == 0) or ((n**2 - n) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all n > 1, if n^2 - n is divisible by n then n is composite.",
+    "predicate": "(n > 1) -> ((n**2 - n) % n == 0) -> (not is_prime(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all n > 1, if n is prime then n^2 - n is divisible by 2 or 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**2 - n) % 2 == 0 or (n**2 - n) % 4 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23
+    ],
+    "claim": "For all n > 1, if n is prime then n^2 - n is divisible by 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**2 - n) % 4 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      11
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is divisible by 8.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 8 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      16
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is divisible by 32.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 32 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime then n^3 - n is divisible by n.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**3 - n) % n == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all n > 1, if n^3 - n is divisible by n then n is composite.",
+    "predicate": "(n > 1) -> ((n**3 - n) % n == 0) -> (not is_prime(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      27
+    ],
+    "claim": "For all n > 1, if n is prime then n^3 - n is divisible by n or 2.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((n**3 - n) % n == 0) or ((n**3 - n) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all n > 1, if n is prime then n^3 - n is divisible by 2 or 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**3 - n) % 2 == 0 or (n**3 - n) % 4 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30
+    ],
+    "claim": "For all n > 1, if n is prime then n^3 - n is divisible by 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**3 - n) % 4 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      14
+    ],
+    "claim": "For all n > 1, 2^(n+1) - 2 is not divisible by 10.",
+    "predicate": "(n > 1) -> 2**(n+1) - 2 % 10 != 0",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime then n^4 - n is divisible by n.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**4 - n) % n == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all n > 1, if n^4 - n is divisible by n then n is composite.",
+    "predicate": "(n > 1) -> ((n**4 - n) % n == 0) -> (not is_prime(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      32,
+      33
+    ],
+    "claim": "For all n > 1, if n is prime then 2^(n+1) - 2 is not divisible by n or n/5.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((2**(n+1) - 2) % n != 0) or ((2**(n+1) - 2) % (n/5) != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all n > 1, if n is prime then 2^(n+1) - 2 is not divisible by n or n/2.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((2**(n+1) - 2) % n != 0) or ((2**(n+1) - 2) % (n/2) != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all n > 1, if n is prime then 2^(n+1) - 2 is not divisible by n or n/4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((2**(n+1) - 2) % n != 0) or ((2**(n+1) - 2) % (n/4) != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "For all n > 1, if n is prime then n^5 - n is divisible by n.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**5 - n) % n == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all n > 1, if n^5 - n is divisible by n then n is composite.",
+    "predicate": "(n > 1) -> ((n**5 - n) % n == 0) -> (not is_prime(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      38
+    ],
+    "claim": "For all n > 1, if n is prime then n^5 - n is divisible by n or 2.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((n**5 - n) % n == 0) or ((n**5 - n) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all n > 1, if n is prime then n^5 - n is divisible by 2 or 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**5 - n) % 2 == 0 or (n**5 - n) % 4 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      40
+    ],
+    "claim": "For all n > 1, if n is prime then n^5 - n is divisible by 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**5 - n) % 4 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      18
+    ],
+    "claim": "For all n > 1, if n is prime then 2^(n+1) - 2 is not divisible by n or n/3 or n/5.",
+    "predicate": "(n > 1) and (is_prime(n)) -> ((2**(n+1) - 2) % n != 0) or ((2**(n+1) - 2) % (n/3) != 0) or ((2**(n+1) - 2) % (n/5) != 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      22
+    ],
+    "claim": "For all n > 1, if n^2 - n is divisible by n then n^2 - n is divisible by n/2.",
+    "predicate": "(n > 1) -> ((n**2 - n) % n == 0) -> ((n**2 - n) % (n/2) == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all n > 1, if n is prime then n^7 - n is divisible by 2 or 4.",
+    "predicate": "(n > 1) and (is_prime(n)) -> (n**7 - n) % 2 == 0 or (n**7 - n) % 4 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  }
+]

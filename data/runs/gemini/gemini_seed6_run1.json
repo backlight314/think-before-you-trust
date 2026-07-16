@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 is congruent to 1 modulo 24.",
+    "predicate": "not (is_prime(n) and n > 3) or (pow(n, 2, 24) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "If n is prime and n > 3, then n is not divisible by 2 or 3.",
+    "predicate": "not (is_prime(n) and n > 3) or (gcd(n, 6) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [1],
+    "claim": "If gcd(n, 6) == 1, then n^2 is congruent to 1 modulo 3.",
+    "predicate": "not (gcd(abs(n), 6) == 1) or (pow(n, 2, 3) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1],
+    "claim": "If gcd(n, 6) == 1, then n^2 is congruent to 1 modulo 8.",
+    "predicate": "not (gcd(abs(n), 6) == 1) or (pow(n, 2, 8) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [2, 3],
+    "claim": "If gcd(n, 6) == 1, then n^2 is congruent to 1 modulo 24.",
+    "predicate": "not (gcd(abs(n), 6) == 1) or (pow(n, 2, 24) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [4],
+    "claim": "If gcd(n, 6) == 1 and n > 1, then the Euler totient of n^2 is divisible by 4.",
+    "predicate": "n <= 1 or not (gcd(n, 6) == 1) or (phi(n**2) % 4 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then n^4 is congruent to 1 modulo 5.",
+    "predicate": "not (is_prime(n) and n > 3) or (pow(n, 4, 5) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [4, 6],
+    "claim": "If n is prime and n > 5, then n^4 is congruent to 1 modulo 240.",
+    "predicate": "not (is_prime(n) and n > 5) or (pow(n, 4, 240) == 1)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [0],
+    "claim": "If n is prime and n > 3, then the product of phi(n) and sigma(n) is divisible by 24.",
+    "predicate": "not (is_prime(n) and n > 3) or ((phi(n) * sigma(n)) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then phi(n) is even.",
+    "predicate": "not (is_prime(n) and n > 3) or (phi(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [8, 9],
+    "claim": "If n is prime and n > 3, then sigma(n) is even.",
+    "predicate": "not (is_prime(n) and n > 3) or (sigma(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [8, 9],
+    "claim": "If n is prime and n > 3, then both phi(n) and sigma(n) are even.",
+    "predicate": "not (is_prime(n) and n > 3) or (phi(n) % 2 == 0 and sigma(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [7],
+    "claim": "If n is prime and n > 5, then n^4 is congruent to 1 modulo 80.",
+    "predicate": "not (is_prime(n) and n > 5) or (pow(n, 4, 80) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [7, 12],
+    "claim": "If n is prime and n > 5, then n^4 - 1 is divisible by 480.",
+    "predicate": "not (is_prime(n) and n > 5) or ((pow(n, 4) - 1) % 480 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then the divisor count tau(n^2) is 3.",
+    "predicate": "not (is_prime(n) and n > 3) or (tau(n**2) == 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [11, 14],
+    "claim": "If n is prime and n > 3, then sigma(n^2) is odd.",
+    "predicate": "not (is_prime(n) and n > 3) or (sigma(n**2) % 2 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [1, 2],
+    "claim": "If n is prime and n > 3, then n is congruent to 1 or 5 modulo 6.",
+    "predicate": "not (is_prime(n) and n > 3) or (n % 6 in [1, 5])",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [16],
+    "claim": "If n is prime and n > 3, then n^2 is congruent to 1 modulo 12.",
+    "predicate": "not (is_prime(n) and n > 3) or (pow(n, 2, 12) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [3, 17],
+    "claim": "If n is prime and n > 3, then n^2 is congruent to 1 modulo 24.",
+    "predicate": "not (is_prime(n) and n > 3) or (pow(n, 2, 24) == 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 19,
+    "parents": [16],
+    "claim": "If n is prime and n > 3, then (n-1)*(n+1) is divisible by 24.",
+    "predicate": "not (is_prime(n) and n > 3) or (((n - 1) * (n + 1)) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [8, 19],
+    "claim": "If n is prime and n > 3, then phi(n)*sigma(n) is equal to (n-1)*(n+1).",
+    "predicate": "not (is_prime(n) and n > 3) or (phi(n) * sigma(n) == (n - 1) * (n + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [20],
+    "claim": "For all n > 1, phi(n)*sigma(n) is at most n^2 - 1.",
+    "predicate": "n <= 1 or (phi(n) * sigma(n) <= n**2 - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [15, 20],
+    "claim": "If n is prime and n > 3, then phi(n^2)*sigma(n^2) = n^4 - n.",
+    "predicate": "not (is_prime(n) and n > 3) or (phi(n**2) * sigma(n**2) == n**4 - n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [22],
+    "claim": "If n is prime and n > 3, then phi(n^2)*sigma(n^2) is even.",
+    "predicate": "not (is_prime(n) and n > 3) or ((phi(n**2) * sigma(n**2)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 24,
+    "parents": [13, 22],
+    "claim": "If n is prime and n > 5, then phi(n^2)*sigma(n^2) + n is congruent to 1 modulo 480.",
+    "predicate": "not (is_prime(n) and n > 5) or (((phi(n**2) * sigma(n**2)) + n) % 480 == 1)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then n^3 - n is divisible by 6.",
+    "predicate": "not (is_prime(n) and n > 3) or ((pow(n, 3) - n) % 6 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [4, 25],
+    "claim": "If n is prime and n > 3, then n^3 - n is divisible by 24.",
+    "predicate": "not (is_prime(n) and n > 3) or ((pow(n, 3) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then n^5 - n is divisible by 5.",
+    "predicate": "not (is_prime(n) and n > 3) or ((pow(n, 5) - n) % 5 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [26, 27],
+    "claim": "If n is prime and n > 3, then n^5 - n is divisible by 120.",
+    "predicate": "not (is_prime(n) and n > 3) or ((pow(n, 5) - n) % 120 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [26, 27],
+    "claim": "If n is prime and n > 3, then n^5 - n is divisible by 240.",
+    "predicate": "not (is_prime(n) and n > 3) or ((pow(n, 5) - n) % 240 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then gcd(n, 30) == 1 or n == 5.",
+    "predicate": "not (is_prime(n) and n > 3) or (gcd(n, 30) == 1 or n == 5)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [29, 30],
+    "claim": "If n is prime and n > 5, then n^5 - n is divisible by 480.",
+    "predicate": "not (is_prime(n) and n > 5) or ((pow(n, 5) - n) % 480 == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then the divisor count tau(n) is 2.",
+    "predicate": "not (is_prime(n) and n > 3) or (tau(n) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [32, 14],
+    "claim": "If n is prime and n > 3, then tau(n^2) - tau(n) == 1.",
+    "predicate": "not (is_prime(n) and n > 3) or (tau(n**2) - tau(n) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [10, 32],
+    "claim": "If n is prime and n > 3, then sigma(n) - tau(n) is even.",
+    "predicate": "not (is_prime(n) and n > 3) or ((sigma(n) - tau(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 35,
+    "parents": [9, 32],
+    "claim": "If n is prime and n > 3, then phi(n) + tau(n) is even.",
+    "predicate": "not (is_prime(n) and n > 3) or ((phi(n) + tau(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 36,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then the 2-adic valuation of n^2 - 1 is at least 3.",
+    "predicate": "not (is_prime(n) and n > 3) or (vp(pow(n, 2) - 1, 2) >= 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then the 3-adic valuation of n^2 - 1 is at least 1.",
+    "predicate": "not (is_prime(n) and n > 3) or (vp(pow(n, 2) - 1, 3) >= 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [36, 37],
+    "claim": "If n is prime and n > 3, then the sum of 2-adic and 3-adic valuations of n^2 - 1 is at least 4.",
+    "predicate": "not (is_prime(n) and n > 3) or (vp(pow(n, 2) - 1, 2) + vp(pow(n, 2) - 1, 3) >= 4)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 39,
+    "parents": [13],
+    "claim": "If n is prime and n > 5, then the 2-adic valuation of n^4 - 1 is at least 4.",
+    "predicate": "not (is_prime(n) and n > 5) or (vp(pow(n, 4) - 1, 2) >= 4)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [13],
+    "claim": "If n is prime and n > 5, then the 5-adic valuation of n^4 - 1 is at least 1.",
+    "predicate": "not (is_prime(n) and n > 5) or (vp(pow(n, 4) - 1, 5) >= 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [39, 40],
+    "claim": "If n is prime and n > 5, then the sum of 2-adic and 5-adic valuations of n^4 - 1 is at least 5.",
+    "predicate": "not (is_prime(n) and n > 5) or (vp(pow(n, 4) - 1, 2) + vp(pow(n, 4) - 1, 5) >= 5)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 42,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then n^2 + 2 is divisible by 3.",
+    "predicate": "not (is_prime(n) and n > 3) or ((pow(n, 2) + 2) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [1, 42],
+    "claim": "If n is prime and n > 3, then n^2 + 2 is composite.",
+    "predicate": "not (is_prime(n) and n > 3) or (not is_prime(pow(n, 2) + 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then n^2 - 2 is not divisible by 3.",
+    "predicate": "not (is_prime(n) and n > 3) or ((pow(n, 2) - 2) % 3 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [43, 44],
+    "claim": "If n is prime and n > 3, then the divisor count of n^2 + 2 is at least 3.",
+    "predicate": "not (is_prime(n) and n > 3) or (tau(pow(n, 2) + 2) >= 3)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [1],
+    "claim": "If n is prime and n > 3, then sigma(n) is composite.",
+    "predicate": "not (is_prime(n) and n > 3) or (not is_prime(sigma(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [9, 46],
+    "claim": "If n is prime and n > 3, then phi(n) is composite.",
+    "predicate": "not (is_prime(n) and n > 3) or (not is_prime(phi(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [46, 47],
+    "claim": "If n is prime and n > 3, then neither phi(n) nor sigma(n) is prime.",
+    "predicate": "not (is_prime(n) and n > 3) or (not is_prime(phi(n)) and not is_prime(sigma(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [33, 48],
+    "claim": "If n is prime and n > 3, then tau(phi(n)) + tau(sigma(n)) is at least 6.",
+    "predicate": "not (is_prime(n) and n > 3) or (tau(phi(n)) + tau(sigma(n)) >= 6)",
+    "confidence": 0.99,
+    "is_terminal": true
+  }
+]

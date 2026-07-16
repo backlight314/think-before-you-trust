@@ -1,0 +1,329 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is at least n.",
+    "predicate": "n < 1 or vp(math.factorial(2*n), 2) >= n",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is at least the exponent of 2 in n!",
+    "predicate": "n < 1 or vp(math.factorial(2*n), 2) >= vp(math.factorial(n), 2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then the exponent of 2 in (2n)! is exactly n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0) or vp(math.factorial(2*n), 2) == n",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is composite, then the exponent of 2 in (2n)! is greater than the exponent of 2 in n!",
+    "predicate": "n < 1 or is_prime(n) or vp(math.factorial(2*n), 2) > vp(math.factorial(n), 2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      2,
+      3
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and composite, then the exponent of 2 in (2n)! is greater than n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0) or is_prime(n) or vp(math.factorial(2*n), 2) > n",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 3 in (2n)! is at least n/2.",
+    "predicate": "n < 1 or vp(math.factorial(2*n), 3) >= n // 2",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is a multiple of 3, then the exponent of 3 in (2n)! is at least n.",
+    "predicate": "n < 1 or (n % 3!= 0) or vp(math.factorial(2*n), 3) >= n",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      1,
+      5
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is greater than or equal to the exponent of 3 in (2n)!",
+    "predicate": "n < 1 or vp(math.factorial(2*n), 2) >= vp(math.factorial(2*n), 3)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      4,
+      6
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and a multiple of 3, then the exponent of 2 in (2n)! is greater than n and the exponent of 3 in (2n)! is at least n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0) or (n % 3!= 0) or (vp(math.factorial(2*n), 2) > n and vp(math.factorial(2*n), 3) >= n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! plus the exponent of 3 in (2n)! is at least 3n/2.",
+    "predicate": "n < 1 or vp(math.factorial(2*n), 2) + vp(math.factorial(2*n), 3) >= 3 * n // 2",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is greater than or equal to the exponent of 5 in (2n)!",
+    "predicate": "n < 1 or vp(math.factorial(2*n), 2) >= vp(math.factorial(2*n), 5)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! plus the exponent of 3 in (2n)! plus the exponent of 5 in (2n)! is at least 2n.",
+    "predicate": "n < 1 or vp(math.factorial(2*n), 2) + vp(math.factorial(2*n), 3) + vp(math.factorial(2*n), 5) >= 2 * n",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is a multiple of 5, then the exponent of 2 in (2n)! is greater than or equal to the exponent of 5 in (2n)!",
+    "predicate": "n < 1 or (n % 5!= 0) or vp(math.factorial(2*n), 2) >= vp(math.factorial(2*n), 5)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is a multiple of 5, then the exponent of 2 in (2n)! plus the exponent of 3 in (2n)! plus the exponent of 5 in (2n)! is at least 3n.",
+    "predicate": "n < 1 or (n % 5!= 0) or vp(math.factorial(2*n), 2) + vp(math.factorial(2*n), 3) + vp(math.factorial(2*n), 5) >= 3 * n",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 5, then the exponent of 2 in (2n)! is greater than or equal to the exponent of 5 in (2n)!",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 5) % 1!= 0)) or vp(math.factorial(2*n), 2) >= vp(math.factorial(2*n), 5)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 5, then the exponent of 2 in (2n)! plus the exponent of 3 in (2n)! plus the exponent of 5 in (2n)! is at least 4n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 5) % 1!= 0)) or vp(math.factorial(2*n), 2) + vp(math.factorial(2*n), 3) + vp(math.factorial(2*n), 5) >= 4 * n",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 5 and a multiple of 3, then the exponent of 2 in (2n)! is greater than or equal to the exponent of 5 in (2n)!",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 5) % 1!= 0)) or (n % 3!= 0) or vp(math.factorial(2*n), 2) >= vp(math.factorial(2*n), 5)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 5 and a multiple of 3, then the exponent of 2 in (2n)! plus the exponent of 3 in (2n)! plus the exponent of 5 in (2n)! is at least 5n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 5) % 1!= 0)) or (n % 3!= 0) or vp(math.factorial(2*n), 2) + vp(math.factorial(2*n), 3) + vp(math.factorial(2*n), 5) >= 5 * n",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      16
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and a multiple of 3 and a power of 5, then the exponent of 2 in (2n)! is greater than or equal to the exponent of 5 in (2n)!",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 2) % 1!= 0) and (math.log(n, 5) % 1!= 0)) or (n % 3!= 0) or vp(math.factorial(2*n), 2) >= vp(math.factorial(2*n), 5)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and a multiple of 3 and a power of 5, then the exponent of 2 in (2n)! plus the exponent of 3 in (2n)! plus the exponent of 5 in (2n)! is at least 6n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 2) % 1!= 0) and (math.log(n, 5) % 1!= 0)) or (n % 3!= 0) or vp(math.factorial(2*n), 2) + vp(math.factorial(2*n), 3) + vp(math.factorial(2*n), 5) >= 6 * n",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and a multiple of 3 and a power of 5, then the exponent of 2 in (2n)! is greater than or equal to the exponent of 7 in (2n)!",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 2) % 1!= 0) and (math.log(n, 5) % 1!= 0)) or (n % 3!= 0) or vp(math.factorial(2*n), 2) >= vp(math.factorial(2*n), 7)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and a multiple of 3 and a power of 5, then the exponent of 2 in (2n)! plus the exponent of 3 in (2n)! plus the exponent of 5 in (2n)! plus the exponent of 7 in (2n)! is at least 7n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 2) % 1!= 0) and (math.log(n, 5) % 1!= 0)) or (n % 3!= 0) or vp(math.factorial(2*n), 2) + vp(math.factorial(2*n), 3) + vp(math.factorial(2*n), 5) + vp(math.factorial(2*n), 7) >= 7 * n",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is at least the number of times 2 divides n.",
+    "predicate": "n < 1 or vp(math.factorial(2*n), 2) >= vp(n, 2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then the exponent of 2 in (2n)! is exactly the number of times 2 divides n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0) or vp(math.factorial(2*n), 2) == vp(n, 2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and a multiple of 3, then the exponent of 2 in (2n)! is greater than the number of times 2 divides n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0) or (n % 3!= 0) or vp(math.factorial(2*n), 2) > vp(n, 2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and a multiple of 3 and a power of 5, then the exponent of 2 in (2n)! is greater than the number of times 2 divides n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 2) % 1!= 0) and (math.log(n, 5) % 1!= 0)) or (n % 3!= 0) or vp(math.factorial(2*n), 2) > vp(n, 2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and a multiple of 3 and a power of 5, then the exponent of 2 in (2n)! plus the exponent of 3 in (2n)! is at least 2n.",
+    "predicate": "n < 1 or (n & (n-1)!= 0 and (math.log(n, 2) % 1!= 0) and (math.log(n, 5) % 1!= 0)) or (n % 3!= 0) or vp(math.factorial(2*n), 2) + vp(math.factorial(2*n), 3) >= 2 * n",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

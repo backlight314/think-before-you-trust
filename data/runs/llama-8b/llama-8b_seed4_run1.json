@@ -1,0 +1,368 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the sum of phi(d) over all positive divisors d of n equals n.",
+    "predicate": "(sum(phi(d) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the sum of phi(d) over all divisors d of n equals n, if n is prime.",
+    "predicate": "(not is_prime(n)) or (sum(phi(d) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the sum of phi(d) over all divisors d of n equals n, if n is a power of 2.",
+    "predicate": "(sum(phi(d) for d in range(1, n+1) if n % d == 0) == n) and (is_power_of_2(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the sum of phi(d) over all divisors d of n equals n, if n is a product of distinct primes.",
+    "predicate": "(sum(phi(d) for d in range(1, n+1) if n % d == 0) == n) and (not is_prime(n)) and (all(is_prime(p) and p != n for p in range(2, int(n**0.5)+1) if n % p == 0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1,
+      2,
+      3
+    ],
+    "claim": "For all integers n >= 1, the sum of phi(d) over all divisors d of n equals n, if n is a power of 2 or a prime.",
+    "predicate": "(sum(phi(d) for d in range(1, n+1) if n % d == 0) == n) and ((is_power_of_2(n)) or (is_prime(n)))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the sum of tau(d) over all divisors d of n equals sigma(n) / n.",
+    "predicate": "(sum(tau(d) for d in range(1, n+1) if n % d == 0) == sigma(n) / n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n >= 1, the sum of tau(d) over all divisors d of n equals sigma(n) / n, if n is prime.",
+    "predicate": "(not is_prime(n)) or (sum(tau(d) for d in range(1, n+1) if n % d == 0) == sigma(n) / n)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n >= 1, the sum of tau(d) over all divisors d of n equals sigma(n) / n, if n is a product of distinct primes.",
+    "predicate": "(sum(tau(d) for d in range(1, n+1) if n % d == 0) == sigma(n) / n) and (not is_prime(n)) and (all(is_prime(p) and p != n for p in range(2, int(n**0.5)+1) if n % p == 0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      6,
+      7
+    ],
+    "claim": "For all integers n >= 1, the sum of tau(d) over all divisors d of n equals sigma(n) / n, if n is a power of 2 or a prime.",
+    "predicate": "(sum(tau(d) for d in range(1, n+1) if n % d == 0) == sigma(n) / n) and ((is_power_of_2(n)) or (is_prime(n)))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the sum of vp(d, 2) over all divisors d of n equals log_2(n) for the prime 2.",
+    "predicate": "(sum(vp(d, 2) for d in range(1, n+1) if n % d == 0) == math.log(n, 2))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n >= 1, the sum of vp(d, 2) over all divisors d of n equals log_2(n) for the prime 2, if n is a power of 2.",
+    "predicate": "(sum(vp(d, 2) for d in range(1, n+1) if n % d == 0) == math.log(n, 2)) and (is_power_of_2(n))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      9
+    ],
+    "claim": "For all integers n >= 1, the sum of vp(d, 2) over all divisors d of n equals log_2(n) for the prime 2, if n is a product of distinct primes.",
+    "predicate": "(sum(vp(d, 2) for d in range(1, n+1) if n % d == 0) == math.log(n, 2)) and (not is_prime(n)) and (all(is_prime(p) and p != n for p in range(2, int(n**0.5)+1) if n % p == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10,
+      11
+    ],
+    "claim": "For all integers n >= 1, the sum of vp(d, 2) over all divisors d of n equals log_2(n) for the prime 2, if n is a power of 2 or a product of distinct primes.",
+    "predicate": "(sum(vp(d, 2) for d in range(1, n+1) if n % d == 0) == math.log(n, 2)) and ((is_power_of_2(n)) or (not is_prime(n)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the sum of vp(d, p) over all divisors d of n equals log_p(n) for the prime p.",
+    "predicate": "(sum(vp(d, p) for d in range(1, n+1) if n % d == 0) == math.log(n, p))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n >= 1, the sum of vp(d, p) over all divisors d of n equals log_p(n) for the prime p, if n is a power of p.",
+    "predicate": "(sum(vp(d, p) for d in range(1, n+1) if n % d == 0) == math.log(n, p)) and (is_power_of_p(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n >= 1, the sum of vp(d, p) over all divisors d of n equals log_p(n) for the prime p, if n is a product of distinct primes.",
+    "predicate": "(sum(vp(d, p) for d in range(1, n+1) if n % d == 0) == math.log(n, p)) and (not is_prime(n)) and (all(is_prime(q) and q != n for q in range(2, int(n**0.5)+1) if n % q == 0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      14,
+      15
+    ],
+    "claim": "For all integers n >= 1, the sum of vp(d, p) over all divisors d of n equals log_p(n) for the prime p, if n is a power of p or a product of distinct primes.",
+    "predicate": "(sum(vp(d, p) for d in range(1, n+1) if n % d == 0) == math.log(n, p)) and ((is_power_of_p(n)) or (not is_prime(n)))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the sum of gcd(d, n) over all divisors d of n equals n.",
+    "predicate": "(sum(gcd(d, n) for d in range(1, n+1) if n % d == 0) == n)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n >= 1, the sum of gcd(d, n) over all divisors d of n equals n, if n is a product of distinct primes.",
+    "predicate": "(sum(gcd(d, n) for d in range(1, n+1) if n % d == 0) == n) and (not is_prime(n)) and (all(is_prime(p) and p != n for p in range(2, int(n**0.5)+1) if n % p == 0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n >= 1, the sum of gcd(d, n) over all divisors d of n equals n, if n is a power of 2.",
+    "predicate": "(sum(gcd(d, n) for d in range(1, n+1) if n % d == 0) == n) and (is_power_of_2(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18,
+      19
+    ],
+    "claim": "For all integers n >= 1, the sum of gcd(d, n) over all divisors d of n equals n, if n is a power of 2 or a product of distinct primes.",
+    "predicate": "(sum(gcd(d, n) for d in range(1, n+1) if n % d == 0) == n) and ((is_power_of_2(n)) or (not is_prime(n)))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the product of phi(d) over all positive divisors d of n equals n^((phi(n)-1)/n).",
+    "predicate": "(prod(phi(d) for d in range(1, n+1) if n % d == 0) == n**((phi(n)-1)/n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n >= 1, the product of phi(d) over all divisors d of n equals n^((phi(n)-1)/n), if n is a product of distinct primes.",
+    "predicate": "(prod(phi(d) for d in range(1, n+1) if n % d == 0) == n**((phi(n)-1)/n)) and (not is_prime(n)) and (all(is_prime(p) and p != n for p in range(2, int(n**0.5)+1) if n % p == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      21
+    ],
+    "claim": "For all integers n >= 1, the product of phi(d) over all divisors d of n equals n^((phi(n)-1)/n), if n is a power of 2.",
+    "predicate": "(prod(phi(d) for d in range(1, n+1) if n % d == 0) == n**((phi(n)-1)/n)) and (is_power_of_2(n))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      22,
+      23
+    ],
+    "claim": "For all integers n >= 1, the product of phi(d) over all divisors d of n equals n^((phi(n)-1)/n), if n is a power of 2 or a product of distinct primes.",
+    "predicate": "(prod(phi(d) for d in range(1, n+1) if n % d == 0) == n**((phi(n)-1)/n)) and ((is_power_of_2(n)) or (not is_prime(n)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n equals prod((p^i+1)/(p-1) for p in primes if n % p == 0),",
+    "predicate": "(tau(n) == prod((p**(vp(n, p))+1)/(p-1) for p in range(2, n+1) if is_prime(p) and n % p == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n equals prod((p^i+1)/(p-1) for p in primes if n % p == 0), if n is a product of distinct primes.",
+    "predicate": "(tau(n) == prod((p**(vp(n, p))+1)/(p-1) for p in range(2, n+1) if is_prime(p) and n % p == 0)) and (not is_prime(n)) and (all(is_prime(p) and p != n for p in range(2, int(n**0.5)+1) if n % p == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n equals prod((p^i+1)/(p-1) for p in primes if n % p == 0), if n is a power of 2.",
+    "predicate": "(tau(n) == prod((p**(vp(n, p))+1)/(p-1) for p in range(2, n+1) if is_prime(p) and n % p == 0)) and (is_power_of_2(n))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      26,
+      27
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n equals prod((p^i+1)/(p-1) for p in primes if n % p == 0), if n is a power of 2 or a product of distinct primes.",
+    "predicate": "(tau(n) == prod((p**(vp(n, p))+1)/(p-1) for p in range(2, n+1) if is_prime(p) and n % p == 0)) and ((is_power_of_2(n)) or (not is_prime(n)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the sum of the k-th powers of the divisors of n equals n^k * prod((p^i+1)/(p^(i+1)-1) for p in primes if n % p == 0) if k is even.",
+    "predicate": "(sum(d**k for d in range(1, n+1) if n % d == 0) == n**k * prod((p**(vp(n, p))+1)/(p**(vp(n, p)+1)-1) for p in range(2, n+1) if is_prime(p) and n % p == 0)) and (k % 2 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  }
+]

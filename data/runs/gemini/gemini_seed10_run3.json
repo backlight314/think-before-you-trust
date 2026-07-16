@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 2, Euler's totient phi(n) is even.",
+    "predicate": "(abs(n) <= 2) or (phi(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For any prime p > 2, p - 1 is an even integer.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or ((abs(n) - 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "If n is a power of 2 greater than 2, its totient is even.",
+    "predicate": "(abs(n) <= 2 or (abs(n) & (abs(n) - 1)) != 0) or (phi(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1, 2],
+    "claim": "For any n > 2, there exists a prime factor p of n such that phi(p^vp(n,p)) is even.",
+    "predicate": "(abs(n) <= 2) or any(phi(pow(p, vp(abs(n), p))) % 2 == 0 for p in range(2, abs(n) + 1) if is_prime(p) and abs(n) % p == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [],
+    "claim": "For all integers n, n^3 - n is divisible by 3.",
+    "predicate": "(pow(n, 3) - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [1, 4],
+    "claim": "For any prime p > 2, p^3 - p is divisible by 6.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or ((pow(abs(n), 3) - abs(n)) % 6 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [],
+    "claim": "If n is odd, then n^2 - 1 is divisible by 8.",
+    "predicate": "(abs(n) % 2 == 0) or ((pow(n, 2) - 1) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [1, 4, 6],
+    "claim": "For any prime p > 3, p^2 - 1 is divisible by 24.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 3)) or ((pow(abs(n), 2) - 1) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [0],
+    "claim": "If n > 2, the number of primitive roots modulo n is either 0 or even.",
+    "predicate": "(abs(n) <= 2) or (phi(phi(abs(n))) % 2 == 0 if phi(phi(abs(n))) > 0 else True)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [1, 8],
+    "claim": "If p is a prime such that p = 2q + 1 where q is an odd prime, then phi(p-1) is even.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime((abs(n)-1)//2) and ((abs(n)-1)//2) > 2)) or (phi(abs(n)-1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [],
+    "claim": "For any prime p, n^p - n is divisible by p.",
+    "predicate": "(not is_prime(abs(n))) or all((pow(k, abs(n)) - k) % abs(n) == 0 for k in range(1, 5))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [7, 10],
+    "claim": "If p is a prime greater than 3, then p divides the sum of its divisors sigma(p) if and only if p is not prime (which is a contradiction).",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 3)) or (sigma(abs(n)) % abs(n) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [1],
+    "claim": "The sum of divisors sigma(p) of an odd prime p is even.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (sigma(abs(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [0, 12],
+    "claim": "For any prime p > 2, the product phi(p) * sigma(p) is a multiple of 4.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or ((phi(abs(n)) * sigma(abs(n))) % 4 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [13],
+    "claim": "For any prime p > 2, p^2 - 1 is a multiple of 4.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or ((pow(abs(n), 2) - 1) % 4 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [7, 14],
+    "claim": "For any prime p > 3, p^2 - 1 is a multiple of 12.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 3)) or ((pow(abs(n), 2) - 1) % 12 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [],
+    "claim": "The number of divisors tau(n) is odd if and only if n is a perfect square.",
+    "predicate": "(tau(abs(n)) % 2 != 0) == (round(abs(n)**0.5)**2 == abs(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [1, 16],
+    "claim": "If p is an odd prime, then p^k is a perfect square if and only if k is even.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or all((round((abs(n)**k)**0.5)**2 == abs(n)**k) == (k % 2 == 0) for k in range(1, 5))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [12, 17],
+    "claim": "If p is an odd prime, sigma(p^k) is even if and only if k is odd.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or all((sigma(abs(n)**k) % 2 == 0) == (k % 2 != 0) for k in range(1, 5))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [0, 18],
+    "claim": "For any odd prime p, phi(p^k) is always even for k >= 1.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or all(phi(abs(n)**k) % 2 == 0 for k in range(1, 5))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [19],
+    "claim": "For any odd prime p, the sum of phi(p^i) from i=1 to k is even if k is large enough.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (sum(phi(abs(n)**i) for i in range(1, 4)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [1, 20],
+    "claim": "For n > 1, the sum of phi(d) for all divisors d of n is exactly n.",
+    "predicate": "(abs(n) <= 1) or (sum(phi(d) for d in range(1, abs(n) + 1) if abs(n) % d == 0) == abs(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [0, 21],
+    "claim": "For n > 2, n is the sum of an even number of totients if n is even and no d=2 is present.",
+    "predicate": "(abs(n) <= 2 or abs(n) % 2 != 0) or (sum(phi(d) for d in range(1, abs(n) + 1) if abs(n) % d == 0) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [],
+    "claim": "For all n > 1, phi(n) < n.",
+    "predicate": "(abs(n) <= 1) or (phi(abs(n)) < abs(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [0, 23],
+    "claim": "For any n > 2, phi(n) is an even integer in the range [2, n-1].",
+    "predicate": "(abs(n) <= 2) or (phi(abs(n)) % 2 == 0 and 2 <= phi(abs(n)) < abs(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [1, 24],
+    "claim": "If p is a prime and p > 2, then p-1 is the largest possible value of phi(p).",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (phi(abs(n)) == abs(n) - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [25],
+    "claim": "For p > 2, phi(p) is even and phi(p) + 1 is prime only if p-1 + 1 = p is prime.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (is_prime(phi(abs(n)) + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [1, 12],
+    "claim": "If p is an odd prime, sigma(p) = p + 1 is even.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (sigma(abs(n)) == abs(n) + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [13, 27],
+    "claim": "For odd prime p, sigma(p) - phi(p) = 2.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (sigma(abs(n)) - phi(abs(n)) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [0, 28],
+    "claim": "For n > 2, if n is prime, sigma(n) and phi(n) have the same parity.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (sigma(abs(n)) % 2 == phi(abs(n)) % 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [29],
+    "claim": "For any prime p > 2, the difference sigma(p) - phi(p) is the number of divisors of p.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (sigma(abs(n)) - phi(abs(n)) == tau(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [30],
+    "claim": "For any prime p > 2, phi(p) + tau(p) = sigma(p).",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (phi(abs(n)) + tau(abs(n)) == sigma(abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [0, 12, 16],
+    "claim": "If n is a perfect square of an odd integer, sigma(n) is odd.",
+    "predicate": "(abs(n) % 2 == 0 or round(abs(n)**0.5)**2 != abs(n)) or (sigma(abs(n)) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [19, 32],
+    "claim": "If n is a perfect square of an odd prime p, then phi(n) is even and sigma(n) is odd.",
+    "predicate": "(not (is_prime(round(abs(n)**0.5)) and round(abs(n)**0.5)**2 == abs(n) and round(abs(n)**0.5) > 2)) or (phi(abs(n)) % 2 == 0 and sigma(abs(n)) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [33],
+    "claim": "If n = p^2 for an odd prime p, then phi(n) + sigma(n) = 2p^2 + 1.",
+    "predicate": "(not (is_prime(round(abs(n)**0.5)) and round(abs(n)**0.5)**2 == abs(n) and round(abs(n)**0.5) > 2)) or (phi(abs(n)) + sigma(abs(n)) == 2 * abs(n) + 1)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [34],
+    "claim": "If n = p^2 for an odd prime p, then phi(n) + sigma(n) is always odd.",
+    "predicate": "(not (is_prime(round(abs(n)**0.5)) and round(abs(n)**0.5)**2 == abs(n) and round(abs(n)**0.5) > 2)) or ((phi(abs(n)) + sigma(abs(n))) % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [28, 35],
+    "claim": "The parity of phi(n) + sigma(n) distinguishes between primes and squares of primes for odd p.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or ((phi(abs(n)) + sigma(abs(n))) % 2 != (phi(abs(n)**2) + sigma(abs(n)**2)) % 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [7],
+    "claim": "If p and p+2 are twin primes greater than 3, then p(p+2) is congruent to -1 modulo 24.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime(abs(n) + 2) and abs(n) > 3)) or ((abs(n) * (abs(n) + 2)) % 24 == 23)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [37],
+    "claim": "If p, p+2 are twin primes > 3, their product plus 1 is a perfect square divisible by 24.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime(abs(n) + 2) and abs(n) > 3)) or ((abs(n) * (abs(n) + 2) + 1) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [38],
+    "claim": "The square of the even integer between twin primes p and p+2 is divisible by 36 if the primes are > 3.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime(abs(n) + 2) and abs(n) > 3)) or ((abs(n) + 1)**2 % 36 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [39, 15],
+    "claim": "For twin primes p, p+2 > 3, (p+1) is divisible by 6.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime(abs(n) + 2) and abs(n) > 3)) or ((abs(n) + 1) % 6 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [40, 0],
+    "claim": "For twin primes p, p+2 > 3, phi(p+1) is even and phi(p+1) <= p/2.",
+    "predicate": "(not (is_prime(abs(n)) and is_prime(abs(n) + 2) and abs(n) > 3)) or (phi(abs(n) + 1) % 2 == 0 and phi(abs(n) + 1) <= abs(n) // 2)",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [15, 41],
+    "claim": "For any prime p > 3, p^2 - 1 is divisible by 24, and thus phi(p^2 - 1) is even.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 3)) or (phi(abs(n)**2 - 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [42],
+    "claim": "If n is prime p > 3, then phi(sigma(p)phi(p)) is even.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 3)) or (phi(sigma(abs(n)) * phi(abs(n))) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [1, 10],
+    "claim": "Fermat's Little Theorem implies that for any prime p, the value n^p is congruent to n mod p.",
+    "predicate": "(not is_prime(abs(n))) or all(pow(a, abs(n), abs(n)) == a % abs(n) for a in range(1, 5))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [44],
+    "claim": "For any prime p, p divides the binomial coefficient C(p, k) for 0 < k < p.",
+    "predicate": "(not is_prime(abs(n))) or all((factorial(abs(n)) // (factorial(k) * factorial(abs(n) - k))) % abs(n) == 0 for k in range(1, abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [45, 0],
+    "claim": "For any prime p > 2, the sum of C(p, k) from k=1 to p-1 is 2^p - 2, which is even and divisible by p.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or ((pow(2, abs(n)) - 2) % (2 * abs(n)) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [46],
+    "claim": "For p > 2, the value (2^p - 2)/p is an even integer.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (((pow(2, abs(n)) - 2) // abs(n)) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [47, 7],
+    "claim": "If p is a prime such that (2^p - 2)/p is a perfect square, p must be small.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (round(((pow(2, abs(n)) - 2) // abs(n))**0.5)**2 != (pow(2, abs(n)) - 2) // abs(n) or abs(n) < 10)",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [48, 22],
+    "claim": "The expression n^p - n for n=2, p prime > 2, always has an even totient.",
+    "predicate": "(not (is_prime(abs(n)) and abs(n) > 2)) or (phi(pow(2, abs(n)) - 2) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  }
+]

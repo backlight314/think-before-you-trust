@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^2 is congruent to 0 or 1 modulo 4.",
+    "predicate": "(n**2 % 4 == 0) or (n**2 % 4 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n, n^2 and n have the same parity.",
+    "predicate": "(n**2 - n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n, if n is odd, then n^2 is congruent to 1 modulo 8.",
+    "predicate": "(n % 2 == 0) or (n**2 % 8 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1, 2],
+    "claim": "For all integers n, if n is odd, then n^4 - n^2 is divisible by 8.",
+    "predicate": "(n % 2 == 0) or ((n**4 - n**2) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [],
+    "claim": "For all integers n, n^2 is congruent to 0 or 1 modulo 3.",
+    "predicate": "(n**2 % 3 == 0) or (n**2 % 3 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [0, 4],
+    "claim": "For all integers n, n^2 is congruent to 0, 1, 4, or 9 modulo 12.",
+    "predicate": "(n**2 % 12) in [0, 1, 4, 9]",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [4],
+    "claim": "For all integers n, n^3 - n is divisible by 3.",
+    "predicate": "(n**3 - n) % 3 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [1, 6],
+    "claim": "For all integers n, n^3 - n is divisible by 6.",
+    "predicate": "(n**3 - n) % 6 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [],
+    "claim": "For all integers n, n^5 - n is divisible by 5.",
+    "predicate": "(n**5 - n) % 5 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [7, 8],
+    "claim": "For all integers n, n^5 - n is divisible by 30.",
+    "predicate": "(n**5 - n) % 30 == 0",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [3, 9],
+    "claim": "For all integers n, if n is odd, then n^5 - n is divisible by 240.",
+    "predicate": "(n % 2 == 0) or ((n**5 - n) % 240 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [2, 4],
+    "claim": "For all integers n, if n is prime and greater than 3, then n^2 - 1 is divisible by 24.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((n**2 - 1) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [1],
+    "claim": "For all integers n, if n is greater than 2, then the Euler totient phi(n) is even.",
+    "predicate": "(n <= 2) or (phi(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [0, 1],
+    "claim": "For all positive integers n, the sum of divisors sigma(n) is odd if and only if n is a perfect square or twice a perfect square.",
+    "predicate": "(n <= 0) or ((sigma(n) % 2 != 0) == (any(i*i == n or 2*i*i == n for i in range(1, int(abs(n)**0.5)+2))))",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [0, 13],
+    "claim": "For all positive integers n, the number of divisors tau(n) is odd if and only if n is a perfect square.",
+    "predicate": "(n <= 0) or ((tau(n) % 2 != 0) == (any(i*i == n for i in range(1, int(abs(n)**0.5)+2))))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [],
+    "claim": "For all integers n, the greatest common divisor of n and n+1 is 1.",
+    "predicate": "(n <= 0) or (gcd(n, n+1) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [15],
+    "claim": "For all integers n, the greatest common divisor of n^2 and n+1 is 1.",
+    "predicate": "(n <= 0) or (gcd(n**2, n+1) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [1, 15],
+    "claim": "For all integers n, gcd(n^2 - 1, n^2 + 1) is 1 if n is even, and 2 if n is odd.",
+    "predicate": "(n <= 0) or (gcd(n**2 - 1, n**2 + 1) == (2 if n % 2 != 0 else 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [2],
+    "claim": "For all integers n, if n is odd, then the 2-adic valuation of n^2 - 1 is at least 3.",
+    "predicate": "(n % 2 == 0) or (n**2 - 1 == 0) or (vp(n**2 - 1, 2) >= 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [17, 18],
+    "claim": "For all integers n, if n is odd, then the 2-adic valuation of n^4 - 1 is at least 4.",
+    "predicate": "(n % 2 == 0) or (n**4 - 1 == 0) or (vp(n**4 - 1, 2) >= 4)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [],
+    "claim": "For all integers n, n^2 is congruent to 0, 1, or 4 modulo 5.",
+    "predicate": "(n**2 % 5) in [0, 1, 4]",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [20],
+    "claim": "For all integers n, if n is not divisible by 5, then n^4 is congruent to 1 modulo 5.",
+    "predicate": "(n % 5 == 0) or (n**4 % 5 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [1, 21],
+    "claim": "For all integers n, if n is not divisible by 5, then n^4 is congruent to 1 or 6 modulo 10.",
+    "predicate": "(n % 5 == 0) or ((n**4 % 10) in [1, 6])",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [19, 21],
+    "claim": "For all integers n, if n is odd and not divisible by 5, then n^4 is congruent to 1 modulo 80.",
+    "predicate": "(n % 2 == 0) or (n % 5 == 0) or (n**4 % 80 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [0],
+    "claim": "For all integers n, if p is a prime factor of n^2 + 1, then p is not congruent to 3 modulo 4.",
+    "predicate": "(n**2 + 1 == 0) or all((p % 4 != 3) for p in range(2, abs(n**2 + 1) + 1) if is_prime(p) and (n**2 + 1) % p == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [24],
+    "claim": "For all positive integers n, if n is congruent to 3 modulo 4, it cannot be written as the sum of two squares.",
+    "predicate": "(n <= 0) or (n % 4 != 3) or not any(x*x + y*y == n for x in range(int(n**0.5)+1) for y in range(int(n**0.5)+1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [0],
+    "claim": "For all integers n, n^2 is never congruent to 3 modulo 4.",
+    "predicate": "n**2 % 4 != 3",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [24, 26],
+    "claim": "For all integers n, any odd divisor of n^2 + 1 is congruent to 1 modulo 4.",
+    "predicate": "all(d % 4 == 1 for d in range(1, abs(n**2 + 1) + 1) if (n**2 + 1) % d == 0 and d % 2 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [12, 24],
+    "claim": "For all integers n > 1, phi(n) is divisible by 4 if n has a prime factor congruent to 3 modulo 4.",
+    "predicate": "(n <= 1) or (not any(is_prime(p) and n % p == 0 and p % 4 == 3 for p in range(2, n + 1))) or (phi(n) % 4 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [12, 1],
+    "claim": "For all integers n > 1, phi(n^2) is divisible by n.",
+    "predicate": "(n <= 1) or (phi(n**2) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [],
+    "claim": "For all integers n, if n is not divisible by 7, then n^6 - 1 is divisible by 7.",
+    "predicate": "(n % 7 == 0) or ((n**6 - 1) % 7 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [4],
+    "claim": "For all integers n, if n is not divisible by 3, then n^6 - 1 is divisible by 9.",
+    "predicate": "(n % 3 == 0) or ((n**6 - 1) % 9 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [19, 30, 31],
+    "claim": "For all integers n, if n is coprime to 42, then n^6 - 1 is divisible by 504.",
+    "predicate": "(gcd(abs(n), 42) != 1) or ((n**6 - 1) % 504 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [14],
+    "claim": "For all positive integers n, tau(n^2) is always odd.",
+    "predicate": "(n <= 0) or (tau(n**2) % 2 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [13],
+    "claim": "For all positive integers n, sigma(n^2) is always odd.",
+    "predicate": "(n <= 0) or (sigma(n**2) % 2 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [33, 34],
+    "claim": "For all positive integers n, the greatest common divisor of sigma(n^2) and tau(n^2) is odd.",
+    "predicate": "(n <= 0) or (gcd(sigma(n**2), tau(n**2)) % 2 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [0, 1],
+    "claim": "For all integers n, the 2-adic valuation of n^2 is even.",
+    "predicate": "(n == 0) or (vp(n**2, 2) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [7, 15],
+    "claim": "For all integers n, n^3 - n is divisible by gcd(6, 2*abs(n)).",
+    "predicate": "(n == 0) or ((n**3 - n) % gcd(6, 2*abs(n)) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [12, 14],
+    "claim": "For all composite integers n > 4, phi(n) * tau(n) is even.",
+    "predicate": "(n <= 4) or is_prime(n) or ((phi(n) * tau(n)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [],
+    "claim": "For all integers n, if n is prime, then tau(n) is exactly 2.",
+    "predicate": "(not is_prime(abs(n))) or (tau(abs(n)) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [],
+    "claim": "For all integers n, if n is prime, then sigma(n) is n + 1.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (sigma(n) == n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [39, 40],
+    "claim": "For all prime integers n, sigma(n) + tau(n) is odd if and only if n is 2.",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (((sigma(n) + tau(n)) % 2 != 0) == (n == 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [2],
+    "claim": "For all integers n, if n is odd, then n^8 is congruent to 1 modulo 16.",
+    "predicate": "(n % 2 == 0) or (n**8 % 16 == 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 43,
+    "parents": [2],
+    "claim": "For all integers n, if n is odd, then n^4 is congruent to 1 modulo 16.",
+    "predicate": "(n % 2 == 0) or (n**4 % 16 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [21, 43, 6],
+    "claim": "For all integers n, if n is coprime to 30, then n^4 - 1 is divisible by 240.",
+    "predicate": "(gcd(abs(n), 30) != 1) or ((n**4 - 1) % 240 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 45,
+    "parents": [11, 15],
+    "claim": "For all integers n, if n is coprime to 6, then gcd(n^2 - 1, 24) is 24.",
+    "predicate": "(gcd(abs(n), 6) != 1) or (gcd(n**2 - 1, 24) == 24)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [29],
+    "claim": "For all prime integers p, phi(p^2) is p * (p - 1).",
+    "predicate": "(n <= 1) or (not is_prime(n)) or (phi(n**2) == n * (n - 1))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 47,
+    "parents": [15],
+    "claim": "For all integers n > 1, the greatest common divisor of n-1 and n^2+n+1 is either 1 or 3.",
+    "predicate": "(n <= 1) or (gcd(n-1, n**2+n+1) in [1, 3])",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [6, 47],
+    "claim": "For all integers n, if n is congruent to 1 modulo 3, then n^3 - 1 is divisible by 9.",
+    "predicate": "(n % 3 != 1) or ((n**3 - 1) % 9 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [7, 48],
+    "claim": "For all integers n, if n is congruent to 1 modulo 6, then n^3 - 1 is divisible by 18.",
+    "predicate": "(n % 6 != 1) or ((n**3 - 1) % 18 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  }
+]

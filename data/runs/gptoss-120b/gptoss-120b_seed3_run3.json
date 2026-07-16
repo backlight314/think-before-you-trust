@@ -1,0 +1,635 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n \u2265 1, (1+2+\u2026+n)^2 equals 1^3+2^3+\u2026+n^3.",
+    "predicate": "n>=1 and ( (n*(n+1)//2)**2 == sum([k**3 for k in range(1,n+1)]) )",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all n\u22651, the sum of the first n integers is n(n+1)/2.",
+    "predicate": "n>=1 and ( sum(range(1,n+1)) == n*(n+1)//2 )",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all n\u22651, the sum of the first n cubes is (n(n+1)/2)^2.",
+    "predicate": "n>=1 and ( sum([k**3 for k in range(1,n+1)]) == (n*(n+1)//2)**2 )",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all n\u22651, n(n+1)/2 is integer and its square equals sum of cubes.",
+    "predicate": "n>=1 and ((n*(n+1)//2)**2 == sum([k**3 for k in range(1,n+1)]))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1
+    ],
+    "claim": "For all n\u22651, n(n+1) is even.",
+    "predicate": "n>=1 and ((n*(n+1))%2==0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all n\u22651, (n(n+1)/2) is integer.",
+    "predicate": "n>=1 and ((n*(n+1)//2)*2 == n*(n+1))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "For all n\u22651, the triangular number T_n = n(n+1)/2 is congruent to 0 or 1 mod 3.",
+    "predicate": "n>=1 and (( (n*(n+1)//2) %3) in (0,1))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "For all n\u22651, T_n mod 3 equals n mod 3 choose 0 or 1 pattern.",
+    "predicate": "n>=1 and (( (n*(n+1)//2) %3) == (n%3)*( (n+1)%3)//2 %3)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      2,
+      6
+    ],
+    "claim": "For all n\u22651, sum_{k=1}^n k^3 \u2261 0 or 1 (mod 3).",
+    "predicate": "n>=1 and ( (sum([k**3 for k in range(1,n+1)]) ) %3 in (0,1) )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      3,
+      8
+    ],
+    "claim": "For all n\u22651, (T_n)^2 \u2261 0 or 1 (mod 3).",
+    "predicate": "n>=1 and ( ((n*(n+1)//2)**2) %3 in (0,1) )",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      4
+    ],
+    "claim": "For all n\u22651, n(n+1) is divisible by 2.",
+    "predicate": "n>=1 and ( (n*(n+1))%2==0 )",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all n\u22651, n(n+1) is divisible by 6 when n is odd.",
+    "predicate": "n>=1 and ( (n%2==1) or ((n*(n+1))%6==0) )",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11,
+      5
+    ],
+    "claim": "For all n\u22651, T_n is divisible by 3 when n \u2261 2 (mod 3).",
+    "predicate": "n>=1 and ( (n%3==2) or ((n*(n+1)//2)%3==0) )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      2
+    ],
+    "claim": "For all n\u22651, sum of cubes is congruent to 0 mod n.",
+    "predicate": "n>=1 and ( sum([k**3 for k in range(1,n+1)]) % n ==0 )",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13,
+      4
+    ],
+    "claim": "For all n\u22651, n divides sum_{k=1}^n k^3 and also divides n(n+1).",
+    "predicate": "n>=1 and ( sum([k**3 for k in range(1,n+1)])%n==0 and (n*(n+1))%n==0 )",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "For all n\u22651, n divides (T_n)^2.",
+    "predicate": "n>=1 and ( ((n*(n+1)//2)**2) % n ==0 )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      1,
+      12
+    ],
+    "claim": "For all n\u22651, if n\u22612 (mod3) then T_n is multiple of 3.",
+    "predicate": "n>=1 and ( (n%3!=2) or ((n*(n+1)//2)%3==0) )",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      6,
+      9
+    ],
+    "claim": "For all n\u22651, T_n^2 mod 3 equals T_n mod 3.",
+    "predicate": "n>=1 and ( ((n*(n+1)//2)**2)%3 == (n*(n+1)//2)%3 )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      7,
+      8
+    ],
+    "claim": "For all n\u22651, sum of cubes mod 3 equals T_n mod 3.",
+    "predicate": "n>=1 and ( (sum([k**3 for k in range(1,n+1)]) )%3 == (n*(n+1)//2)%3 )",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      15,
+      18
+    ],
+    "claim": "For all n\u22651, n divides sum of cubes and also divides its square root squared (trivial).",
+    "predicate": "n>=1 and ( sum([k**3 for k in range(1,n+1)])%n==0 )",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      3
+    ],
+    "claim": "For all n\u22651, sum_{k=1}^n k^3 is a perfect square.",
+    "predicate": "n>=1 and int((sum([k**3 for k in range(1,n+1)]))**0.5)**2 == sum([k**3 for k in range(1,n+1)])",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20
+    ],
+    "claim": "For all n\u22651, sqrt of sum of cubes equals T_n.",
+    "predicate": "n>=1 and int((sum([k**3 for k in range(1,n+1)]))**0.5) == n*(n+1)//2",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21,
+      5
+    ],
+    "claim": "For all n\u22651, T_n is integer and equals sqrt of sum of cubes.",
+    "predicate": "n>=1 and ( n*(n+1)//2 == int((sum([k**3 for k in range(1,n+1)]))**0.5) )",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22,
+      12
+    ],
+    "claim": "For all n\u22651 with n\u22612 (mod3), sqrt of sum of cubes is multiple of 3.",
+    "predicate": "n>=1 and ( (n%3!=2) or (int((sum([k**3 for k in range(1,n+1)]))**0.5)%3==0) )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      9,
+      11
+    ],
+    "claim": "For all n\u22651, if n is odd then T_n^2 is divisible by 6.",
+    "predicate": "n>=1 and ( (n%2==0) or (( (n*(n+1)//2)**2 )%6==0) )",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24,
+      16
+    ],
+    "claim": "For all n\u22651, if n odd and n\u22612 (mod3) then T_n^2 divisible by 18.",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or (( (n*(n+1)//2)**2 )%18==0) )",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      2,
+      13
+    ],
+    "claim": "For all n\u22651, sum of cubes is divisible by n and equals T_n^2.",
+    "predicate": "n>=1 and ( sum([k**3 for k in range(1,n+1)])%n==0 and sum([k**3 for k in range(1,n+1)]) == (n*(n+1)//2)**2 )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26,
+      20
+    ],
+    "claim": "For all n\u22651, T_n^2 is divisible by n.",
+    "predicate": "n>=1 and ( ((n*(n+1)//2)**2)%n==0 )",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      27,
+      11
+    ],
+    "claim": "For all n\u22651, if n odd then T_n^2 divisible by n and by 6.",
+    "predicate": "n>=1 and ( (n%2==0) or ( ((n*(n+1)//2)**2)%n==0 and ((n*(n+1)//2)**2)%6==0) )",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      5,
+      8
+    ],
+    "claim": "For all n\u22651, T_n mod 3 equals sum of cubes mod 3.",
+    "predicate": "n>=1 and ( (n*(n+1)//2)%3 == (sum([k**3 for k in range(1,n+1)]) )%3 )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29,
+      17
+    ],
+    "claim": "For all n\u22651, T_n^2 mod 3 equals sum of cubes mod 3.",
+    "predicate": "n>=1 and ( ((n*(n+1)//2)**2)%3 == (sum([k**3 for k in range(1,n+1)]) )%3 )",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30,
+      25
+    ],
+    "claim": "For all n\u22651, if n odd and n\u22612 (mod3) then T_n^2 \u22610 (mod 18).",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or (( (n*(n+1)//2)**2 )%18==0) )",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      23
+    ],
+    "claim": "For all n\u22651, under same conditions sqrt of sum of cubes is multiple of 3 and its square multiple of 18.",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or ( int((sum([k**3 for k in range(1,n+1)]))**0.5)%3==0 and (( (n*(n+1)//2)**2 )%18==0) ) )",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      1
+    ],
+    "claim": "For all n\u22651, sigma(n) \u2264 n\u00b7tau(n).",
+    "predicate": "n>=1 and ( sigma(n) <= n * tau(n) )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33
+    ],
+    "claim": "For all n\u22651, sigma(n) is even unless n is a square or twice a square.",
+    "predicate": "n>=1 and ( (int(math.isqrt(n))**2==n or (n%2==0 and int(math.isqrt(n//2))**2==n//2)) or sigma(n)%2==0 )",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34,
+      4
+    ],
+    "claim": "For all n\u22651, if n is even then sigma(n) is even.",
+    "predicate": "n>=1 and ( (n%2==1) or sigma(n)%2==0 )",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35,
+      12
+    ],
+    "claim": "For all n\u22651, if n\u22612 (mod3) then sigma(n) divisible by 3.",
+    "predicate": "n>=1 and ( (n%3!=2) or sigma(n)%3==0 )",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      36,
+      11
+    ],
+    "claim": "For all n\u22651, if n odd and n\u22612 (mod3) then sigma(n) divisible by 6.",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or sigma(n)%6==0 )",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      2,
+      33
+    ],
+    "claim": "For all n\u22651, (T_n)^2 \u2264 n\u00b7tau(n)\u00b7n^2.",
+    "predicate": "n>=1 and ( ((n*(n+1)//2)**2) <= n*tau(n)*n**2 )",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      20
+    ],
+    "claim": "For all n\u22651, sum of cubes \u2264 n\u00b7tau(n)\u00b7n^2.",
+    "predicate": "n>=1 and ( sum([k**3 for k in range(1,n+1)]) <= n*tau(n)*n**2 )",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39,
+      13
+    ],
+    "claim": "For all n\u22651, sum of cubes is divisible by n and bounded by n^4 tau(n).",
+    "predicate": "n>=1 and ( sum([k**3 for k in range(1,n+1)])%n==0 and sum([k**3 for k in range(1,n+1)]) <= n**4 * tau(n) )",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40,
+      31
+    ],
+    "claim": "For all n\u22651, if n odd and n\u22612 (mod3) then sum of cubes divisible by 18 and \u2264 n^4 tau(n).",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or ( sum([k**3 for k in range(1,n+1)])%18==0 and sum([k**3 for k in range(1,n+1)]) <= n**4 * tau(n) ) )",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      21,
+      34
+    ],
+    "claim": "For all n\u22651, sqrt of sum of cubes is even unless n is a square or twice a square.",
+    "predicate": "n>=1 and ( (int(math.isqrt(n))**2==n or (n%2==0 and int(math.isqrt(n//2))**2==n//2)) or (int((sum([k**3 for k in range(1,n+1)]))**0.5)%2==0) )",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42,
+      37
+    ],
+    "claim": "For all n\u22651, if n odd and n\u22612 (mod3) then sqrt of sum of cubes is multiple of 6.",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or ( int((sum([k**3 for k in range(1,n+1)]))**0.5)%6==0 ) )",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      3,
+      33
+    ],
+    "claim": "For all n\u22651, n divides sigma(T_n).",
+    "predicate": "n>=1 and ( sigma(n*(n+1)//2) % n ==0 )",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44,
+      12
+    ],
+    "claim": "For all n\u22651, if n\u22612 (mod3) then n divides sigma(T_n) and sigma(T_n) multiple of 3.",
+    "predicate": "n>=1 and ( (n%3!=2) or ( sigma(n*(n+1)//2)%3==0 ) )",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      35
+    ],
+    "claim": "For all n\u22651, if n even then n divides sigma(T_n) and sigma(T_n) even.",
+    "predicate": "n>=1 and ( (n%2==1) or ( sigma(n*(n+1)//2)%2==0 ) )",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      25
+    ],
+    "claim": "For all n\u22651, if n odd and n\u22612 (mod3) then sigma(T_n) divisible by 6.",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or sigma(n*(n+1)//2)%6==0 )",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      41
+    ],
+    "claim": "For all n\u22651, under same parity and mod conditions, sum of cubes, sigma(T_n) and T_n^2 are all divisible by 6.",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or ( sum([k**3 for k in range(1,n+1)])%6==0 and sigma(n*(n+1)//2)%6==0 and ((n*(n+1)//2)**2)%6==0 ) )",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      43
+    ],
+    "claim": "For all n\u22651, if n odd, n\u22612 (mod3) then sqrt of sum of cubes, sigma(T_n) and T_n are all multiples of 6.",
+    "predicate": "n>=1 and ( (n%2==0 or n%3!=2) or ( int((sum([k**3 for k in range(1,n+1)]))**0.5)%6==0 and sigma(n*(n+1)//2)%6==0 and (n*(n+1)//2)%6==0 ) )",
+    "confidence": 0.5,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

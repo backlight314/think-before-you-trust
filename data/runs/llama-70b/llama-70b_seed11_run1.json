@@ -1,0 +1,450 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^5 is congruent to n modulo 10.",
+    "predicate": "pow(n, 5, 10) == n % 10",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 2.",
+    "predicate": "pow(n, 5) - n % 2 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 5.",
+    "predicate": "pow(n, 5) - n % 5 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n, n^5 - n is divisible by 10.",
+    "predicate": "pow(n, 5) - n % 10 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^7 is congruent to n modulo 10.",
+    "predicate": "pow(n, 7, 10) == n % 10",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1,
+      4
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 2.",
+    "predicate": "pow(n, 7) - n % 2 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2,
+      4
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 5.",
+    "predicate": "pow(n, 7) - n % 5 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      5,
+      6
+    ],
+    "claim": "For all integers n, n^7 - n is divisible by 10.",
+    "predicate": "pow(n, 7) - n % 10 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      3,
+      7
+    ],
+    "claim": "For all integers n, n^5 - n and n^7 - n have the same parity.",
+    "predicate": "(pow(n, 5) - n % 2) == (pow(n, 7) - n % 2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^11 is congruent to n modulo 10.",
+    "predicate": "pow(n, 11, 10) == n % 10",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      1,
+      9
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 2.",
+    "predicate": "pow(n, 11) - n % 2 == 0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2,
+      9
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 5.",
+    "predicate": "pow(n, 11) - n % 5 == 0",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10,
+      11
+    ],
+    "claim": "For all integers n, n^11 - n is divisible by 10.",
+    "predicate": "pow(n, 11) - n % 10 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      8,
+      12
+    ],
+    "claim": "For all integers n, n^5 - n, n^7 - n, and n^11 - n have the same parity.",
+    "predicate": "(pow(n, 5) - n % 2) == (pow(n, 7) - n % 2) == (pow(n, 11) - n % 2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then n^5 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (pow(n, 5) - n % 24 == 0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      1,
+      14
+    ],
+    "claim": "For all integers n, if n is prime, then n^5 - n is divisible by 24 and n^7 - n is divisible by 2.",
+    "predicate": "(not is_prime(n)) or ((pow(n, 5) - n % 24 == 0) and (pow(n, 7) - n % 2 == 0))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      2,
+      14
+    ],
+    "claim": "For all integers n, if n is prime, then n^5 - n is divisible by 24 and n^7 - n is divisible by 5.",
+    "predicate": "(not is_prime(n)) or ((pow(n, 5) - n % 24 == 0) and (pow(n, 7) - n % 5 == 0))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15,
+      16
+    ],
+    "claim": "For all integers n, if n is prime, then n^5 - n is divisible by 24, n^7 - n is divisible by 2, and n^7 - n is divisible by 5.",
+    "predicate": "(not is_prime(n)) or ((pow(n, 5) - n % 24 == 0) and (pow(n, 7) - n % 2 == 0) and (pow(n, 7) - n % 5 == 0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      3,
+      17
+    ],
+    "claim": "For all integers n, if n is prime, then n^5 - n and n^7 - n have the same parity and are both divisible by 10.",
+    "predicate": "(not is_prime(n)) or (((pow(n, 5) - n % 2) == (pow(n, 7) - n % 2)) and (pow(n, 5) - n % 10 == 0) and (pow(n, 7) - n % 10 == 0))",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, the sum of divisors of n^5 is greater than the sum of divisors of n.",
+    "predicate": "sigma(pow(n, 5)) > sigma(n)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n, the number of divisors of n^5 is greater than the number of divisors of n.",
+    "predicate": "tau(pow(n, 5)) > tau(n)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      19,
+      20
+    ],
+    "claim": "For all integers n, the sum of divisors of n^5 is greater than the sum of divisors of n and the number of divisors of n^5 is greater than the number of divisors of n.",
+    "predicate": "(sigma(pow(n, 5)) > sigma(n)) and (tau(pow(n, 5)) > tau(n))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is odd, then the Euler totient function of n^5 is greater than the Euler totient function of n.",
+    "predicate": "(n % 2 == 0) or (phi(pow(n, 5)) > phi(n))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n, if n is odd, then the Euler totient function of n^7 is greater than the Euler totient function of n.",
+    "predicate": "(n % 2 == 0) or (phi(pow(n, 7)) > phi(n))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      22,
+      23
+    ],
+    "claim": "For all integers n, if n is odd, then the Euler totient function of n^5 and n^7 are both greater than the Euler totient function of n.",
+    "predicate": "(n % 2 == 0) or ((phi(pow(n, 5)) > phi(n)) and (phi(pow(n, 7)) > phi(n)))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then the exponent of 2 in the prime factorization of n^5 - n is greater than 2.",
+    "predicate": "(not is_prime(n)) or (vp(pow(n, 5) - n, 2) > 2)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n, if n is prime, then the exponent of 2 in the prime factorization of n^7 - n is greater than 2.",
+    "predicate": "(not is_prime(n)) or (vp(pow(n, 7) - n, 2) > 2)",
+    "confidence": 0.45,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      25,
+      26
+    ],
+    "claim": "For all integers n, if n is prime, then the exponent of 2 in the prime factorization of n^5 - n and n^7 - n are both greater than 2.",
+    "predicate": "(not is_prime(n)) or ((vp(pow(n, 5) - n, 2) > 2) and (vp(pow(n, 7) - n, 2) > 2))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is odd, then the greatest common divisor of n^5 - n and n^7 - n is 1.",
+    "predicate": "(n % 2 == 0) or (gcd(pow(n, 5) - n, pow(n, 7) - n) == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n, if n is odd, then the greatest common divisor of n^5 - n and n^11 - n is 1.",
+    "predicate": "(n % 2 == 0) or (gcd(pow(n, 5) - n, pow(n, 11) - n) == 1)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      28,
+      29
+    ],
+    "claim": "For all integers n, if n is odd, then the greatest common divisor of n^5 - n, n^7 - n, and n^11 - n is 1.",
+    "predicate": "(n % 2 == 0) or (gcd(gcd(pow(n, 5) - n, pow(n, 7) - n), pow(n, 11) - n) == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, the sum of the first 5 divisors of n^5 is greater than the sum of the first 5 divisors of n.",
+    "predicate": "sum([i for i in range(1, 6) if pow(n, 5) % i == 0]) > sum([i for i in range(1, 6) if n % i == 0])",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31
+    ],
+    "claim": "For all integers n, the sum of the first 7 divisors of n^5 is greater than the sum of the first 7 divisors of n.",
+    "predicate": "sum([i for i in range(1, 8) if pow(n, 5) % i == 0]) > sum([i for i in range(1, 8) if n % i == 0])",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      31,
+      32
+    ],
+    "claim": "For all integers n, the sum of the first 5 divisors of n^5 and the sum of the first 7 divisors of n^5 are both greater than the sum of the first 7 divisors of n.",
+    "predicate": "(sum([i for i in range(1, 6) if pow(n, 5) % i == 0]) > sum([i for i in range(1, 8) if n % i == 0])) and (sum([i for i in range(1, 8) if pow(n, 5) % i == 0]) > sum([i for i in range(1, 8) if n % i == 0]))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime, then the product of the first 5 divisors of n^5 is greater than the product of the first 5 divisors of n.",
+    "predicate": "(not is_prime(n)) or (math.prod([i for i in range(1, 6) if pow(n, 5) % i == 0]) > math.prod([i for i in range(1, 6) if n % i == 0]))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34
+    ],
+    "claim": "For all integers n, if n is prime, then the product of the first 7 divisors of n^5 is greater than the product of the first 7 divisors of n.",
+    "predicate": "(not is_prime(n)) or (math.prod([i for i in range(1, 8) if pow(n, 5) % i == 0]) > math.prod([i for i in range(1, 8) if n % i == 0]))",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

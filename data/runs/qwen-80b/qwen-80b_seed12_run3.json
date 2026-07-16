@@ -1,0 +1,516 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is at least n.",
+    "predicate": "vp(math.factorial(2*n), 2) >= n",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is strictly greater than n when n is odd.",
+    "predicate": "n % 2 == 1 and vp(math.factorial(2*n), 2) > n",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! is at least n+1 when n is a power of 2.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and vp(math.factorial(2*n), 2) >= n+1",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then (2n)! is divisible by 2^{n+1} but not by 2^{n+2} for n=3,7,15.",
+    "predicate": "n % 2 == 1 and (n in [3,7,15]) and vp(math.factorial(2*n), 2) == n+1",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2, then (2n)! is divisible by 2^{n+2} when n >= 4.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 4 and vp(math.factorial(2*n), 2) >= n+2",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the exponent of 2 in (2n)! minus n is even.",
+    "predicate": "(vp(math.factorial(2*n), 2) - n) % 2 == 0",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is even, then the exponent of 2 in (2n)! minus n is divisible by 4.",
+    "predicate": "n % 2 == 0 and (vp(math.factorial(2*n), 2) - n) % 4 == 0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then (2n)! / 2^n is odd only when n=1.",
+    "predicate": "n % 2 == 1 and (math.factorial(2*n) // pow(2, n)) % 2 == 1 and n == 1",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0,
+      5
+    ],
+    "claim": "For all integers n >= 1, if the exponent of 2 in (2n)! minus n is 0, then n=1.",
+    "predicate": "vp(math.factorial(2*n), 2) - n == 0 and n == 1",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 4, then (2n)! is divisible by 2^{n+3}.",
+    "predicate": "n % 4 == 0 and vp(math.factorial(2*n), 2) >= n+3",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0,
+      1,
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is odd and not a power of 2, then the exponent of 2 in (2n)! minus n is at least 3.",
+    "predicate": "n % 2 == 1 and (n & (n-1)) != 0 and vp(math.factorial(2*n), 2) - n >= 3",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      6,
+      9
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then (2n)! is divisible by 2^{n+4}.",
+    "predicate": "n % 8 == 0 and vp(math.factorial(2*n), 2) >= n+4",
+    "confidence": 0.86,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      1,
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is odd and composite, then the exponent of 2 in (2n)! minus n is at least 4.",
+    "predicate": "n % 2 == 1 and not is_prime(n) and n > 1 and vp(math.factorial(2*n), 2) - n >= 4",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0,
+      2,
+      9
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and n >= 8, then the exponent of 2 in (2n)! is at least n+5.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 8 and vp(math.factorial(2*n), 2) >= n+5",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is odd and composite, then (2n)! / 2^n is divisible by 16.",
+    "predicate": "n % 2 == 1 and not is_prime(n) and n > 1 and (math.factorial(2*n) // pow(2, n)) % 16 == 0",
+    "confidence": 0.83,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      11,
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then the exponent of 2 in (2n)! is at least n+6.",
+    "predicate": "n % 16 == 0 and vp(math.factorial(2*n), 2) >= n+6",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0,
+      14
+    ],
+    "claim": "For all integers n >= 1, if n is odd and composite, then (2n)! / 2^n is divisible by 32 if n >= 9.",
+    "predicate": "n % 2 == 1 and not is_prime(n) and n >= 9 and (math.factorial(2*n) // pow(2, n)) % 32 == 0",
+    "confidence": 0.81,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      15,
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 and n >= 16, then the exponent of 2 in (2n)! is at least n+7.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 16 and vp(math.factorial(2*n), 2) >= n+7",
+    "confidence": 0.86,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      16,
+      17
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 greater than or equal to 16, then (2n)! / 2^n is divisible by 128.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 16 and (math.factorial(2*n) // pow(2, n)) % 128 == 0",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      6,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then (2n)! / 2^n is divisible by 64.",
+    "predicate": "n % 16 == 0 and (math.factorial(2*n) // pow(2, n)) % 64 == 0",
+    "confidence": 0.83,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0,
+      18,
+      19
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then (2n)! / 2^n is divisible by 256.",
+    "predicate": "n % 16 == 0 and (math.factorial(2*n) // pow(2, n)) % 256 == 0",
+    "confidence": 0.82,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      17,
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 greater than or equal to 32, then the exponent of 2 in (2n)! is at least n+8.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 32 and vp(math.factorial(2*n), 2) >= n+8",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      14,
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is odd and composite and n >= 15, then (2n)! / 2^n is divisible by 64.",
+    "predicate": "n % 2 == 1 and not is_prime(n) and n >= 15 and (math.factorial(2*n) // pow(2, n)) % 64 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      15,
+      21
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 32, then the exponent of 2 in (2n)! is at least n+9.",
+    "predicate": "n % 32 == 0 and vp(math.factorial(2*n), 2) >= n+9",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      20,
+      23
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 32, then (2n)! / 2^n is divisible by 512.",
+    "predicate": "n % 32 == 0 and (math.factorial(2*n) // pow(2, n)) % 512 == 0",
+    "confidence": 0.83,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      21,
+      22
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 greater than or equal to 32, then (2n)! / 2^n is divisible by 256.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 32 and (math.factorial(2*n) // pow(2, n)) % 256 == 0",
+    "confidence": 0.81,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      23,
+      25
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 32 and a power of 2, then (2n)! / 2^n is divisible by 1024.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n % 32 == 0 and (math.factorial(2*n) // pow(2, n)) % 1024 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      24,
+      26
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 64, then the exponent of 2 in (2n)! is at least n+10.",
+    "predicate": "n % 64 == 0 and vp(math.factorial(2*n), 2) >= n+10",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      25,
+      27
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 greater than or equal to 64, then (2n)! / 2^n is divisible by 2048.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 64 and (math.factorial(2*n) // pow(2, n)) % 2048 == 0",
+    "confidence": 0.82,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      22,
+      27
+    ],
+    "claim": "For all integers n >= 1, if n is odd and composite and n >= 25, then (2n)! / 2^n is divisible by 128.",
+    "predicate": "n % 2 == 1 and not is_prime(n) and n >= 25 and (math.factorial(2*n) // pow(2, n)) % 128 == 0",
+    "confidence": 0.79,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0,
+      28,
+      29
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 greater than or equal to 64 or n is odd composite greater than or equal to 25, then (2n)! / 2^n is divisible by 512.",
+    "predicate": "(n > 0 and (n & (n-1)) == 0 and n >= 64) or (n % 2 == 1 and not is_prime(n) and n >= 25) and (math.factorial(2*n) // pow(2, n)) % 512 == 0",
+    "confidence": 0.81,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      27,
+      30
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 64, then (2n)! / 2^n is divisible by 4096.",
+    "predicate": "n % 64 == 0 and (math.factorial(2*n) // pow(2, n)) % 4096 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0,
+      28,
+      31
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 greater than or equal to 128, then the exponent of 2 in (2n)! is at least n+11.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 128 and vp(math.factorial(2*n), 2) >= n+11",
+    "confidence": 0.83,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      29,
+      31
+    ],
+    "claim": "For all integers n >= 1, if n is odd and composite and n >= 35, then (2n)! / 2^n is divisible by 256.",
+    "predicate": "n % 2 == 1 and not is_prime(n) and n >= 35 and (math.factorial(2*n) // pow(2, n)) % 256 == 0",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      0,
+      32,
+      33
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 greater than or equal to 128 or n is odd composite greater than or equal to 35, then (2n)! / 2^n is divisible by 1024.",
+    "predicate": "(n > 0 and (n & (n-1)) == 0 and n >= 128) or (n % 2 == 1 and not is_prime(n) and n >= 35) and (math.factorial(2*n) // pow(2, n)) % 1024 == 0",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0,
+      32,
+      34
+    ],
+    "claim": "For all integers n >= 1, if n is a power of 2 greater than or equal to 128, then (2n)! / 2^n is divisible by 4096.",
+    "predicate": "n > 0 and (n & (n-1)) == 0 and n >= 128 and (math.factorial(2*n) // pow(2, n)) % 4096 == 0",
+    "confidence": 0.79,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      0,
+      31,
+      35
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 128, then the exponent of 2 in (2n)! is at least n+12.",
+    "predicate": "n % 128 == 0 and vp(math.factorial(2*n), 2) >= n+12",
+    "confidence": 0.82,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0,
+      34,
+      36
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 128, then (2n)! / 2^n is divisible by 8192.",
+    "predicate": "n % 128 == 0 and (math.factorial(2*n) // pow(2, n)) % 8192 == 0",
+    "confidence": 0.81,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

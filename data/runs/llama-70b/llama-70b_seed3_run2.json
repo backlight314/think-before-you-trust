@@ -1,0 +1,306 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 equals 1^3 + 2^3 + ... + n^3.",
+    "predicate": "(n < 1) or ((n * (n + 1) // 2) ** 2 == sum(i ** 3 for i in range(1, n + 1)))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 is divisible by n.",
+    "predicate": "(n < 1) or (((n * (n + 1) // 2) ** 2) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, 1^3 + 2^3 + ... + n^3 is divisible by n.",
+    "predicate": "(n < 1) or (sum(i ** 3 for i in range(1, n + 1)) % n == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same prime factors.",
+    "predicate": "(n < 1) or (set(vp((n * (n + 1) // 2) ** 2, p) for p in range(2, n + 1) if is_prime(p)) == set(vp(sum(i ** 3 for i in range(1, n + 1)), p) for p in range(2, n + 1) if is_prime(p)))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 is congruent to 1 modulo 4.",
+    "predicate": "(n < 1) or (((n * (n + 1) // 2) ** 2) % 4 == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 1, 1^3 + 2^3 + ... + n^3 is congruent to 1 modulo 4.",
+    "predicate": "(n < 1) or (sum(i ** 3 for i in range(1, n + 1)) % 4 == 1)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      4,
+      5
+    ],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 4.",
+    "predicate": "(n < 1) or (((n * (n + 1) // 2) ** 2) % 4 == sum(i ** 3 for i in range(1, n + 1)) % 4)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same prime factors.",
+    "predicate": "(n < 1) or (not is_prime(n)) or (set(vp((n * (n + 1) // 2) ** 2, p) for p in range(2, n + 1) if is_prime(p)) == set(vp(sum(i ** 3 for i in range(1, n + 1)), p) for p in range(2, n + 1) if is_prime(p)))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 are both divisible by 8.",
+    "predicate": "(n < 1) or (n % 2 == 0) or ((((n * (n + 1) // 2) ** 2) % 8 == 0) and (sum(i ** 3 for i in range(1, n + 1)) % 8 == 0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      4,
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is even, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 are both congruent to 0 modulo 4.",
+    "predicate": "(n < 1) or (n % 2 != 0) or ((((n * (n + 1) // 2) ** 2) % 4 == 0) and (sum(i ** 3 for i in range(1, n + 1)) % 4 == 0))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      6,
+      8
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 8.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (((n * (n + 1) // 2) ** 2) % 8 == sum(i ** 3 for i in range(1, n + 1)) % 8)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      7,
+      9
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same prime factors and are both congruent to 1 modulo 4.",
+    "predicate": "(n < 1) or (not is_prime(n)) or (set(vp((n * (n + 1) // 2) ** 2, p) for p in range(2, n + 1) if is_prime(p)) == set(vp(sum(i ** 3 for i in range(1, n + 1)), p) for p in range(2, n + 1) if is_prime(p))) and (((n * (n + 1) // 2) ** 2) % 4 == 1) and (sum(i ** 3 for i in range(1, n + 1)) % 4 == 1)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10,
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is odd and prime, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 8 and are both congruent to 1 modulo 4.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (not is_prime(n)) or (((n * (n + 1) // 2) ** 2) % 8 == sum(i ** 3 for i in range(1, n + 1)) % 8) and (((n * (n + 1) // 2) ** 2) % 4 == 1) and (sum(i ** 3 for i in range(1, n + 1)) % 4 == 1)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      8,
+      12
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 are both divisible by 16.",
+    "predicate": "(n < 1) or (n % 2 == 0) or ((((n * (n + 1) // 2) ** 2) % 16 == 0) and (sum(i ** 3 for i in range(1, n + 1)) % 16 == 0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      9,
+      13
+    ],
+    "claim": "For all integers n >= 1, if n is even, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 are both congruent to 0 modulo 8.",
+    "predicate": "(n < 1) or (n % 2 != 0) or ((((n * (n + 1) // 2) ** 2) % 8 == 0) and (sum(i ** 3 for i in range(1, n + 1)) % 8 == 0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      10,
+      14
+    ],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 16.",
+    "predicate": "(n < 1) or (((n * (n + 1) // 2) ** 2) % 16 == sum(i ** 3 for i in range(1, n + 1)) % 16)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      11,
+      15
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 16 and are both congruent to 1 modulo 4.",
+    "predicate": "(n < 1) or (not is_prime(n)) or (((n * (n + 1) // 2) ** 2) % 16 == sum(i ** 3 for i in range(1, n + 1)) % 16) and (((n * (n + 1) // 2) ** 2) % 4 == 1) and (sum(i ** 3 for i in range(1, n + 1)) % 4 == 1)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      12,
+      16
+    ],
+    "claim": "For all integers n >= 1, if n is odd and prime, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 32 and are both congruent to 1 modulo 4.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (not is_prime(n)) or (((n * (n + 1) // 2) ** 2) % 32 == sum(i ** 3 for i in range(1, n + 1)) % 32) and (((n * (n + 1) // 2) ** 2) % 4 == 1) and (sum(i ** 3 for i in range(1, n + 1)) % 4 == 1)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      13,
+      17
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 are both divisible by 32.",
+    "predicate": "(n < 1) or (n % 2 == 0) or ((((n * (n + 1) // 2) ** 2) % 32 == 0) and (sum(i ** 3 for i in range(1, n + 1)) % 32 == 0))",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      14,
+      18
+    ],
+    "claim": "For all integers n >= 1, if n is even, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 are both congruent to 0 modulo 16.",
+    "predicate": "(n < 1) or (n % 2 != 0) or ((((n * (n + 1) // 2) ** 2) % 16 == 0) and (sum(i ** 3 for i in range(1, n + 1)) % 16 == 0))",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      15,
+      19
+    ],
+    "claim": "For all integers n >= 1, (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 32.",
+    "predicate": "(n < 1) or (((n * (n + 1) // 2) ** 2) % 32 == sum(i ** 3 for i in range(1, n + 1)) % 32)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      16,
+      20
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 32 and are both congruent to 1 modulo 4.",
+    "predicate": "(n < 1) or (not is_prime(n)) or (((n * (n + 1) // 2) ** 2) % 32 == sum(i ** 3 for i in range(1, n + 1)) % 32) and (((n * (n + 1) // 2) ** 2) % 4 == 1) and (sum(i ** 3 for i in range(1, n + 1)) % 4 == 1)",
+    "confidence": 0.5,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      17,
+      21
+    ],
+    "claim": "For all integers n >= 1, if n is odd and prime, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 have the same remainder modulo 64 and are both congruent to 1 modulo 4.",
+    "predicate": "(n < 1) or (n % 2 == 0) or (not is_prime(n)) or (((n * (n + 1) // 2) ** 2) % 64 == sum(i ** 3 for i in range(1, n + 1)) % 64) and (((n * (n + 1) // 2) ** 2) % 4 == 1) and (sum(i ** 3 for i in range(1, n + 1)) % 4 == 1)",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      18,
+      22
+    ],
+    "claim": "For all integers n >= 1, if n is odd, then (1 + 2 + ... + n)^2 and 1^3 + 2^3 + ... + n^3 are both divisible by 64.",
+    "predicate": "(n < 1) or (n % 2 == 0) or ((((n * (n + 1) // 2) ** 2) % 64 == 0) and (sum(i ** 3 for i in range(1, n + 1)) % 64 == 0))",
+    "confidence": 0.4,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

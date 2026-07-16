@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, sigma(n) is at least n + 1, with equality exactly when n is prime.",
+    "predicate": "(n <= 1) or (sigma(n) > n + 1) or (is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "If n is composite, then sigma(n) > n + 1.",
+    "predicate": "is_prime(n) or (n <= 1) or (sigma(n) > n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all primes p, sigma(p) = p + 1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) == n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1],
+    "claim": "If n is composite, then sigma(n) >= n + 1 + min(proper_divisors(n)).",
+    "predicate": "is_prime(n) or (n <= 1) or (sigma(n) >= n + 1 + min([d for d in range(2, n) if n % d == 0] or [n]))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [2],
+    "claim": "For all primes p, sigma(p) - p = 1.",
+    "predicate": "(not is_prime(n)) or (sigma(n) - n == 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 5,
+    "parents": [0],
+    "claim": "For all n > 1, sigma(n) / n > 1.",
+    "predicate": "(n <= 1) or (sigma(n) > n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [1, 5],
+    "claim": "For composite n, sigma(n) / n > (n + 2) / n.",
+    "predicate": "is_prime(n) or (n <= 1) or (sigma(n) * n > n * (n + 2))",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 7,
+    "parents": [2],
+    "claim": "The sum of sigma(p) over all primes p <= N is approximately N^2 / (2 log N).",
+    "predicate": "(n <= 2) or (sum([sigma(p) for p in range(2, n+1) if is_prime(p)]) > 0)",
+    "confidence": 0.7,
+    "is_terminal": true
+  },
+  {
+    "node_id": 8,
+    "parents": [0],
+    "claim": "For all n > 1, tau(n) <= 2 * sqrt(n).",
+    "predicate": "(n <= 1) or (tau(n) <= 2 * int(pow(n, 0.5)) + 1)",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [8],
+    "claim": "For all n > 1, sigma(n) >= n + tau(n).",
+    "predicate": "(n <= 1) or (sigma(n) >= n + tau(n))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [0, 9],
+    "claim": "For prime p, tau(p) = 2 and sigma(p) = p + 1.",
+    "predicate": "(not is_prime(n)) or (tau(n) == 2 and sigma(n) == n + 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 11,
+    "parents": [1],
+    "claim": "For composite n, sigma(n) >= 2n - 1.",
+    "predicate": "is_prime(n) or (n <= 1) or (sigma(n) >= 2*n - 1)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [11],
+    "claim": "If n is a perfect square composite, then sigma(n) >= 2n.",
+    "predicate": "(not (n > 1 and int(pow(n, 0.5))**2 == n and not is_prime(n))) or (sigma(n) >= 2*n)",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [0],
+    "claim": "For all n > 1, if n = p^k where p is prime and k >= 2, then sigma(n) = (p^(k+1) - 1)/(p - 1).",
+    "predicate": "(n <= 1) or (all(vp(n, p) == 0 or (p > 1 and vp(n, p) > 0) for p in range(2, n+1)) and (n <= 1 or sigma(n) == sigma(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [13],
+    "claim": "For all primes p and k >= 2, sigma(p^k) > p^k + 1.",
+    "predicate": "(n <= 1) or (not (all(vp(n, q) == 0 or (q == p and vp(n, p) >= 2) for q in range(2, n+1) for p in range(2, n+1)))) or (sigma(n) > n + 1)",
+    "confidence": 0.9,
+    "is_terminal": true
+  },
+  {
+    "node_id": 15,
+    "parents": [0],
+    "claim": "sigma is a multiplicative function: if gcd(a, b) = 1, then sigma(a*b) = sigma(a) * sigma(b).",
+    "predicate": "(n <= 1) or (all(sigma(n) == sigma(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [2, 15],
+    "claim": "For distinct primes p and q, sigma(p*q) = (p+1)*(q+1).",
+    "predicate": "((n <= 1) or (not (all(is_prime(d) and vp(n, d) == 1 for d in range(2, n+1) if vp(n, d) > 0) and len([d for d in range(2, n+1) if vp(n, d) > 0]) == 2))) or (sigma(n) == (n + 1 + sum([d for d in range(2, n+1) if n % d == 0 and d < n])))",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 17,
+    "parents": [0],
+    "claim": "The deficiency delta(n) = 2n - sigma(n) is non-negative, with delta(n) = n - 1 exactly for primes.",
+    "predicate": "(n <= 1) or ((2*n - sigma(n) >= 0) and (is_prime(n) or (2*n - sigma(n) != n - 1)))",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [17],
+    "claim": "For all n > 1, the deficiency delta(n) >= 0.",
+    "predicate": "(n <= 1) or (2*n >= sigma(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [0, 18],
+    "claim": "n is prime if and only if delta(n) = n - 1.",
+    "predicate": "(n <= 1) or ((2*n - sigma(n) == n - 1) and is_prime(n)) or ((2*n - sigma(n) != n - 1) and (not is_prime(n)))",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [1, 11],
+    "claim": "For composite n, the abundance sigma(n) - 2n is between -n+1 and 0.",
+    "predicate": "is_prime(n) or (n <= 1) or ((sigma(n) - 2*n > -n) and (sigma(n) - 2*n <= 0))",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [0],
+    "claim": "The smallest prime p divides sigma(n) - n - 1 for composite n.",
+    "predicate": "is_prime(n) or (n <= 1) or (all((sigma(n) - n - 1) % p != 0 for p in range(2, n+1) if is_prime(p) and p < 10))",
+    "confidence": 0.5,
+    "is_terminal": true
+  },
+  {
+    "node_id": 22,
+    "parents": [15],
+    "claim": "If n = p_1^{a_1} * ... * p_k^{a_k}, then sigma(n) = prod_{i=1}^{k} (p_i^{a_i+1} - 1)/(p_i - 1).",
+    "predicate": "(n <= 1) or (sigma(n) == sigma(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [22],
+    "claim": "For n with exactly two distinct prime factors, sigma(n) / n > 1 + 1/min_prime_factor(n).",
+    "predicate": "(n <= 1) or (len([p for p in range(2, n+1) if is_prime(p) and vp(n, p) > 0]) != 2) or (sigma(n) > n * (1 + 1/(min([p for p in range(2, n+1) if is_prime(p) and vp(n, p) > 0]) or 1)))",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [0],
+    "claim": "sigma(n) is odd if and only if n is a perfect square or twice a perfect square.",
+    "predicate": "(n <= 1) or (sigma(n) % 2 == 1) == ((int(pow(n, 0.5))**2 == n) or (n % 2 == 0 and int(pow(n // 2, 0.5))**2 == n // 2))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [24],
+    "claim": "For odd prime p, sigma(p) = p + 1 is even.",
+    "predicate": "(not is_prime(n)) or (n == 2) or (sigma(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 26,
+    "parents": [2, 24],
+    "claim": "sigma(4) = 7, which is odd, and 4 = 2^2 is a perfect square.",
+    "predicate": "(n != 4) or (sigma(n) == 7)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 27,
+    "parents": [0],
+    "claim": "For all n > 1, sigma(n) - 1 >= n.",
+    "predicate": "(n <= 1) or (sigma(n) - 1 >= n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [27],
+    "claim": "sigma(n) / n >= (n + 1) / n for all n > 1.",
+    "predicate": "(n <= 1) or (sigma(n) * n >= n * (n + 1))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 29,
+    "parents": [0],
+    "claim": "The ratio sigma(n) / n is minimized over all n > 1 when n is prime, with minimum value 1 + 1/n.",
+    "predicate": "(n <= 1) or (sigma(n) >= n + 1)",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [29, 23],
+    "claim": "For n with at least two distinct odd prime factors, sigma(n) / n > 1 + 1/3 + 1/5.",
+    "predicate": "(n <= 1) or (len([p for p in range(3, n+1, 2) if is_prime(p) and vp(n, p) > 0]) < 2) or (sigma(n) > n * (1 + 1.0/3 + 1.0/5))",
+    "confidence": 0.7,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [0],
+    "claim": "If n > 1 and sigma(n) = n + 1, then n is prime.",
+    "predicate": "(n <= 1) or (sigma(n) != n + 1) or (is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [0],
+    "claim": "phi(n) < sigma(n) for all n > 1.",
+    "predicate": "(n <= 1) or (phi(n) < sigma(n))",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [32, 2],
+    "claim": "For prime p, phi(p) = p - 1 < p + 1 = sigma(p).",
+    "predicate": "(not is_prime(n)) or (phi(n) == n - 1 and sigma(n) == n + 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 34,
+    "parents": [32],
+    "claim": "For all n > 1, sigma(n) - phi(n) >= 2.",
+    "predicate": "(n <= 1) or (sigma(n) - phi(n) >= 2)",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [2, 34],
+    "claim": "For prime p, sigma(p) - phi(p) = p + 1 - (p - 1) = 2.",
+    "predicate": "(not is_prime(n)) or (sigma(n) - phi(n) == 2)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 36,
+    "parents": [0],
+    "claim": "For n > 1, the sum of proper divisors of n is at least 1.",
+    "predicate": "(n <= 1) or (sigma(n) - n >= 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 37,
+    "parents": [8, 9],
+    "claim": "sigma(n) / tau(n) > n / 2 for all n > 1.",
+    "predicate": "(n <= 1) or (tau(n) == 0) or (sigma(n) > n * tau(n) / 2)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [37],
+    "claim": "For n > 1, sigma(n) >= (n * tau(n)) / 2.",
+    "predicate": "(n <= 1) or (tau(n) == 0) or (2 * sigma(n) >= n * tau(n))",
+    "confidence": 0.8,
+    "is_terminal": true
+  },
+    {
+    "node_id": 39,
+    "parents": [0],
+    "claim": "The set of n with sigma(n) = n + 1 is exactly the set of primes.",
+    "predicate": "(n <= 1) or ((sigma(n) == n + 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 40,
+    "parents": [1, 20],
+    "claim": "For all composite n, sigma(n) < 2n - 1.",
+    "predicate": "is_prime(n) or (n <= 1) or (sigma(n) < 2*n - 1)",
+    "confidence": 0.7,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [17, 40],
+    "claim": "For composite n, the deficiency delta(n) = 2n - sigma(n) is positive and less than n.",
+    "predicate": "is_prime(n) or (n <= 1) or ((2*n - sigma(n) > 0) and (2*n - sigma(n) < n))",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [13, 15],
+    "claim": "sigma(p^a * q^b) = sigma(p^a) * sigma(q^b) for distinct primes p, q and a, b >= 1.",
+    "predicate": "(n <= 1) or (sigma(n) >= 1)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 43,
+    "parents": [0],
+    "claim": "Every composite integer n has a prime divisor p where p <= sqrt(n).",
+    "predicate": "is_prime(n) or (n <= 1) or (any(n % p == 0 for p in range(2, int(pow(n, 0.5)) + 2) if is_prime(p)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [1, 43],
+    "claim": "If n is composite with smallest prime divisor p, then sigma(n) >= n + p.",
+    "predicate": "is_prime(n) or (n <= 1) or (sigma(n) >= n + (min([d for d in range(2, int(pow(n, 0.5)) + 2) if is_prime(d) and n % d == 0]) if any(n % d == 0 for d in range(2, int(pow(n, 0.5)) + 2) if is_prime(d)) else n))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [44],
+    "claim": "For composite n >= 4, sigma(n) >= n + 2.",
+    "predicate": "is_prime(n) or (n <= 1) or (n < 4) or (sigma(n) >= n + 2)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [0],
+    "claim": "sigma(n) and n cannot both be odd unless n is a perfect square or twice a perfect square.",
+    "predicate": "(n <= 1) or (sigma(n) % 2 == 0) or (n % 2 == 0) or ((int(pow(n, 0.5))**2 == n) or (n % 2 == 0 and int(pow(n // 2, 0.5))**2 == n // 2))",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [24, 46],
+    "claim": "If n is an odd perfect square, then sigma(n) is odd.",
+    "predicate": "(n % 2 == 0) or (int(pow(n, 0.5))**2 != n) or (sigma(n) % 2 == 1)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [30, 29],
+    "claim": "sigma(30) > 30 + 1 + 1 + 1 since 30 = 2*3*5 has three distinct prime factors.",
+    "predicate": "(n != 30) or (sigma(n) > 33)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [41, 45],
+    "claim": "For all composite n > 4, the deficiency 2n - sigma(n) is strictly between 1 and n-1.",
+    "predicate": "is_prime(n) or (n <= 4) or ((2*n - sigma(n) > 1) and (2*n - sigma(n) < n - 1))",
+    "confidence": 0.75,
+    "is_terminal": true
+  }
+]

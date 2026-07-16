@@ -1,0 +1,537 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) <= 2",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) is either 1 or 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) in [1, 2]",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is odd, then gcd(n^2 + 1, n + 1) = 2.",
+    "predicate": "(n % 2 == 0) or (gcd(n**2 + 1, n + 1) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "If n is even, then gcd(n^2 + 1, n + 1) = 1.",
+    "predicate": "(n % 2 == 1) or (gcd(n**2 + 1, n + 1) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      2,
+      3
+    ],
+    "claim": "gcd(n^2 + 1, n + 1) equals 2 if n is odd and 1 if n is even.",
+    "predicate": "(n % 2 == 1 and gcd(n**2 + 1, n + 1) == 1) or (n % 2 == 0 and gcd(n**2 + 1, n + 1) == 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "n^2 + 1 is never divisible by any odd prime dividing n + 1.",
+    "predicate": "all(gcd(n**2 + 1, p) != p for p in range(3, abs(n)+2, 2) if n+1 % p == 0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      2
+    ],
+    "claim": "If n is odd, then n^2 + 1 is even.",
+    "predicate": "(n % 2 == 0) or ((n**2 + 1) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3
+    ],
+    "claim": "If n is even, then n^2 + 1 is odd.",
+    "predicate": "(n % 2 == 1) or ((n**2 + 1) % 2 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      6,
+      7
+    ],
+    "claim": "n^2 + 1 has the same parity as n + 1 if and only if n is odd.",
+    "predicate": "((n % 2 == 1) and ((n**2 + 1) % 2 == (n + 1) % 2)) or ((n % 2 == 0) and ((n**2 + 1) % 2 != (n + 1) % 2))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "gcd(n^2 + 1, n + 1) divides gcd(n - 1, 2).",
+    "predicate": "gcd(n**2 + 1, n + 1) divides gcd(n - 1, 2)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9
+    ],
+    "claim": "gcd(n^2 + 1, n + 1) divides 2 for all n, and equals gcd(n - 1, 2) when n is odd.",
+    "predicate": "gcd(n**2 + 1, n + 1) == (gcd(n - 1, 2) if n % 2 == 1 else 1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "The product (n^2 + 1)(n + 1) is divisible by 2 for all n.",
+    "predicate": "((n**2 + 1) * (n + 1)) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "If n is even, then (n^2 + 1)(n + 1) is even.",
+    "predicate": "(n % 2 == 1) or (((n**2 + 1) * (n + 1)) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      11
+    ],
+    "claim": "If n is odd, then (n^2 + 1)(n + 1) is divisible by 4.",
+    "predicate": "(n % 2 == 0) or (((n**2 + 1) * (n + 1)) % 4 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      12,
+      13
+    ],
+    "claim": "(n^2 + 1)(n + 1) is divisible by 4 if n is odd, by 2 if n is even.",
+    "predicate": "(n % 2 == 1 and ((n**2 + 1) * (n + 1)) % 4 == 0) or (n % 2 == 0 and ((n**2 + 1) * (n + 1)) % 2 == 0 and ((n**2 + 1) * (n + 1)) % 4 != 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "n^2 + 1 \u2261 2 mod (n + 1) when n is odd.",
+    "predicate": "(n % 2 == 0) or ((n**2 + 1) % (n + 1) == 2)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "n^2 + 1 \u2261 1 mod (n + 1) when n is even.",
+    "predicate": "(n % 2 == 1) or ((n**2 + 1) % (n + 1) == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15,
+      16
+    ],
+    "claim": "n^2 + 1 \u2261 2 - (n % 2) mod (n + 1).",
+    "predicate": "(n**2 + 1) % (n + 1) == 2 - (n % 2)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      15
+    ],
+    "claim": "If n is odd, then n^2 + 1 \u2261 2 mod (n + 1) implies (n + 1) divides (n^2 - 1).",
+    "predicate": "(n % 2 == 0) or ((n**2 - 1) % (n + 1) == 0)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      16
+    ],
+    "claim": "If n is even, then n^2 + 1 \u2261 1 mod (n + 1) implies (n + 1) divides (n^2).",
+    "predicate": "(n % 2 == 1) or ((n**2) % (n + 1) == 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18,
+      19
+    ],
+    "claim": "(n + 1) divides n^2 - 1 if n is odd, and n^2 if n is even.",
+    "predicate": "(n % 2 == 1 and (n**2 - 1) % (n + 1) == 0) or (n % 2 == 0 and (n**2) % (n + 1) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "The gcd(n^2 + 1, n + 1) is equal to gcd(2, n + 1).",
+    "predicate": "gcd(n**2 + 1, n + 1) == gcd(2, n + 1)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21
+    ],
+    "claim": "gcd(n^2 + 1, n + 1) = 1 if n \u2261 0 mod 2, and 2 if n \u2261 1 mod 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) == (2 if n % 2 == 1 else 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "The sequence gcd(n^2 + 1, n + 1) is periodic with period 2.",
+    "predicate": "gcd(n**2 + 1, n + 1) == gcd((n+2)**2 + 1, n+3)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "n^2 + 1 and n + 1 are coprime unless n is odd.",
+    "predicate": "(n % 2 == 0) or (gcd(n**2 + 1, n + 1) != 1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24
+    ],
+    "claim": "n^2 + 1 and n + 1 share a common prime factor only if that factor is 2.",
+    "predicate": "all(p != 2 or gcd(n**2 + 1, n + 1) % p == 0 for p in range(3, 100) if p % 2 == 1 and gcd(n**2 + 1, n + 1) > 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      25
+    ],
+    "claim": "If p is an odd prime dividing both n^2 + 1 and n + 1, then p divides 2, which is impossible.",
+    "predicate": "not any(p for p in range(3, 100, 2) if n+1 % p == 0 and (n**2 + 1) % p == 0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0,
+      26
+    ],
+    "claim": "No odd prime divides both n^2 + 1 and n + 1 for any integer n.",
+    "predicate": "not any(p for p in range(3, 1000, 2) if (n+1) % p == 0 and (n**2 + 1) % p == 0)",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      22
+    ],
+    "claim": "For n even, n^2 + 1 is congruent to 1 mod 4.",
+    "predicate": "(n % 2 == 1) or ((n**2 + 1) % 4 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      28
+    ],
+    "claim": "For n even, n^2 + 1 \u2261 1 mod 8 if n \u2261 0 mod 4, and \u2261 5 mod 8 if n \u2261 2 mod 4.",
+    "predicate": "(n % 2 == 1) or ((n % 4 == 0 and (n**2 + 1) % 8 == 1) or (n % 4 == 2 and (n**2 + 1) % 8 == 5))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29
+    ],
+    "claim": "If n \u2261 2 mod 4, then n^2 + 1 \u2261 5 mod 8, so it is not a square.",
+    "predicate": "(n % 4 != 2) or ((n**2 + 1) % 8 == 5)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      28,
+      22
+    ],
+    "claim": "If n is even, then n^2 + 1 is a quadratic residue modulo any odd prime dividing n + 1 only if that prime is 1 mod 4.",
+    "predicate": "(n % 2 == 1) or (all(p % 4 == 1 for p in range(3, abs(n)+2, 2) if (n+1) % p == 0 and pow(n**2 + 1, (p-1)//2, p) == 1))",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      2
+    ],
+    "claim": "If n is odd, then n + 1 is even, so tau(n + 1) \u2265 2.",
+    "predicate": "(n % 2 == 0) or (tau(n + 1) >= 2)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      3
+    ],
+    "claim": "If n is even, then n + 1 is odd, so phi(n + 1) is even if n + 1 > 2.",
+    "predicate": "(n % 2 == 1) or (n + 1 <= 2 or phi(n + 1) % 2 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      32,
+      33
+    ],
+    "claim": "tau(n + 1) is even if n is odd and n + 1 > 2, and phi(n + 1) is even if n is even and n + 1 > 2.",
+    "predicate": "((n % 2 == 1 and n + 1 > 2 and tau(n + 1) % 2 == 0) or (n % 2 == 0 and n + 1 > 2 and phi(n + 1) % 2 == 0))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "The sum of divisors of gcd(n^2 + 1, n + 1) is 1 if n even, 3 if n odd.",
+    "predicate": "sigma(gcd(n**2 + 1, n + 1)) == (3 if n % 2 == 1 else 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35
+    ],
+    "claim": "sigma(gcd(n^2 + 1, n + 1)) is always odd.",
+    "predicate": "sigma(gcd(n**2 + 1, n + 1)) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      35
+    ],
+    "claim": "The sum of divisors function of gcd(n^2 + 1, n + 1) equals 1 + gcd(n^2 + 1, n + 1).",
+    "predicate": "sigma(gcd(n**2 + 1, n + 1)) == 1 + gcd(n**2 + 1, n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      0
+    ],
+    "claim": "vp(gcd(n^2 + 1, n + 1), 2) = 1 if n is odd, 0 if n is even.",
+    "predicate": "vp(gcd(n**2 + 1, n + 1), 2) == (1 if n % 2 == 1 else 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38
+    ],
+    "claim": "The 2-adic valuation of gcd(n^2 + 1, n + 1) is exactly the same as the 2-adic valuation of n + 1.",
+    "predicate": "vp(gcd(n**2 + 1, n + 1), 2) == vp(n + 1, 2)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39
+    ],
+    "claim": "If n is odd, then n + 1 is divisible by 2 but not by 4 if and only if gcd(n^2 + 1, n + 1) = 2.",
+    "predicate": "(n % 2 == 0) or (vp(n + 1, 2) == 1 == vp(gcd(n**2 + 1, n + 1), 2))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      21,
+      38
+    ],
+    "claim": "gcd(n^2 + 1, n + 1) = 2^{vp(n + 1, 2)}",
+    "predicate": "gcd(n**2 + 1, n + 1) == 2**vp(n + 1, 2)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41
+    ],
+    "claim": "If n + 1 is a power of 2, then gcd(n^2 + 1, n + 1) = n + 1.",
+    "predicate": "(n + 1 == 2**int(round(log(n+1,2))) if n+1 > 1 else True) and gcd(n**2 + 1, n + 1) == n + 1",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42
+    ],
+    "claim": "If n + 1 = 2^k for k \u2265 2, then n^2 + 1 \u2261 2 mod (n + 1).",
+    "predicate": "(n + 1 != 2**int(round(log(n+1,2))) or n+1 <= 2 or (n**2 + 1) % (n + 1) == 2)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  }
+]

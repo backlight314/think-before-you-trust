@@ -1,0 +1,423 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 2, Euler's totient phi(n) is even.",
+    "predicate": "n <= 2 or phi(n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is odd, then phi(n) is divisible by 2.",
+    "predicate": "n <= 2 or n % 2 == 1 or phi(n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is a power of 2 greater than 4, then phi(n) is divisible by 4.",
+    "predicate": "n <= 2 or not (n > 4 and (n & (n-1)) == 0) or phi(n) % 4 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n > 2, if n is a power of 2 greater than 4 or an odd integer greater than 3, then phi(n) is divisible by 4.",
+    "predicate": "n <= 2 or (n % 2 == 1 and n > 3) or not (n > 4 and (n & (n-1)) == 0) or phi(n) % 4 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n has at least two distinct odd prime factors, then phi(n) is divisible by 8.",
+    "predicate": "n <= 2 or len([p for p in range(3, int(n**0.5)+2, 2) if n % p == 0 and is_prime(p)]) < 2 or phi(n) % 8 == 0",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "For all integers n > 2, if n is divisible by an odd prime and is not a prime power, then phi(n) is divisible by 4.",
+    "predicate": "n <= 2 or (is_prime(n) and n > 2) or len([p for p in range(2, int(n**0.5)+2) if n % p == 0 and is_prime(p)]) == 1 or phi(n) % 4 == 0",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 3 and by another prime, then phi(n) is divisible by 6.",
+    "predicate": "n <= 2 or (n % 3 != 0) or len([p for p in range(2, int(n**0.5)+2) if n % p == 0 and is_prime(p)]) < 2 or phi(n) % 6 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 3 and by 5, then phi(n) is divisible by 8.",
+    "predicate": "n <= 2 or (n % 3 != 0 or n % 5 != 0) or phi(n) % 8 == 0",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 7, then phi(n) is divisible by 6.",
+    "predicate": "n <= 2 or n % 7 != 0 or phi(n) % 6 == 0",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0,
+      8
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 7 and by 3, then phi(n) is divisible by 12.",
+    "predicate": "n <= 2 or (n % 3 != 0 or n % 7 != 0) or phi(n) % 12 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 2 and by an odd prime, then phi(n) is divisible by 4.",
+    "predicate": "n <= 2 or n % 2 != 0 or len([p for p in range(3, int(n**0.5)+2, 2) if n % p == 0 and is_prime(p)]) == 0 or phi(n) % 4 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      10
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 2 and by 3, then phi(n) is divisible by 4.",
+    "predicate": "n <= 2 or (n % 2 != 0 or n % 3 != 0) or phi(n) % 4 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 2 and by 3 and by 5, then phi(n) is divisible by 8.",
+    "predicate": "n <= 2 or (n % 2 != 0 or n % 3 != 0 or n % 5 != 0) or phi(n) % 8 == 0",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is a prime, then phi(n) = n-1.",
+    "predicate": "n <= 2 or not is_prime(n) or phi(n) == n - 1",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "For all integers n > 2, if n is prime, then n-1 is even.",
+    "predicate": "n <= 2 or not is_prime(n) or (n - 1) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "For all integers n > 2, if n is prime and n > 3, then n-1 is divisible by 2 and by 3 or by 4.",
+    "predicate": "n <= 2 or not is_prime(n) or n <= 3 or ((n - 1) % 2 == 0 and ((n - 1) % 3 == 0 or (n - 1) % 4 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "For all integers n > 2, if n is prime and n \u2261 1 mod 4, then phi(n) is divisible by 4.",
+    "predicate": "n <= 2 or not is_prime(n) or (n % 4 != 1) or phi(n) % 4 == 0",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "For all integers n > 2, if n is prime and n \u2261 3 mod 4, then phi(n) is divisible by 2 but not necessarily by 4.",
+    "predicate": "n <= 2 or not is_prime(n) or (n % 4 != 3) or (phi(n) % 2 == 0 and phi(n) % 4 != 0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      0,
+      13,
+      16
+    ],
+    "claim": "For all integers n > 2, if n is prime and n \u2261 1 mod 4, then phi(n) is divisible by 8 if n > 5.",
+    "predicate": "n <= 2 or not is_prime(n) or (n % 4 != 1) or n <= 5 or phi(n) % 8 == 0",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0,
+      13,
+      17
+    ],
+    "claim": "For all integers n > 2, if n is prime and n \u2261 3 mod 4, then phi(n) is divisible by 2 but never by 8.",
+    "predicate": "n <= 2 or not is_prime(n) or (n % 4 != 3) or (phi(n) % 2 == 0 and phi(n) % 8 != 0)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is a perfect square greater than 4, then phi(n) is divisible by 4.",
+    "predicate": "n <= 2 or n < 4 or int(n**0.5)**2 != n or phi(n) % 4 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      20
+    ],
+    "claim": "For all integers n > 2, if n is a perfect square and divisible by 9, then phi(n) is divisible by 6.",
+    "predicate": "n <= 2 or n < 9 or int(n**0.5)**2 != n or n % 9 != 0 or phi(n) % 6 == 0",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      0,
+      20
+    ],
+    "claim": "For all integers n > 2, if n is a perfect square and divisible by 25, then phi(n) is divisible by 20.",
+    "predicate": "n <= 2 or n < 25 or int(n**0.5)**2 != n or n % 25 != 0 or phi(n) % 20 == 0",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0,
+      20,
+      22
+    ],
+    "claim": "For all integers n > 2, if n is a perfect square divisible by 25 and by 9, then phi(n) is divisible by 60.",
+    "predicate": "n <= 2 or n < 225 or int(n**0.5)**2 != n or n % 25 != 0 or n % 9 != 0 or phi(n) % 60 == 0",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is a cube greater than 8, then phi(n) is divisible by 6.",
+    "predicate": "n <= 2 or n < 8 or int(round(n**(1/3)))**3 != n or phi(n) % 6 == 0",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0,
+      24
+    ],
+    "claim": "For all integers n > 2, if n is a cube divisible by 8, then phi(n) is divisible by 8.",
+    "predicate": "n <= 2 or n < 8 or int(round(n**(1/3)))**3 != n or n % 8 != 0 or phi(n) % 8 == 0",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      24,
+      25
+    ],
+    "claim": "For all integers n > 2, if n is a cube divisible by 8 and by 27, then phi(n) is divisible by 24.",
+    "predicate": "n <= 2 or n < 216 or int(round(n**(1/3)))**3 != n or n % 8 != 0 or n % 27 != 0 or phi(n) % 24 == 0",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 4 and by an odd prime, then phi(n) is divisible by 8.",
+    "predicate": "n <= 2 or n % 4 != 0 or len([p for p in range(3, int(n**0.5)+2, 2) if n % p == 0 and is_prime(p)]) == 0 or phi(n) % 8 == 0",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      0,
+      27
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 4 and by 3, then phi(n) is divisible by 8.",
+    "predicate": "n <= 2 or n % 4 != 0 or n % 3 != 0 or phi(n) % 8 == 0",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      27,
+      6
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 4 and by 3 and by 5, then phi(n) is divisible by 24.",
+    "predicate": "n <= 2 or n % 4 != 0 or n % 3 != 0 or n % 5 != 0 or phi(n) % 24 == 0",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 9, then phi(n) is divisible by 6.",
+    "predicate": "n <= 2 or n % 9 != 0 or phi(n) % 6 == 0",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0,
+      30
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 9 and by 5, then phi(n) is divisible by 12.",
+    "predicate": "n <= 2 or n % 9 != 0 or n % 5 != 0 or phi(n) % 12 == 0",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      0,
+      30,
+      27
+    ],
+    "claim": "For all integers n > 2, if n is divisible by 9 and by 4, then phi(n) is divisible by 12.",
+    "predicate": "n <= 2 or n % 9 != 0 or n % 4 != 0 or phi(n) % 12 == 0",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

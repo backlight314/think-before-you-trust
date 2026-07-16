@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, n is prime if and only if (n-1)! + 1 is divisible by n.",
+    "predicate": "(n <= 1) or (is_prime(n) == ((factorial(n - 1) + 1) % n == 0))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n > 1, n is prime if and only if its Euler totient phi(n) is equal to n - 1.",
+    "predicate": "(n <= 1) or (is_prime(n) == (phi(abs(n)) == abs(n) - 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n > 1, n is prime if and only if the sum of its divisors sigma(n) is exactly n + 1.",
+    "predicate": "(n <= 1) or (is_prime(n) == (sigma(abs(n)) == abs(n) + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [0],
+    "claim": "For all integers n > 1, n is prime if and only if the number of its divisors tau(n) is exactly 2.",
+    "predicate": "(n <= 1) or (is_prime(n) == (tau(abs(n)) == 2))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [1, 2],
+    "claim": "For all n > 1, n is prime if and only if the sum of its totient and divisor sum is 2n.",
+    "predicate": "(n <= 1) or (is_prime(n) == (phi(abs(n)) + sigma(abs(n)) == 2 * abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [1, 3],
+    "claim": "For all n > 1, n is prime if and only if the product of its totient and divisor count is 2(n-1).",
+    "predicate": "(n <= 1) or (is_prime(n) == (phi(abs(n)) * tau(abs(n)) == 2 * (abs(n) - 1)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [0],
+    "claim": "For any composite n > 4, n divides (n-1)!.",
+    "predicate": "(n <= 4) or is_prime(n) or (factorial(n - 1) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [0, 6],
+    "claim": "For any integer n > 1, gcd(n, (n-1)!) is 1 if and only if n is prime.",
+    "predicate": "(n <= 1) or ((gcd(abs(n), factorial(abs(n) - 1)) == 1) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [1, 2, 4],
+    "claim": "For all integers n > 1, the difference between sigma(n) and phi(n) is 2 if and only if n is prime.",
+    "predicate": "(n <= 1) or ((sigma(abs(n)) - phi(abs(n)) == 2) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [2, 3, 5],
+    "claim": "For all integers n > 1, sigma(n) + phi(n) = n * tau(n) if and only if n is prime.",
+    "predicate": "(n <= 1) or ((sigma(abs(n)) + phi(abs(n)) == abs(n) * tau(abs(n))) == is_prime(n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [0],
+    "claim": "If n is prime, then n divides 2^n - 2.",
+    "predicate": "(not is_prime(n)) or (pow(2, n, n) == 2 % n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [0],
+    "claim": "If n is prime, then (n-2)! is congruent to 1 modulo n.",
+    "predicate": "(not is_prime(n)) or (factorial(n - 2) % n == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [10, 11],
+    "claim": "If n is an odd prime, then n divides (n-2)! * (2^(n-1) - 1).",
+    "predicate": "(not is_prime(n) or n % 2 == 0) or ((factorial(n - 2) * (pow(2, n - 1, n) - 1)) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [1],
+    "claim": "If n > 2 is prime, then phi(n) is even.",
+    "predicate": "(not is_prime(n) or n <= 2) or (phi(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [2],
+    "claim": "If n > 2 is prime, then sigma(n) is even.",
+    "predicate": "(not is_prime(n) or n <= 2) or (sigma(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [13, 14],
+    "claim": "For any prime n > 2, the product phi(n) * sigma(n) is a multiple of 4.",
+    "predicate": "(not is_prime(n) or n <= 2) or ((phi(n) * sigma(n)) % 4 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [1, 2],
+    "claim": "If n is prime, then phi(n) * sigma(n) = n^2 - 1.",
+    "predicate": "(not is_prime(n)) or (phi(n) * sigma(n) == n**2 - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [15, 16],
+    "claim": "For any prime n > 2, n^2 - 1 is a multiple of 8.",
+    "predicate": "(not is_prime(n) or n <= 2) or ((n**2 - 1) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [0],
+    "claim": "If p is prime and p >= 5, then the numerator of the harmonic sum 1 + 1/2 + ... + 1/(p-1) is divisible by p^2.",
+    "predicate": "(not (is_prime(n) and n >= 5)) or (sum(factorial(n - 1) // i for i in range(1, n)) % n**2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 19,
+    "parents": [18],
+    "claim": "If p >= 5 is prime, the binomial coefficient C(2p-1, p-1) is congruent to 1 modulo p^3.",
+    "predicate": "(not (is_prime(n) and n >= 5)) or ((factorial(2 * n - 1) // (factorial(n) * factorial(n - 1))) % n**3 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 20,
+    "parents": [0],
+    "claim": "If n is prime, then every binomial coefficient C(n, k) for 0 < k < n is divisible by n.",
+    "predicate": "(not is_prime(n)) or all((factorial(n) // (factorial(k) * factorial(n - k))) % n == 0 for k in range(1, n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [1, 20],
+    "claim": "If n is prime, then phi(n) divides the sum of divisors of n!.",
+    "predicate": "(not is_prime(n)) or (sigma(factorial(n)) % phi(n) == 0)",
+    "confidence": 0.8,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [1, 10],
+    "claim": "If n is prime, then n divides the Euler totient of n^2.",
+    "predicate": "(not is_prime(n)) or (phi(n**2) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [3, 22],
+    "claim": "If n is prime, the number of divisors of n^2 is exactly 3.",
+    "predicate": "(not is_prime(n)) or (tau(n**2) == 3)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [2, 23],
+    "claim": "If n is prime, the sum of divisors of n^2 is n^2 + n + 1.",
+    "predicate": "(not is_prime(n)) or (sigma(n**2) == n**2 + n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [1, 22],
+    "claim": "If n is prime, the Euler totient of n^2 is n^2 - n.",
+    "predicate": "(not is_prime(n)) or (phi(n**2) == n**2 - n)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [24, 25],
+    "claim": "If n is prime, then sigma(n^2) and phi(n^2) are relatively prime.",
+    "predicate": "(not is_prime(n)) or (gcd(sigma(n**2), phi(n**2)) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [0, 4],
+    "claim": "If n and n+2 are twin primes, then phi(n(n+2)) = (n-1)(n+1).",
+    "predicate": "(not (is_prime(n) and is_prime(n + 2))) or (phi(n * (n + 2)) == (n - 1) * (n + 1))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [0, 4],
+    "claim": "If n and n+2 are twin primes, then sigma(n(n+2)) = (n+1)(n+3).",
+    "predicate": "(not (is_prime(n) and is_prime(n + 2))) or (sigma(n * (n + 2)) == (n + 1) * (n + 3))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [27, 28],
+    "claim": "If n and n+2 are twin primes, then sigma(n(n+2)) - phi(n(n+2)) = 4n + 4.",
+    "predicate": "(not (is_prime(n) and is_prime(n + 2))) or (sigma(n * (n + 2)) - phi(n * (n + 2)) == 4 * n + 4)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 30,
+    "parents": [3, 23],
+    "claim": "For n > 1, the number of divisors tau(n) is odd if and only if n is a perfect square.",
+    "predicate": "(n <= 1) or ((tau(n) % 2 != 0) == (int(n**0.5)**2 == n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [2, 30],
+    "claim": "If sigma(n) is prime and n > 1, then n must be a perfect power.",
+    "predicate": "(n <= 1 or not is_prime(sigma(n))) or any(round(n**(1/k))**k == n for k in range(2, 10))",
+    "confidence": 0.7,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [1, 13],
+    "claim": "If n is a power of 2, n=2^k with k >= 1, then phi(n) = n/2.",
+    "predicate": "(n < 2 or (n & (n-1) != 0)) or (phi(n) == n // 2)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [2, 14],
+    "claim": "If n is a power of 2, n=2^k with k >= 0, then sigma(n) = 2n - 1.",
+    "predicate": "(n < 1 or (n & (n-1) != 0)) or (sigma(n) == 2 * n - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [32, 33],
+    "claim": "If n is a power of 2, n=2^k with k >= 1, then gcd(phi(n), sigma(n)) = 1.",
+    "predicate": "(n < 2 or (n & (n-1) != 0)) or (gcd(phi(n), sigma(n)) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 35,
+    "parents": [17, 20],
+    "claim": "For any prime n > 3, n^2 is congruent to 1 modulo 24.",
+    "predicate": "(not (is_prime(n) and n > 3)) or (n**2 % 24 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [16, 35],
+    "claim": "If n is a prime greater than 3, then phi(n) * sigma(n) is divisible by 24.",
+    "predicate": "(not (is_prime(n) and n > 3)) or ((phi(n) * sigma(n)) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [0],
+    "claim": "For any prime n, the exponent of n in the factorization of n! is exactly 1.",
+    "predicate": "(not is_prime(n)) or (vp(factorial(n), n) == 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 38,
+    "parents": [0, 37],
+    "claim": "For any prime n, the exponent of n in the factorization of (n^2)! is n + 1.",
+    "predicate": "(not is_prime(n)) or (vp(factorial(n**2), n) == n + 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [0, 6],
+    "claim": "If n is a composite number, then phi(n) is strictly less than n - sqrt(n).",
+    "predicate": "(is_prime(n) or n <= 1) or (phi(n) < n - n**0.5)",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [0],
+    "claim": "If n is prime, then n divides the sum of the first n-1 k-th powers for any k not divisible by n-1.",
+    "predicate": "(not is_prime(n)) or all(sum(pow(i, k, n) for i in range(1, n)) % n == 0 for k in [1, 2] if k % (n-1) != 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [1, 40],
+    "claim": "If n is prime, then the sum of i^phi(n) for i=1 to n-1 is congruent to -1 modulo n.",
+    "predicate": "(not is_prime(n) or n < 2) or (sum(pow(i, phi(n), n) for i in range(1, n)) % n == n - 1)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [1, 3],
+    "claim": "For n > 1, n is prime if and only if phi(n) divides (n-1) * tau(n) / 2.",
+    "predicate": "(n <= 1) or (is_prime(n) == (((n - 1) * tau(abs(n)) // 2) % phi(abs(n)) == 0))",
+    "confidence": 0.9,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [1, 2, 42],
+    "claim": "For n > 1, n is prime if and only if phi(n) + sigma(n) = n * 2.",
+    "predicate": "(n <= 1) or (is_prime(n) == (phi(abs(n)) + sigma(abs(n)) == 2 * abs(n)))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [3, 4],
+    "claim": "If n is an even perfect number, then its number of divisors is always even.",
+    "predicate": "(sigma(n) != 2*n or n % 2 != 0) or (tau(n) % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [1, 44],
+    "claim": "If n is an even perfect number, its Euler totient phi(n) is a power of 2 multiplied by a Mersenne prime minus 1.",
+    "predicate": "(sigma(n) != 2*n or n % 2 != 0) or any(phi(n) == pow(2, k-1) * (pow(2, k-1) - 1) for k in range(2, 10))",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [11, 20],
+    "claim": "If p is prime, p divides the binomial coefficient C(p, k) for all 0 < k < p.",
+    "predicate": "(not is_prime(n)) or all((factorial(n) // (factorial(k) * factorial(n - k))) % n == 0 for k in range(1, n))",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [43, 46],
+    "claim": "For any prime p, the sum of C(p, k) for 0 < k < p is divisible by p.",
+    "predicate": "(not is_prime(n) or n < 2) or (sum(factorial(n) // (factorial(k) * factorial(n - k)) for k in range(1, n)) % n == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [17, 35],
+    "claim": "If n and n+2 are twin primes greater than 3, their sum 2n+2 is divisible by 12.",
+    "predicate": "(not (is_prime(n) and is_prime(n + 2) and n > 3)) or ((2 * n + 2) % 12 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [16, 48],
+    "claim": "For twin primes n, n+2 both > 3, the product of their totients (n-1)(n+1) is divisible by 48.",
+    "predicate": "(not (is_prime(n) and is_prime(n + 2) and n > 3)) or (((n - 1) * (n + 1)) % 48 == 0)",
+    "confidence": 0.9,
+    "is_terminal": true
+  }
+]

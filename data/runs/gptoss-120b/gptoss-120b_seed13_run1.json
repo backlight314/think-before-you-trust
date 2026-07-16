@@ -1,0 +1,642 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n > 1, n is prime if and only if (n-1)! + 1 is divisible by n.",
+    "predicate": "(n<=1) or ((is_prime(n) and ((math.factorial(n-1)+1)%n==0)) or (not is_prime(n) and ((math.factorial(n-1)+1)%n!=0)))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is prime then n divides n^2- n.",
+    "predicate": "(not is_prime(n)) or ((n**2 - n)%n==0)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is composite then (n-1)! is not congruent to -1 modulo n.",
+    "predicate": "is_prime(n) or ((math.factorial(n-1)+1)%n!=0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all n, n divides n^2-n and also (n-1)!+1 is not divisible by n unless n is prime.",
+    "predicate": "((n**2 - n)%n==0) and (is_prime(n) or ((math.factorial(n-1)+1)%n!=0))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "If n is prime then n divides (n-1)! + 1 and also n divides (n-1)! + n.",
+    "predicate": "(not is_prime(n)) or (((math.factorial(n-1)+1)%n==0) and ((math.factorial(n-1)+n)%n==0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      3,
+      4
+    ],
+    "claim": "For any integer n, n divides n^2-n and also divides (n-1)!+n whenever n is prime.",
+    "predicate": "((n**2 - n)%n==0) and (is_prime(n) or ((math.factorial(n-1)+n)%n!=0))",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      0
+    ],
+    "claim": "If n is prime then phi(n) = n-1.",
+    "predicate": "(not is_prime(n)) or (phi(n)==n-1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "If n is prime then sigma(n) = n+1.",
+    "predicate": "(not is_prime(n)) or (sigma(n)==n+1)",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      6,
+      7
+    ],
+    "claim": "For prime n, both phi(n)=n-1 and sigma(n)=n+1 hold simultaneously.",
+    "predicate": "(not is_prime(n)) or (phi(n)==n-1 and sigma(n)==n+1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      2,
+      6
+    ],
+    "claim": "If n is composite then phi(n) \u2264 n-2.",
+    "predicate": "is_prime(n) or (phi(n)<=n-2)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9,
+      1
+    ],
+    "claim": "For all n, n divides n^2-n and if n is composite then phi(n) \u2264 n-2.",
+    "predicate": "((n**2 - n)%n==0) and (is_prime(n) or (phi(n)<=n-2))",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "If n is prime then tau(n)=2.",
+    "predicate": "(not is_prime(n)) or (tau(n)==2)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "If n is prime then vp(n,2)=0 unless n=2.",
+    "predicate": "(not is_prime(n)) or (n==2 or vp(n,2)==0)",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12,
+      4
+    ],
+    "claim": "If n is prime and n>2 then n is odd and (n-1)!+1 is divisible by n.",
+    "predicate": "(not is_prime(n)) or (n<=2) or ((n%2==1) and ((math.factorial(n-1)+1)%n==0))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      3,
+      8
+    ],
+    "claim": "For any n, n divides n^2-n and if n is prime then sigma(n)=n+1.",
+    "predicate": "((n**2 - n)%n==0) and (not is_prime(n) or sigma(n)==n+1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      7,
+      9
+    ],
+    "claim": "If n is composite then sigma(n) \u2264 2n and phi(n) \u2264 n-2.",
+    "predicate": "is_prime(n) or (sigma(n)<=2*n and phi(n)<=n-2)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15,
+      1
+    ],
+    "claim": "For all n, n divides n^2-n and if n is composite then sigma(n) \u2264 2n.",
+    "predicate": "((n**2 - n)%n==0) and (is_prime(n) or sigma(n)<=2*n)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      6
+    ],
+    "claim": "If n is prime then both Wilson's theorem holds and phi(n)=n-1.",
+    "predicate": "(not is_prime(n)) or (((math.factorial(n-1)+1)%n==0) and phi(n)==n-1)",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17,
+      11
+    ],
+    "claim": "If n is prime then Wilson's theorem, phi(n)=n-1 and tau(n)=2 all hold together.",
+    "predicate": "(not is_prime(n)) or (((math.factorial(n-1)+1)%n==0) and phi(n)==n-1 and tau(n)==2)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      2,
+      11
+    ],
+    "claim": "If n is composite then (n-1)!+1 is not divisible by n and tau(n)\u22602.",
+    "predicate": "is_prime(n) or ((math.factorial(n-1)+1)%n!=0 and tau(n)!=2)",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19,
+      9
+    ],
+    "claim": "For composite n, (n-1)!+1 not divisible by n and phi(n) \u2264 n-2.",
+    "predicate": "is_prime(n) or ((math.factorial(n-1)+1)%n!=0 and phi(n)<=n-2)",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      5,
+      14
+    ],
+    "claim": "If n is prime then n divides (n-1)!+n and also sigma(n)=n+1.",
+    "predicate": "(not is_prime(n)) or (((math.factorial(n-1)+n)%n==0) and sigma(n)==n+1)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      13,
+      12
+    ],
+    "claim": "If n is an odd prime then vp(n,2)=0 and (n-1)!+1 divisible by n.",
+    "predicate": "(n%2==0) or (not is_prime(n)) or (vp(n,2)==0 and ((math.factorial(n-1)+1)%n==0))",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      8,
+      15
+    ],
+    "claim": "If n is prime then sigma(n)=n+1 and if n is composite then sigma(n) \u2264 2n.",
+    "predicate": "(not is_prime(n)) or (sigma(n)==n+1) and (is_prime(n) or sigma(n)<=2*n)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      10,
+      16
+    ],
+    "claim": "For any n, n divides n^2-n and if n is composite then sigma(n) \u2264 2n.",
+    "predicate": "((n**2 - n)%n==0) and (is_prime(n) or sigma(n)<=2*n)",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      18,
+      20
+    ],
+    "claim": "Prime n satisfy Wilson and phi=n-1; composite n satisfy (n-1)!+1 not \u22610 and phi\u2264n-2.",
+    "predicate": "(is_prime(n) and ((math.factorial(n-1)+1)%n==0) and phi(n)==n-1) or (not is_prime(n) and ((math.factorial(n-1)+1)%n!=0) and phi(n)<=n-2)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      3,
+      7
+    ],
+    "claim": "For all n, n divides n^2-n and if n is prime then sigma(n)=n+1.",
+    "predicate": "((n**2 - n)%n==0) and (not is_prime(n) or sigma(n)==n+1)",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      22,
+      21
+    ],
+    "claim": "Odd prime n divides (n-1)!+n and also (n-1)!+1, with vp(n,2)=0.",
+    "predicate": "(n%2==0) or (not is_prime(n)) or (((math.factorial(n-1)+n)%n==0) and ((math.factorial(n-1)+1)%n==0) and vp(n,2)==0)",
+    "confidence": 0.86,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      24,
+      23
+    ],
+    "claim": "For any n, n divides n^2-n and sigma(n) respects prime/composite bounds.",
+    "predicate": "((n**2 - n)%n==0) and ((is_prime(n) and sigma(n)==n+1) or (not is_prime(n) and sigma(n)<=2*n))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      11,
+      1
+    ],
+    "claim": "If n is prime then tau(n)=2 and n divides n^2-n.",
+    "predicate": "(not is_prime(n)) or (tau(n)==2 and (n**2 - n)%n==0)",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      9,
+      6
+    ],
+    "claim": "If n is composite then phi(n) \u2264 n-2 and if n is prime then phi(n)=n-1.",
+    "predicate": "(is_prime(n) and phi(n)==n-1) or (not is_prime(n) and phi(n)<=n-2)",
+    "confidence": 0.83,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      15,
+      2
+    ],
+    "claim": "Composite n have sigma(n) \u2264 2n and (n-1)!+1 not divisible by n.",
+    "predicate": "is_prime(n) or (sigma(n)<=2*n and ((math.factorial(n-1)+1)%n!=0))",
+    "confidence": 0.82,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      30
+    ],
+    "claim": "For any n, either prime case phi=n-1 or composite case phi\u2264n-2, and also sigma bound holds for composites.",
+    "predicate": "(is_prime(n) and phi(n)==n-1) or (not is_prime(n) and phi(n)<=n-2 and sigma(n)<=2*n)",
+    "confidence": 0.81,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      13,
+      29
+    ],
+    "claim": "Odd prime n divides (n-1)!+1 and has exactly two divisors.",
+    "predicate": "(n%2==0) or (not is_prime(n)) or (((math.factorial(n-1)+1)%n==0) and tau(n)==2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      27,
+      33
+    ],
+    "claim": "Odd prime n satisfies (n-1)!+1 \u22610, (n-1)!+n \u22610, vp(n,2)=0, and tau(n)=2.",
+    "predicate": "(n%2==0) or (not is_prime(n)) or (((math.factorial(n-1)+1)%n==0) and ((math.factorial(n-1)+n)%n==0) and vp(n,2)==0 and tau(n)==2)",
+    "confidence": 0.79,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      28,
+      34
+    ],
+    "claim": "All integers satisfy n|n^2-n and odd primes satisfy the strong Wilson\u2011type congruences together with divisor\u2011function equalities.",
+    "predicate": "((n**2 - n)%n==0) and ((n%2==0) or (not is_prime(n)) or (((math.factorial(n-1)+1)%n==0) and ((math.factorial(n-1)+n)%n==0) and vp(n,2)==0 and tau(n)==2))",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      5,
+      25
+    ],
+    "claim": "If n is prime then n divides (n-1)!+n and (n-1)!+1, while if n is composite the Wilson condition fails and phi\u2264n-2.",
+    "predicate": "(not is_prime(n)) or (((math.factorial(n-1)+n)%n==0) and ((math.factorial(n-1)+1)%n==0) and phi(n)<=n-2)",
+    "confidence": 0.77,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      12,
+      16
+    ],
+    "claim": "For any n, vp(n,2)=0 unless n=2, and if n is composite then sigma(n)\u22642n and n|n^2-n.",
+    "predicate": "(n==2) or (vp(n,2)==0) and (is_prime(n) or sigma(n)<=2*n) and ((n**2 - n)%n==0)",
+    "confidence": 0.76,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      22,
+      37
+    ],
+    "claim": "Odd prime n has vp(n,2)=0, satisfies Wilson, and also obeys sigma bound trivially.",
+    "predicate": "(n%2==0) or (not is_prime(n)) or (vp(n,2)==0 and ((math.factorial(n-1)+1)%n==0) and sigma(n)<=2*n)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      3,
+      31
+    ],
+    "claim": "All n satisfy n|n^2-n and for composites (n-1)!+1 not \u22610 and sigma\u22642n.",
+    "predicate": "((n**2 - n)%n==0) and (is_prime(n) or ((math.factorial(n-1)+1)%n!=0 and sigma(n)<=2*n))",
+    "confidence": 0.74,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      35,
+      39
+    ],
+    "claim": "Combining the strong Wilson congruences for odd primes with the composite sigma bound yields a uniform statement for all n.",
+    "predicate": "((n**2 - n)%n==0) and ((n%2==0) or (not is_prime(n)) or (((math.factorial(n-1)+1)%n==0) and ((math.factorial(n-1)+n)%n==0) and vp(n,2)==0 and tau(n)==2)) and (is_prime(n) or sigma(n)<=2*n)",
+    "confidence": 0.73,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      8,
+      30
+    ],
+    "claim": "Prime n have sigma=n+1, phi=n-1; composite n have phi\u2264n-2 and sigma\u22642n.",
+    "predicate": "(is_prime(n) and sigma(n)==n+1 and phi(n)==n-1) or (not is_prime(n) and phi(n)<=n-2 and sigma(n)<=2*n)",
+    "confidence": 0.72,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      41,
+      26
+    ],
+    "claim": "For any n, n|n^2-n and the appropriate sigma/phi bounds hold according to primality.",
+    "predicate": "((n**2 - n)%n==0) and ((is_prime(n) and sigma(n)==n+1 and phi(n)==n-1) or (not is_prime(n) and phi(n)<=n-2 and sigma(n)<=2*n))",
+    "confidence": 0.71,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      18,
+      34
+    ],
+    "claim": "Prime n satisfy Wilson, phi=n-1, tau=2, and also the double congruence (n-1)!+n\u22610.",
+    "predicate": "(not is_prime(n)) or (((math.factorial(n-1)+1)%n==0) and phi(n)==n-1 and tau(n)==2 and ((math.factorial(n-1)+n)%n==0))",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      20
+    ],
+    "claim": "Prime n satisfy all strong Wilson properties; composite n fail Wilson and obey phi\u2264n-2.",
+    "predicate": "(is_prime(n) and ((math.factorial(n-1)+1)%n==0) and phi(n)==n-1 and ((math.factorial(n-1)+n)%n==0)) or (not is_prime(n) and ((math.factorial(n-1)+1)%n!=0) and phi(n)<=n-2)",
+    "confidence": 0.69,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44,
+      42
+    ],
+    "claim": "Uniform statement: n|n^2-n and either prime case (Wilson, phi, sigma) or composite case (Wilson fails, phi bound, sigma bound).",
+    "predicate": "((n**2 - n)%n==0) and ((is_prime(n) and ((math.factorial(n-1)+1)%n==0) and phi(n)==n-1 and sigma(n)==n+1) or (not is_prime(n) and ((math.factorial(n-1)+1)%n!=0) and phi(n)<=n-2 and sigma(n)<=2*n))",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      38
+    ],
+    "claim": "Adding the odd\u2011prime vp(2) condition yields a refined uniform claim for all integers.",
+    "predicate": "((n**2 - n)%n==0) and ((is_prime(n) and ((math.factorial(n-1)+1)%n==0) and phi(n)==n-1 and sigma(n)==n+1 and (n%2==1 or vp(n,2)==0)) or (not is_prime(n) and ((math.factorial(n-1)+1)%n!=0) and phi(n)<=n-2 and sigma(n)<=2*n))",
+    "confidence": 0.67,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      32
+    ],
+    "claim": "Combining divisor\u2011function bounds with the refined Wilson statement gives a comprehensive conjecture about n's arithmetic functions.",
+    "predicate": "((n**2 - n)%n==0) and ((is_prime(n) and ((math.factorial(n-1)+1)%n==0) and phi(n)==n-1 and sigma(n)==n+1 and (n%2==1 or vp(n,2)==0) and tau(n)==2) or (not is_prime(n) and ((math.factorial(n-1)+1)%n!=0) and phi(n)<=n-2 and sigma(n)<=2*n and tau(n)>=3))",
+    "confidence": 0.66,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      21
+    ],
+    "claim": "If n is prime then n divides (n-1)!+n and all divisor\u2011function equalities hold; otherwise Wilson fails and divisor bounds hold.",
+    "predicate": "(is_prime(n) and ((math.factorial(n-1)+n)%n==0) and ((math.factorial(n-1)+1)%n==0) and phi(n)==n-1 and sigma(n)==n+1 and tau(n)==2) or (not is_prime(n) and ((math.factorial(n-1)+1)%n!=0) and phi(n)<=n-2 and sigma(n)<=2*n and tau(n)>=3)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      40
+    ],
+    "claim": "Final comprehensive conjecture: for every integer n, n|n^2-n, and the prime/composite dichotomy governs Wilson, divisor functions, and the extra congruence (n-1)!+n\u22610.",
+    "predicate": "((n**2 - n)%n==0) and ((is_prime(n) and ((math.factorial(n-1)+1)%n==0) and ((math.factorial(n-1)+n)%n==0) and phi(n)==n-1 and sigma(n)==n+1 and tau(n)==2) or (not is_prime(n) and ((math.factorial(n-1)+1)%n!=0) and phi(n)<=n-2 and sigma(n)<=2*n and tau(n)>=3))",
+    "confidence": 0.64,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

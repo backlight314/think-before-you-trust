@@ -1,0 +1,452 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 is congruent to 1 modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2) % 24 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 2) - 1) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 is congruent to 1 modulo 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2) % 8 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 is congruent to 1 modulo 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2) % 3 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      2,
+      3
+    ],
+    "claim": "For all integers n, if n > 3 and n^2 is congruent to 1 modulo 8 and n^2 is congruent to 1 modulo 3, then n^2 is congruent to 1 modulo 24.",
+    "predicate": "(n <= 3) or (pow(n, 2) % 8 != 1) or (pow(n, 2) % 3 != 1) or (pow(n, 2) % 24 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 - 1 is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 4) - 1) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^3 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 3) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^3 - n is divisible by 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 3) - n) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^3 - n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 3) - n) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7,
+      8
+    ],
+    "claim": "For all integers n, if n > 3 and n^3 - n is divisible by 8 and n^3 - n is divisible by 3, then n^3 - n is divisible by 24.",
+    "predicate": "(n <= 3) or ((pow(n, 3) - n) % 8 != 0) or ((pow(n, 3) - n) % 3 != 0) or ((pow(n, 3) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^5 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 5) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^5 - n is divisible by 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 5) - n) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^5 - n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 5) - n) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      11,
+      12
+    ],
+    "claim": "For all integers n, if n > 3 and n^5 - n is divisible by 8 and n^5 - n is divisible by 3, then n^5 - n is divisible by 24.",
+    "predicate": "(n <= 3) or ((pow(n, 5) - n) % 8 != 0) or ((pow(n, 5) - n) % 3 != 0) or ((pow(n, 5) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 7) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 - n is divisible by 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 7) - n) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      14
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^7 - n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 7) - n) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      15,
+      16
+    ],
+    "claim": "For all integers n, if n > 3 and n^7 - n is divisible by 8 and n^7 - n is divisible by 3, then n^7 - n is divisible by 24.",
+    "predicate": "(n <= 3) or ((pow(n, 7) - n) % 8 != 0) or ((pow(n, 7) - n) % 3 != 0) or ((pow(n, 7) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^9 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 9) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^9 - n is divisible by 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 9) - n) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      18
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^9 - n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 9) - n) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      19,
+      20
+    ],
+    "claim": "For all integers n, if n > 3 and n^9 - n is divisible by 8 and n^9 - n is divisible by 3, then n^9 - n is divisible by 24.",
+    "predicate": "(n <= 3) or ((pow(n, 9) - n) % 8 != 0) or ((pow(n, 9) - n) % 3 != 0) or ((pow(n, 9) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^11 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 11) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^11 - n is divisible by 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 11) - n) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^11 - n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 11) - n) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      23,
+      24
+    ],
+    "claim": "For all integers n, if n > 3 and n^11 - n is divisible by 8 and n^11 - n is divisible by 3, then n^11 - n is divisible by 24.",
+    "predicate": "(n <= 3) or ((pow(n, 11) - n) % 8 != 0) or ((pow(n, 11) - n) % 3 != 0) or ((pow(n, 11) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^13 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 13) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^13 - n is divisible by 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 13) - n) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      26
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^13 - n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 13) - n) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      27,
+      28
+    ],
+    "claim": "For all integers n, if n > 3 and n^13 - n is divisible by 8 and n^13 - n is divisible by 3, then n^13 - n is divisible by 24.",
+    "predicate": "(n <= 3) or ((pow(n, 13) - n) % 8 != 0) or ((pow(n, 13) - n) % 3 != 0) or ((pow(n, 13) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^15 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 15) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^15 - n is divisible by 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 15) - n) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      30
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^15 - n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 15) - n) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      31,
+      32
+    ],
+    "claim": "For all integers n, if n > 3 and n^15 - n is divisible by 8 and n^15 - n is divisible by 3, then n^15 - n is divisible by 24.",
+    "predicate": "(n <= 3) or ((pow(n, 15) - n) % 8 != 0) or ((pow(n, 15) - n) % 3 != 0) or ((pow(n, 15) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^17 - n is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 17) - n) % 24 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^17 - n is divisible by 8.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 17) - n) % 8 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      34
+    ],
+    "claim": "For all integers n, if n is prime and n > 3 then n^17 - n is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 17) - n) % 3 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

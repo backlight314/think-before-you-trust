@@ -1,0 +1,498 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is prime.",
+    "predicate": "all(is_prime(n**2 + n + 41) for n in range(0, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 2.",
+    "predicate": "all((n**2 + n + 41) % 2 != 0 for n in range(0, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 3.",
+    "predicate": "all((n**2 + n + 41) % 3 != 0 for n in range(0, 501))",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 5.",
+    "predicate": "all((n**2 + n + 41) % 5 != 0 for n in range(0, 501))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 6.",
+    "predicate": "all((n**2 + n + 41) % 6 != 0 for n in range(0, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 7.",
+    "predicate": "all((n**2 + n + 41) % 7 != 0 for n in range(0, 501))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      1,
+      3
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 10.",
+    "predicate": "all((n**2 + n + 41) % 10 != 0 for n in range(0, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 11.",
+    "predicate": "all((n**2 + n + 41) % 11 != 0 for n in range(0, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      2,
+      5
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 21.",
+    "predicate": "all((n**2 + n + 41) % 21 != 0 for n in range(0, 501))",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 13.",
+    "predicate": "all((n**2 + n + 41) % 13 != 0 for n in range(0, 501))",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      1,
+      7
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 22.",
+    "predicate": "all((n**2 + n + 41) % 22 != 0 for n in range(0, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 17.",
+    "predicate": "all((n**2 + n + 41) % 17 != 0 for n in range(0, 501))",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      3,
+      9
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 65.",
+    "predicate": "all((n**2 + n + 41) % 65 != 0 for n in range(0, 501))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 19.",
+    "predicate": "all((n**2 + n + 41) % 19 != 0 for n in range(0, 501))",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      5,
+      11
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 187.",
+    "predicate": "all((n**2 + n + 41) % 187 != 0 for n in range(0, 501))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 23.",
+    "predicate": "all((n**2 + n + 41) % 23 != 0 for n in range(0, 501))",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      1,
+      13
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 38.",
+    "predicate": "all((n**2 + n + 41) % 38 != 0 for n in range(0, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 29.",
+    "predicate": "all((n**2 + n + 41) % 29 != 0 for n in range(0, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      2,
+      15
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 69.",
+    "predicate": "all((n**2 + n + 41) % 69 != 0 for n in range(0, 501))",
+    "confidence": 0.97,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 31.",
+    "predicate": "all((n**2 + n + 41) % 31 != 0 for n in range(0, 501))",
+    "confidence": 0.89,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      3,
+      17
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 145.",
+    "predicate": "all((n**2 + n + 41) % 145 != 0 for n in range(0, 501))",
+    "confidence": 0.96,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 37.",
+    "predicate": "all((n**2 + n + 41) % 37 != 0 for n in range(0, 501))",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      1,
+      19
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 62.",
+    "predicate": "all((n**2 + n + 41) % 62 != 0 for n in range(0, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 41.",
+    "predicate": "all((n**2 + n + 41) % 41 != 0 or n % 41 == 0 for n in range(0, 501))",
+    "confidence": 0.87,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      5,
+      21
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 259.",
+    "predicate": "all((n**2 + n + 41) % 259 != 0 for n in range(0, 501))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 43.",
+    "predicate": "all((n**2 + n + 41) % 43 != 0 for n in range(0, 501))",
+    "confidence": 0.86,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      7,
+      23
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 451.",
+    "predicate": "all((n**2 + n + 41) % 451 != 0 for n in range(0, 501))",
+    "confidence": 0.94,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 47.",
+    "predicate": "all((n**2 + n + 41) % 47 != 0 for n in range(0, 501))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      1,
+      25
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 86.",
+    "predicate": "all((n**2 + n + 41) % 86 != 0 for n in range(0, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 53.",
+    "predicate": "all((n**2 + n + 41) % 53 != 0 for n in range(0, 501))",
+    "confidence": 0.84,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      3,
+      27
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 235.",
+    "predicate": "all((n**2 + n + 41) % 235 != 0 for n in range(0, 501))",
+    "confidence": 0.93,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 59.",
+    "predicate": "all((n**2 + n + 41) % 59 != 0 for n in range(0, 501))",
+    "confidence": 0.83,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      9,
+      29
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 689.",
+    "predicate": "all((n**2 + n + 41) % 689 != 0 for n in range(0, 501))",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 61.",
+    "predicate": "all((n**2 + n + 41) % 61 != 0 for n in range(0, 501))",
+    "confidence": 0.82,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      1,
+      31
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 118.",
+    "predicate": "all((n**2 + n + 41) % 118 != 0 for n in range(0, 501))",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 67.",
+    "predicate": "all((n**2 + n + 41) % 67 != 0 for n in range(0, 501))",
+    "confidence": 0.81,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      5,
+      33
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 427.",
+    "predicate": "all((n**2 + n + 41) % 427 != 0 for n in range(0, 501))",
+    "confidence": 0.91,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 71.",
+    "predicate": "all((n**2 + n + 41) % 71 != 0 for n in range(0, 501))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      11,
+      35
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 1139.",
+    "predicate": "all((n**2 + n + 41) % 1139 != 0 for n in range(0, 501))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 0, n^2 + n + 41 is not divisible by 73.",
+    "predicate": "all((n**2 + n + 41) % 73 != 0 for n in range(0, 501))",
+    "confidence": 0.79,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  }
+]

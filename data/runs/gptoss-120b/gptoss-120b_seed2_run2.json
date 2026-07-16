@@ -1,0 +1,643 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, gcd(n^2 + 1, n + 1) divides 2.",
+    "predicate": "(abs(gcd(n*n+1, n+1)) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "If n is even then n^2+1 is odd.",
+    "predicate": "(n%2!=0) or ((n*n+1)%2==1)",
+    "confidence": 0.99,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "If n is odd then gcd(n^2+1,n+1)=2.",
+    "predicate": "(n%2==0) or (gcd(n*n+1,n+1)==2)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      1,
+      2
+    ],
+    "claim": "For all n, n^2+1 \u2261 1 (mod 2).",
+    "predicate": "((n*n+1)-1)%2==0",
+    "confidence": 0.98,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "If n \u2261 1 (mod 4) then n^2+1 \u2261 2 (mod 5).",
+    "predicate": "(n%4!=1) or ((n*n+1-2)%5==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "If n \u2261 1 (mod 4) then 5 divides n^4-1.",
+    "predicate": "(n%4!=1) or ((n**4-1)%5==0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5,
+      2
+    ],
+    "claim": "If n is odd then 5 divides n^4-1 and gcd(n^2+1,n+1)=2.",
+    "predicate": "(n%2==0) or ((n**4-1)%5==0 and gcd(n*n+1,n+1)==2)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      3,
+      6
+    ],
+    "claim": "For all n, n^4-1 is divisible by 8 when n is odd.",
+    "predicate": "(n%2==0) or ((n**4-1)%8==0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "If n is odd then sigma(n^2) is odd.",
+    "predicate": "(n%2==0) or (sigma(n*n)%2==1)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      1,
+      8
+    ],
+    "claim": "If n is even then sigma(n^2) is even.",
+    "predicate": "(n%2!=0) or (sigma(n*n)%2==0)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      9,
+      2
+    ],
+    "claim": "For all n, sigma(n^2) \u2261 n (mod 2).",
+    "predicate": "(sigma(n*n)-n)%2==0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0
+    ],
+    "claim": "If n \u2261 0 (mod 3) then 3 divides n^2+1 only when n\u22610 (mod 3).",
+    "predicate": "(n%3!=0) or ((n*n+1)%3==0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11,
+      4
+    ],
+    "claim": "If n \u2261 1 (mod 12) then 13 divides n^2+1.",
+    "predicate": "(n%12!=1) or ((n*n+1)%13==0)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      12,
+      2
+    ],
+    "claim": "If n is odd and n\u22611 (mod 12) then gcd(n^2+1,n+1)=2 and 13|n^2+1.",
+    "predicate": "(n%2==0 or n%12!=1) or (gcd(n*n+1,n+1)==2 and (n*n+1)%13==0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      13,
+      7
+    ],
+    "claim": "If n is odd and n\u22611 (mod 12) then 13 divides n^4-1.",
+    "predicate": "(n%2==0 or n%12!=1) or ((n**4-1)%13==0)",
+    "confidence": 0.64,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      14,
+      5
+    ],
+    "claim": "If n\u22611 (mod 12) then n^4-1 is divisible by 5\u00b713.",
+    "predicate": "(n%12!=1) or ((n**4-1)%(5*13)==0)",
+    "confidence": 0.62,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      15,
+      3
+    ],
+    "claim": "If n\u22611 (mod 12) then n^4-1 \u2261 0 (mod 40).",
+    "predicate": "(n%12!=1) or ((n**4-1)%40==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "If n is even then n+1 is odd and coprime to n^2+1.",
+    "predicate": "(n%2!=0) or (gcd(n+1,n*n+1)==1)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17,
+      2
+    ],
+    "claim": "If n is odd then gcd(n+1,n^2+1)=2 and n+1 is even.",
+    "predicate": "(n%2==0) or (gcd(n+1,n*n+1)==2 and (n+1)%2==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      18,
+      10
+    ],
+    "claim": "For all n, sigma(n^2) and gcd(n+1,n^2+1) have opposite parity.",
+    "predicate": "(sigma(n*n)%2) != (gcd(n+1,n*n+1)%2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19,
+      6
+    ],
+    "claim": "If n is odd then sigma(n^2) is odd and gcd(...)=2, so both are odd/even as predicted.",
+    "predicate": "(n%2==0) or (sigma(n*n)%2==1 and gcd(n+1,n*n+1)==2)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      0,
+      4
+    ],
+    "claim": "If n\u22611 (mod 4) then vp(n^2+1,2)=1.",
+    "predicate": "(n%4!=1) or (vp(n*n+1,2)==1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      21,
+      1
+    ],
+    "claim": "If n\u22611 (mod 4) then n^2+1 is twice an odd number.",
+    "predicate": "(n%4!=1) or ((n*n+1)//2)%2==1",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      22,
+      5
+    ],
+    "claim": "If n\u22611 (mod 4) then 5 divides (n^2+1)/2.",
+    "predicate": "(n%4!=1) or (((n*n+1)//2)%5==0)",
+    "confidence": 0.75,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      23,
+      12
+    ],
+    "claim": "If n\u22611 (mod 12) then 5\u00b713 divides (n^2+1)/2.",
+    "predicate": "(n%12!=1) or ((((n*n+1)//2)%(5*13))==0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24,
+      16
+    ],
+    "claim": "If n\u22611 (mod 12) then n^4-1 is divisible by 2\u00b75\u00b713\u00b74 (=520).",
+    "predicate": "(n%12!=1) or ((n**4-1)%520==0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      0,
+      7
+    ],
+    "claim": "If n is odd then n^4-1 is divisible by 24.",
+    "predicate": "(n%2==0) or ((n**4-1)%24==0)",
+    "confidence": 0.92,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      26,
+      15
+    ],
+    "claim": "If n\u22611 (mod 12) then n^4-1 is divisible by lcm(24,5\u00b713)=1560.",
+    "predicate": "(n%12!=1) or ((n**4-1)%1560==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      27,
+      3
+    ],
+    "claim": "If n\u22611 (mod 12) then n^4-1 \u2261 0 (mod 1560) and also \u22610 (mod 8).",
+    "predicate": "(n%12!=1) or ((n**4-1)%1560==0 and (n**4-1)%8==0)",
+    "confidence": 0.58,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      0,
+      11
+    ],
+    "claim": "If n\u22610 (mod 3) then 3 divides n^2+1 iff n\u22610 (mod 3).",
+    "predicate": "(n%3!=0) or ((n*n+1)%3==0)",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29,
+      2
+    ],
+    "claim": "If n is odd and n\u22610 (mod 3) then gcd(n^2+1,n+1)=2 and 3|n^2+1.",
+    "predicate": "(n%2==0 or n%3!=0) or (gcd(n*n+1,n+1)==2 and (n*n+1)%3==0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      30,
+      10
+    ],
+    "claim": "If n is odd and 3|n^2+1 then sigma(n^2) is odd.",
+    "predicate": "(n%2==0 or (n*n+1)%3!=0) or (sigma(n*n)%2==1)",
+    "confidence": 0.68,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31,
+      19
+    ],
+    "claim": "For all n, parity of sigma(n^2) matches parity of (n if 3\u2224(n^2+1) else n+1).",
+    "predicate": "((n*n+1)%3!=0 and (sigma(n*n)-n)%2==0) or ((n*n+1)%3==0 and (sigma(n*n)-(n+1))%2==0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      0,
+      21
+    ],
+    "claim": "If n\u22611 (mod 4) then vp(n^2+1,5)=0.",
+    "predicate": "(n%4!=1) or (vp(n*n+1,5)==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33,
+      5
+    ],
+    "claim": "If n\u22611 (mod 4) then 5 divides n^4-1 but not n^2+1.",
+    "predicate": "(n%4!=1) or (((n**4-1)%5==0) and ((n*n+1)%5!=0))",
+    "confidence": 0.78,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      34,
+      12
+    ],
+    "claim": "If n\u22611 (mod 12) then 5 and 13 both divide n^4-1 and neither divides n^2+1.",
+    "predicate": "(n%12!=1) or (((n**4-1)%(5*13)==0) and ((n*n+1)%5!=0) and ((n*n+1)%13!=0))",
+    "confidence": 0.66,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35,
+      16
+    ],
+    "claim": "If n\u22611 (mod 12) then n^4-1 is divisible by 5\u00b713\u00b78=520 and also by 40, so by 1040.",
+    "predicate": "(n%12!=1) or ((n**4-1)%1040==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      0,
+      8
+    ],
+    "claim": "If n is odd then tau(n^2) is odd.",
+    "predicate": "(n%2==0) or (tau(n*n)%2==1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37,
+      9
+    ],
+    "claim": "If n is even then tau(n^2) is even.",
+    "predicate": "(n%2!=0) or (tau(n*n)%2==0)",
+    "confidence": 0.88,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      38,
+      10
+    ],
+    "claim": "For all n, tau(n^2) \u2261 n (mod 2).",
+    "predicate": "(tau(n*n)-n)%2==0",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39,
+      19
+    ],
+    "claim": "Parity of tau(n^2) matches parity of gcd(n+1,n^2+1).",
+    "predicate": "(tau(n*n)%2) == (gcd(n+1,n*n+1)%2)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      40,
+      2
+    ],
+    "claim": "If n is odd then tau(n^2) is odd and gcd(...)=2, contradicting parity match, so conjecture false for odd n.",
+    "predicate": "(n%2==0) or ((tau(n*n)%2)==(gcd(n+1,n*n+1)%2))",
+    "confidence": 0.5,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      0,
+      13
+    ],
+    "claim": "If n\u22611 (mod 12) then phi(n^2+1) is even.",
+    "predicate": "(n%12!=1) or (phi(n*n+1)%2==0)",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      42,
+      21
+    ],
+    "claim": "If n\u22611 (mod 4) then phi(n^2+1) is a multiple of 4.",
+    "predicate": "(n%4!=1) or (phi(n*n+1)%4==0)",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 44,
+    "parents": [
+      43,
+      5
+    ],
+    "claim": "If n\u22611 (mod 4) then 5 divides phi(n^2+1).",
+    "predicate": "(n%4!=1) or (phi(n*n+1)%5==0)",
+    "confidence": 0.7,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 45,
+    "parents": [
+      44,
+      12
+    ],
+    "claim": "If n\u22611 (mod 12) then 5\u00b713 divides phi(n^2+1).",
+    "predicate": "(n%12!=1) or (phi(n*n+1)%(5*13)==0)",
+    "confidence": 0.65,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 46,
+    "parents": [
+      45,
+      16
+    ],
+    "claim": "If n\u22611 (mod 12) then phi(n^2+1) is divisible by lcm(40,5\u00b713)=260.",
+    "predicate": "(n%12!=1) or (phi(n*n+1)%260==0)",
+    "confidence": 0.6,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 47,
+    "parents": [
+      46,
+      25
+    ],
+    "claim": "If n\u22611 (mod 12) then both n^4-1 and phi(n^2+1) share a factor 260.",
+    "predicate": "(n%12!=1) or ((n**4-1)%260==0 and phi(n*n+1)%260==0)",
+    "confidence": 0.58,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 48,
+    "parents": [
+      47,
+      27
+    ],
+    "claim": "If n\u22611 (mod 12) then lcm(n^4-1, phi(n^2+1)) is divisible by 1560\u00b7260.",
+    "predicate": "(n%12!=1) or (math.lcm(n**4-1, phi(n*n+1))%(1560*260)==0)",
+    "confidence": 0.55,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 49,
+    "parents": [
+      48,
+      41
+    ],
+    "claim": "If n is odd then the parity contradiction in claim 40 forces phi(n^2+1) to be even.",
+    "predicate": "(n%2==0) or (phi(n*n+1)%2==0)",
+    "confidence": 0.6,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]

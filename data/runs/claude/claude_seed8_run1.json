@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the number of divisors of n is odd if and only if n is a perfect square.",
+    "predicate": "tau(n) % 2 == 1 if and only if int(n**0.5)**2 == n",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "If n is a perfect square, then n has an odd number of divisors.",
+    "predicate": "int(n**0.5)**2 != n or tau(n) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "If n has an odd number of divisors, then n is a perfect square.",
+    "predicate": "tau(n) % 2 != 1 or int(n**0.5)**2 == n",
+    "confidence": 1.0,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1],
+    "claim": "For all perfect squares n = m^2, the divisor d pairs with n/d under the pairing d → n/d except when d = sqrt(n).",
+    "predicate": "int(n**0.5)**2 != n or all(d == n // d or d * (n // d) == n for d in range(1, int(n**0.5) + 1))",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [2],
+    "claim": "An integer n is a perfect square if and only if for every prime p, the exponent vp(n, p) is even.",
+    "predicate": "int(n**0.5)**2 == n if and only if all(vp(n, p) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 5,
+    "parents": [4],
+    "claim": "If n = p^(2k) for a prime p and integer k >= 0, then n is a perfect square.",
+    "predicate": "all(vp(n, p) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n) or n == 1",
+    "confidence": 0.97,
+    "is_terminal": true
+  },
+  {
+    "node_id": 6,
+    "parents": [1, 4],
+    "claim": "A perfect square n has tau(n) = product over primes p dividing n of (2 * vp(n, p) + 1), which is always odd.",
+    "predicate": "int(n**0.5)**2 != n or tau(n) % 2 == 1",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 7,
+    "parents": [6],
+    "claim": "For n = 4, tau(n) = 3, which is odd, and n is a perfect square.",
+    "predicate": "n != 4 or (tau(n) % 2 == 1 and int(n**0.5)**2 == n)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 8,
+    "parents": [6],
+    "claim": "For n = 9, tau(n) = 3, which is odd, and n is a perfect square.",
+    "predicate": "n != 9 or (tau(n) % 2 == 1 and int(n**0.5)**2 == n)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 9,
+    "parents": [6],
+    "claim": "For n = 16, tau(n) = 5, which is odd, and n is a perfect square.",
+    "predicate": "n != 16 or (tau(n) % 2 == 1 and int(n**0.5)**2 == n)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 10,
+    "parents": [2],
+    "claim": "If tau(n) is odd, then in the prime factorization n = p1^a1 * p2^a2 * ... * pk^ak, each exponent ai is even.",
+    "predicate": "tau(n) % 2 != 1 or all(vp(n, p) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [10],
+    "claim": "If tau(n) is odd and n = 2^a, then a is even.",
+    "predicate": "tau(n) % 2 != 1 or n <= 1 or (n & (n - 1) != 0) or (vp(n, 2) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 12,
+    "parents": [10],
+    "claim": "If tau(n) is odd and n = 3^b, then b is even.",
+    "predicate": "tau(n) % 2 != 1 or all(n % 3 != 0 or (vp(n, 3) % 2 == 0)) or (n <= 1)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 13,
+    "parents": [1, 10],
+    "claim": "Every perfect square n > 1 has at least one prime divisor p with even exponent >= 2 in its factorization.",
+    "predicate": "int(n**0.5)**2 != n or n == 1 or any(vp(n, p) % 2 == 0 and vp(n, p) >= 2 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [0, 10],
+    "claim": "The number tau(n) is odd if and only if every prime in the factorization of n appears to an even power.",
+    "predicate": "tau(n) % 2 == 1 if and only if all(vp(n, p) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [14],
+    "claim": "The divisor function tau is multiplicative, so tau(n) = prod(tau(p^vp(n,p))) over all primes p.",
+    "predicate": "all(tau(n * m) == tau(n) * tau(m) or gcd(n, m) != 1 for n in range(1, 100) for m in range(1, 100))",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [15, 14],
+    "claim": "tau(n) is odd if and only if tau(p^a) is odd for every prime power p^a dividing n.",
+    "predicate": "tau(n) % 2 == 1 if and only if all(tau(pow(p, vp(n, p))) % 2 == 1 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 17,
+    "parents": [16],
+    "claim": "For a prime power p^a, tau(p^a) = a + 1 is odd if and only if a is even.",
+    "predicate": "all((vp(n, p) % 2 == 0) == (tau(pow(p, vp(n, p))) % 2 == 1) for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n and vp(n, p) > 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [17],
+    "claim": "tau(2^2) = 3 is odd, consistent with the exponent 2 being even.",
+    "predicate": "tau(4) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 19,
+    "parents": [17],
+    "claim": "tau(2^1) = 2 is even, consistent with the exponent 1 being odd.",
+    "predicate": "tau(2) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [17],
+    "claim": "tau(3^4) = 5 is odd, consistent with the exponent 4 being even.",
+    "predicate": "tau(81) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 21,
+    "parents": [0],
+    "claim": "If n is not a perfect square, then tau(n) is even.",
+    "predicate": "int(n**0.5)**2 == n or tau(n) % 2 == 0",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 22,
+    "parents": [21],
+    "claim": "For any non-square n, the divisors pair up as d and n/d with d ≠ n/d, so the count is even.",
+    "predicate": "int(n**0.5)**2 == n or tau(n) % 2 == 0",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [22],
+    "claim": "For n = 6, tau(n) = 4 is even, and 6 is not a perfect square.",
+    "predicate": "n != 6 or (tau(n) % 2 == 0 and int(n**0.5)**2 != n)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 24,
+    "parents": [22],
+    "claim": "For n = 10, tau(n) = 4 is even, and 10 is not a perfect square.",
+    "predicate": "n != 10 or (tau(n) % 2 == 0 and int(n**0.5)**2 != n)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 25,
+    "parents": [21, 14],
+    "claim": "If n is not a perfect square, then at least one prime in its factorization appears to an odd power.",
+    "predicate": "int(n**0.5)**2 == n or any(vp(n, p) % 2 == 1 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [25],
+    "claim": "If p is an odd prime with odd exponent in n and p divides n exactly once, then tau(n) is even.",
+    "predicate": "all((vp(n, p) % 2 == 0) or tau(n) % 2 == 0 for p in [3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 27,
+    "parents": [14, 0],
+    "claim": "An integer n has an odd divisor count if and only if n is a perfect square, equivalently iff all primes have even exponent.",
+    "predicate": "tau(n) % 2 == 1 if and only if int(n**0.5)**2 == n",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 28,
+    "parents": [13],
+    "claim": "Every perfect square n = m^2 is the square of some integer m.",
+    "predicate": "int(n**0.5)**2 != n or (lambda m: m*m == n)(int(n**0.5))",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [28],
+    "claim": "For n = 1 = 1^2, tau(1) = 1 is odd.",
+    "predicate": "n != 1 or tau(n) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 30,
+    "parents": [28],
+    "claim": "For n = 25 = 5^2, tau(25) = 3 is odd.",
+    "predicate": "n != 25 or tau(n) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 31,
+    "parents": [28],
+    "claim": "For n = 36 = 6^2, tau(36) = 9 is odd.",
+    "predicate": "n != 36 or tau(n) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 32,
+    "parents": [27, 15],
+    "claim": "The Euler totient function phi(n) is even for all n > 2.",
+    "predicate": "n <= 2 or phi(n) % 2 == 0",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [32],
+    "claim": "For a perfect square n = m^2 with m > 1, phi(n) is even.",
+    "predicate": "int(n**0.5)**2 != n or n <= 1 or phi(n) % 2 == 0",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [33],
+    "claim": "For n = 4, phi(4) = 2 is even.",
+    "predicate": "n != 4 or phi(n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 35,
+    "parents": [33],
+    "claim": "For n = 9, phi(9) = 6 is even.",
+    "predicate": "n != 9 or phi(n) % 2 == 0",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 36,
+    "parents": [0, 32],
+    "claim": "The sum of divisors sigma(n) is odd if and only if n is a perfect square or twice a perfect square.",
+    "predicate": "(int(n**0.5)**2 == n or int((n/2)**0.5)**2 == n/2) or (sigma(n) % 2 == 0)",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [36],
+    "claim": "For n = 4, sigma(4) = 1 + 2 + 4 = 7 is odd, consistent with 4 being a perfect square.",
+    "predicate": "n != 4 or sigma(n) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 38,
+    "parents": [36],
+    "claim": "For n = 8 = 2*4, sigma(8) = 1 + 2 + 4 + 8 = 15 is odd, consistent with 8 being twice a perfect square.",
+    "predicate": "n != 8 or sigma(n) % 2 == 1",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 39,
+    "parents": [0, 1],
+    "claim": "If n is a perfect square and p is an odd prime dividing n, then p divides tau(n).",
+    "predicate": "int(n**0.5)**2 != n or n <= 1 or all((p > 2 and n % p != 0) or (tau(n) % p == 0) for p in [3, 5, 7, 11, 13, 17, 19, 23])",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 40,
+    "parents": [21, 26],
+    "claim": "If n has an odd number of prime factors (counted with multiplicity) that are distinct and appear to odd exponent, then tau(n) is even.",
+    "predicate": "all((vp(n, p) % 2 == 0) or tau(n) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.88,
+    "is_terminal": true
+  },
+  {
+    "node_id": 41,
+    "parents": [2, 25],
+    "claim": "An integer n is a perfect square if and only if it is not a non-square, equivalently iff its odd-exponent prime count is zero.",
+    "predicate": "int(n**0.5)**2 == n if and only if all(vp(n, p) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [41],
+    "claim": "The set of perfect squares is exactly the set of integers with even exponent on every prime in factorization.",
+    "predicate": "int(n**0.5)**2 == n if and only if all(vp(n, p) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 43,
+    "parents": [6, 16],
+    "claim": "The parity of tau(n) depends multiplicatively on the parity of exponents in the prime factorization.",
+    "predicate": "tau(n) % 2 == 1 if and only if all(vp(n, p) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 44,
+    "parents": [43],
+    "claim": "For n = 100 = 10^2, tau(100) = 9 is odd, consistent with all exponents being even.",
+    "predicate": "n != 100 or (tau(n) % 2 == 1 and int(n**0.5)**2 == n)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 45,
+    "parents": [43],
+    "claim": "For n = 60 = 2^2 * 3 * 5, tau(60) = 12 is even because 3 and 5 appear to odd exponent.",
+    "predicate": "n != 60 or (tau(n) % 2 == 0 and int(n**0.5)**2 != n)",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 46,
+    "parents": [27, 41],
+    "claim": "The characterization 'odd divisor count iff perfect square' is logically equivalent to 'odd divisor count iff all prime exponents even'.",
+    "predicate": "tau(n) % 2 == 1 if and only if int(n**0.5)**2 == n",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [46],
+    "claim": "This equivalence holds universally for all positive integers without exception.",
+    "predicate": "tau(n) % 2 == 1 if and only if int(n**0.5)**2 == n",
+    "confidence": 1.0,
+    "is_terminal": true
+  },
+  {
+    "node_id": 48,
+    "parents": [14, 43],
+    "claim": "The parity of tau(n) is completely determined by the multiset of prime exponent parities in n.",
+    "predicate": "tau(n) % 2 == 1 if and only if all(vp(n, p) % 2 == 0 for p in [2, 3, 5, 7, 11, 13, 17, 19, 23] if p <= n)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 49,
+    "parents": [22, 28],
+    "claim": "Perfect squares correspond bijectively to integers, where each perfect square m^2 gives a unique divisor-pairing structure.",
+    "predicate": "int(n**0.5)**2 == n or all(d != n // d or d * d == n for d in range(1, int(n**0.5) + 1))",
+    "confidence": 0.94,
+    "is_terminal": true
+  }
+]

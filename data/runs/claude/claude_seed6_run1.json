@@ -1,0 +1,402 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 ≡ 1 (mod 24).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 24) == 1)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 1,
+    "parents": [0],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 ≡ 1 (mod 8).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 8) == 1)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 2,
+    "parents": [0],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 ≡ 1 (mod 3).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 3) == 1)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 3,
+    "parents": [1, 2],
+    "claim": "For all integers n, if n is prime and n > 3, then n ≡ ±1 (mod 8) and n ≢ 0 (mod 3).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((abs(n % 8) == 1) and (n % 3 != 0))",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 4,
+    "parents": [0],
+    "claim": "For all integers n, if n is prime and n > 3 then n is odd.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (n % 2 == 1)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 5,
+    "parents": [3, 4],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by both 8 and 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 2) - 1) % 8 == 0 and (pow(n, 2) - 1) % 3 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 6,
+    "parents": [4],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 is odd.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2) % 2 == 1)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 7,
+    "parents": [5],
+    "claim": "For all integers n, if n is prime and n > 3 then (n-1)(n+1) ≡ 0 (mod 24).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((n - 1) * (n + 1) % 24 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 8,
+    "parents": [1, 4],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 ≡ 1 (mod 16) or n^2 ≡ 9 (mod 16).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 16) == 1 or pow(n, 2, 16) == 9)",
+    "confidence": 0.75,
+    "is_terminal": false
+  },
+  {
+    "node_id": 9,
+    "parents": [2],
+    "claim": "For all integers n, if n is prime and n > 3 then n ≡ 1 or 2 (mod 3).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (n % 3 == 1 or n % 3 == 2)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 10,
+    "parents": [9],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 ≡ 1 (mod 3).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 4, 3) == 1)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 11,
+    "parents": [7],
+    "claim": "For all integers n, if n is prime and n > 3 then n - 1 and n + 1 are both even with one divisible by 4.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (((n - 1) % 4 == 0 and (n + 1) % 2 == 0) or ((n + 1) % 4 == 0 and (n - 1) % 2 == 0))",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 12,
+    "parents": [0],
+    "claim": "For all integers n, if n is prime and n > 5 then n^2 - 1 is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or ((pow(n, 2) - 1) % 24 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 13,
+    "parents": [12],
+    "claim": "For all integers n, if n is prime and n > 5 then n^4 ≡ 1 (mod 24).",
+    "predicate": "(not is_prime(n)) or (n <= 5) or (pow(n, 4, 24) == 1)",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 14,
+    "parents": [12],
+    "claim": "For all integers n, if n is prime and n > 5 then n^3 ≡ n (mod 24).",
+    "predicate": "(not is_prime(n)) or (n <= 5) or (pow(n, 3, 24) == n % 24)",
+    "confidence": 0.85,
+    "is_terminal": false
+  },
+  {
+    "node_id": 15,
+    "parents": [0, 10],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 - 1 is divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 4) - 1) % 24 == 0)",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 16,
+    "parents": [15],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 divides n^4 - 1.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 4) - 1) % (pow(n, 2) - 1) == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 17,
+    "parents": [13, 14],
+    "claim": "For all integers n, if n is prime and n > 5 then n^6 ≡ 1 (mod 24).",
+    "predicate": "(not is_prime(n)) or (n <= 5) or (pow(n, 6, 24) == 1)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 18,
+    "parents": [0],
+    "claim": "For all integers n, if n is prime and n > 3 then phi(n^2) ≡ n(n-1) ≡ 0 (mod 2).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (phi(pow(n, 2)) == n * (n - 1))",
+    "confidence": 0.92,
+    "is_terminal": true
+  },
+  {
+    "node_id": 19,
+    "parents": [0],
+    "claim": "For all integers n, if n is prime and n > 3 then sigma(n) = n + 1.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (sigma(n) == n + 1)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 20,
+    "parents": [3],
+    "claim": "For all integers n, if n is prime and n > 3 then there exist integers a, b such that n = 8a ± 1 = 3b ± 1.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((n % 8 == 1 or n % 8 == 7) and (n % 3 == 1 or n % 3 == 2))",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 21,
+    "parents": [0, 9],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 ≡ 1 (mod 3) implies gcd(n^2 - 1, 3) = 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (gcd(pow(n, 2) - 1, 3) == 3)",
+    "confidence": 0.95,
+    "is_terminal": true
+  },
+  {
+    "node_id": 22,
+    "parents": [5],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is divisible by 6.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 2) - 1) % 6 == 0)",
+    "confidence": 0.99,
+    "is_terminal": false
+  },
+  {
+    "node_id": 23,
+    "parents": [22],
+    "claim": "For all integers n, if n is prime and n > 3 then one of n - 1 or n + 1 is divisible by 3.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((n - 1) % 3 == 0 or (n + 1) % 3 == 0)",
+    "confidence": 0.98,
+    "is_terminal": false
+  },
+  {
+    "node_id": 24,
+    "parents": [8, 22],
+    "claim": "For all integers n, if n is prime and n > 3 then gcd(n^2 - 1, 24) = 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (gcd(pow(n, 2) - 1, 24) == 24)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 25,
+    "parents": [15],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 ≡ 1 (mod 8).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 4, 8) == 1)",
+    "confidence": 0.97,
+    "is_terminal": false
+  },
+  {
+    "node_id": 26,
+    "parents": [25, 10],
+    "claim": "For all integers n, if n is prime and n > 3 then n^4 ≡ 1 (mod 3) and n^4 ≡ 1 (mod 8).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 4, 3) == 1 and pow(n, 4, 8) == 1)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 27,
+    "parents": [0],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 has exactly one primitive root modulo 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 24) == 1)",
+    "confidence": 0.60,
+    "is_terminal": false
+  },
+  {
+    "node_id": 28,
+    "parents": [20],
+    "claim": "For all integers n, if n ≡ ±1 (mod 8) and n ≡ ±1 (mod 3) then n^2 ≡ 1 (mod 24).",
+    "predicate": "((n % 8 == 1 or n % 8 == 7) and (n % 3 == 1 or n % 3 == 2)) or (pow(n, 2, 24) != 1)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 29,
+    "parents": [11],
+    "claim": "For all integers n, if n is prime and n > 3 then gcd(n - 1, n + 1) = 2.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (gcd(n - 1, n + 1) == 2)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 30,
+    "parents": [24, 28],
+    "claim": "For all integers n, if n is prime and n > 3 then the multiplicative order of n modulo 24 divides 2.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 24) == 1)",
+    "confidence": 0.87,
+    "is_terminal": false
+  },
+  {
+    "node_id": 31,
+    "parents": [1],
+    "claim": "For all integers n, if n is prime and n > 3 then n ≡ ±1, ±3 (mod 8).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (n % 8 in [1, 3, 5, 7])",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 32,
+    "parents": [31],
+    "claim": "For all integers n, if n is prime and n > 3 and n ≡ 3 (mod 8) then n^2 ≡ 9 (mod 16).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (n % 8 != 3) or (pow(n, 2, 16) == 9)",
+    "confidence": 0.94,
+    "is_terminal": false
+  },
+  {
+    "node_id": 33,
+    "parents": [32, 8],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 ≡ 1 or 9 (mod 16) based on n ≡ ±1 or ±3 (mod 8).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 16) in [1, 9])",
+    "confidence": 0.93,
+    "is_terminal": false
+  },
+  {
+    "node_id": 34,
+    "parents": [0, 12],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 - 1 is always a product of consecutive even numbers.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (((n - 1) % 2 == 0) and ((n + 1) % 2 == 0))",
+    "confidence": 0.96,
+    "is_terminal": true
+  },
+  {
+    "node_id": 35,
+    "parents": [23],
+    "claim": "For all integers n, if n is prime and n > 3 then at least one of n - 1, n + 1 is divisible by 6.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((n - 1) % 6 == 0 or (n + 1) % 6 == 0)",
+    "confidence": 0.82,
+    "is_terminal": false
+  },
+  {
+    "node_id": 36,
+    "parents": [35],
+    "claim": "For all integers n, if n is prime and n > 5 then n^2 - 1 is divisible by 12.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or ((pow(n, 2) - 1) % 12 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false
+  },
+  {
+    "node_id": 37,
+    "parents": [14],
+    "claim": "For all integers n, if n is prime and n > 5 then n divides n^3 and n^3 - n is divisible by n.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or ((pow(n, 3) - n) % n == 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 38,
+    "parents": [17],
+    "claim": "For all integers n, if n is prime and n > 5 then n^12 ≡ 1 (mod 24).",
+    "predicate": "(not is_prime(n)) or (n <= 5) or (pow(n, 12, 24) == 1)",
+    "confidence": 0.96,
+    "is_terminal": false
+  },
+  {
+    "node_id": 39,
+    "parents": [30],
+    "claim": "For all integers n, if n is prime and n > 3 then n^2 ≡ 1 (mod 24) means n is coprime to 24.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (gcd(n, 24) == 1)",
+    "confidence": 0.98,
+    "is_terminal": true
+  },
+  {
+    "node_id": 40,
+    "parents": [36, 22],
+    "claim": "For all integers n, if n is prime and n > 5 then n^2 - 1 is divisible by 12 but n^2 - 1 ≡ 0 (mod 24) or 12 (mod 24).",
+    "predicate": "(not is_prime(n)) or (n <= 5) or ((pow(n, 2) - 1) % 12 == 0)",
+    "confidence": 0.80,
+    "is_terminal": false
+  },
+  {
+    "node_id": 41,
+    "parents": [0],
+    "claim": "For all integers n, if n is prime and n > 3 then the set of quadratic residues modulo 24 containing n^2 has order dividing 2.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 24) == 1)",
+    "confidence": 0.65,
+    "is_terminal": false
+  },
+  {
+    "node_id": 42,
+    "parents": [38, 13],
+    "claim": "For all integers n, if n is prime and n > 5 then n^lcm(4,6,12) ≡ 1 (mod 24) where lcm(4,6,12) = 12.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or (pow(n, 12, 24) == 1)",
+    "confidence": 0.94,
+    "is_terminal": false
+  },
+  {
+    "node_id": 43,
+    "parents": [2, 9],
+    "claim": "For all integers n, if n is prime and n > 3 then n ≢ 0 (mod 3) and n ≡ 1 or 2 (mod 3).",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (n % 3 != 0)",
+    "confidence": 0.99,
+    "is_terminal": true
+  },
+  {
+    "node_id": 44,
+    "parents": [41, 27],
+    "claim": "For all integers n, if n is prime and n > 3 then n modulo 24 generates a subgroup of order dividing 2 in (Z/24Z)*.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 24) == 1)",
+    "confidence": 0.72,
+    "is_terminal": false
+  },
+  {
+    "node_id": 45,
+    "parents": [12, 36],
+    "claim": "For all integers n, if n is prime and n > 5 then n^2 - 1 ≡ 0 (mod 12) and divisible by 2 means divisible by 24.",
+    "predicate": "(not is_prime(n)) or (n <= 5) or ((pow(n, 2) - 1) % 24 == 0)",
+    "confidence": 0.91,
+    "is_terminal": false
+  },
+  {
+    "node_id": 46,
+    "parents": [29, 11],
+    "claim": "For all integers n, if n is prime and n > 3 then (n-1)/gcd(n-1,n+1) and (n+1)/gcd(n-1,n+1) are coprime odd numbers.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (gcd((n - 1) // gcd(n - 1, n + 1), (n + 1) // gcd(n - 1, n + 1)) == 1)",
+    "confidence": 0.93,
+    "is_terminal": false
+  },
+  {
+    "node_id": 47,
+    "parents": [44, 30],
+    "claim": "For all integers n, if n is prime and n > 3 then n generates a subgroup of (Z/24Z)* of order exactly 2.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or (pow(n, 2, 24) == 1 and pow(n, 1, 24) != 1)",
+    "confidence": 0.77,
+    "is_terminal": false
+  },
+  {
+    "node_id": 48,
+    "parents": [45, 40],
+    "claim": "For all integers n, if n is prime and n ≥ 5 then 24 divides n^2 - 1 exactly once.",
+    "predicate": "(not is_prime(n)) or (n < 5) or ((pow(n, 2) - 1) % 24 == 0)",
+    "confidence": 0.88,
+    "is_terminal": false
+  },
+  {
+    "node_id": 49,
+    "parents": [46, 22],
+    "claim": "For all integers n, if n is prime and n > 3 then the product (n-1)(n+1) = n^2 - 1 is composed of complementary factors modulo 2.",
+    "predicate": "(not is_prime(n)) or (n <= 3) or ((pow(n, 2) - 1) % 2 == 0)",
+    "confidence": 0.96,
+    "is_terminal": true
+  }
+]

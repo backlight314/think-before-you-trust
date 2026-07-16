@@ -1,0 +1,507 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n, n^2 is congruent to 0 or 1 modulo 4.",
+    "predicate": "(n**2 % 4 == 0) or (n**2 % 4 == 1)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, if n is even, then n^2 is divisible by 4.",
+    "predicate": "(n % 2 == 0) and ((n**2 % 4) == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n^2 is divisible by 4, then n is divisible by 2.",
+    "predicate": "((n**2 % 4 == 0)) -> (n % 2 == 0)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n, if n is divisible by 2, then n^2 is divisible by 4.",
+    "predicate": "((n % 2 == 0)) -> ((n**2 % 4 == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 is odd if and only if n is odd.",
+    "predicate": "((n**2 % 2 == 1)) -> ((n % 2 == 1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 is congruent to 1 modulo 4.",
+    "predicate": "((n % 2 == 1)) -> ((n**2 % 4 == 1))",
+    "confidence": 0.8,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n, if n^2 is congruent to 1 modulo 4, then n is odd.",
+    "predicate": "((n**2 % 4 == 1)) -> ((n % 2 == 1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^3 is congruent to 0, 1, or -1 modulo 4.",
+    "predicate": "(n**3 % 4 == 0) or (n**3 % 4 == 1) or (n**3 % 4 == -1)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n, if n^3 is congruent to -1 modulo 4, then n is odd.",
+    "predicate": "((n**3 % 4 == -1)) -> ((n % 2 == 1))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n, if n^3 is congruent to 1 modulo 4, then n is odd.",
+    "predicate": "((n**3 % 4 == 1)) -> ((n % 2 == 1))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      4,
+      9
+    ],
+    "claim": "For all integers n, if n is odd, then n^3 is congruent to 1 modulo 4.",
+    "predicate": "((n % 2 == 1)) -> ((n**3 % 4 == 1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n, if n is divisible by 2, then n^2 is divisible by 2.",
+    "predicate": "((n % 2 == 0)) -> ((n**2 % 2 == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n, if n^2 is divisible by 2, then n is even.",
+    "predicate": "((n**2 % 2 == 0)) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is divisible by 2.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 2 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n, if n is odd, then n^3 is not divisible by 2.",
+    "predicate": "((n % 2 == 1)) -> ((n**3 % 2 != 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      13,
+      14
+    ],
+    "claim": "For all integers n, n^3 is divisible by 2 if and only if n is even.",
+    "predicate": "((n**3 % 2 == 0)) -> ((n % 2 == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n, n^2 is congruent to 0 or 1 modulo 8.",
+    "predicate": "(n**2 % 8 == 0) or (n**2 % 8 == 1)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16
+    ],
+    "claim": "For all integers n, if n^2 is congruent to 1 modulo 8, then n is odd.",
+    "predicate": "((n**2 % 8 == 1)) -> ((n % 2 == 1))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      17
+    ],
+    "claim": "For all integers n, if n is odd, then n^2 is congruent to 1 modulo 8.",
+    "predicate": "((n % 2 == 1)) -> ((n**2 % 8 == 1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      16
+    ],
+    "claim": "For all integers n, if n^2 is congruent to 0 modulo 8, then n is even.",
+    "predicate": "((n**2 % 8 == 0)) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      19
+    ],
+    "claim": "For all integers n, if n is even, then n^2 is divisible by 8.",
+    "predicate": "((n % 2 == 0)) -> ((n**2 % 8 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      20
+    ],
+    "claim": "For all integers n, if n^2 is divisible by 8, then n is divisible by 2.",
+    "predicate": "((n**2 % 8 == 0)) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      20
+    ],
+    "claim": "For all integers n, if n is even, then n^2 is divisible by 4.",
+    "predicate": "((n % 2 == 0)) -> ((n**2 % 4 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      21,
+      22
+    ],
+    "claim": "For all integers n, if n^2 is divisible by 8, then n^2 is divisible by 4.",
+    "predicate": "((n**2 % 8 == 0)) -> ((n**2 % 4 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is divisible by 4.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 4 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, if n^3 is divisible by 4, then n is even.",
+    "predicate": "((n**3 % 4 == 0)) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is divisible by 2.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is divisible by 8.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 8 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      27
+    ],
+    "claim": "For all integers n, if n^3 is divisible by 8, then n is even.",
+    "predicate": "((n**3 % 8 == 0)) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is congruent to 0 modulo 8.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 8 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n, if n^3 is congruent to 0 modulo 8, then n is even.",
+    "predicate": "((n**3 % 8 == 0)) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is divisible by 4 and not divisible by 8.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 4 == 0) and ((n**3 % 8 != 0)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      31
+    ],
+    "claim": "For all integers n, if n^3 is divisible by 4 and not divisible by 8, then n is even.",
+    "predicate": "(((n**3 % 4 == 0) and ((n**3 % 8 != 0))) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is divisible by 2 and not divisible by 4.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 2 == 0) and ((n**3 % 4 != 0)))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      33
+    ],
+    "claim": "For all integers n, if n^3 is divisible by 2 and not divisible by 4, then n is even.",
+    "predicate": "(((n**3 % 2 == 0) and ((n**3 % 4 != 0))) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n, if n^3 is divisible by 8, then n is even and not divisible by 4.",
+    "predicate": "((n**3 % 8 == 0)) -> ((n % 2 == 0) and ((n % 4 != 0)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      35
+    ],
+    "claim": "For all integers n, if n is even and not divisible by 4, then n^3 is divisible by 8.",
+    "predicate": "(((n % 2 == 0) and ((n % 4 != 0))) -> ((n**3 % 8 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is divisible by 2 and not divisible by 8.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 2 == 0) and ((n**3 % 8 != 0)))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      37
+    ],
+    "claim": "For all integers n, if n^3 is divisible by 2 and not divisible by 8, then n is even.",
+    "predicate": "(((n**3 % 2 == 0) and ((n**3 % 8 != 0))) -> ((n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      27
+    ],
+    "claim": "For all integers n, if n^3 is divisible by 8, then n is even and divisible by 4.",
+    "predicate": "((n**3 % 8 == 0)) -> ((n % 2 == 0) and ((n % 4 == 0)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      39
+    ],
+    "claim": "For all integers n, if n is even and divisible by 4, then n^3 is divisible by 8.",
+    "predicate": "(((n % 2 == 0) and ((n % 4 == 0))) -> ((n**3 % 8 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n, if n is even, then n^3 is divisible by 4 and not divisible by 2.",
+    "predicate": "((n % 2 == 0)) -> ((n**3 % 4 == 0) and ((n**3 % 2 != 0)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "build:SyntaxError"
+  }
+]

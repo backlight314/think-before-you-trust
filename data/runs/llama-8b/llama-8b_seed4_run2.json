@@ -1,0 +1,537 @@
+[
+  {
+    "node_id": 0,
+    "parents": [],
+    "claim": "For all integers n >= 1, the sum of phi(d) over all positive divisors d of n equals n.",
+    "predicate": "(sum(phi(d) for d in divisors(n)) == n)",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 1,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, n is divisible by any divisor of n.",
+    "predicate": "(n % d == 0 for d in divisors(n))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": true,
+    "truth_reason": "holds"
+  },
+  {
+    "node_id": 2,
+    "parents": [
+      0
+    ],
+    "claim": "For all integers n >= 1, the number of divisors of n is a product of one more than the exponents of its prime factors.",
+    "predicate": "(tau(n) == prod(exponent+1 for exponent in vp(n, p) for p in primes))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 3,
+    "parents": [
+      0,
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 2, then phi(n) is even.",
+    "predicate": "((n % 2 == 0) and (phi(n) % 2 == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 4,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then tau(n) is 2.",
+    "predicate": "((is_prime(n)) and (tau(n) == 2))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 5,
+    "parents": [
+      0,
+      3
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then phi(n) is n-1.",
+    "predicate": "((is_prime(n)) and (phi(n) == n-1))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 6,
+    "parents": [
+      4
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then sigma(n) is n+1.",
+    "predicate": "((is_prime(n)) and (sigma(n) == n+1))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 7,
+    "parents": [
+      0,
+      2
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then tau(n) is odd.",
+    "predicate": "((n == pow(x, 2)) and (tau(n) % 2 == 1))",
+    "confidence": 0.85,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 8,
+    "parents": [
+      2,
+      7
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then phi(n) is (n-1)/2.",
+    "predicate": "((n == pow(x, 2)) and (phi(n) == (n-1)//2))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 9,
+    "parents": [
+      3
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is even, then n is divisible by 2.",
+    "predicate": "((phi(n) % 2 == 0) and (n % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 10,
+    "parents": [
+      1
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 4, then phi(n) is divisible by 4.",
+    "predicate": "((n % 4 == 0) and (phi(n) % 4 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 11,
+    "parents": [
+      0,
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is divisible by 8.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 8 == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 12,
+    "parents": [
+      5
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then phi(phi(n)) is phi(n).",
+    "predicate": "((is_prime(n)) and (phi(phi(n)) == phi(n)))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 13,
+    "parents": [
+      5,
+      12
+    ],
+    "claim": "For all integers n >= 1, phi(phi(n)) is phi(n).",
+    "predicate": "(phi(phi(n)) == phi(n))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 14,
+    "parents": [
+      6
+    ],
+    "claim": "For all integers n >= 1, if n is prime, then sigma(sigma(n)) is sigma(n).",
+    "predicate": "((is_prime(n)) and (sigma(sigma(n)) == sigma(n)))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 15,
+    "parents": [
+      6,
+      14
+    ],
+    "claim": "For all integers n >= 1, sigma(sigma(n)) is sigma(n).",
+    "predicate": "(sigma(sigma(n)) == sigma(n))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 16,
+    "parents": [
+      2
+    ],
+    "claim": "For all integers n >= 1, tau(n) is a product of one more than the exponents of its prime factors.",
+    "predicate": "(tau(n) == prod(exponent+1 for exponent in vp(n, p) for p in primes))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 17,
+    "parents": [
+      16
+    ],
+    "claim": "For all integers n >= 1, if tau(n) is a prime power, then tau(n) is a square.",
+    "predicate": "((tau(n) == pow(p, e)) and (is_prime(p) and is_prime(e)))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 18,
+    "parents": [
+      7
+    ],
+    "claim": "For all integers n >= 1, if n is a perfect square, then tau(n) is a square.",
+    "predicate": "((n == pow(x, 2)) and (tau(n) == pow(y, 2)))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 19,
+    "parents": [
+      17,
+      18
+    ],
+    "claim": "For all integers n >= 1, if tau(n) is a prime power, then tau(n) is a square.",
+    "predicate": "((tau(n) == pow(p, e)) and (is_prime(p) and is_prime(e)))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": null,
+    "truth_reason": "runtime:NameError"
+  },
+  {
+    "node_id": 20,
+    "parents": [
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 4, then phi(n) is divisible by 2.",
+    "predicate": "((n % 4 == 0) and (phi(n) % 2 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 21,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is divisible by 4.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 4 == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 22,
+    "parents": [
+      13
+    ],
+    "claim": "For all integers n >= 1, phi(phi(n)) is even.",
+    "predicate": "(phi(phi(n)) % 2 == 0)",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 23,
+    "parents": [
+      15
+    ],
+    "claim": "For all integers n >= 1, sigma(sigma(n)) is even.",
+    "predicate": "(sigma(sigma(n)) % 2 == 0)",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 24,
+    "parents": [
+      0,
+      10
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is even.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 2 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 25,
+    "parents": [
+      11
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then phi(n) is divisible by 8.",
+    "predicate": "((n % 16 == 0) and (phi(n) % 8 == 0))",
+    "confidence": 0.9,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 26,
+    "parents": [
+      22
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is even, then phi(phi(n)) is even.",
+    "predicate": "((phi(n) % 2 == 0) and (phi(phi(n)) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 27,
+    "parents": [
+      24
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is divisible by 2.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 28,
+    "parents": [
+      25
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then phi(n) is divisible by 4.",
+    "predicate": "((n % 16 == 0) and (phi(n) % 4 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 29,
+    "parents": [
+      26
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is even, then phi(phi(n)) is divisible by 2.",
+    "predicate": "((phi(n) % 2 == 0) and (phi(phi(n)) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 30,
+    "parents": [
+      27
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is divisible by 4.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 4 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 31,
+    "parents": [
+      28
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then phi(n) is divisible by 8.",
+    "predicate": "((n % 16 == 0) and (phi(n) % 8 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 32,
+    "parents": [
+      29
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is even, then phi(phi(n)) is even.",
+    "predicate": "((phi(n) % 2 == 0) and (phi(phi(n)) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 33,
+    "parents": [
+      30
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is divisible by 2.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 34,
+    "parents": [
+      31
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then phi(n) is divisible by 4.",
+    "predicate": "((n % 16 == 0) and (phi(n) % 4 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 35,
+    "parents": [
+      32
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is even, then phi(phi(n)) is even.",
+    "predicate": "((phi(n) % 2 == 0) and (phi(phi(n)) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 36,
+    "parents": [
+      33
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is divisible by 4.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 4 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 37,
+    "parents": [
+      34
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then phi(n) is divisible by 8.",
+    "predicate": "((n % 16 == 0) and (phi(n) % 8 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 38,
+    "parents": [
+      35
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is even, then phi(phi(n)) is even.",
+    "predicate": "((phi(n) % 2 == 0) and (phi(phi(n)) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 39,
+    "parents": [
+      36
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is divisible by 2.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 40,
+    "parents": [
+      37
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then phi(n) is divisible by 4.",
+    "predicate": "((n % 16 == 0) and (phi(n) % 4 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 41,
+    "parents": [
+      38
+    ],
+    "claim": "For all integers n >= 1, if phi(n) is even, then phi(phi(n)) is even.",
+    "predicate": "((phi(n) % 2 == 0) and (phi(phi(n)) % 2 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 42,
+    "parents": [
+      39
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 8, then phi(n) is divisible by 4.",
+    "predicate": "((n % 8 == 0) and (phi(n) % 4 == 0))",
+    "confidence": 1.0,
+    "is_terminal": true,
+    "truth": false,
+    "truth_reason": "counterexample"
+  },
+  {
+    "node_id": 43,
+    "parents": [
+      40
+    ],
+    "claim": "For all integers n >= 1, if n is divisible by 16, then phi(n) is divisible by 8.",
+    "predicate": "((n % 16 == 0) and (phi(n) % 8 == 0))",
+    "confidence": 0.95,
+    "is_terminal": false,
+    "truth": false,
+    "truth_reason": "counterexample"
+  }
+]
