@@ -43,45 +43,49 @@ Every strategy scores a claim to decide what to verify.
 
 ## Results
 
-Each entry-point script writes to a matching `results*/` directory. The figures that
-carry the argument:
-
 (to be filled in) 
-
-Confidence-calibration findings for real models (whether verbalized confidence tracks
-actual correctness on number-theory claims) live in `christestv1/`. *[Claude / Gemini /
-GPT calibration summary]*
 
 ## Repository Structure
 
 ```
-tree codes/            # single-parent claim tree model
-  tree_model.py           strategies, ClaimTree, DP oracle, evaluation
-  tree_simulation.py       simulation / rollout logic
-  tree_results.py          plotting for tree experiments
-  damage_core.py           shared expected-damage scoring
-  tree_main.py             entry point → results_tree/
+tree_codes/              # single-parent claim tree model
+  tree_model.py             strategies, ClaimTree, DP oracle, evaluation
+  tree_simulation.py        simulation / rollout logic
+  tree_results.py           plotting for tree experiments
+  damage_core.py            shared expected-damage scoring
+  tree_main.py              entry point → results_tree/
 
-dag codes/              # multi-parent claim DAG model
-  dag_model.py             strategies, ClaimDAG, evaluation
-  dag_visualization.py     plotting for DAG experiments
-  dag_main.py              entry point (fixed budgets) → results_dag/
-  adaptive_dag_main.py     entry point (adaptive/CLI budgets) → results_adaptive_dag/
+dag_codes/               # multi-parent claim DAG model
+  dag_model.py              strategies, ClaimDAG, evaluation
+  adaptive_dag_model.py     adaptive expand/verify policy, sigma-calibrated against the static DAG
+  dag_visualization.py      plotting for DAG experiments
+  geometry_topology.py      real-vs-synthetic topology invariants + betweenness validation → results_geometry/
+  stats_significance.py     paired significance tests across tree/DAG/adaptive results → results_stats/
+  constants.py              empirically-grounded constants (base error rate, propagation strength, branching)
+  dag_main.py               entry point (fixed budgets) → results_dag/
+  adaptive_dag_main.py      entry point (adaptive/CLI budgets) → results_adaptive_dag/
 
-data/runs/              # verbalized-confidence transcripts from real models
+data/runs/               # verbalized-confidence transcripts from real models
   claude/, gemini/, deepseek/, gptoss-120b/, gptoss-20b/, llama-70b/, llama-8b/, qwen-80b/
-                           per-model, per-seed JSON runs used for calibration analysis
+                            per-model, per-seed JSON runs used for calibration analysis
 
-results_tree/            figures + pickled artifacts from tree_main.py
-results_adaptive_dag/    figures from adaptive_dag_main.py
+results_tree/             figures + pickled artifacts from tree_main.py
+results_dag/              figures from dag_main.py
+results_adaptive_dag/     figures from adaptive_dag_main.py
+results_geometry/         topology-invariant + betweenness-validation CSVs from geometry_topology.py
+results_stats/            paired significance-test CSVs from stats_significance.py
+
+run.sh                    puts dag_codes/ and tree_codes/ on PYTHONPATH, then execs a given script
+requirements.txt          numpy, matplotlib, networkx, scipy, scikit-learn
 ```
 
 ## Running the Experiments
 
-Dependencies: `numpy`, `matplotlib`, `scikit-learn`.
+Dependencies: `numpy`, `matplotlib`, `scikit-learn`, `networkx`.
 
 ```bash
 pip install numpy matplotlib scikit-learn
+pip install networkx
 
 # Claim-tree experiments (fixed budget + DP oracle, calibration comparison)
 cd "tree codes" && python tree_main.py
