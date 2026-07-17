@@ -51,3 +51,50 @@ carry the argument:
 Confidence-calibration findings for real models (whether verbalized confidence tracks
 actual correctness on number-theory claims) live in `christestv1/`. *[Claude / Gemini /
 GPT calibration summary]*
+
+## Repository Structure
+
+```
+tree codes/            # single-parent claim tree model
+  tree_model.py           strategies, ClaimTree, DP oracle, evaluation
+  tree_simulation.py       simulation / rollout logic
+  tree_results.py          plotting for tree experiments
+  damage_core.py           shared expected-damage scoring
+  tree_main.py             entry point → results_tree/
+
+dag codes/              # multi-parent claim DAG model
+  dag_model.py             strategies, ClaimDAG, evaluation
+  dag_visualization.py     plotting for DAG experiments
+  dag_main.py              entry point (fixed budgets) → results_dag/
+  adaptive_dag_main.py     entry point (adaptive/CLI budgets) → results_adaptive_dag/
+
+data/runs/              # verbalized-confidence transcripts from real models
+  claude/, gemini/, deepseek/, gptoss-120b/, gptoss-20b/, llama-70b/, llama-8b/, qwen-80b/
+                           per-model, per-seed JSON runs used for calibration analysis
+
+results_tree/            figures + pickled artifacts from tree_main.py
+results_adaptive_dag/    figures from adaptive_dag_main.py
+```
+
+## Running the Experiments
+
+Dependencies: `numpy`, `matplotlib`, `scikit-learn`.
+
+```bash
+pip install numpy matplotlib scikit-learn
+
+# Claim-tree experiments (fixed budget + DP oracle, calibration comparison)
+cd "tree codes" && python tree_main.py
+
+# Claim-DAG experiments (fixed budget)
+cd "dag codes" && python dag_main.py
+
+# Claim-DAG experiments with adaptive/configurable budgets
+cd "dag codes" && python adaptive_dag_main.py \
+  --max-nodes 80 --trials 50 --budgets 5,10,15,20,25,30,40,50 \
+  --output-dir ../results_adaptive_dag --seed 2
+```
+
+Each script prints a per-strategy precision/recall/reliability/cascade-prevented table
+for a reference tree or DAG, then writes its plots to the corresponding `results*/`
+directory (created if missing).
