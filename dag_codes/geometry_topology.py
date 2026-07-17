@@ -55,7 +55,7 @@ from dag_model import (
 OUT_DIR = "results_geometry"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-RUNS_GLOB = os.path.join("data", "runs", "*", "*_run1.json")
+RUNS_GLOB = os.path.join("data", "runs", "*", "*_run*.json")
 VERIFIED_GLOB = os.path.join("data", "runs", "*", "*_verified.json")
 
 
